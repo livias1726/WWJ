@@ -1,6 +1,5 @@
 1. The system shall provide a notification to recruiters whenever a job offer, previously uploaded by them, has expired and consequently been cancelled, containing the following message: "The offer for < job position > has just expired."
 
-2. The system shall store every notification the user has received in the last six months in a section of the user’s account.
+2. The system shall store every notification the user has received in the last six months in a section of the user's account.
 
 3. The system shall provide a notification to premium unemployed users whenever a new job offer is uploaded in the category those users have expressed interest in, containing the following message: "There is a new job opportunity for you."
-
