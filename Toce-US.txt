@@ -1,5 +1,5 @@
-1.	As a Company recruiter, I want to have an overview of the candidates who have applied for the job offers I have uploaded, so that I can choose among the most qualified ones and contact them directly.
+1.	As a Company recruiter, I want to have an overview of the candidates who have applied for the job offers I have uploaded, so that I can choose among the most qualified ones.
 
 2.	As an unemployed user, I want to label job offers as favourites, so that I can choose among a restricted group of them.
 
-3.	As an unemployed user, I want to view job offers related to the sector I am interested in, so that the I can discard the offers I am not interested in.
+3.	As an unemployed user, I want to view job offers related to the sector I am interested in, so that the I can discard the others.
