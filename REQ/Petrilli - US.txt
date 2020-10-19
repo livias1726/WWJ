@@ -1,0 +1,9 @@
+1. As a freelance worker, I want to know the probability of success of a specific business in a particular Country, so that I can avoid unnecessary investments.
+
+2. As a freelance worker, I want to have filters for Countries or type of business, so that I can set search criteria.
+
+3. As a regular user, I want to buy the premium version of the software, so that I can unlock special functionalities*.
+
+*a.(For workers) Priority access to new job offers and certified user badge;
+ b.(For companies) Highlighted offers and advertisements for the Company;
+
