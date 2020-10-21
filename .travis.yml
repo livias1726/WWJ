@@ -1,4 +1,0 @@
-language: java
-jdk
-- openjdk14
-script: ant build
