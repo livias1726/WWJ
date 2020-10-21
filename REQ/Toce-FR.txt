@@ -1,5 +1,0 @@
-1.	The system shall provide the possibility to label job offers as favourites.
-
-2.	The system shall store still active job offers, that a recruiter had previously uploaded, in a section of the recruiter’s account.
-
-3.	The system shall provide a mechanism of automatic deletion of job offers, based on a date of expiration set by the recruiter who uploaded them.

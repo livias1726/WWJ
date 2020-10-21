@@ -1,9 +1,0 @@
-1. The system shall provide search filters for Countries and job categories, to unemployed users, or type of business, to freelance users, to set search criteria.
-
-2. The system shall provide a list of job offers whenever an unemployed user carries out a research.
-
-3. The system shall provide a set of ordering system criteria for the list of job offers, whenever an unemployed user carries out a research, which must include:
-	• Most recent ones,
-	• Decreasing salary,
-	• Increasing salary,
-	• The ones closest to the expiration date.
