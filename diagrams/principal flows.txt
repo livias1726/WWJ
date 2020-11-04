@@ -1,0 +1,38 @@
+PRINCIPAL FLOWS
+
+1. CALCULATE FEASIBILITY
+	Requisites: 
+		i. select business
+		ii. select country -> evaluate tax regime
+		iii. insert a budget
+	If <login>:
+		i. *view statistics
+
+2. APPLY TO JOB OFFER
+	Requisites: 
+		i. login
+		ii. [view job offer]
+	If <login>:
+		i. *add to favourites
+		 
+3. PUBLISH JOB OFFER
+	Requisites: 
+		i. login
+
+4. CHECK OUT CANDIDATES
+	Requisites: 
+		i. login
+
+5. MANAGE SYSTEM
+	Pre-requisites: 
+		i. login
+
+6. BUY AD SPACE
+	Pre-requisites: 
+		i. message admin
+
+
+
+LEGEND
+ - [squared breaces]: can be reached out of the flow;
+ - *use case: extension of previous use cases
