@@ -59,7 +59,7 @@ public class Launcher extends Application {
 
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("Go to user choice page");
+				//Temporary: go to main page
 			}
 		});
 		startButton.setPrefSize(100, 50);
