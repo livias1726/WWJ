@@ -47,6 +47,13 @@
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
                 <exclude name="**/*.java"/>
+                <exclude name="logic/presentation/icons/"/>
+                <exclude name="logic/presentation/xml/"/>
+                <exclude name="logic/presentation/xml/"/>
+                <exclude name="logic/presentation/xml/"/>
+                <exclude name="logic/presentation/icons/"/>
+                <exclude name="logic/presentation/resources/xml/"/>
+                <exclude name="logic/presentation/xml/"/>
             </fileset>
         </copy>
     </target>
@@ -60,6 +67,13 @@
         <echo message="${ant.project.name}: ${ant.file}"/>
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
             <src path="src"/>
+            <exclude name="logic/presentation/icons/"/>
+            <exclude name="logic/presentation/xml/"/>
+            <exclude name="logic/presentation/xml/"/>
+            <exclude name="logic/presentation/xml/"/>
+            <exclude name="logic/presentation/icons/"/>
+            <exclude name="logic/presentation/resources/xml/"/>
+            <exclude name="logic/presentation/xml/"/>
             <classpath refid="WorldWideJob.classpath"/>
         </javac>
     </target>
@@ -78,7 +92,7 @@
         <antcall target="build"/>
     </target>
     <target name="Launcher">
-        <java classname="logic.Launcher" failonerror="true" fork="yes">
+        <java classname="logic.Main" failonerror="true" fork="yes">
             <jvmarg line="--module-path &quot;C:\Program Files\Java\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml"/>
             <classpath refid="run.Launcher.classpath"/>
         </java>

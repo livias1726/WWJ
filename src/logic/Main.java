@@ -1,5 +1,7 @@
 package logic;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,18 +18,21 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import logic.presentation.GraphicSwitch;
+import logic.presentation.ImageBucket;
+import logic.presentation.Screens;
 
-import logic.util.ImageBucket;
-
-public class Launcher extends Application {
+public class Main extends Application {
 	
 	private ImageView imageView;
 	private HBox hbox;
+	private Stage primaryStage;
 	
 	@Override
 	public void start(Stage stage) {
 
-		stage.setTitle("WorldWideJob");
+		primaryStage = stage;
+		primaryStage.setTitle("WorldWideJob");
 		
 		//Creating the main icon
 		initImg(300, 300);
@@ -42,12 +47,12 @@ public class Launcher extends Application {
 		screen.setBottom(hbox);
 		Scene scene = new Scene(screen, 1180, 600);
 
-		stage.setScene(scene);
-		stage.show();
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 	
 	public void initImg(double h, double w) {
-		Image main = ImageBucket.getImage(ImageBucket.MAIN);
+		Image main = ImageBucket.getImage(ImageBucket.TITLE);
 		imageView = new ImageView(main); 
 		imageView.setFitHeight(h); 
 		imageView.setFitWidth(w);
@@ -59,7 +64,12 @@ public class Launcher extends Application {
 
 			@Override
 			public void handle(ActionEvent event) {
-				//Temporary: go to main page
+				try {
+					primaryStage.setScene(GraphicSwitch.switchScreen(Screens.MAIN, null));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		startButton.setPrefSize(100, 50);

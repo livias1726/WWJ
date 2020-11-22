@@ -1,4 +1,4 @@
-package logic.util;
+package logic.presentation;
 
 import java.io.File;
 
@@ -6,8 +6,8 @@ import javafx.scene.image.Image;
 
 public class ImageBucket {
 	
-	private static final String PATH = "src\\graphics\\";	
-	public static final String MAIN = "main_icon";
+	private static final String PATH = "src/logic/presentation/icons/";	
+	public static final String TITLE = "main_icon";
 	
 	private ImageBucket() {
 		/*default constructor*/
