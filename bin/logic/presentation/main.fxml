@@ -11,17 +11,17 @@
          <children>
             <Button mnemonicParsing="false" onAction="#searchUnemployed" styleClass="btn" text="Unemployed" textFill="BLACK">
                <font>
-                  <Font name="Courier New" size="15.0" />
+                  <Font name="System" size="15.0" />
                </font>
             </Button>
             <Button mnemonicParsing="false" onAction="#login" styleClass="btn" text="Recruiter" textFill="BLACK">
                <font>
-                  <Font name="Courier New" size="15.0" />
+                  <Font name="System" size="15.0" />
                </font>
             </Button>
             <Button mnemonicParsing="false" onAction="#searchEntrepreneur" styleClass="btn" text="Entrepreneur" textFill="BLACK">
                <font>
-                  <Font name="Courier New" size="15.0" />
+                  <Font name="System" size="15.0" />
                </font>
             </Button>
          </children>
