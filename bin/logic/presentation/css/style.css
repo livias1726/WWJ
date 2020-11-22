@@ -1,0 +1,5 @@
+.su{
+	-fx-background-image: url('../icons/search_usr.png');
+	-fx-background-size: 1180 600;
+    -fx-background-position: center;
+}

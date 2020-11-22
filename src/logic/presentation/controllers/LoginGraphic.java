@@ -55,12 +55,8 @@ public class LoginGraphic implements Initializable {
 		SessionFacade.getSession().setCurrUser(username);
 		
 		Stage stage = (Stage)logPane.getScene().getWindow();
-		/*switch(type) {
-			case UNEMPLOYED:
-			case RECRUITER:
-			case ENTREPRENEUR:
-			default:
-		}*/
+		
+		/*CHOOSE USER TYPE*/
 		
 		stage.setScene(GraphicSwitch.switchScreen(Screens.ACC_REC, null));
 	}

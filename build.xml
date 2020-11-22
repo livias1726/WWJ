@@ -9,7 +9,9 @@
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
+    <path id="JavaFX SDK.libraryclasspath"/>
     <path id="WorldWideJob.classpath">
+        <path refid="JavaFX SDK.libraryclasspath"/>
         <pathelement location="bin"/>
         <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.base.jar"/>
         <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.controls.jar"/>
@@ -21,6 +23,7 @@
         <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx-swt.jar"/>
     </path>
     <path id="run.Launcher.classpath">
+        <path refid="JavaFX SDK.libraryclasspath"/>
         <path refid="WorldWideJob.classpath"/>
         <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.base.jar"/>
         <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.controls.jar"/>
@@ -32,6 +35,7 @@
         <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx-swt.jar"/>
     </path>
     <path id="run.User.classpath">
+        <path refid="JavaFX SDK.libraryclasspath"/>
         <path refid="WorldWideJob.classpath"/>
         <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.base.jar"/>
         <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.controls.jar"/>
@@ -54,6 +58,7 @@
                 <exclude name="logic/presentation/icons/"/>
                 <exclude name="logic/presentation/resources/xml/"/>
                 <exclude name="logic/presentation/xml/"/>
+                <exclude name="logic/presentation/css/"/>
             </fileset>
         </copy>
     </target>
@@ -74,6 +79,7 @@
             <exclude name="logic/presentation/icons/"/>
             <exclude name="logic/presentation/resources/xml/"/>
             <exclude name="logic/presentation/xml/"/>
+            <exclude name="logic/presentation/css/"/>
             <classpath refid="WorldWideJob.classpath"/>
         </javac>
     </target>
