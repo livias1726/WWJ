@@ -9,42 +9,23 @@
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
-    <path id="JavaFX SDK.libraryclasspath"/>
+    <path id="JavaFX SDK.libraryclasspath">
+        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.eclipse.fx.ide.css.jfx8_3.5.0.201907240300.jar"/>
+    </path>
+    <path id="javaFX.userclasspath">
+        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.base.jar"/>
+        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.controls.jar"/>
+        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.fxml.jar"/>
+        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.graphics.jar"/>
+        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.media.jar"/>
+        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.swing.jar"/>
+        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.web.jar"/>
+        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx-swt.jar"/>
+    </path>
     <path id="WorldWideJob.classpath">
         <path refid="JavaFX SDK.libraryclasspath"/>
+        <path refid="javaFX.userclasspath"/>
         <pathelement location="bin"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.base.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.controls.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.fxml.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.graphics.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.media.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.swing.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.web.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx-swt.jar"/>
-    </path>
-    <path id="run.Launcher.classpath">
-        <path refid="JavaFX SDK.libraryclasspath"/>
-        <path refid="WorldWideJob.classpath"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.base.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.controls.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.fxml.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.graphics.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.media.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.swing.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.web.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx-swt.jar"/>
-    </path>
-    <path id="run.User.classpath">
-        <path refid="JavaFX SDK.libraryclasspath"/>
-        <path refid="WorldWideJob.classpath"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.base.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.controls.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.fxml.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.graphics.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.media.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.swing.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.web.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx-swt.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
@@ -59,6 +40,7 @@
                 <exclude name="logic/presentation/resources/xml/"/>
                 <exclude name="logic/presentation/xml/"/>
                 <exclude name="logic/presentation/css/"/>
+                <exclude name="logic/presentation/fxml/"/>
             </fileset>
         </copy>
     </target>
@@ -80,6 +62,7 @@
             <exclude name="logic/presentation/resources/xml/"/>
             <exclude name="logic/presentation/xml/"/>
             <exclude name="logic/presentation/css/"/>
+            <exclude name="logic/presentation/fxml/"/>
             <classpath refid="WorldWideJob.classpath"/>
         </javac>
     </target>
@@ -99,13 +82,12 @@
     </target>
     <target name="Launcher">
         <java classname="logic.Main" failonerror="true" fork="yes">
-            <jvmarg line="--module-path &quot;C:\Program Files\Java\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml"/>
-            <classpath refid="run.Launcher.classpath"/>
+            <classpath refid="WorldWideJob.classpath"/>
         </java>
     </target>
     <target name="User">
         <java classname="logic.User" failonerror="true" fork="yes">
-            <classpath refid="run.User.classpath"/>
+            <classpath refid="WorldWideJob.classpath"/>
         </java>
     </target>
 </project>

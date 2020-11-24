@@ -1,40 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.Cursor?>
 
-<BorderPane fx:id="pane" prefHeight="600.0" prefWidth="1180.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.controllers.MainGraphic">
-   <center>
-      <HBox alignment="CENTER" spacing="100.0">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1180.0" styleClass="main" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.controllers.MainGraphic">
+   <children>
+      <HBox alignment="TOP_RIGHT" layoutX="975.0" layoutY="38.0" spacing="20.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#searchUnemployed" styleClass="btn" text="Unemployed" textFill="BLACK">
+            <MenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="user_btn">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#login" text="Login" />
+              </items>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MenuButton>
+            <MenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="menu_btn" textFill="#00000001">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Quit" />
+              </items>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MenuButton>
+         </children>
+      </HBox>
+      <HBox layoutX="181.0" layoutY="392.0" spacing="100.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#searchUnemployed" prefHeight="68.0" prefWidth="212.0" text="Unemployed" textAlignment="CENTER">
                <font>
-                  <Font name="System" size="15.0" />
+                  <Font size="24.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <effect>
+                  <InnerShadow color="#0f318d" />
+               </effect>
             </Button>
-            <Button mnemonicParsing="false" onAction="#login" styleClass="btn" text="Recruiter" textFill="BLACK">
+            <Button mnemonicParsing="false" prefHeight="68.0" prefWidth="212.0" text="Recruiter">
                <font>
-                  <Font name="System" size="15.0" />
+                  <Font size="24.0" />
                </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
+               <effect>
+                  <InnerShadow color="#0f318d" />
+               </effect>
             </Button>
-            <Button mnemonicParsing="false" onAction="#searchEntrepreneur" styleClass="btn" text="Entrepreneur" textFill="BLACK">
+            <Button mnemonicParsing="false" onAction="#searchEntrepreneur" prefHeight="68.0" prefWidth="212.0" text="Entrepreneur" textAlignment="CENTER">
                <font>
-                  <Font name="System" size="15.0" />
+                  <Font size="24.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <effect>
+                  <InnerShadow color="#0f318d" />
+               </effect>
             </Button>
          </children>
       </HBox>
-   </center>
-</BorderPane>
+   </children>
+</AnchorPane>

@@ -4,61 +4,68 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.security.auth.login.FailedLoginException;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import logic.application.LoginControl;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import logic.application.SessionFacade;
-import logic.presentation.GraphicSwitch;
-import logic.presentation.Screens;
+import logic.bean.LoginBean;
+import logic.presentation.GraphicHandler;
 
 public class LoginGraphic implements Initializable {
 	@FXML
-	BorderPane logPane;
-	
-	@FXML
-	VBox fields;
-	
+	AnchorPane logPane;
+
 	@FXML
 	TextField usr;
 	
 	@FXML
     PasswordField pwd;
 	
-	@FXML
-    Button loginBtn;
-	
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
-		// TODO Auto-generated method stub
+		/*Default behavior*/
 
 	}
 		
 	@FXML
-	public void login() throws IOException {
-		String username = usr.getText();
-		String password = pwd.getText();
+	public void verifyLogin() {
+		LoginBean credentials = new LoginBean(usr.getText(), pwd.getText());
 		
-		LoginControl controller = new LoginControl();
-		
-		if(controller.verifyLogin(username, password).equals(false)) {
-			/*LOGIN REJECTION*/
+		try {
+			if(!credentials.verify()) {
+				GraphicHandler.popUpMsg(AlertType.ERROR, "Please, fill out every field");
+			}
+		} catch (FailedLoginException e) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
-		
-		/*INTERACTION WITH USER ENTITY -> BEAN INTERMEDIATE*/
 
-		SessionFacade.getSession().setCurrUser(username);
+		SessionFacade.getSession().setCurrUser(credentials.getUsername());	
+
+		/*Stage stage = (Stage)logPane.getScene().getWindow();
 		
-		Stage stage = (Stage)logPane.getScene().getWindow();
+		if(SessionFacade.getSession().getCurrUser().equals("recruiter")) {
+			stage.setScene(GraphicHandler.switchScreen(Screens.ACC_REC, null));
+			
+		}else if(SessionFacade.getSession().getCurrUser().equals("unemployed")) {
+			stage.setScene(GraphicHandler.switchScreen(Screens.ACC_UNEM, null));
+			
+		}else{
+			stage.setScene(GraphicHandler.switchScreen(Screens.ACC_ENTR, null));
+		}*/
 		
-		/*CHOOSE USER TYPE*/
-		
-		stage.setScene(GraphicSwitch.switchScreen(Screens.ACC_REC, null));
 	}
 
+	@FXML
+	public void facebookLogin() throws IOException {}
+	
+	@FXML
+	public void googleLogin() throws IOException {}
+	
+	@FXML
+	public void createAccount() throws IOException {}
 }

@@ -2,6 +2,8 @@ package logic.application;
 
 import logic.presentation.Screens;
 
+/**Singleton*/
+
 public class SessionFacade {
 	private static SessionFacade instance = null;
 
@@ -15,9 +17,9 @@ public class SessionFacade {
 	}
 	
 	public static SessionFacade getSession() {
-		if (instance == null) 
+		if (instance == null) {
 			instance = new SessionFacade();
-			
+		}		
 		return instance;
 	}
 	
