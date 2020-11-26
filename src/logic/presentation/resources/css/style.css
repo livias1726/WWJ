@@ -1,0 +1,79 @@
+.menu_btn{
+	-fx-background-image: url('../icons/menu.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:24px;
+}
+
+.user_btn{
+	-fx-background-image: url('../icons/user.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:24px;
+}
+
+.main{
+	-fx-background-color: white;
+	-fx-background-image: url('../icons/main_icon.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: 50% 30%;
+}
+
+.login_fb{
+	-fx-background-image: url('../icons/facebook.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
+
+.login_gg{
+	-fx-background-image: url('../icons/gg_log.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:250px;
+}
+
+.back_btn{
+	-fx-background-image: url('../icons/arrow.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:24px;
+}
+
+.su{
+	-fx-background-image: url('../icons/search_usr.png');
+	-fx-background-size: 1180 600;
+    -fx-background-position: center;
+	-fx-background-repeat: no-repeat;
+}
+
+.se{
+	-fx-background-image: url('../icons/search_entr.png');
+	-fx-background-size: 1180 600;
+    -fx-background-position: center;
+	-fx-background-repeat: no-repeat;
+}
+
+.home_btn{
+	-fx-background-image: url('../icons/home.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:24px;
+}
+
+.notify_btn{
+	-fx-background-image: url('../icons/notification.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:24px;
+}
+
+.main_icon{
+	-fx-image: url('../icons/main_icon.png');
+	-fx-repeat: no-repeat;
+}
+
+.toolbar{
+	-fx-background-color: white;
+	-fx-border: 5px;
+	-fx-border-color: blue;
+}

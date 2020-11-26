@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="searchPane" maxHeight="600.0" maxWidth="1180.0" minHeight="600.0" minWidth="1180.0" prefHeight="600.0" prefWidth="1180.0" styleClass="se" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.controllers.SearchEntrepreneurGraphic">
+   <children>
+   	  <VBox alignment="CENTER" layoutX="233.0" layoutY="147.0" prefHeight="497.0" prefWidth="714.0" spacing="50.0">
+	   	 <children>
+	   	 	<Label alignment="CENTER" prefHeight="76.0" prefWidth="261.0" text="Become your own boss" textAlignment="CENTER" textFill="WHITE">
+	            <font>
+	               <Font name="System Bold" size="24.0" />
+	            </font>
+	         </Label>
+	         <Label prefHeight="35.0" prefWidth="597.0" text="Start a new business in the Country of your dreams" textAlignment="CENTER" textFill="WHITE">
+	            <font>
+	               <Font name="System Bold" size="24.0" />
+	            </font>
+	         </Label>
+	    	<HBox alignment="CENTER" prefHeight="118.0" prefWidth="1180.0" spacing="50.0">
+	            <children>
+	               <ComboBox fx:id="placeSearch" editable="true" prefWidth="200.0" promptText="Place" />
+	               <ComboBox fx:id="businessSearch" editable="true" prefWidth="200.0" promptText="Business" />
+	            </children>
+	   	 </HBox>
+	   	     	 <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#search" text="Search" textAlignment="CENTER" textFill="BLACK">
+	            <cursor>
+	               <Cursor fx:constant="HAND" />
+	            </cursor>
+	            <font>
+	               <Font name="System" size="15.0" />
+	            </font>
+	            <effect>
+	               <InnerShadow color="#0f318d" />
+	            </effect>
+	         </Button>
+	   </children>
+	   <padding>
+	         <Insets bottom="250.0" top="80.0" />
+	      </padding>
+	</VBox>
+      <ToolBar prefHeight="60.0" prefWidth="1180.0" styleClass="toolbar" BorderPane.alignment="CENTER">
+        <items>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="main_icon" />
+            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="home_btn" />
+            <Pane prefHeight="50.0" prefWidth="829.0" />
+            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="notify_btn" visible="false" />
+            <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="190.0" spacing="20.0">
+               <children>
+                  <MenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="user_btn">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#login" text="Login" />
+                        <MenuItem mnemonicParsing="false" text="Logout" visible="false" />
+                     </items>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </MenuButton>
+                  <MenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="menu_btn" textFill="#00000001">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#buyPremium" text="Buy premium version" />
+                        <MenuItem mnemonicParsing="false" onAction="#openOnlineDoc" text="Support" />
+                        <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Quit" />
+                     </items>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="30.0" top="10.0" />
+                     </HBox.margin>
+                  </MenuButton>
+               </children>
+            </HBox>
+        </items>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" color="#0f318d" />
+         </effect>
+      </ToolBar>
+   </children>
+</AnchorPane>

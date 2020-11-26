@@ -7,12 +7,12 @@ import logic.presentation.Screens;
 public class SessionFacade {
 	private static SessionFacade instance = null;
 
-	private String currUser;
+	private Users currUserType;
 	private Screens curr;
 	private Screens prev;
 
 	private SessionFacade() {
-		currUser = "";
+		currUserType = null;
 		curr = Screens.MAIN;
 	}
 	
@@ -23,16 +23,16 @@ public class SessionFacade {
 		return instance;
 	}
 	
-	public String getCurrUser() {
-		return currUser;
+	public Users getCurrUserType() {
+		return currUserType;
 	}
 
 	public Screens getScreen() {
 		return curr;
 	}
 	
-	public void setCurrUser(String currUser) {
-		this.currUser = currUser;
+	public void setCurrUserType(Users currUser) {
+		this.currUserType = currUser;
 	}
 
 	public void setScreen(Screens next) {
@@ -40,7 +40,7 @@ public class SessionFacade {
 		this.curr = next;
 	}
 	
-	public Screens getPrevView() {
+	public Screens getPrevScreen() {
 		return prev;
 	}
 }

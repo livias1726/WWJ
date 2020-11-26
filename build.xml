@@ -32,15 +32,16 @@
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
                 <exclude name="**/*.java"/>
+                <exclude name="logic/presentation/decorators/"/>
+                <exclude name="logic/presentation/decorators/"/>
+                <exclude name="logic/presentation/fxml/"/>
                 <exclude name="logic/presentation/icons/"/>
-                <exclude name="logic/presentation/xml/"/>
-                <exclude name="logic/presentation/xml/"/>
-                <exclude name="logic/presentation/xml/"/>
                 <exclude name="logic/presentation/icons/"/>
                 <exclude name="logic/presentation/resources/xml/"/>
                 <exclude name="logic/presentation/xml/"/>
-                <exclude name="logic/presentation/css/"/>
-                <exclude name="logic/presentation/fxml/"/>
+                <exclude name="logic/presentation/xml/"/>
+                <exclude name="logic/presentation/xml/"/>
+                <exclude name="logic/presentation/xml/"/>
             </fileset>
         </copy>
     </target>
@@ -54,15 +55,16 @@
         <echo message="${ant.project.name}: ${ant.file}"/>
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
             <src path="src"/>
+            <exclude name="logic/presentation/decorators/"/>
+            <exclude name="logic/presentation/decorators/"/>
+            <exclude name="logic/presentation/fxml/"/>
             <exclude name="logic/presentation/icons/"/>
-            <exclude name="logic/presentation/xml/"/>
-            <exclude name="logic/presentation/xml/"/>
-            <exclude name="logic/presentation/xml/"/>
             <exclude name="logic/presentation/icons/"/>
             <exclude name="logic/presentation/resources/xml/"/>
             <exclude name="logic/presentation/xml/"/>
-            <exclude name="logic/presentation/css/"/>
-            <exclude name="logic/presentation/fxml/"/>
+            <exclude name="logic/presentation/xml/"/>
+            <exclude name="logic/presentation/xml/"/>
+            <exclude name="logic/presentation/xml/"/>
             <classpath refid="WorldWideJob.classpath"/>
         </javac>
     </target>

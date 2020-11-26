@@ -7,5 +7,6 @@ public enum Screens {
 	ACC_REC,
 	ACC_UNEM,
 	ACC_ENTR,
-	LOGIN;
+	LOGIN,
+	SIGN_UP;
 }

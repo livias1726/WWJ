@@ -14,6 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import logic.application.SessionFacade;
 
 public class GraphicHandler {
+	
+	private static final String PATH = "resources/fxml/";
 
 	private GraphicHandler() { 
 		/*Default constructor*/ 
@@ -22,25 +24,24 @@ public class GraphicHandler {
 	public static FXMLLoader loadFXML(Screens s) {
 		switch(s) {
 			case LOGIN: 
-				return new FXMLLoader(GraphicHandler.class.getResource("login.fxml"));
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "login.fxml"));
+			case SIGN_UP: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "signup.fxml"));
 			case SEARCH_USER: 
-				return new FXMLLoader(GraphicHandler.class.getResource("searchusr.fxml"));
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "searchusr.fxml"));
 			case SEARCH_ENTR: 
-				return new FXMLLoader(GraphicHandler.class.getResource("searchentr.fxml"));
-			case ACC_REC: 
-				return new FXMLLoader(GraphicHandler.class.getResource("accountrec.fxml"));
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "searchentr.fxml"));	
 			default:
-				return new FXMLLoader(GraphicHandler.class.getResource("main.fxml"));
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "main.fxml"));
 		}
 	}
 	
 	public static Scene switchScreen(Screens next, Initializable controller) {
 		SessionFacade.getSession().setScreen(next);
 		
-		try {
-			
+		try {			
 			if (next.equals(Screens.MAIN)) {
-				SessionFacade.getSession().setCurrUser(null);
+				SessionFacade.getSession().setCurrUserType(null);
 				return new Scene(loadFXML(next).load());
 				
 			} else {
@@ -51,9 +52,10 @@ public class GraphicHandler {
 				
 				AnchorPane pane = loader.load();
 				return new Scene(pane);
-			}
-			
+			}			
 		}catch (IOException e){
+			//GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+			e.printStackTrace();
 			return null;
 		}
 		
