@@ -13,6 +13,10 @@ public class UserBean {
     private String firstName;
 	private String lastName;
 	
+	public UserBean() {
+		/*Default constructor*/
+	}
+	
     public UserBean(String u, String p) {
     	this.password = p;
     	this.email = u;

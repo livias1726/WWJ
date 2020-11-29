@@ -48,8 +48,8 @@
 
 .se{
 	-fx-background-image: url('../icons/search_entr.png');
-	-fx-background-size: 1176 600;
-    -fx-background-position: left-center;
+	-fx-background-size: 1180 600;
+    -fx-background-position: center;
 	-fx-background-repeat: no-repeat;
 }
 
@@ -74,4 +74,6 @@
 
 .toolbar{
 	-fx-background-color: white;
+	-fx-border: 5px;
+	-fx-border-color: blue;
 }

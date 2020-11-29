@@ -1,0 +1,145 @@
+.main{
+	background-color: white;
+	background-image: url('../icons/main_icon.png');
+	background-repeat: no-repeat;
+	background-position: 50% 30%;
+}
+
+.main_btns{
+	height: 68px; 
+	width: 212px; 
+	border-color: #0080FF; 
+	font-size: 24px; 
+	font-family: System; 
+	margin-right: 20px; 
+	margin-left: 20px; 	
+	margin-top: 400px; 
+	margin-bottom: 20px; 
+	cursor: hand;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.menu_btn{
+	background-image: url('../icons/menu.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 24px;
+	height: 30px; 
+	width: 30px;
+}
+
+.user_btn{
+	background-image: url('../icons/user.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size:24px;
+	height: 30px; 
+	width: 30px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a:hover {
+	background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown:hover .dropbtn {
+	background-color: #3e8e41;
+}
+
+.login_btns{
+	height: 31px; 
+	width: 66px; 
+	border-color: #0080FF; 
+	font-size: 15px; 
+	font-family: System; 
+	cursor: hand;
+}
+
+.login_frame{
+	height: 350px; 
+	width: 300px; 
+	border-color: #0080FF; 
+	margin: 0px 0px 0px 500px; 
+}
+
+.login_fb{
+	background-image: url('../icons/facebook.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 31px;
+	width: 188px;
+	margin-left: 60px;
+}
+
+.login_gg{
+	background-image: url('../icons/gg_log.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 250px;
+	height: 31px;
+	width: 188px;
+	margin-left: 60px;
+}
+
+.su{
+	background-image: url('../icons/search_usr.png');
+	background-size: 1180 600;
+    background-position: center;
+	background-repeat: no-repeat;
+}
+
+.se{
+	background-image: url('../icons/search_entr.png');
+	background-size: 1180 600;
+    background-position: center;
+	background-repeat: no-repeat;
+}
+
+.home_btn{
+	background-image: url('../icons/home.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size:24px;
+}
+
+.notify_btn{
+	background-image: url('../icons/notification.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size:24px;
+}
+
+.main_icon{
+	background-image: url('../icons/main_icon.png');
+	background-repeat: no-repeat;
+}
+
+.toolbar{
+	background-color: white;
+	border: 5px;
+	border-color: blue;
+}

@@ -16,5 +16,12 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry excluding="logic/presentation/decorators/|logic/presentation/decorators/|logic/presentation/fxml/|logic/presentation/icons/|logic/presentation/icons/|logic/presentation/resources/xml/|logic/presentation/xml/|logic/presentation/xml/|logic/presentation/xml/|logic/presentation/xml/" kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.5">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
