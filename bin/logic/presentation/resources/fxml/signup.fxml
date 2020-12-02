@@ -7,6 +7,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -24,13 +25,16 @@
          <children>
             <HBox fx:id="radioBox" spacing="50.0" visible="false">
                <children>
-                  <RadioButton mnemonicParsing="false" text="Unemployed">
+                  <RadioButton fx:id="seekRadio" mnemonicParsing="false" onMouseClicked="#setUser" text="Job Seeker">
                      <HBox.margin>
                         <Insets left="90.0" />
                      </HBox.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="radioUser" />
+                     </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Recruiter" />
-                  <RadioButton mnemonicParsing="false" text="Entrepreneur" />
+                  <RadioButton fx:id="recRadio" mnemonicParsing="false" onMouseClicked="#setUser" text="Recruiter" toggleGroup="$radioUser" />
+                  <RadioButton fx:id="entreRadio" mnemonicParsing="false" onMouseClicked="#setUser" text="Entrepreneur" toggleGroup="$radioUser" />
                </children>
                <VBox.margin>
                   <Insets right="50.0" />

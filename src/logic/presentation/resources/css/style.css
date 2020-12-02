@@ -1,3 +1,19 @@
+.toolbar{
+	-fx-background-color: white;
+	-fx-border-color: blue;
+}
+
+.notify_btn{
+	-fx-background-image: url('../icons/notification.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:24px;
+}
+
+.main_icon{
+	-fx-image: url('../icons/main_icon.png');
+}
+
 .menu_btn{
 	-fx-background-image: url('../icons/menu.png');
 	-fx-background-repeat: no-repeat;
@@ -10,6 +26,34 @@
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
 	-fx-background-size:24px;
+}
+
+.back_btn{
+	-fx-background-image: url('../icons/arrow.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:24px;
+}
+
+.close_btn{
+	-fx-background-image: url('../icons/close.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:16px;
+}
+
+.add_btn{
+	-fx-background-image: url('../icons/plus.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:16px;
+}
+
+.view_btn{
+	-fx-background-image: url('../icons/view.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:16px;
 }
 
 .main{
@@ -30,13 +74,6 @@
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
 	-fx-background-size:250px;
-}
-
-.back_btn{
-	-fx-background-image: url('../icons/arrow.png');
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: center;
-	-fx-background-size:24px;
 }
 
 .su{
@@ -60,20 +97,94 @@
 	-fx-background-size:24px;
 }
 
-.notify_btn{
-	-fx-background-image: url('../icons/notification.png');
+.account_ext{
+	-fx-background-color: #8ecae6;
+}
+
+.account_int{
+	-fx-background-color: white;
+	-fx-border-color: blue;
+}
+
+.profile_pic{
+	-fx-border-color: blue;
+}
+
+.profile_btn{
+	-fx-background-image: url('../icons/change_pic.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: 10%;
+}
+
+.sections{
+	-fx-background-color: #8ecae6;
+	-fx-pref-width: 250px;
+	-fx-pref-height: 150px;
+	-fx-font-family: System;
+	-fx-font-size:24px;
+	-fx-font-weight:bold;
+	-fx-border-color: blue;
+}
+
+.section_views{
+	-fx-background-color: #8ecae6;
+	-fx-pref-width: 600px;
+	-fx-pref-height: 450px;
+	-fx-border-color: blue;
+}
+
+.company{
+	-fx-background-image: url('../icons/company.png');
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
-	-fx-background-size:24px;
+	-fx-background-size:150px;
 }
 
-.main_icon{
-	-fx-image: url('../icons/main_icon.png');
-	-fx-repeat: no-repeat;
+.candidates{
+	-fx-background-image: url('../icons/candidate.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:150px;
 }
 
-.toolbar{
-	-fx-background-color: white;
-	-fx-border: 5px;
-	-fx-border-color: blue;
+.offers{
+	-fx-background-image: url('../icons/offer.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:150px;
+}
+
+.info{
+	-fx-background-image: url('../icons/id.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:150px;
+}
+
+.cv{
+	-fx-background-image: url('../icons/cv.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:150px;
+}
+
+.fav{
+	-fx-background-image: url('../icons/star.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:150px;
+}
+
+.bus{
+	-fx-background-image: url('../icons/profits.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:150px;
+}
+
+.motiv{
+	-fx-background-image: url('../icons/motivation.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:150px;
 }

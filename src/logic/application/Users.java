@@ -1,7 +1,7 @@
 package logic.application;
 
 public enum Users {
-	UNEMPLOYED,
+	SEEKER,
 	RECRUITER,
 	ENTREPRENEUR;
 }

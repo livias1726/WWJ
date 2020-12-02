@@ -1,5 +1,8 @@
 package logic.bean;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import javax.security.auth.login.FailedLoginException;
 
 import logic.application.LoginControl;
@@ -12,18 +15,29 @@ public class UserBean {
     private String password;
     private String firstName;
 	private String lastName;
+	private String city;
+	private LocalDate birth;
+	private List<String> titles;
 	
 	public UserBean() {
 		/*Default constructor*/
 	}
 	
-    public UserBean(String u, String p) {
+    public UserBean(String e, String p) {
     	this.password = p;
-    	this.email = u;
+    	this.email = e;
     }
     
-    public UserBean(String u, String p, String f, String l) {
-    	this.email = u;
+    public UserBean(String e, String ce, String p, String cp, String f, String l) throws InvalidFieldException {
+    	if(!ce.equals(e)) {
+    		throw new InvalidFieldException("The email addresses do not match");
+    	}
+    	
+    	if(!cp.equals(p)) {
+    		throw new InvalidFieldException("The passwords do not match");
+    	}
+    	
+    	this.email = e;
     	this.password = p;
     	this.firstName = f;
     	this.lastName = l;
@@ -61,6 +75,30 @@ public class UserBean {
 		this.lastName = lastName;
 	}
 	
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public LocalDate getBirth() {
+		return birth;
+	}
+
+	public void setBirth(LocalDate birth) {
+		this.birth = birth;
+	}
+
+	public List<String> getTitles() {
+		return titles;
+	}
+
+	public void setTitles(List<String> titles) {
+		this.titles = titles;
+	}
+	
 	public boolean checkSyntax(String email) {
 		String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 	    return email.matches(regex);
@@ -71,28 +109,37 @@ public class UserBean {
 	}
 
     public boolean verifyLogin() throws FailedLoginException {
-        if (!checkFieldValidity(email) || !checkFieldValidity(password)) {
+        if (checkFieldValidity(email) || checkFieldValidity(password)) {
             return false;
         }
 
-        UserBean user = LoginControl.getInstance().login(email, password);
-        
-        if(user != null) {
+        if(LoginControl.getInstance().login(email, password)) {
         	return true;
         }else{
-        	throw new FailedLoginException();
+        	throw new FailedLoginException("Login has failed. Retry.");
         }
     }
     
-    public void verifyNewAccount() throws InvalidFieldException {
-		if(!checkFieldValidity(email) || !checkFieldValidity(password) || !checkFieldValidity(firstName) || !checkFieldValidity(lastName)) {		
+    public void verifyUser() throws InvalidFieldException {
+		if(checkFieldValidity(email) || checkFieldValidity(password) || checkFieldValidity(firstName) || checkFieldValidity(lastName)) {		
 			throw new InvalidFieldException("Please, fill out every field.");		
 		}
 		
 		if(!checkSyntax(email)) {
 			throw new InvalidFieldException("The email address is not valid");	
 		}
-		
-		SignUpControl.getInstance().signUp(email, password);
 	}
+    
+    public void trySignUp(){
+    	SignUpControl.getInstance().signUp(email, password, firstName, lastName);
+    }
+    
+    public void update(UserBean user) throws InvalidFieldException {
+    	user.verifyUser();
+    	while(user.getTitles().contains("")) {
+    		user.getTitles().remove("");
+    	}
+    	AccountBean account = new AccountBean();
+    	account.updateInfo(user);
+    }
 }

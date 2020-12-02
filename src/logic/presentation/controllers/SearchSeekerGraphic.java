@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Screens;
 
-public class SearchUnemployedGraphic implements Initializable {
+public class SearchSeekerGraphic implements Initializable {
 	
 	@FXML
 	private AnchorPane searchPane;

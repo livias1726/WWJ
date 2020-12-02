@@ -27,10 +27,16 @@ public class GraphicHandler {
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "login.fxml"));
 			case SIGN_UP: 
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "signup.fxml"));
-			case SEARCH_USER: 
+			case SEARCH_SEEK: 
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "searchusr.fxml"));
 			case SEARCH_ENTR: 
-				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "searchentr.fxml"));	
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "searchentr.fxml"));
+			case ACC_SEEK: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "seeker_account.fxml"));
+			case ACC_REC: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "recruiter_account.fxml"));
+			case ACC_ENTR: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "entrepreneur_account.fxml"));
 			default:
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "main.fxml"));
 		}
@@ -54,7 +60,6 @@ public class GraphicHandler {
 				return new Scene(pane);
 			}			
 		}catch (IOException e){
-			//GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			e.printStackTrace();
 			return null;
 		}

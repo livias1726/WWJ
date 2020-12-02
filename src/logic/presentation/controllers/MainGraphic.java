@@ -40,10 +40,10 @@ public class MainGraphic implements Initializable {
 	
 	@FXML
 	private void searchUnemployed() {
-		SessionFacade.getSession().setCurrUserType(Users.UNEMPLOYED);
+		SessionFacade.getSession().setCurrUserType(Users.SEEKER);
 		
 		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Screens.SEARCH_USER, null));
+		stage.setScene(GraphicHandler.switchScreen(Screens.SEARCH_SEEK, null));
 	}
 	
 	@FXML

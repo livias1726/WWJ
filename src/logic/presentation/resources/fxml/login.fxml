@@ -29,7 +29,7 @@
             </Label>
             <TextField fx:id="email" maxWidth="300.0" promptText="Email" />
             <PasswordField fx:id="pwd" maxWidth="300.0" promptText="Password" />
-            <Button mnemonicParsing="false" onAction="#verifyLogin" text="Sign In" textFill="BLACK">
+            <Button mnemonicParsing="false" onAction="#displaySignIn" text="Sign In" textFill="BLACK">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -42,7 +42,7 @@
             </Button>
          </children>
       </VBox>
-      <Button layoutX="1066.0" layoutY="24.0" mnemonicParsing="false" onAction="#createAccount" text="Sign Up">
+      <Button layoutX="1066.0" layoutY="24.0" mnemonicParsing="false" onAction="#displaySignUp" text="Sign Up">
          <font>
             <Font size="15.0" />
          </font>

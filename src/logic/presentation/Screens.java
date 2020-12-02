@@ -2,10 +2,10 @@ package logic.presentation;
 
 public enum Screens {
 	MAIN,
-	SEARCH_USER,
+	SEARCH_SEEK,
 	SEARCH_ENTR,
 	ACC_REC,
-	ACC_UNEM,
+	ACC_SEEK,
 	ACC_ENTR,
 	LOGIN,
 	SIGN_UP;

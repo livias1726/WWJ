@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
+import logic.application.Users;
 import logic.bean.UserBean;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Screens;
@@ -41,7 +42,7 @@ public class LoginGraphic implements Initializable {
 	}
 		
 	@FXML
-	public void verifyLogin() {
+	public void displaySignIn() {
 		UserBean credentials = new UserBean(email.getText(), pwd.getText());
 		
 		try {
@@ -50,7 +51,19 @@ public class LoginGraphic implements Initializable {
 			}
 		} catch (FailedLoginException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
-		}		
+		}	
+		
+		Stage stage = (Stage)logPane.getScene().getWindow();
+	
+		if(SessionFacade.getSession().getCurrUserType() == Users.SEEKER) {
+			stage.setScene(GraphicHandler.switchScreen(Screens.ACC_SEEK, null));
+			
+		}else if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER) {
+			stage.setScene(GraphicHandler.switchScreen(Screens.ACC_REC, null));
+			
+		}else {
+			stage.setScene(GraphicHandler.switchScreen(Screens.ACC_ENTR, null));
+		}
 	}
 
 	@FXML
@@ -68,18 +81,15 @@ public class LoginGraphic implements Initializable {
 	}
 	
 	@FXML
-	public void createAccount(){
-		Stage stage = (Stage)logPane.getScene().getWindow();
-		
+	public void displaySignUp(){
+		Stage stage = (Stage)logPane.getScene().getWindow();		
 		stage.setScene(GraphicHandler.switchScreen(Screens.SIGN_UP, null));
 	}
 	
 	@FXML
 	public void goBack(){
-		Screens prev = SessionFacade.getSession().getPrevScreen();	
-		
+		Screens prev = SessionFacade.getSession().getPrevScreen();		
 		Stage stage = (Stage)logPane.getScene().getWindow();	
-		
 		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}
 }

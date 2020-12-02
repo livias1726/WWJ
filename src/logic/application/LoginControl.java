@@ -1,8 +1,10 @@
 package logic.application;
 
-import java.util.Random;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.ObjectInputStream;
 
-import logic.bean.UserBean;
+import logic.domain.Account;
 
 /**Application of the Singleton pattern */
 
@@ -23,33 +25,33 @@ public class LoginControl {
     }
 
     /*DUMMY*/
-    public UserBean login(String username, String password) {
-    	UserBean log;
-    	
+    public boolean login(String email, String password) {
+        	
     	/**
     	 * Access the DB and retrieve credentials...
     	 * 
     	 * EXAMPLE DUMMY
     	 */
+       	
+    	Account account = new Account();
     	
-    	int choose = (new Random()).nextInt()%4;
+    	/*TEMPORARY BEHAVIOR: save account on file*/  	
+    	do {
+    		try (FileInputStream fileIn = new FileInputStream("src/logic/persistence/database/account.txt"); 
+    	    		ObjectInputStream objectIn = new ObjectInputStream(fileIn)) { 		 
+    	            account = (Account)objectIn.readObject();
+    	           	            
+	        } catch (FileNotFoundException e) {
+	            System.err.print("File not found.");
+	        } catch (Exception e) {
+	        	e.printStackTrace();
+	        }
+    	} while(!email.equals(account.getUser().getEmail()) && !password.equals(account.getUser().getPwd()));
     	
-    	switch(choose) {
-    		case 0:
-    			log = new UserBean("recruiter", password);
-    			break;
-    		case 1:
-    			log = new UserBean("unemployed", password);
-    			break;
-    		case 2:
-    			log = new UserBean("entrepreneur", password);
-    			break;
-    		default:
-    			log = null;
-    			break;
-    	}
+    	SessionFacade.getSession().setCurrUserType(account.getType());
+    	SessionFacade.getSession().setID(account.getID());
     	
-        return log;
+    	return true;
     }
     
 }

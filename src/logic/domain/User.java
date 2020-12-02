@@ -1,14 +1,26 @@
 package logic.domain;
 
-public class User {
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.List;
+
+public class User implements Serializable{
 	
-	protected String firstName;
-	protected String lastName;
-	protected String email;
-	protected boolean logged;
+	private static final long serialVersionUID = -4203020823149238767L;
 	
-	protected User (String e) {
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String pwd;
+	private String city;
+	private LocalDate birth;
+	private List<String> titles;
+	
+	public User (String e, String p, String f, String l) {
 		this.email = e;
+		this.pwd = p;
+		this.firstName = f;
+		this.lastName = l;
 	}
 
 	public String getEmail() {
@@ -35,13 +47,35 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public boolean isLogged() {
-		return logged;
+	public String getPwd() {
+		return pwd;
 	}
 
-	public void setLogged(boolean logged) {
-		this.logged = logged;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+	
+	public String getCity() {
+		return city;
 	}
 
+	public void setCity(String city) {
+		this.city = city;
+	}
 
+	public LocalDate getBirth() {
+		return birth;
+	}
+
+	public void setBirth(LocalDate birth) {
+		this.birth = birth;
+	}
+
+	public List<String> getTitles() {
+		return titles;
+	}
+
+	public void setTitles(List<String> titles) {
+		this.titles = titles;
+	}
 }

@@ -56,16 +56,33 @@
 	</VBox>
       <ToolBar prefHeight="60.0" prefWidth="1180.0" styleClass="toolbar" BorderPane.alignment="CENTER">
         <items>
-            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="main_icon" />
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="home_btn" />
-            <Pane prefHeight="50.0" prefWidth="829.0" />
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="notify_btn" visible="false" />
-            <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="190.0" spacing="20.0">
+            <HBox prefHeight="50.0" prefWidth="158.0">
                <children>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="main_icon" />
+                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="home_btn">
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="back_btn">
+                     <HBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <Pane prefHeight="50.0" prefWidth="755.0" />
+            <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="243.0" spacing="20.0">
+               <children>
+                  <MenuButton fx:id="notifyBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="notify_btn">
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </MenuButton>
                   <MenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="user_btn">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#login" text="Login" />
-                        <MenuItem mnemonicParsing="false" text="Logout" visible="false" />
+                        <MenuItem fx:id="loginItem" mnemonicParsing="false" onAction="#login" text="Login" />
+                        <MenuItem fx:id="logoutItem" mnemonicParsing="false" onAction="#logout" text="Logout" visible="false" />
                      </items>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -76,7 +93,7 @@
                   </MenuButton>
                   <MenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="menu_btn" textFill="#00000001">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#buyPremium" text="Buy premium version" />
+                        <MenuItem fx:id="premiumBtn" mnemonicParsing="false" onAction="#buyPremium" text="Buy premium version" />
                         <MenuItem mnemonicParsing="false" onAction="#openOnlineDoc" text="Support" />
                         <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Quit" />
                      </items>
@@ -84,7 +101,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <HBox.margin>
-                        <Insets right="30.0" top="10.0" />
+                        <Insets right="10.0" top="10.0" />
                      </HBox.margin>
                   </MenuButton>
                </children>

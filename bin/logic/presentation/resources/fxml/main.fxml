@@ -33,7 +33,7 @@
       </HBox>
       <HBox layoutX="181.0" layoutY="392.0" spacing="100.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#searchUnemployed" prefHeight="68.0" prefWidth="212.0" text="Unemployed" textAlignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#searchUnemployed" prefHeight="68.0" prefWidth="212.0" text="Job Seeker" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>

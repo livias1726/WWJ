@@ -8,6 +8,7 @@ public class SessionFacade {
 	private static SessionFacade instance = null;
 
 	private Users currUserType;
+	private Long accountID; //Account serial number
 	private Screens curr;
 	private Screens prev;
 
@@ -42,5 +43,13 @@ public class SessionFacade {
 	
 	public Screens getPrevScreen() {
 		return prev;
+	}
+	
+	public Long getID() {
+		return accountID;
+	}
+
+	public void setID(Long accountID) {
+		this.accountID = accountID;
 	}
 }
