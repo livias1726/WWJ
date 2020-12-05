@@ -1,14 +1,15 @@
 package logic.presentation.controllers;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -16,6 +17,8 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.TextFieldListCell;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
@@ -26,6 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+
 import logic.application.SessionFacade;
 import logic.bean.AccountBean;
 import logic.bean.UserBean;
@@ -42,9 +46,6 @@ public class AccountGraphic implements Initializable {
 	protected Pane frame;
 	
 	@FXML
-	protected AnchorPane sectionPane;
-	
-	@FXML
 	protected Button backBtn;
 	
 	@FXML
@@ -59,9 +60,9 @@ public class AccountGraphic implements Initializable {
 	@FXML 
 	protected Label nameLbl;
 	
-	@FXML 
-	protected Label roleLbl;
-	
+	@FXML
+	private AnchorPane personalPane;
+
 	@FXML
 	protected TextField nameField;
 	
@@ -73,6 +74,12 @@ public class AccountGraphic implements Initializable {
 	
 	@FXML
 	protected PasswordField pwdField;
+	
+	@FXML
+	protected TextField pwdUnmasked;
+	
+	@FXML
+	protected CheckBox showBtn;
 	
 	@FXML
 	protected TextField city;
@@ -92,33 +99,58 @@ public class AccountGraphic implements Initializable {
 	@FXML
 	protected Button saveBtn;
 	
-	protected URL path = getClass().getResource("../resources/fxml/personal_info.fxml");
-	
 	public AccountGraphic() {
 		/*Default constructor*/
 	}
 	
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
-		/*Upload the Account Data from the DB*/
-		AccountBean account = new AccountBean().retrieveInfo(SessionFacade.getSession().getID());
 		
-		if(url.equals(path)) {
-			nameField.setText(account.getUser().getFirstName());
-			lastNameField.setText(account.getUser().getLastName());
-			
-		}else {			
-			//If notifyBtn has non read items: enlighten it.
-			if(notifyBtn.getItems() != null) {
-				notifyBtn.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.rgb(15, 49, 141), 10, 0, 0, 0));
-			}	
-			//If the account is premium: make premiumBtn invisibles
+		AccountBean account = new AccountBean().retrieveInfo();		
+		
+		if(account != null) {
 			if(account.isPremium()) {
 				premiumBtn.setVisible(false);
 			}
-			//Insert the personal data inside the view
+			
 			nameLbl.setText(account.getUser().getFirstName() + " " + account.getUser().getLastName());	
-		}		
+			
+			if(notifyBtn.getItems().isEmpty()) {
+				notifyBtn.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.rgb(15, 49, 141), 10, 0, 0, 0));
+			}	
+			
+			retrievePersonalInfo(account);
+			initPersonalInfo();
+		}	
+	}
+		
+	
+	private void retrievePersonalInfo(AccountBean account) {		
+		nameField.setText(account.getUser().getFirstName());
+		lastNameField.setText(account.getUser().getLastName());
+		emailField.setText(account.getUser().getEmail());
+		pwdField.setText(account.getUser().getPwd());
+		city.setText(account.getUser().getCity());
+		birth.setValue(account.getUser().getBirth());		
+		titles.setItems((ObservableList<String>) account.getUser().getTitles());
+	}
+	
+	private void initPersonalInfo() {
+		titles.setCellFactory(TextFieldListCell.forListView());
+		
+		pwdUnmasked.visibleProperty().bind(showBtn.selectedProperty());
+		pwdField.visibleProperty().bind(showBtn.selectedProperty().not());		
+		pwdUnmasked.textProperty().bindBidirectional(pwdField.textProperty());
+		
+		addBtn.visibleProperty().bind(saveBtn.visibleProperty());
+		
+		nameField.editableProperty().bind(saveBtn.visibleProperty());
+		lastNameField.editableProperty().bind(saveBtn.visibleProperty());
+		emailField.editableProperty().bind(saveBtn.visibleProperty());
+		pwdUnmasked.editableProperty().bind(saveBtn.visibleProperty());
+		city.editableProperty().bind(saveBtn.visibleProperty());
+		birth.editableProperty().bind(saveBtn.visibleProperty());	
+		titles.editableProperty().bind(saveBtn.visibleProperty());	
 	}
 	
 	@FXML
@@ -134,29 +166,22 @@ public class AccountGraphic implements Initializable {
 		
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.getExtensionFilters().add(new ExtensionFilter("Image Files", "*.png", "*.jpg"));
-		File selectedFile = fileChooser.showOpenDialog(stage);
+		File newPic = fileChooser.showOpenDialog(stage);
 		
-		if (selectedFile != null) {
-			Image image = new Image(selectedFile.toURI().toString());
+		if (newPic != null) {
+			Image image = new Image(newPic.toURI().toString());
 		    profilePic.setImage(image);
 		    profilePic.fitHeightProperty().bind(frame.heightProperty());
 		    profilePic.fitWidthProperty().bind(frame.widthProperty());
+		    
+		    AccountBean bean = new AccountBean();
+		    bean.updatePic(newPic);
 		}
 	}	
 	
 	@FXML
 	public void openPersonalInfo(){
-		FXMLLoader loader = new FXMLLoader();
-		
-		try {                       
-		    loader.setLocation(path);
-		    sectionPane = (AnchorPane)loader.load();
-		    pane.getChildren().addAll(sectionPane);
-		    sectionPane.setLayoutX(485);
-		    sectionPane.setLayoutY(100);
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
+		personalPane.setVisible(true);
 	}
 	
 	@FXML
@@ -174,37 +199,32 @@ public class AccountGraphic implements Initializable {
 	}
 	
 	@FXML
-	private void closeSection(){
-		pane.getChildren().remove(sectionPane);
+	protected void closePersonalSection() {
+		personalPane.setVisible(false);
 	}
 	
 	@FXML
-	private void showPassword(){
-		
-	}
-	
-	@FXML
-	private void changeInfo(){
+	public void changeInfo(){
 		changeInfoBtn.setVisible(false);
 		saveBtn.setVisible(true);
-		addBtn.setVisible(true);
-		
-		nameField.setEditable(true);
-		lastNameField.setEditable(true);
-		emailField.setEditable(true);
-		pwdField.setEditable(true);
-		city.setEditable(true);
-		birth.setEditable(true);
-		titles.setEditable(true);
 	}
 	
 	@FXML
 	private void addTitles(){
-		titles.getItems().add("");
+		if(titles.getItems() == null) {
+			ObservableList <String> obs = FXCollections.observableArrayList(); 
+			obs.add("");
+			titles.setItems(obs);
+		}else {
+			titles.getItems().add("");
+		}
+		
+		titles.edit(titles.getItems().size()-1);
 	}
 	
 	@FXML
 	private void saveChanges(){
+		
 		UserBean user = new UserBean(emailField.getText(), pwdField.getText());
 		user.setBirth(birth.getValue());
 		user.setCity(city.getText());
@@ -214,10 +234,12 @@ public class AccountGraphic implements Initializable {
 		user.setTitles(titles.getItems());
 		
 		try {
-			user.update(user);
+			user.update();
 		} catch (InvalidFieldException e) {
-			e.printStackTrace();
+			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
+		
+		saveBtn.setVisible(false);
 	}
 	
 	@FXML

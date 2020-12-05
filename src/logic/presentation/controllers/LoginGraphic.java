@@ -42,7 +42,7 @@ public class LoginGraphic implements Initializable {
 	}
 		
 	@FXML
-	public void displaySignIn() {
+	public void signInClicked() {
 		UserBean credentials = new UserBean(email.getText(), pwd.getText());
 		
 		try {
@@ -51,7 +51,7 @@ public class LoginGraphic implements Initializable {
 			}
 		} catch (FailedLoginException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
-		}	
+		}
 		
 		Stage stage = (Stage)logPane.getScene().getWindow();
 	

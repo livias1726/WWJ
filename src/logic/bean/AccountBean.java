@@ -1,15 +1,19 @@
 package logic.bean;
 
+import java.io.File;
+
 import logic.application.AccountControl;
 import logic.application.Users;
 import logic.domain.User;
 
 public class AccountBean {
 	
-	private User user;
-	private Users type;
-	private boolean premium = false;
-	private long id;
+	protected User user;
+	protected Users type;
+	protected File pic;
+
+	protected boolean premium = false;
+	protected long id;
 
 	public AccountBean() {
 		/*Default constructor*/
@@ -53,11 +57,23 @@ public class AccountBean {
 		this.premium = premium;
 	}
 	
-	public AccountBean retrieveInfo(long id) {
-		return AccountControl.getInstance().retrieveAccount(id);
+	public File getPic() {
+		return pic;
+	}
+
+	public void setPic(File pic) {
+		this.pic = pic;
 	}
 	
-	public void updateInfo(UserBean changes) {
-		AccountControl.getInstance().updateAccount(changes);
+	public AccountBean retrieveInfo() {
+		return AccountControl.getInstance().retrieveAccount();
+	}
+	
+	public void updateInfo(){
+		AccountControl.getInstance().updateAccount();
+	}
+	
+	public void updatePic(File img) {
+		AccountControl.getInstance().updateAccountPic(img);
 	}
 }

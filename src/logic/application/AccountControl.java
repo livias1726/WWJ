@@ -1,14 +1,9 @@
 package logic.application;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.File;
 
 import logic.bean.AccountBean;
-import logic.bean.UserBean;
-import logic.domain.Account;
+import logic.domain.User;
 
 public class AccountControl {
 	
@@ -27,65 +22,22 @@ public class AccountControl {
     }
 
     /*DUMMY*/
-    public AccountBean retrieveAccount(long id) {
-    	/*Access the DB and deserialize the 
-    	 * Account info related to the id
-    	 */
+    public AccountBean retrieveAccount(){
     	
-    	Account newAccount = new Account();
-    	long dbId = 0;
-    	
-    	/*TEMPORARY BEHAVIOR: save account on file*/  	
-    	while(id != dbId) {
-    		try (FileInputStream fileIn = new FileInputStream("src/logic/persistence/database/account.txt"); 
-    	    		ObjectInputStream objectIn = new ObjectInputStream(fileIn)) { 		 
-    	            newAccount = (Account)objectIn.readObject();
-    	            
-    	            dbId = newAccount.getID();
-    	           	            
-	        } catch (FileNotFoundException e) {
-	            System.err.print("File not found.");
-	        } catch (Exception e) {
-	        	e.printStackTrace();
-	        }
-    	}
-    	
-    	AccountBean result = new AccountBean(newAccount.getUser(), newAccount.getType(), newAccount.getID());
-        SessionFacade.getSession().setID(result.getId());
-        return result;
+    	/*Access the DB and deserialize the Account info related to the Session id*/
+
+    	User user = new User("star@gmail.com", "ciao", "Pinco", "Panco");
+    
+        return new AccountBean(user, Users.RECRUITER, SessionFacade.getSession().getID());
+        //return new AccountBean(user, Users.SEEKER, SessionFacade.getSession().getID());
+        //return new AccountBean(user, Users.ENTREPRENEUR, SessionFacade.getSession().getID());
     }
     
-    public void updateAccount(UserBean bean) {
-    	
-    	/*TEMPORARY BEHAVIOR: save account on file*/  
-    	Account account = new Account();
-    	try (FileInputStream fileIn = new FileInputStream("src/logic/persistence/database/account.txt"); 
-	    		ObjectInputStream objectIn = new ObjectInputStream(fileIn)) { 	
-			
-	            account = (Account)objectIn.readObject();
-	            
-        } catch (FileNotFoundException e) {
-            System.err.print("File not found.");
-        } catch (Exception e) {
-        	e.printStackTrace();
-        }
-    	
-    	account.getUser().setEmail(bean.getEmail());
-    	account.getUser().setPwd(bean.getPassword());
-    	account.getUser().setFirstName(bean.getFirstName());
-    	account.getUser().setLastName(bean.getLastName());
-    	account.getUser().setCity(bean.getCity());
-    	account.getUser().setBirth(bean.getBirth());
-    	account.getUser().setTitles(bean.getTitles());
-    	
-    	/*TEMPORARY BEHAVIOR: save account on file*/  	
-    	try (FileOutputStream fileOut = new FileOutputStream("src/logic/persistence/database/account.txt"); 
-    		ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) { 		 
-            objectOut.writeObject(account);
-        } catch (FileNotFoundException e) {
-            System.err.print("File not found.");
-        } catch (Exception e) {
-        	e.printStackTrace();
-        }
+    public void updateAccount() {
+    	/*Update personal info for the account*/
+    }
+    
+    public void updateAccountPic(File img) {
+    	/*Update image field for the account*/
     }
 }

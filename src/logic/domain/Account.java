@@ -1,5 +1,6 @@
 package logic.domain;
 
+import java.io.File;
 import java.io.Serializable;
 
 import logic.application.Users;
@@ -7,10 +8,12 @@ import logic.application.Users;
 public class Account implements Serializable{
 	
 	private static final long serialVersionUID = -9081974993803980612L;
-	private long id;
-	private User user;
-	private Users type;
-	private boolean premium = false;
+	
+	protected long id;
+	protected User user;
+	protected Users type;
+	protected File pic;
+	protected boolean premium = false;
 	
 	public Account() {
 		/*Default constructor*/

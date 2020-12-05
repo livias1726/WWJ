@@ -1,32 +1,38 @@
 package logic.presentation.controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
 
 public class EntrepreneurAccountGraphic extends AccountGraphic {
+	
+	@FXML
+    private AnchorPane motivPane;
+
+    @FXML
+    private AnchorPane plansPane;
 	
 	public EntrepreneurAccountGraphic() {
 		/*Default constructor*/
 	}
 	
-	@Override
-	public void initialize(URL url, ResourceBundle resource) {
-		super.initialize(url, resource);
+	@FXML
+	public void openPlanSection(){
+		plansPane.setVisible(true);
 	}
 	
 	@FXML
-	public void openPlanSection(){
-		/*
-		 * Open the company description page
-		 */
+	public void closePlanSection(){
+		plansPane.setVisible(false);
 	}
 	
 	@FXML
 	public void openMotivationSection(){
-		/*
-		 * Open the published offers page
-		 */
+		motivPane.setVisible(true);
 	}
+	
+	@FXML
+	public void closeMotivationSection(){
+		motivPane.setVisible(false);
+	}
+	
 }

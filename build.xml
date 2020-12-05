@@ -53,54 +53,42 @@
         <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/tomcat-websocket.jar"/>
         <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/websocket-api.jar"/>
     </path>
-    <path id="Web App Libraries.libraryclasspath"/>
-    <path id="EAR Libraries.libraryclasspath"/>
+    <path id="Maven Dependencies.libraryclasspath"/>
     <path id="WorldWideJob.classpath">
         <path refid="JavaFX SDK.libraryclasspath"/>
         <path refid="javaFX.userclasspath"/>
-        <pathelement location="bin"/>
+        <pathelement location="target/classes"/>
         <path refid="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath"/>
-        <path refid="Web App Libraries.libraryclasspath"/>
-        <path refid="EAR Libraries.libraryclasspath"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
+    </path>
+    <path id="run.Launcher.classpath">
+        <path refid="WorldWideJob.classpath"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
+    </path>
+    <path id="run.User.classpath">
+        <path refid="WorldWideJob.classpath"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
     </path>
     <target name="init">
-        <mkdir dir="bin"/>
-        <copy includeemptydirs="false" todir="bin">
+        <mkdir dir="target/classes"/>
+        <copy includeemptydirs="false" todir="target/classes">
             <fileset dir="src">
+                <include name="**/*.java"/>
                 <exclude name="**/*.java"/>
-                <exclude name="logic/presentation/decorators/"/>
-                <exclude name="logic/presentation/decorators/"/>
-                <exclude name="logic/presentation/fxml/"/>
-                <exclude name="logic/presentation/icons/"/>
-                <exclude name="logic/presentation/icons/"/>
-                <exclude name="logic/presentation/resources/xml/"/>
-                <exclude name="logic/presentation/xml/"/>
-                <exclude name="logic/presentation/xml/"/>
-                <exclude name="logic/presentation/xml/"/>
-                <exclude name="logic/presentation/xml/"/>
             </fileset>
         </copy>
     </target>
     <target name="clean">
-        <delete dir="bin"/>
+        <delete dir="target/classes"/>
     </target>
     <target depends="clean" name="cleanall"/>
     <target depends="build-subprojects,build-project" name="build"/>
     <target name="build-subprojects"/>
     <target depends="init" name="build-project">
         <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+        <javac debug="true" debuglevel="${debuglevel}" destdir="target/classes" includeantruntime="false" source="${source}" target="${target}">
             <src path="src"/>
-            <exclude name="logic/presentation/decorators/"/>
-            <exclude name="logic/presentation/decorators/"/>
-            <exclude name="logic/presentation/fxml/"/>
-            <exclude name="logic/presentation/icons/"/>
-            <exclude name="logic/presentation/icons/"/>
-            <exclude name="logic/presentation/resources/xml/"/>
-            <exclude name="logic/presentation/xml/"/>
-            <exclude name="logic/presentation/xml/"/>
-            <exclude name="logic/presentation/xml/"/>
-            <exclude name="logic/presentation/xml/"/>
+            <include name="**/*.java"/>
             <classpath refid="WorldWideJob.classpath"/>
         </javac>
     </target>
@@ -120,12 +108,12 @@
     </target>
     <target name="Launcher">
         <java classname="logic.Main" failonerror="true" fork="yes">
-            <classpath refid="WorldWideJob.classpath"/>
+            <classpath refid="run.Launcher.classpath"/>
         </java>
     </target>
     <target name="User">
         <java classname="logic.User" failonerror="true" fork="yes">
-            <classpath refid="WorldWideJob.classpath"/>
+            <classpath refid="run.User.classpath"/>
         </java>
     </target>
 </project>

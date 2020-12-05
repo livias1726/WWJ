@@ -29,7 +29,7 @@
             </Label>
             <TextField fx:id="email" maxWidth="300.0" promptText="Email" />
             <PasswordField fx:id="pwd" maxWidth="300.0" promptText="Password" />
-            <Button mnemonicParsing="false" onAction="#displaySignIn" text="Sign In" textFill="BLACK">
+            <Button mnemonicParsing="false" onAction="#signInClicked" text="Sign In" textFill="BLACK">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

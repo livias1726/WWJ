@@ -1,17 +1,10 @@
 package logic.application;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.ObjectInputStream;
-
-import logic.domain.Account;
-
 /**Application of the Singleton pattern */
-
 public class LoginControl {
 	
 	private static LoginControl instance = null;
-
+	
     private LoginControl() {
     	/*Default constructor*/
     }
@@ -25,31 +18,17 @@ public class LoginControl {
     }
 
     /*DUMMY*/
-    public boolean login(String email, String password) {
+    public boolean login(String email, String password){
         	
-    	/**
-    	 * Access the DB and retrieve credentials...
-    	 * 
-    	 * EXAMPLE DUMMY
-    	 */
-       	
-    	Account account = new Account();
+    	/*Access DB to retrieve the Account*/
     	
-    	/*TEMPORARY BEHAVIOR: save account on file*/  	
-    	do {
-    		try (FileInputStream fileIn = new FileInputStream("src/logic/persistence/database/account.txt"); 
-    	    		ObjectInputStream objectIn = new ObjectInputStream(fileIn)) { 		 
-    	            account = (Account)objectIn.readObject();
-    	           	            
-	        } catch (FileNotFoundException e) {
-	            System.err.print("File not found.");
-	        } catch (Exception e) {
-	        	e.printStackTrace();
-	        }
-    	} while(!email.equals(account.getUser().getEmail()) && !password.equals(account.getUser().getPwd()));
-    	
-    	SessionFacade.getSession().setCurrUserType(account.getType());
-    	SessionFacade.getSession().setID(account.getID());
+    	/*FIXED ACCOUNT FOR TESTING: RECRUITER*/
+    	SessionFacade.getSession().setID((long) 1);
+    	if(SessionFacade.getSession().getCurrUserType() == null) {
+    		SessionFacade.getSession().setCurrUserType(Users.RECRUITER);
+    		//SessionFacade.getSession().setCurrUserType(Users.SEEKER);
+    		//SessionFacade.getSession().setCurrUserType(Users.ENTREPRENEUR);
+    	}
     	
     	return true;
     }

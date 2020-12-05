@@ -108,7 +108,7 @@ public class UserBean {
 		return (str == null || str.equals(""));
 	}
 
-    public boolean verifyLogin() throws FailedLoginException {
+    public boolean verifyLogin() throws FailedLoginException{
         if (checkFieldValidity(email) || checkFieldValidity(password)) {
             return false;
         }
@@ -130,16 +130,16 @@ public class UserBean {
 		}
 	}
     
-    public void trySignUp(){
+    public void trySignUp() {
     	SignUpControl.getInstance().signUp(email, password, firstName, lastName);
     }
     
-    public void update(UserBean user) throws InvalidFieldException {
-    	user.verifyUser();
-    	while(user.getTitles().contains("")) {
-    		user.getTitles().remove("");
+    public void update() throws InvalidFieldException {
+    	verifyUser();
+    	while(titles.contains("")) {
+    		titles.remove("");
     	}
     	AccountBean account = new AccountBean();
-    	account.updateInfo(user);
+    	account.updateInfo();
     }
 }

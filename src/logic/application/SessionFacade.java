@@ -3,12 +3,12 @@ package logic.application;
 import logic.presentation.Screens;
 
 /**Singleton*/
-
 public class SessionFacade {
+	
 	private static SessionFacade instance = null;
 
 	private Users currUserType;
-	private Long accountID; //Account serial number
+	private Long accountID;
 	private Screens curr;
 	private Screens prev;
 
