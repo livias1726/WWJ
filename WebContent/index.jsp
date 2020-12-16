@@ -9,18 +9,17 @@
 		
 		<link rel="icon" href="icons/main_icon.png">
 		<link rel="stylesheet" href="css/style.css">
-		
 		<title>WorldWideJob</title>
 	</head>
 	<body class="main">
 		<div class="dropdown" style="float:right;">
-		  <button class="user_btn"></button>
+	    	<button class="user_btn"></button>
 		  <div class="dropdown-content" style="right:0;">
 		    <a href="http://localhost:8080/WorldWideJob/login.jsp">Login</a>
 		  </div>
 		</div>
 		<div style="margin-left: 300px">
-		    <button class="main_btns" type="button" onClick="javascript:window.location='searchseek.jsp';">Job seeker</button>
+		    <button class="main_btns" type="button" onClick="javascript:window.location='homeJobSeeker.jsp';">Job seeker</button>
 		    <button class="main_btns" type="button" onClick="javascript:window.location='login.jsp';">Recruiter</button>
 		    <button class="main_btns" type="button" onClick="javascript:window.location='jspsearchentr.jsp';">Entrepreneur</button>
 		</div>

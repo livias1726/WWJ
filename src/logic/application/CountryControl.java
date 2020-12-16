@@ -32,4 +32,10 @@ public class CountryControl {
     	
     	return list;
     }
+    
+    /*DUMMY*/
+    public boolean jobSeekerResearch(String nameCountry, String job) {
+    	/*Access DB to check the nameCountry and job*/
+    	return true;
+    }
 }
