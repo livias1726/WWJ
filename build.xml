@@ -22,6 +22,22 @@
         <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.web.jar"/>
         <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx-swt.jar"/>
     </path>
+    <path id="JUnit 5.libraryclasspath">
+        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.jupiter.api_5.6.0.v20200203-2009.jar"/>
+        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.jupiter.engine_5.6.0.v20200203-2009.jar"/>
+        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.jupiter.migrationsupport_5.6.0.v20200203-2009.jar"/>
+        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.jupiter.params_5.6.0.v20200203-2009.jar"/>
+        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.platform.commons_1.6.0.v20200203-2009.jar"/>
+        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.platform.engine_1.6.0.v20200203-2009.jar"/>
+        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.platform.launcher_1.6.0.v20200203-2009.jar"/>
+        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.platform.runner_1.6.0.v20200203-2009.jar"/>
+        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.platform.suite.api_1.6.0.v20200203-2009.jar"/>
+        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.vintage.engine_5.6.0.v20200203-2009.jar"/>
+        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.opentest4j_1.2.0.v20190826-0900.jar"/>
+        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.apiguardian_1.1.0.v20190826-0900.jar"/>
+        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit_4.13.0.v20200204-1500.jar"/>
+        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
+    </path>
     <path id="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath">
         <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/annotations-api.jar"/>
         <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/catalina-ant.jar"/>
@@ -57,6 +73,7 @@
     <path id="WorldWideJob.classpath">
         <path refid="JavaFX SDK.libraryclasspath"/>
         <path refid="javaFX.userclasspath"/>
+        <path refid="JUnit 5.libraryclasspath"/>
         <pathelement location="target/classes"/>
         <path refid="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath"/>
         <path refid="Maven Dependencies.libraryclasspath"/>

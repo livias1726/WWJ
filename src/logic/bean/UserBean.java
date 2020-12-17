@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.security.auth.login.FailedLoginException;
 
-import logic.application.LoginControl;
-import logic.application.SignUpControl;
+import logic.application.control.LoginControl;
+import logic.application.control.SignUpControl;
 import logic.exceptions.InvalidFieldException;
 
 public class UserBean {

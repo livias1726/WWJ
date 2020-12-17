@@ -78,14 +78,14 @@
 
 .su{
 	-fx-background-image: url('../icons/search_usr.png');
-	-fx-background-size: 1180 600;
+	-fx-background-size: 1180 680;
     -fx-background-position: center;
 	-fx-background-repeat: no-repeat;
 }
 
 .se{
 	-fx-background-image: url('../icons/search_entr.png');
-	-fx-background-size: 1180 600;
+	-fx-background-size: 1180 680;
     -fx-background-position: center;
 	-fx-background-repeat: no-repeat;
 }
@@ -186,4 +186,23 @@
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
 	-fx-background-size:150px;
+}
+
+.filter_box{
+	-fx-background-color: #a2a7ab;
+	-fx-border-color: black;
+}
+
+.results{
+	-fx-background-color: #AED6F1;
+}
+
+.result_titles{
+	-fx-background-color: dodgerblue;
+	-fx-border-color: black;
+}
+
+.result_box{
+	-fx-border-color: #a2a7ab;
+	-fx-background-color: #C6CFD5;
 }

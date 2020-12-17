@@ -2,7 +2,7 @@ package logic.bean;
 
 import java.util.List;
 
-import logic.application.RecruiterAccountControl;
+import logic.application.control.RecruiterAccountControl;
 import logic.domain.Candidate;
 import logic.domain.Company;
 import logic.domain.Offer;

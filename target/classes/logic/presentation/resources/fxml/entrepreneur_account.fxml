@@ -86,7 +86,7 @@
          <children>
             <VBox layoutX="805.0" layoutY="53.0" prefHeight="396.0" prefWidth="663.0" AnchorPane.bottomAnchor="52.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="52.0">
                <children>
-                  <HBox prefHeight="199.0" prefWidth="200.0">
+                  <HBox prefHeight="207.0" prefWidth="663.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#openPlanSection" text="Business Plans" textFill="WHITE">
                            <font>
@@ -122,25 +122,9 @@
                            </effect>
                         </Button>
                      </children>
-                  </HBox>
-                  <HBox prefHeight="197.0" prefWidth="340.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#openMotivationSection" text="Motivation" textFill="WHITE">
-                           <HBox.margin>
-                              <Insets left="210.0" top="20.0" />
-                           </HBox.margin>
-                           <styleClass>
-                              <String fx:value="sections" />
-                              <String fx:value="motiv" />
-                           </styleClass>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <effect>
-                              <DropShadow />
-                           </effect>
-                        </Button>
-                     </children>
+                     <VBox.margin>
+                        <Insets top="90.0" />
+                     </VBox.margin>
                   </HBox>
                </children>
             </VBox>

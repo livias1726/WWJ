@@ -2,8 +2,8 @@ package logic.bean;
 
 import java.io.File;
 
-import logic.application.AccountControl;
 import logic.application.Users;
+import logic.application.control.AccountControl;
 import logic.domain.User;
 
 public class AccountBean {

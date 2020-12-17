@@ -28,9 +28,17 @@ public class GraphicHandler {
 			case SIGN_UP: 
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "signup.fxml"));
 			case SEARCH_SEEK: 
-				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "searchusr.fxml"));
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "search_seek.fxml"));
+			case OFFERS: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "offers_result.fxml"));
+			case OFFER: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "offer_details.fxml"));
 			case SEARCH_ENTR: 
-				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "searchentr.fxml"));
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "search_entr.fxml"));
+			case BUSINESSES: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "business_result.fxml"));
+			case BUSINESS: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "business_details.fxml"));
 			case ACC_SEEK: 
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "seeker_account.fxml"));
 			case ACC_REC: 
@@ -62,9 +70,7 @@ public class GraphicHandler {
 		}catch (IOException e){
 			e.printStackTrace();
 			return null;
-		}
-		
-		
+		}	
 	}
 	
 	public static Optional<ButtonType> popUpMsg(AlertType type, String content) {
@@ -73,6 +79,15 @@ public class GraphicHandler {
 		switch(type) {
 			case ERROR: 
 				alert.setHeaderText("Error"); 
+				break;
+			case CONFIRMATION: 
+				alert.setHeaderText("Confirm"); 
+				break;
+			case INFORMATION: 
+				alert.setHeaderText("Info"); 
+				break;
+			case WARNING: 
+				alert.setHeaderText("Attention"); 
 				break;
 			default: 
 				alert.setHeaderText(""); 
