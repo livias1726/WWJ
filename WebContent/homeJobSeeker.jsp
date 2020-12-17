@@ -43,9 +43,9 @@
 	    		</div>
 	    		</div>
 	    		<div class="search_usr">Find the right job for you,<br>In the place you've always dreamed of.<br>
-	    		<input class="place_btn" type="text" name="place" value="place" style="background-color:white">
-	    		<input class="job_btn" type="text" name="job" value="job" style="background-color:white"><br>
-	    		<button class="search_btn" style="width:100px; height:50px; top:100px; background-color: dodgerblue; margin-right:-100px; border-color: black">Search</button>
+	    		<input class="place_btn" type="text" name="place" value="place" style="background-color:white; border-color:black">
+	    		<input class="job_btn" type="text" name="job" value="job" style="background-color:white; border-color:black"><br>
+	    		<button class="search_btn" style="width:100px; height:50px; top:100px; background-color: dodgerblue; margin-right:-20px; border-color: black">Search</button>
 	    		</div>
 	    	</form>
 		</div>

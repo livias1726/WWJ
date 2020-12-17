@@ -89,7 +89,12 @@
     text-align:right;
     color:grey;
     margin-top:200px;
+    background-image: url('../icons/map.png');
+	background-repeat: no-repeat;
+    background-position: left;
+	background-size:31px;
 }
+        
 
 .business_btn{
 	width:250px;
@@ -231,5 +236,62 @@
 	border-color: blue;
 }
 
-
+.place2{
+	position: absolute;
+	width:250px;
+    height:30px;
+    left: 20px;
+	top: 130px;
+    font-size:20px;
+    max-lenght:"20";
+    text-align:center;
+    color:black;
+    border-color:black;
+    background-image: url('../icons/map.png');
+	background-repeat: no-repeat;
+    background-position: left;
+	background-size:31px;
+}
         
+.joboffers{
+	width:250px;
+    height:60px;
+    position: absolute;
+	left: 250px;
+	top: 130px;
+    margin-left:400px;
+    font-size:20px;
+    max-lenght:"20";
+    text-align:center;
+    color:white;
+    border-color:black;
+}
+
+.line{
+	position: absolute;
+	width: 500px;
+	height: 0px;
+	left: 540px;
+	top: 220px;
+	color:black;
+	border: 1px;
+}
+
+.order_by{
+	position: absolute;
+	width: 250px;
+	height: 40px;
+	left: 20px;
+	top: 250px;
+	color:black;
+}
+
+.order_select{
+	position: absolute;
+	width: 160px;
+	height: 30px;
+	left: 110px;
+	top: 258px;
+	color:black;	
+}
+
