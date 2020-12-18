@@ -295,3 +295,48 @@
 	color:black;	
 }
 
+.busdetails{
+	position: absolute;
+	width: 96%;
+	height: 95%;
+	left: 20px;
+	top: 180px;
+	color:black;
+}
+
+.businessname{
+	color: white;
+    position:relative;
+    width:250px; 
+    height:45px; 
+    top:200px;
+    left:-140px;
+}
+
+.thebusiness{
+    position:relative;
+    width:250px; 
+    height:40px; 
+    top:290px;
+    left:-400px;
+    border:0;
+    font-size: 15px;
+}
+
+.busdescription{
+	position: absolute;
+	width: 90%;
+	height: 30%;
+	left: 40px;
+	top: 350px;
+	color:black;
+}
+
+.statistics_btn{
+	color: white;
+    font-style: bold;
+    font-size: 15px;
+    text-align:center;
+    position:relative
+}
+
