@@ -14,6 +14,10 @@
 	-fx-image: url('../icons/main_icon.png');
 }
 
+.spec_btn{
+	-fx-background-color: dodgerblue; 
+}
+
 .menu_btn{
 	-fx-background-image: url('../icons/menu.png');
 	-fx-background-repeat: no-repeat;
@@ -54,6 +58,13 @@
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
 	-fx-background-size:16px;
+}
+
+.maps_btn{
+	-fx-background-image: url('../icons/map.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:32px;
 }
 
 .main{

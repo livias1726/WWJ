@@ -10,7 +10,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="680.0" prefWidth="1180.0" styleClass="results" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane prefHeight="680.0" prefWidth="1180.0" styleClass="results" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
    <children>
       <Pane layoutX="42.0" layoutY="100.0" prefHeight="50.0" prefWidth="233.0" styleClass="result_titles">
          <children>
@@ -38,7 +39,7 @@
             <ChoiceBox fx:id="order" prefHeight="34.0" prefWidth="237.0" />
          </children>
       </HBox>
-      <VBox layoutX="42.0" layoutY="242.0" prefHeight="324.0" prefWidth="233.0" styleClass="filter_box">
+      <VBox layoutX="42.0" layoutY="248.0" prefHeight="324.0" prefWidth="233.0" styleClass="filter_box">
          <children>
             <Label text="Filters">
                <padding>
@@ -50,11 +51,11 @@
             </Label>
          </children>
       </VBox>
-      <VBox layoutX="437.0" layoutY="92.0" prefHeight="512.0" prefWidth="634.0">
+      <VBox layoutX="437.0" layoutY="92.0" prefHeight="546.0" prefWidth="634.0">
          <children>
             <Pane prefHeight="50.0" prefWidth="554.0" styleClass="result_titles">
                <children>
-                  <Label layoutX="56.0" layoutY="2.0" text="BUSINESSES" textFill="WHITE">
+                  <Label layoutX="56.0" layoutY="2.0" text="JOB OFFERS" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -67,11 +68,11 @@
                   <Insets left="200.0" right="200.0" />
                </VBox.margin>
             </Pane>
-            <ScrollPane prefHeight="432.0" prefWidth="634.0">
+            <ScrollPane prefHeight="443.0" prefWidth="634.0">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="444.0" prefWidth="634.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="447.0" prefWidth="634.0">
                      <children>
-                        <VBox fx:id="resultsBox" prefHeight="442.0" prefWidth="634.0" spacing="10.0" styleClass="result_box">
+                        <VBox fx:id="resultsBox" prefHeight="443.0" prefWidth="634.0" spacing="10.0" styleClass="result_box">
                            <padding>
                               <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                            </padding>
