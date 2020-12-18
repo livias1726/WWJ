@@ -4,22 +4,11 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -28,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="600.0" prefWidth="1180.0" styleClass="account_ext" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.RecruiterAccountGraphic">
+<AnchorPane fx:id="pane" prefHeight="680.0" prefWidth="1180.0" styleClass="account_ext" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.RecruiterAccountGraphic">
    <children>
       <ToolBar prefHeight="60.0" prefWidth="1180.0" styleClass="toolbar">
          <items>
@@ -98,7 +87,7 @@
       </ToolBar>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="account_int" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="80.0">
          <children>
-            <VBox layoutX="805.0" layoutY="53.0" prefHeight="396.0" prefWidth="663.0" AnchorPane.bottomAnchor="52.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="52.0">
+            <VBox layoutX="424.0" layoutY="92.0" prefHeight="408.0" prefWidth="663.0" AnchorPane.bottomAnchor="82.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="92.0">
                <children>
                   <HBox prefHeight="199.0" prefWidth="200.0">
                      <children>
@@ -196,180 +185,6 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="companyPane" layoutX="485.0" layoutY="100.0" prefHeight="450.0" prefWidth="600.0" styleClass="section_views" stylesheets="@../css/style.css" visible="false">
-         <children>
-            <TextField fx:id="nameCompany" editable="false" layoutX="24.0" layoutY="90.0" prefHeight="25.0" prefWidth="187.0" />
-            <Label layoutX="24.0" layoutY="63.0" prefHeight="17.0" prefWidth="149.0" text="Name">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="24.0" layoutY="131.0" prefHeight="27.0" prefWidth="140.0" text="Decription">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="headquarter" editable="false" layoutX="329.0" layoutY="90.0" prefHeight="25.0" prefWidth="187.0" />
-            <Label layoutX="329.0" layoutY="63.0" prefHeight="27.0" prefWidth="123.0" text="Headquarter">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="329.0" layoutY="131.0" prefHeight="27.0" prefWidth="123.0" text="Branches">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <ListView fixedCellSize="24.0" layoutX="329.0" layoutY="158.0" prefHeight="125.0" prefWidth="187.0" />
-            <Button fx:id="changeCompanyBtn" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" text="Change">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="addBranchesBtn" layoutX="528.0" layoutY="158.0" mnemonicParsing="false" text="Add" visible="false">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="554.0" layoutY="24.0" mnemonicParsing="false" onAction="#closeCompanySection" prefHeight="25.0" prefWidth="25.0" styleClass="close_btn">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="saveCompanyBtn" layoutX="484.0" layoutY="396.0" mnemonicParsing="false" onAction="#saveChanges" text="Save changes">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <TextArea fx:id="description" editable="false" layoutX="24.0" layoutY="159.0" prefHeight="200.0" prefWidth="241.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="personalPane" layoutX="485.0" layoutY="100.0" prefHeight="450.0" prefWidth="600.0" styleClass="section_views" stylesheets="@../css/style.css" visible="false">
-         <children>
-            <TextField fx:id="nameField" editable="false" layoutX="61.0" layoutY="80.0" prefHeight="25.0" prefWidth="187.0" />
-            <TextField fx:id="lastNameField" editable="false" layoutX="319.0" layoutY="80.0" prefHeight="25.0" prefWidth="187.0" />
-            <Label layoutX="61.0" layoutY="53.0" prefHeight="17.0" prefWidth="149.0" text="First name">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="319.0" layoutY="53.0" prefHeight="27.0" prefWidth="140.0" text="Last name">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="61.0" layoutY="121.0" prefHeight="27.0" prefWidth="123.0" text="Birth date">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="city" editable="false" layoutX="319.0" layoutY="149.0" prefHeight="25.0" prefWidth="187.0" />
-            <Label layoutX="319.0" layoutY="121.0" prefHeight="17.0" prefWidth="105.0" text="City">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="61.0" layoutY="287.0" prefHeight="27.0" prefWidth="123.0" text="Titles/Lines">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <DatePicker fx:id="birth" editable="false" layoutX="61.0" layoutY="149.0" prefHeight="25.0" prefWidth="187.0" />
-            <ListView fx:id="titles" fixedCellSize="24.0" layoutX="200.0" layoutY="288.0" prefHeight="125.0" prefWidth="200.0" />
-            <Button fx:id="changeInfoBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeInfo" text="Change info">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="496.0" layoutY="375.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="81.0" text="Save" visible="false">
-               <effect>
-                  <InnerShadow blurType="ONE_PASS_BOX" color="#0f318d" />
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="addBtn" layoutX="406.0" layoutY="288.0" mnemonicParsing="false" onAction="#addTitles" text="Add">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="556.0" layoutY="12.0" mnemonicParsing="false" onAction="#closePersonalSection" prefHeight="25.0" prefWidth="25.0" styleClass="close_btn">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="saveBtn" layoutX="493.0" layoutY="405.0" mnemonicParsing="false" onAction="#saveChanges" text="Save changes" visible="false">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="412.0" layoutY="275.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" styleClass="add_btn" visible="false">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <TextField fx:id="emailField" editable="false" layoutX="61.0" layoutY="219.0" prefHeight="25.0" prefWidth="187.0" />
-            <Label layoutX="61.0" layoutY="192.0" prefHeight="27.0" prefWidth="123.0" text="Email">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="319.0" layoutY="192.0" prefHeight="27.0" prefWidth="123.0" text="Password">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <PasswordField fx:id="pwdField" editable="false" layoutX="320.0" layoutY="219.0" prefHeight="25.0" prefWidth="187.0" />
-            <CheckBox fx:id="showBtn" layoutX="520.0" layoutY="223.0" mnemonicParsing="false" text="Show" />
-            <TextField fx:id="pwdUnmasked" editable="false" layoutX="319.0" layoutY="219.0" prefHeight="25.0" prefWidth="187.0" visible="false" />
-         </children>
-         <effect>
-            <DropShadow />
-         </effect>
-      </AnchorPane>
-      <AnchorPane fx:id="candidatesPane" layoutX="180.0" layoutY="100.0" prefHeight="450.0" prefWidth="900.0" styleClass="section_views" stylesheets="@../css/style.css" visible="false">
-         <children>
-            <Button layoutX="861.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeCandidatesSection" prefHeight="25.0" prefWidth="25.0" styleClass="close_btn">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <TableView layoutX="31.0" layoutY="55.0" prefHeight="354.0" prefWidth="836.0">
-               <columns>
-                  <TableColumn prefWidth="97.0" text="Offer" />
-                  <TableColumn prefWidth="134.0" text="Candidate" />
-               </columns>
-            </TableView>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="offersPane" layoutX="180.0" layoutY="100.0" prefHeight="450.0" prefWidth="900.0" styleClass="section_views" stylesheets="@../css/style.css" visible="false">
-         <children>
-            <Button layoutX="852.0" layoutY="15.0" mnemonicParsing="false" onAction="#closeOffersSection" prefHeight="25.0" prefWidth="25.0" styleClass="close_btn">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <HBox layoutX="31.0" layoutY="27.0" prefHeight="17.0" prefWidth="200.0" spacing="20.0">
-               <children>
-                  <RadioButton mnemonicParsing="false" selected="true" text="All">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="views" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <RadioButton mnemonicParsing="false" text="Active" toggleGroup="$views" />
-                  <RadioButton mnemonicParsing="false" text="Expired" toggleGroup="$views" />
-               </children>
-            </HBox>
-            <TableView layoutX="31.0" layoutY="55.0" prefHeight="354.0" prefWidth="831.0">
-               <columns>
-                  <TableColumn prefWidth="75.0" text="Number" />
-                  <TableColumn prefWidth="156.0" text="Position" />
-                  <TableColumn minWidth="0.0" prefWidth="105.0" text="Expire Date" />
-               </columns>
-            </TableView>
          </children>
       </AnchorPane>
    </children>
