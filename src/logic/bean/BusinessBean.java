@@ -1,7 +1,8 @@
 package logic.bean;
 
-import javafx.collections.ObservableList;
-import logic.application.BusinessControl;
+import java.util.List;
+
+import logic.application.control.ViewBusinessControl;
 
 public class BusinessBean {
 	private String name;
@@ -14,8 +15,8 @@ public class BusinessBean {
 		this.name = name;
 	}
 
-	public ObservableList<String> getBusinesses(){
-		BusinessControl control = BusinessControl.getInstance();
+	public List<String> getBusinesses(){
+		ViewBusinessControl control = ViewBusinessControl.getInstance();
 		return control.retrieveBusinesses();
 	}
 }
