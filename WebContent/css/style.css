@@ -340,3 +340,113 @@
     position:relative
 }
 
+.recruiter_acc{
+	position:absolute; 
+    top:70px; 
+    left:0px; 
+    width:100%; 
+    height:100%; 
+    background-image: url('../icons/bgRecruiter.png');
+	
+}
+
+.profile_pic{
+	position:relative;
+	background-repeat:no-repeat; 
+	margin-left:200px;
+    top:70px; 
+    left:0px; 
+    width:100%; 
+    height:100%; 
+    background-image: url('../icons/profile_pic.png');
+	
+}
+
+.change_pic{
+	position:relative;
+	background-repeat:no-repeat; 
+	margin-left:10px;
+    top:205px; 
+    left:-10px; 
+    width:50px; 
+    height:50px; 
+    background-image: url('../icons/change_pic.png');
+	
+}
+
+#griglia {
+padding: 0;
+margin: 0;
+}
+
+#griglia > li {
+border: 2px solid black;
+display: inline-block;
+width: 200px;
+height: 160px;
+margin: 10px;
+background-color: lightgrey;
+}
+
+#container {
+background: transparent;
+max-width:480px;
+margin:0 auto;
+padding: 20px;
+text-align: center;
+margin-top:-800px;
+margin-left:700px;
+}
+
+.candidate_btn{
+	color:white;
+	font-size:30px;
+	font-style:bold;
+	position:relative;
+	text-align:center;
+	background-repeat:no-repeat; 
+	background-size: 150px;
+	background-position:center;
+	background-image: url('../icons/candidate.png');
+	
+}
+
+.company_btn{
+	color:white;
+	font-size:30px;
+	font-style:bold;
+	position:relative;
+	text-align:center;
+	background-repeat:no-repeat; 
+	background-size: 150px;
+	background-position:center;
+	background-image: url('../icons/company.png');
+	
+}
+
+.id_btn{
+	color:white;
+	font-size:30px;
+	font-style:bold;
+	position:relative;
+	text-align:center;
+	background-repeat:no-repeat; 
+	background-size: 150px;
+	background-position:center;
+	background-image: url('../icons/id.png');
+	
+}
+
+.offers_btn{
+	color:white;
+	font-size:30px;
+	font-style:bold;
+	position:relative;
+	text-align:center;
+	background-repeat:no-repeat; 
+	background-size: 150px;
+	background-position:center;
+	background-image: url('../icons/offer.png');
+	
+}
+
