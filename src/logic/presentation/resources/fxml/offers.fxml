@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<AnchorPane fx:id="offersPane" prefHeight="588.0" prefWidth="1136.0" styleClass="section_views" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="1083.0" layoutY="23.0" mnemonicParsing="false" onAction="#closeOffersSection" prefHeight="25.0" prefWidth="25.0" styleClass="close_btn">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <HBox layoutX="91.0" layoutY="40.0" prefHeight="17.0" prefWidth="200.0" spacing="20.0">
+         <children>
+            <RadioButton mnemonicParsing="false" selected="true" text="All">
+               <toggleGroup>
+                  <ToggleGroup fx:id="views" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Active" toggleGroup="$views" />
+            <RadioButton mnemonicParsing="false" text="Expired" toggleGroup="$views" />
+         </children>
+      </HBox>
+      <ScrollPane layoutX="86.0" layoutY="75.0" prefHeight="463.0" prefWidth="961.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="465.0" prefWidth="960.0">
+               <children>
+                  <TableView prefHeight="463.0" prefWidth="963.0">
+                     <columns>
+                        <TableColumn prefWidth="75.0" text="Number" />
+                        <TableColumn prefWidth="156.0" text="Position" />
+                        <TableColumn minWidth="0.0" prefWidth="105.0" text="Upload Date" />
+                        <TableColumn prefWidth="113.0" text="Expiration Date" />
+                        <TableColumn prefWidth="75.0" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
