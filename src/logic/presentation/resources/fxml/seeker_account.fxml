@@ -7,8 +7,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -174,37 +172,6 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="applicationPane" layoutX="180.0" layoutY="100.0" prefHeight="450.0" prefWidth="900.0" styleClass="section_views" stylesheets="@../css/style.css" visible="false">
-         <children>
-            <Button layoutX="852.0" layoutY="15.0" mnemonicParsing="false" onAction="#closeApplicationSection" prefHeight="25.0" prefWidth="25.0" styleClass="close_btn">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <TableView layoutX="31.0" layoutY="55.0" prefHeight="354.0" prefWidth="831.0">
-               <columns>
-                  <TableColumn prefWidth="75.0" text="Offer" />
-                  <TableColumn prefWidth="156.0" text="Position" />
-                  <TableColumn minWidth="0.0" prefWidth="105.0" text="Application Date" />
-               </columns>
-            </TableView>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="favPane" layoutX="180.0" layoutY="100.0" prefHeight="450.0" prefWidth="900.0" styleClass="section_views" stylesheets="@../css/style.css" visible="false">
-         <children>
-            <Button layoutX="852.0" layoutY="15.0" mnemonicParsing="false" onAction="#closeFavouritesSection" prefHeight="25.0" prefWidth="25.0" styleClass="close_btn">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <TableView layoutX="31.0" layoutY="55.0" prefHeight="354.0" prefWidth="831.0">
-               <columns>
-                  <TableColumn prefWidth="75.0" text="Offer" />
-                  <TableColumn minWidth="0.0" prefWidth="105.0" text="Expire Date" />
-               </columns>
-            </TableView>
          </children>
       </AnchorPane>
    </children>
