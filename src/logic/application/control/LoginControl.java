@@ -1,9 +1,14 @@
 package logic.application.control;
 
-import logic.application.SessionFacade;
-import logic.application.Users;
+import java.sql.SQLException;
 
-/**Application of the Singleton pattern */
+import javax.security.auth.login.FailedLoginException;
+
+import logic.application.SessionFacade;
+import logic.domain.Account;
+import logic.domain.User;
+
+/**Singleton*/
 public class LoginControl {
 	
 	private static LoginControl instance = null;
@@ -20,20 +25,25 @@ public class LoginControl {
         return instance;
     }
 
-    /*DUMMY*/
     public boolean login(String email, String password){
         	
-    	/*Access DB to retrieve the Account*/
+    	User user = new User(email, password);
+    	Account account;
+		try {
+			account = user.login();
+			
+			if(account != null) {
+	    		SessionFacade.getSession().setID(account.getID());
+	    		SessionFacade.getSession().setCurrUserType(account.getType());
+	    		return true;
+	    	}
+		} catch (FailedLoginException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			
+		}
     	
-    	/*FIXED ACCOUNT FOR TESTING: RECRUITER*/
-    	SessionFacade.getSession().setID((long) 1);
-    	if(SessionFacade.getSession().getCurrUserType() == null) {
-    		SessionFacade.getSession().setCurrUserType(Users.RECRUITER);
-    		//SessionFacade.getSession().setCurrUserType(Users.SEEKER);
-    		//SessionFacade.getSession().setCurrUserType(Users.ENTREPRENEUR);
-    	}
-    	
-    	return true;
+    	return false;
     }
     
 }

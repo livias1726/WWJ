@@ -3,5 +3,6 @@ package logic.application;
 public enum Users {
 	SEEKER,
 	RECRUITER,
-	ENTREPRENEUR;
+	ENTREPRENEUR,
+	ADMIN;
 }
