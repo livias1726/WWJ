@@ -217,3 +217,15 @@
 	-fx-border-color: #a2a7ab;
 	-fx-background-color: #C6CFD5;
 }
+
+.dollar{
+	-fx-background-image: url('../icons/dollar.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
+
+.euro{
+	-fx-background-image: url('../icons/euro.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+}
