@@ -10,20 +10,24 @@
 		
 		<link rel="icon" href="icons/search_usr.png">
 	    <link href="css/style.css" rel="stylesheet">
-	
-		<title>WorldWideJob - JobSeekerResearchResult</title>
+		
+		<title>WorldWideJob - FavouriteJobOffers</title>
+		
 	</head>
-	
 	<body>
 		<div>
-			<form action="jobSeekerResearchResult.jsp" name="researchresultjobseekform" method="POST">
+			<form action="favouriteJobOffers.jsp" name="favouriteJobOffers" method="POST">
 				<div style="float:right;">
 	    			<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
-	    		<div class="dropdown" style="float:left;">
-	    			<button class="user_btn" style="background-color:lightblue;margin-right:10px;width:40px;height:40px;margin-top:10px"></button>
-		        <div class="dropdown-content" style="right:0;">
-		     		<a href="http://localhost:8080/WorldWideJob/login.jsp">Login</a>
 		     	</div>
+		     	<div style="float:right;">
+	    			<button class="notify_btn" style="background-color:lightblue;margin-right:10px;width:40px;height:40px;margin-top:10px"></button>
+		        <div class="dropdown" style="float:right;">
+	    			<button class="user_btn" style="background-color:lightblue;margin-right:10px;width:40px;height:40px;margin-top:10px"></button>
+		     		<div class="dropdown-content" style="right:0;">
+		     			<a href="">Account</a>
+		     			<a href="">Logout</a>
+		     		</div>
 		     	</div>
 		     	</div>
 	    		<div style="float:left;width:70px;height:70px">
@@ -36,25 +40,14 @@
 	    		</div>
 	    		</div>
 	    		<div>
-	    		<input class="place2" type="text" name="place2" value="" disabled style="background-color:white">
-	    		<input class="joboffers" type="text" name="joboffers" value="JOB OFFERS" disabled style="background-color:dodgerblue">
-	    		<input class="line" style="background-color:black">
+	    		<input class="favourite_container" type="text" name="favourite_container" value="" disabled style="background-color:#C6D6D3">
+	    		<input class="favourite_title" type="text" name="favourite_title" value="Favourite job offers" disabled style="background-color:#C6D6D3">
 	    		<input class="order_by" type="text" name="orderby" value="  Ordered by:" disabled style="background-color:lightgrey">
 	    		<select class="order_select" name="orderselect" size="1" style="background-color:whitesmoke">
+	    			<option>expiration</option>
 	    			<option>most recent</option>
 					<option>alphabetical order</option>
-	    		</select> 
-	    		<fieldset style="background-color:lightgrey;position: absolute;width:230px;height:140px;left:20px;top:300px;">
-	    		<legend>Category:</legend>
-	    		<input type="radio" name="category">Consumer goods<br>
-	    		<input type="radio" name="category">Financials<br>
-	    		<input type="radio" name="category">Health care<br>
-	    		<input type="radio" name="category">Industrials<br>
-	    		<input type="radio" name="category">Retail<br>
-	    		<input type="radio" name="category">Technology
-	    		</fieldset>
 	    		</div>
-	    	</form>	
-	    </div>
+			</form>
 	</body>
 </html>

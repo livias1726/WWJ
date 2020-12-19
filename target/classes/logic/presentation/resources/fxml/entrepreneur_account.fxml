@@ -143,14 +143,5 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="plansPane" layoutX="180.0" layoutY="100.0" prefHeight="450.0" prefWidth="900.0" styleClass="section_views">
-         <children>
-            <Button layoutX="861.0" layoutY="14.0" mnemonicParsing="false" onAction="#closePlanSection" prefHeight="25.0" prefWidth="25.0" styleClass="close_btn">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </AnchorPane>
    </children>
 </AnchorPane>
