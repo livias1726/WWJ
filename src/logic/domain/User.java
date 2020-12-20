@@ -1,13 +1,8 @@
 package logic.domain;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
-
-import javax.security.auth.login.FailedLoginException;
-
-import logic.persistence.dao.UserDAO;
 
 public class User implements Serializable{
 	
@@ -20,6 +15,10 @@ public class User implements Serializable{
 	private String city;
 	private LocalDate birth;
 	private List<String> titles;
+	
+	public User() {
+		/**/
+	}
 	
 	public User (String e, String p) {
 		this.email = e;
@@ -88,8 +87,5 @@ public class User implements Serializable{
 	public void setTitles(List<String> titles) {
 		this.titles = titles;
 	}
-	
-	public Account login() throws FailedLoginException, SQLException {
-		return UserDAO.loginToSystem(this.email, this.pwd);
-	}
+
 }

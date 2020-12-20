@@ -11,10 +11,6 @@ public class EntrepreneurAccountGraphic extends AccountGraphic {
     @FXML
     private AnchorPane plansPane;
 	
-	public EntrepreneurAccountGraphic() {
-		/*Default constructor*/
-	}
-	
 	@FXML
 	public void openPlanSection(){
 		plansPane.setVisible(true);

@@ -7,6 +7,7 @@ import javax.security.auth.login.FailedLoginException;
 import logic.application.SessionFacade;
 import logic.domain.Account;
 import logic.domain.User;
+import logic.exceptions.DatabaseFailureException;
 
 /**Singleton*/
 public class LoginControl {
@@ -25,25 +26,24 @@ public class LoginControl {
         return instance;
     }
 
-    public boolean login(String email, String password){
+    public void tryLogin(String email, String password) throws FailedLoginException, DatabaseFailureException{
         	
     	User user = new User(email, password);
-    	Account account;
-		try {
-			account = user.login();
-			
-			if(account != null) {
-	    		SessionFacade.getSession().setID(account.getID());
-	    		SessionFacade.getSession().setCurrUserType(account.getType());
-	    		return true;
-	    	}
-		} catch (FailedLoginException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			
-		}
+    	Account account = new Account();
+    	account.setUser(user);
     	
-    	return false;
+		try {
+			account = account.tryLoginToDB();
+			
+			SessionFacade.getSession().setID(account.getID());
+    		SessionFacade.getSession().setCurrUserType(account.getType());
+		
+		} catch (SQLException se) {
+			throw new DatabaseFailureException("Something went wrong. Please, retry later.");
+		} catch (FailedLoginException fe) {
+			throw new FailedLoginException("Login failed. Please, correct your credentials or Sign Up.");
+		}
+
     }
     
 }

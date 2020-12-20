@@ -1,15 +1,19 @@
 package logic.bean;
 
 import java.io.File;
+import java.util.List;
 
-import logic.application.Users;
+import javax.security.auth.login.FailedLoginException;
+
 import logic.application.control.AccountControl;
-import logic.domain.User;
+import logic.application.control.LoginControl;
+import logic.application.control.SignUpControl;
+import logic.exceptions.DatabaseFailureException;
 
 public class AccountBean {
 	
-	protected User user;
-	protected Users type;
+	protected UserBean user;
+	protected String type;
 	protected File pic;
 
 	protected boolean premium = false;
@@ -19,25 +23,25 @@ public class AccountBean {
 		/*Default constructor*/
 	}
 	
-	public AccountBean(User u, Users t, long id) {
+	public AccountBean(UserBean u, String t, long id) {
 		this.user = u;
 		this.type = t;
 		this.id = id;
 	}
 	
-	public User getUser() {
+	public UserBean getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserBean user) {
 		this.user = user;
 	}
 
-	public Users getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Users type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 	
@@ -65,7 +69,7 @@ public class AccountBean {
 		this.pic = pic;
 	}
 	
-	public AccountBean retrieveInfo() {
+	public AccountBean getAccount() throws DatabaseFailureException {
 		return AccountControl.getInstance().retrieveAccount();
 	}
 	
@@ -76,4 +80,17 @@ public class AccountBean {
 	public void updatePic(File img) {
 		AccountControl.getInstance().updateAccountPic(img);
 	}
+
+	public List<String> getNotification() throws DatabaseFailureException {
+		return AccountControl.getInstance().retrieveNotifications();
+	}
+
+	public void login() throws FailedLoginException, DatabaseFailureException {
+		LoginControl.getInstance().tryLogin(user.getEmail(), user.getPassword());
+	}
+	
+	public void signUp() throws FailedLoginException {
+    	SignUpControl.getInstance().trySignUp(user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName());
+    }
+   
 }

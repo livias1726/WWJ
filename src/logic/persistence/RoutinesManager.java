@@ -11,21 +11,21 @@ public class RoutinesManager {
 	}
 	
 	public static ResultSet bindParametersAndExec(CallableStatement stmt, String ... params) throws SQLException {
-		for (int i = 0; i < params.length; ++i) 
-			stmt.setString(i + 1, params[i]);
-		
+		for (int i = 0; i < params.length; i++) {
+			stmt.setString(i+1, params[i]);
+		}
+				
 		return executeStmt(stmt);
 	}
 	
-	public static ResultSet bindParametersAndExec(CallableStatement stmt, int paramInt, String ... params) throws SQLException {
-		stmt.setInt(1, paramInt);
-		for (int i = 0; i < params.length; ++ i) 
-			stmt.setString(i + 2, params[i]);
-		
+	public static ResultSet bindParametersAndExec(CallableStatement stmt, int ... params) throws SQLException {
+		for (int i = 0; i < params.length; i++) {
+			stmt.setInt(i+1, params[i]);
+		}
+				
 		return executeStmt(stmt);
-		
 	}
-	
+
 	private static ResultSet executeStmt(CallableStatement stmt) throws SQLException {
 		if(stmt.execute()) {
 			return stmt.getResultSet();

@@ -32,14 +32,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="back_btn">
-                     <HBox.margin>
-                        <Insets left="20.0" top="10.0" />
-                     </HBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
                </children>
             </HBox>
             <Pane prefHeight="50.0" prefWidth="755.0" />
@@ -162,7 +154,7 @@
                   </HBox>
                </children>
             </VBox>
-            <Pane fx:id="frame" layoutX="56.0" layoutY="104.0" prefHeight="181.0" prefWidth="219.0" styleClass="profile_pic" AnchorPane.leftAnchor="55.0">
+            <Pane fx:id="picFrame" layoutX="56.0" layoutY="104.0" prefHeight="181.0" prefWidth="219.0" styleClass="profile_pic" AnchorPane.leftAnchor="55.0">
                <children>
                   <ImageView fx:id="profilePic" fitHeight="175.0" fitWidth="226.0" layoutX="5.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" styleClass="profile_pic">
                      <image>

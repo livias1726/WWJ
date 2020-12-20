@@ -15,7 +15,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
 import logic.application.Users;
+import logic.bean.AccountBean;
 import logic.bean.UserBean;
+import logic.exceptions.DatabaseFailureException;
+import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Screens;
 
@@ -44,13 +47,22 @@ public class LoginGraphic implements Initializable {
 	@FXML
 	public void signInClicked() {
 		UserBean credentials = new UserBean(email.getText(), pwd.getText());
+		try {
+			credentials.verifyFields();		
+		} catch (InvalidFieldException ie) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, "Please, fill out every field");
+			refresh();
+		}
+		
+		AccountBean account = new AccountBean();
+		account.setUser(credentials);
 		
 		try {
-			if(!credentials.verifyLogin()) {
-				GraphicHandler.popUpMsg(AlertType.ERROR, "Please, fill out every field");
-			}
-		} catch (FailedLoginException e) {
-			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+			account.login();
+		} catch (FailedLoginException fe) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, fe.getMessage());
+		} catch(DatabaseFailureException de) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, de.getMessage());
 		}
 		
 		Stage stage = (Stage)logPane.getScene().getWindow();
@@ -64,6 +76,11 @@ public class LoginGraphic implements Initializable {
 		}else {
 			stage.setScene(GraphicHandler.switchScreen(Screens.ACC_ENTR, null));
 		}
+	}
+	
+	private void refresh() {
+		Stage stage = (Stage)logPane.getScene().getWindow();
+		stage.setScene(GraphicHandler.switchScreen(Screens.LOGIN, null));
 	}
 
 	@FXML

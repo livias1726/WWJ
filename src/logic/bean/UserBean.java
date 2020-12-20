@@ -3,10 +3,7 @@ package logic.bean;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.security.auth.login.FailedLoginException;
-
-import logic.application.control.LoginControl;
-import logic.application.control.SignUpControl;
+import logic.application.control.AccountControl;
 import logic.exceptions.InvalidFieldException;
 
 public class UserBean {
@@ -26,21 +23,6 @@ public class UserBean {
     public UserBean(String e, String p) {
     	this.password = p;
     	this.email = e;
-    }
-    
-    public UserBean(String e, String ce, String p, String cp, String f, String l) throws InvalidFieldException {
-    	if(!ce.equals(e)) {
-    		throw new InvalidFieldException("The email addresses do not match");
-    	}
-    	
-    	if(!cp.equals(p)) {
-    		throw new InvalidFieldException("The passwords do not match");
-    	}
-    	
-    	this.email = e;
-    	this.password = p;
-    	this.firstName = f;
-    	this.lastName = l;
     }
     
     public String getEmail() {
@@ -99,47 +81,37 @@ public class UserBean {
 		this.titles = titles;
 	}
 	
-	public boolean checkSyntax(String email) {
-		String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
-	    return email.matches(regex);
-	}
-	
 	public boolean checkFieldValidity(String str) {
 		return (str == null || str.equals(""));
 	}
 
-    public boolean verifyLogin() throws FailedLoginException{
-        if (checkFieldValidity(email) || checkFieldValidity(password)) {
-            return false;
-        }
-
-        if(LoginControl.getInstance().login(email, password)) {
-        	return true;
-        }else{
-        	throw new FailedLoginException("Login has failed. Retry.");
-        }
+    public void verifyFields(String...params) throws InvalidFieldException{
+    	for (int i = 0; i < params.length; i++) {
+    		if (checkFieldValidity(params[i])) {
+                throw new InvalidFieldException("Please, fill out every field");
+            }
+		}     
     }
     
-    public void verifyUser() throws InvalidFieldException {
-		if(checkFieldValidity(email) || checkFieldValidity(password) || checkFieldValidity(firstName) || checkFieldValidity(lastName)) {		
-			throw new InvalidFieldException("Please, fill out every field.");		
-		}
-		
-		if(!checkSyntax(email)) {
+    public void verifySyntax() throws InvalidFieldException {
+    	String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+	    
+		if(!email.matches(regex)) {
 			throw new InvalidFieldException("The email address is not valid");	
 		}
 	}
     
-    public void trySignUp() {
-    	SignUpControl.getInstance().signUp(email, password, firstName, lastName);
-    }
-    
-    public void update() throws InvalidFieldException {
-    	verifyUser();
-    	while(titles.contains("")) {
-    		titles.remove("");
+    public void verifyEqualFields(String email, String pwd) throws InvalidFieldException {
+    	if(!email.equals(this.email)) {
+    		throw new InvalidFieldException("The email addresses do not match");
     	}
-    	AccountBean account = new AccountBean();
-    	account.updateInfo();
+    	
+    	if(!pwd.equals(this.password)) {
+    		throw new InvalidFieldException("The passwords do not match");
+    	}
     }
+   
+	public UserBean getPersonalInfo() {
+		return AccountControl.getInstance().retrievePersonalInfo();
+	}
 }

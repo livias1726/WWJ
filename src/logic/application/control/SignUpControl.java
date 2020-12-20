@@ -1,5 +1,14 @@
 package logic.application.control;
 
+import java.sql.SQLException;
+
+import javax.security.auth.login.FailedLoginException;
+
+import logic.application.SessionFacade;
+import logic.domain.Account;
+import logic.domain.User;
+import logic.exceptions.DatabaseFailureException;
+
 public class SignUpControl {
 	
 	private static SignUpControl instance = null;
@@ -16,9 +25,21 @@ public class SignUpControl {
         return instance;
     }
     
-    /*DUMMY*/
-    public void signUp(String email, String password, String firstName, String lastName) {
+    public void trySignUp(String email, String password, String firstName, String lastName) throws FailedLoginException {
+    
+    	User user = new User(email, password, firstName, lastName);
+    	Account account = new Account();
+    	account.setUser(user);
+    	account.setType(SessionFacade.getSession().getCurrUserType());
     	
-    	/*Save account into the DB and redirect*/
+    	try {
+			if(account.createAccountOnDB()) {
+				LoginControl.getInstance().tryLogin(email, password);
+			}
+		} catch (DatabaseFailureException e) {
+
+		} catch (SQLException e) {
+
+		}
     }
 }

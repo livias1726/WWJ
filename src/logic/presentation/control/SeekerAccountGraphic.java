@@ -30,10 +30,6 @@ public class SeekerAccountGraphic extends AccountGraphic {
 
     @FXML
     private AnchorPane favPane;
-
-	public SeekerAccountGraphic() {
-		/*Default constructor*/
-	}
 	
 	@FXML
     public void selectCV() {

@@ -18,7 +18,7 @@ public class GraphicHandler {
 	private static final String PATH = "resources/fxml/";
 
 	private GraphicHandler() { 
-		/*Default constructor*/ 
+		/**/ 
 	}
 	
 	public static FXMLLoader loadFXML(Screens s) {

@@ -11,6 +11,7 @@ public enum Screens {
 	ACC_REC,
 	ACC_SEEK,
 	ACC_ENTR,
+	PERSONAL_INFO,
 	LOGIN,
 	SIGN_UP;
 }
