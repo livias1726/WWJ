@@ -536,6 +536,10 @@ margin-left:700px;
 	
 }
 
-
-
-
+.delete_btn{
+	color: white;
+    font-size: 15px;
+    font-style: bold;
+    text-align:center;
+    position:relative
+}

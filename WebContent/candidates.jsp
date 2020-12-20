@@ -2,7 +2,6 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 
-
 <html lang="en">
 	<head>
 		<meta charset="ISO-8859-1">
@@ -11,12 +10,11 @@
 		<link rel="icon" href="icons/search_usr.png">
 	    <link href="css/style.css" rel="stylesheet">
 		
-		<title>WorldWideJob - FavouriteJobOffers</title>
-		
+		<title>WorldWideJob - Candidates</title>
 	</head>
 	<body>
 		<div>
-			<form action="favouriteJobOffers.jsp" name="favouriteJobOffers" method="POST">
+			<form action="candidates.jsp" name="candidates" method="POST">
 				<div style="float:right;">
 	    			<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
 		     	</div>
@@ -41,15 +39,13 @@
 	    		</div>
 	    		<div>
 	    		<input class="favourite_container" type="text" name="favourite_container" value="" disabled style="background-color:#C6D6D3">
-	    		<input class="favourite_title" type="text" name="favourite_title" value="Favourite job offers" disabled style="background-color:#C6D6D3">
-	    		<input class="order_by" type="text" name="orderby" value="  Ordered by:" disabled style="background-color:lightgrey">
-	    		<select class="order_select" name="orderselect" size="1" style="background-color:whitesmoke">
-	    			<option>expiration</option>
-	    			<option>most recent</option>
-					<option>alphabetical order</option>
-				</select> 	
-	    		</div>	
-			</form>
-		</div>	
-	</body>
+	    		<input class="favourite_title" type="text" name="favourite_title" value="Candidates" disabled style="background-color:#C6D6D3">
+	    		<fieldset style="background-color:#C6D6D3;position:absolute;width:150px;height:30px;left:20px;top:170px;border:0">
+	    		<input type="checkbox" name="select_all" style="">Select all<br>
+	    		</fieldset>
+	    		<button class="delete_btn" style="width:100px; height:50px; top:500px; left:400px; background-color: lightgrey">Delete</button>
+	    		</div>
+	    	</form>
+	    </div>	
+	</body>	
 </html>
