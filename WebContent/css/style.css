@@ -363,16 +363,15 @@
 }
 
 .change_pic{
+	color:black;
+	font-size:15px;
 	position:relative;
 	background-repeat:no-repeat; 
-	margin-left:10px;
-    top:205px; 
-    left:-10px; 
-    width:50px; 
-    height:50px; 
+	background-size:24px; 
     background-image: url('../icons/change_pic.png');
 	
 }
+
 
 #griglia {
 padding: 0;
@@ -385,7 +384,7 @@ display: inline-block;
 width: 200px;
 height: 160px;
 margin: 10px;
-background-color: lightgrey;
+background-color: #add8e6;
 }
 
 #container {
@@ -510,3 +509,33 @@ margin-left:700px;
 	left:20px;
 	border:0;
 }
+
+.cv_btn{
+	color:white;
+	font-size:30px;
+	font-style:bold;
+	position:relative;
+	text-align:center;
+	background-repeat:no-repeat; 
+	background-size: 150px;
+	background-position:center;
+	background-image: url('../icons/cv.png');
+	
+}
+
+.favourites_btn{
+	color:white;
+	font-size:30px;
+	font-style:bold;
+	position:relative;
+	text-align:center;
+	background-repeat:no-repeat; 
+	background-size: 150px;
+	background-position:center;
+	background-image: url('../icons/star.png');
+	
+}
+
+
+
+
