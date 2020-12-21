@@ -543,3 +543,16 @@ margin-left:700px;
     text-align:center;
     position:relative
 }
+
+.profits_btn{
+	color:white;
+	font-size:30px;
+	font-style:bold;
+	position:relative;
+	text-align:center;
+	background-repeat:no-repeat; 
+	background-size: 150px;
+	background-position:center;
+	background-image: url('../icons/profits.png');
+	
+}
