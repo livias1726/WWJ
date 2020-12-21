@@ -17,14 +17,19 @@
 	<body>
 		<div>
 			<form action="jobSeekerResearchResult.jsp" name="researchresultjobseekform" method="POST">
-				<div style="float:right;">
+				<div class="dropdown" style="float:right;">
 	    			<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
-	    		<div class="dropdown" style="float:left;">
+	    			<div class="dropdown-content" style="right:0;">
+		     			<a href="">Buy Premium Version</a>
+		     			<a class="dropdown" href="">Support</a>
+		     			<a href="">Quit</a>
+		     		</div>
+		     	</div>		
+		        <div class="dropdown" style="float:right;">
 	    			<button class="user_btn" style="background-color:lightblue;margin-right:10px;width:40px;height:40px;margin-top:10px"></button>
-		        <div class="dropdown-content" style="right:0;">
-		     		<a href="http://localhost:8080/WorldWideJob/login.jsp">Login</a>
-		     	</div>
-		     	</div>
+		     		<div class="dropdown-content" style="right:0;">
+		     			<a href="">Login</a>
+		     		</div>
 		     	</div>
 	    		<div style="float:left;width:70px;height:70px">
 	    			<img alt="" class="image" src="icons/main_icon.png" width=70px height=70px>
