@@ -5,84 +5,50 @@
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="WorldWideJob">
     <property environment="env"/>
-    <property name="ECLIPSE_HOME" value="../../../../../../../../../../eclipse/java-2020-09/eclipse/"/>
+    <property name="ECLIPSE_HOME" value="../../../eclipse/java-2020-09/eclipse/"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
-    <path id="JavaFX SDK.libraryclasspath">
-        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.eclipse.fx.ide.css.jfx8_3.5.0.201907240300.jar"/>
-    </path>
-    <path id="javaFX.userclasspath">
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.base.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.controls.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.fxml.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.graphics.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.media.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.swing.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.web.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx-swt.jar"/>
-    </path>
-    <path id="JUnit 5.libraryclasspath">
-        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.jupiter.api_5.6.0.v20200203-2009.jar"/>
-        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.jupiter.engine_5.6.0.v20200203-2009.jar"/>
-        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.jupiter.migrationsupport_5.6.0.v20200203-2009.jar"/>
-        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.jupiter.params_5.6.0.v20200203-2009.jar"/>
-        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.platform.commons_1.6.0.v20200203-2009.jar"/>
-        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.platform.engine_1.6.0.v20200203-2009.jar"/>
-        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.platform.launcher_1.6.0.v20200203-2009.jar"/>
-        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.platform.runner_1.6.0.v20200203-2009.jar"/>
-        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.platform.suite.api_1.6.0.v20200203-2009.jar"/>
-        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit.vintage.engine_5.6.0.v20200203-2009.jar"/>
-        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.opentest4j_1.2.0.v20190826-0900.jar"/>
-        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.apiguardian_1.1.0.v20190826-0900.jar"/>
-        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.junit_4.13.0.v20200204-1500.jar"/>
-        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
-    </path>
+    <path id="javaFX.userclasspath"/>
     <path id="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath">
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/annotations-api.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/catalina-ant.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/catalina-ha.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/catalina-storeconfig.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/catalina-tribes.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/catalina.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/ecj-4.6.3.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/el-api.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/jasper-el.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/jasper.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/jaspic-api.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/jsp-api.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/servlet-api.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/tomcat-api.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/tomcat-coyote.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/tomcat-dbcp.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/tomcat-i18n-de.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/tomcat-i18n-es.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/tomcat-i18n-fr.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/tomcat-i18n-ja.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/tomcat-i18n-ko.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/tomcat-i18n-ru.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/tomcat-i18n-zh-CN.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/tomcat-jdbc.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/tomcat-jni.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/tomcat-util-scan.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/tomcat-util.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/tomcat-websocket.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/websocket-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/annotations-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/catalina-ant.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/catalina-ha.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/catalina-storeconfig.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/catalina-tribes.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/catalina.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/ecj-4.6.3.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/el-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/jasper-el.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/jasper.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/jaspic-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/jsp-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/servlet-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/tomcat-api.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/tomcat-coyote.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/tomcat-dbcp.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/tomcat-i18n-de.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/tomcat-i18n-es.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/tomcat-i18n-fr.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/tomcat-i18n-ja.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/tomcat-i18n-ko.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/tomcat-i18n-ru.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/tomcat-i18n-zh-CN.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/tomcat-jdbc.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/tomcat-jni.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/tomcat-util-scan.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/tomcat-util.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/tomcat-websocket.jar"/>
+        <pathelement location="../../../Downloads/apache-tomcat-8.5.61-windows-x64/apache-tomcat-8.5.61/lib/websocket-api.jar"/>
     </path>
     <path id="Maven Dependencies.libraryclasspath"/>
     <path id="WorldWideJob.classpath">
-        <path refid="JavaFX SDK.libraryclasspath"/>
         <path refid="javaFX.userclasspath"/>
-        <path refid="JUnit 5.libraryclasspath"/>
         <pathelement location="target/classes"/>
         <path refid="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath"/>
         <path refid="Maven Dependencies.libraryclasspath"/>
     </path>
-    <path id="run.Launcher.classpath">
-        <path refid="WorldWideJob.classpath"/>
-        <path refid="Maven Dependencies.libraryclasspath"/>
-    </path>
-    <path id="run.User.classpath">
+    <path id="run.Main.classpath">
         <path refid="WorldWideJob.classpath"/>
         <path refid="Maven Dependencies.libraryclasspath"/>
     </path>
@@ -91,6 +57,7 @@
         <copy includeemptydirs="false" todir="target/classes">
             <fileset dir="src">
                 <include name="**/*.java"/>
+                <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
@@ -123,14 +90,9 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="Launcher">
+    <target name="Main">
         <java classname="logic.Main" failonerror="true" fork="yes">
-            <classpath refid="run.Launcher.classpath"/>
-        </java>
-    </target>
-    <target name="User">
-        <java classname="logic.User" failonerror="true" fork="yes">
-            <classpath refid="run.User.classpath"/>
+            <classpath refid="run.Main.classpath"/>
         </java>
     </target>
 </project>
