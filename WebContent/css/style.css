@@ -393,7 +393,7 @@ max-width:480px;
 margin:0 auto;
 padding: 20px;
 text-align: center;
-margin-top:-800px;
+margin-top:-550px;
 margin-left:700px;
 }
 
@@ -542,6 +542,25 @@ margin-left:700px;
     font-style: bold;
     text-align:center;
     position:relative
+}
+
+
+.candidate_row_title{
+	position: absolute;
+	width: 86%;
+	height: 30px;
+	left: 100px;
+	top: 220px;
+	color:white;
+}
+
+.candidate_row{
+	position: absolute;
+	width: 90%;
+	height: 20px;
+	left: 50px;
+	top: 250px;
+	color:black;
 }
 
 .profits_btn{

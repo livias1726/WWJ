@@ -49,7 +49,13 @@
 	    		<fieldset style="background-color:#C6D6D3;position:absolute;width:150px;height:30px;left:20px;top:170px;border:0">
 	    		<input type="checkbox" name="select_all" style="">Select all<br>
 	    		</fieldset>
-	    		<input class="candidate_row" tyoe>
+	    		<input class="candidate_row_title" type="text" name="candidate_row_title" value="" disabled style="background-color:#56A6F0; border:0;">
+	    		<input class="candidate_row_title" type="text" name="candidatename_row_title" value="CANDIDATES NAME" disabled style="background-color:#56A6F0; width:10%; left:350px;border:0;">
+	    		<input class="candidate_row_title" type="text" name="offernumber_row_title" value="OFFER NUMBER" disabled style="background-color:#56A6F0; width:10%; left:800px;border:0;">
+	    		<input class="candidate_row" type="text" name="candidate_row" value="" disabled style="background-color:white;border:0;">
+	    		<input class="candidate_row" type="text" name="candidatename_row" value="" disabled style="background-color:white; width:30%; left:250px;border:0;">
+	    		<input class="candidate_row" type="text" name="offernumber_row" value="" disabled style="background-color:white;width:30%; left:700px; border:0;">
+	    		<input class="candidate_row" type="checkbox" name="candidate_checkbox" style="left:-500px"><br>
 	    		<button class="delete_btn" style="width:100px; height:50px; top:500px; left:400px; background-color:dodgerblue">Delete</button>
 	    		</div>
 	    	</form>
