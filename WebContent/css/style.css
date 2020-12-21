@@ -556,3 +556,18 @@ margin-left:700px;
 	background-image: url('../icons/profits.png');
 	
 }
+
+.favouritejoboffer_container{
+	position: absolute;
+	width: 35%;
+	height: 20%;
+	left: 500px;
+	top: 150px;
+	color:black;
+	border: 1px solid #56A6F0;
+	
+	background-image: url('../icons/star.png');
+	background-repeat: no-repeat;
+    background-position: top-left;
+	background-size:25px;
+}

@@ -2,7 +2,6 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 
-
 <html lang="en">
 	<head>
 		<meta charset="ISO-8859-1">
@@ -11,12 +10,12 @@
 		<link rel="icon" href="icons/search_usr.png">
 	    <link href="css/style.css" rel="stylesheet">
 		
-		<title>WorldWideJob - FavouriteJobOffers</title>
+		<title>WorldWideJob - FavouriteBusiness</title>
 		
 	</head>
 	<body>
 		<div>
-			<form action="favouriteJobOffers.jsp" name="favouriteJobOffers" method="POST">
+			<form action="favouriteBusiness.jsp" name="favouriteBusiness" method="POST">
 				<div class="dropdown" style="float:right;">
 	    				<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
 		     		<div class="dropdown-content" style="right:0;">
@@ -46,16 +45,16 @@
 	    		</div>
 	    		<div>
 	    		<input class="favourite_container" type="text" name="favourite_container" value="" disabled style="background-color:#C6D6D3">
-	    		<input class="favourite_title" type="text" name="favourite_title" value="Favourite job offers" disabled style="background-color:#C6D6D3">
+	    		<input class="favourite_title" type="text" name="favourite_title" value="Favourite business" disabled style="background-color:#C6D6D3">
 	    		<input class="favouritejoboffer_container" type="text" name="favouritejoboffer_container" value="" disabled style="background-color:#56A6F0">
 	    		<input class="order_by" type="text" name="orderby" value="  Ordered by:" disabled style="background-color:lightgrey">
 	    		<select class="order_select" name="orderselect" size="1" style="background-color:whitesmoke">
-	    			<option>expiration</option>
-	    			<option>most recent</option>
+	    			<option>popularity</option>
 					<option>alphabetical order</option>
 				</select>	
 	    		</div>	
 			</form>
-		</div>	
+		</div>
+
 	</body>
 </html>
