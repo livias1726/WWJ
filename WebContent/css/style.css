@@ -553,8 +553,7 @@ margin-left:700px;
 	background-repeat:no-repeat; 
 	background-size: 150px;
 	background-position:center;
-	background-image: url('../icons/profits.png');
-	
+	background-image: url('../icons/profits.png');	
 }
 
 .favouritejoboffer_container{
@@ -570,4 +569,31 @@ margin-left:700px;
 	background-repeat: no-repeat;
     background-position: top-left;
 	background-size:25px;
+}
+
+.calculatefeasibility_btn{
+	color: white;
+    font-style: bold;
+    font-size: 15px;
+    text-align:center;
+    position:relative
+}
+
+.insert_budget{
+	position:relative;
+    width:250px; 
+    height:40px; 
+    top:600px;
+    left:-650px;
+    border:0;
+    font-size:15px;
+}
+
+.budget{
+	color: black;
+    position:relative;
+    width:250px; 
+    height:45px; 
+    top:600px;
+    left:-30px;
 }

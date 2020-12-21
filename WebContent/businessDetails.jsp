@@ -40,7 +40,10 @@
 	    		<input class="businessname" type="text" name="businessname" value="" disabled style="background-color:#C6D6D3">
 	    		<input class="thebusiness" type="text" name="thebusiness" value="The business" disabled style="background-color:#C6D6D3">
 	    		<input class="busdescription" type="text" name="busdescription" value="" disabled style="background-color:#E4F5F2">
-	    		<button class="statistics_btn" style="width:150px; height:50px; top:170px; background-color: dodgerblue; margin-left:960px; border-color: black">View statistics</button>
+	    		<input class="insert_budget" type="text" name="insert_budget" value="Insert budget" disabled style="background-color:#C6D6D3"><br>
+	    		<input class="budget" type="text" name="budget" value="" style="background-color:#E4F5F2">
+	    		<button class="statistics_btn" style="width:150px; height:50px; top:100px; background-color: dodgerblue; margin-left:1050px; border-color: black">View statistics</button>
+	    		<button class="calculatefeasibility_btn" style="width:150px; height:50px; top:500px; background-color: dodgerblue; margin-left:350px; border-color: black">Calculate feasibility</button>
 	    		</div>
 	    	</form>
 		</div>
