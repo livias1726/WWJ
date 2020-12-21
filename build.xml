@@ -9,6 +9,16 @@
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
+    <path id="JavaFX.userclasspath">
+        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.base.jar"/>
+        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.controls.jar"/>
+        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.fxml.jar"/>
+        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.graphics.jar"/>
+        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.media.jar"/>
+        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.swing.jar"/>
+        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.web.jar"/>
+        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx-swt.jar"/>
+    </path>
     <path id="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath">
         <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/annotations-api.jar"/>
         <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/catalina-ant.jar"/>
@@ -42,23 +52,21 @@
     </path>
     <path id="Maven Dependencies.libraryclasspath"/>
     <path id="WorldWideJob.classpath">
+        <path refid="JavaFX.userclasspath"/>
         <pathelement location="target/classes"/>
         <path refid="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath"/>
         <path refid="Maven Dependencies.libraryclasspath"/>
-        <pathelement location="../../../../../../../../../../../../Program Files (x86)/MySQL/Connector J 8.0/mysql-connector-java-8.0.22.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk.zip"/>
+        <pathelement location="lib/mysql-connector-java-8.0.22.jar"/>
     </path>
     <path id="run.Launcher.classpath">
         <path refid="WorldWideJob.classpath"/>
         <path refid="Maven Dependencies.libraryclasspath"/>
-        <pathelement location="../../../../../../../../../../../../Program Files (x86)/MySQL/Connector J 8.0/mysql-connector-java-8.0.22.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk.zip"/>
+        <pathelement location="lib/mysql-connector-java-8.0.22.jar"/>
     </path>
     <path id="run.User.classpath">
         <path refid="WorldWideJob.classpath"/>
         <path refid="Maven Dependencies.libraryclasspath"/>
-        <pathelement location="../../../../../../../../../../../../Program Files (x86)/MySQL/Connector J 8.0/mysql-connector-java-8.0.22.jar"/>
-        <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk.zip"/>
+        <pathelement location="lib/mysql-connector-java-8.0.22.jar"/>
     </path>
     <target name="init">
         <mkdir dir="target/classes"/>
