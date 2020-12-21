@@ -9,6 +9,7 @@ import logic.application.Users;
 import logic.bean.AccountBean;
 import logic.bean.UserBean;
 import logic.domain.Account;
+import logic.domain.User;
 import logic.exceptions.DatabaseFailureException;
 
 public class AccountControl {
@@ -52,9 +53,31 @@ public class AccountControl {
     	return bean;
     }
     
-    public UserBean retrievePersonalInfo() {
-		return null;
+    public UserBean retrievePersonalInfo() throws DatabaseFailureException {
+    	
+    	Account account = new Account();
+    	User user;
+		try {
+			user = account.getPersonalInfoFromDB(SessionFacade.getSession().getID());
+		} catch (SQLException e) {
+			throw new DatabaseFailureException("Something went wrong. Please, retry later.");
+		}
+    	
+    	return modelToBean(user);	
 	}
+    
+    private UserBean modelToBean(User user) {
+    	UserBean bean = new UserBean(user.getEmail(), user.getPwd());
+    	bean.setFirstName(user.getFirstName());
+    	bean.setLastName(user.getLastName());
+    	bean.setCity(user.getCity());
+    	bean.setBirth(user.getBirth());
+    	for(String i: user.getTitles()) {
+    		bean.getTitles().add(i);
+    	}
+    	
+    	return bean;
+    }
     
     public void updateAccount() {
     	/*Update personal info for the account*/

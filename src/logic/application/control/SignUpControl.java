@@ -25,7 +25,7 @@ public class SignUpControl {
         return instance;
     }
     
-    public void trySignUp(String email, String password, String firstName, String lastName) throws FailedLoginException {
+    public void trySignUp(String email, String password, String firstName, String lastName) throws FailedLoginException, DatabaseFailureException {
     
     	User user = new User(email, password, firstName, lastName);
     	Account account = new Account();
@@ -36,10 +36,8 @@ public class SignUpControl {
 			if(account.createAccountOnDB()) {
 				LoginControl.getInstance().tryLogin(email, password);
 			}
-		} catch (DatabaseFailureException e) {
-
 		} catch (SQLException e) {
-
+			throw new DatabaseFailureException("Something went wrong. Please, retry later.");
 		}
     }
 }

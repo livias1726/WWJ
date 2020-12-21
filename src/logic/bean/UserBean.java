@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import logic.application.control.AccountControl;
+import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
 
 public class UserBean {
@@ -111,7 +112,7 @@ public class UserBean {
     	}
     }
    
-	public UserBean getPersonalInfo() {
+	public UserBean getPersonalInfo() throws DatabaseFailureException {
 		return AccountControl.getInstance().retrievePersonalInfo();
 	}
 }

@@ -58,7 +58,7 @@
                   </MenuButton>
                   <MenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="menu_btn" textFill="#00000001">
                      <items>
-                        <MenuItem fx:id="pubBtn" mnemonicParsing="false" onAction="#openNewOffer" text="Publish an offer" />
+                        <MenuItem mnemonicParsing="false" onAction="#openNewOffer" text="Publish an offer" />
                         <MenuItem fx:id="premiumBtn" mnemonicParsing="false" onAction="#buyPremium" text="Buy premium version" />
                         <MenuItem mnemonicParsing="false" onAction="#openOnlineDoc" text="Support" />
                         <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Quit" />
@@ -83,7 +83,7 @@
                <children>
                   <HBox prefHeight="199.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#openCompanySection" text="Company" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#openCompanyInfo" text="Company" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
@@ -120,7 +120,7 @@
                   </HBox>
                   <HBox prefHeight="199.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#openOffersSection" text="Job Offers" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#openOffersInfo" text="Job Offers" textFill="WHITE">
                            <HBox.margin>
                               <Insets left="40.0" top="20.0" />
                            </HBox.margin>
@@ -135,7 +135,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#openCandidatesSection" text="Candidates" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#openCandidatesInfo" text="Candidates" textFill="WHITE">
                            <HBox.margin>
                               <Insets left="80.0" top="20.0" />
                            </HBox.margin>

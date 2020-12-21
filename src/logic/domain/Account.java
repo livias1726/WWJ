@@ -9,6 +9,7 @@ import javax.security.auth.login.FailedLoginException;
 
 import logic.application.Users;
 import logic.persistence.dao.AccountDAO;
+import logic.persistence.dao.UserDAO;
 
 public class Account implements Serializable{
 	
@@ -73,5 +74,9 @@ public class Account implements Serializable{
 	public boolean createAccountOnDB() throws SQLException{
 		String typeStr = Users.usersToString(this.getType());
 		return AccountDAO.createAccount(this.user.getEmail(), this.user.getPwd(), this.user.getFirstName(), this.user.getLastName(), typeStr);
+	}
+
+	public User getPersonalInfoFromDB(long id) throws SQLException {
+		return UserDAO.selectPersonalInfo(id);
 	}
 }

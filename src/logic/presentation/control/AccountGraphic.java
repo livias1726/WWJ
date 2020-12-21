@@ -89,8 +89,8 @@ public class AccountGraphic implements Initializable {
 	}
 	
 	@FXML
-	protected void openPersonalInfo() {
-		Scene scene = GraphicHandler.switchScreen(Screens.PERSONAL_INFO, null);
+	protected void openPersonalInfo() {		
+		Scene scene = GraphicHandler.switchScreen(Screens.PERSONAL_INFO, new PersonalInfoGraphic(pane));
 		pane.getChildren().setAll(scene.getRoot());
 	}
 			

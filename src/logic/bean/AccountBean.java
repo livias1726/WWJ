@@ -89,7 +89,7 @@ public class AccountBean {
 		LoginControl.getInstance().tryLogin(user.getEmail(), user.getPassword());
 	}
 	
-	public void signUp() throws FailedLoginException {
+	public void signUp() throws FailedLoginException, DatabaseFailureException {
     	SignUpControl.getInstance().trySignUp(user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName());
     }
    

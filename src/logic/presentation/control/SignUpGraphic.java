@@ -18,6 +18,7 @@ import logic.application.SessionFacade;
 import logic.application.Users;
 import logic.bean.AccountBean;
 import logic.bean.UserBean;
+import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Screens;
@@ -121,6 +122,8 @@ public class SignUpGraphic implements Initializable {
 
 		} catch (FailedLoginException le) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, le.getMessage());
+		} catch (DatabaseFailureException e) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
 	}
 	
