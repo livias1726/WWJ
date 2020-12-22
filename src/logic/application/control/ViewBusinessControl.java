@@ -40,8 +40,6 @@ public class ViewBusinessControl {
     public List<BusinessInCountryBean> retrieveBusinessesByName(BusinessInCountryBean bean) {
     	BusinessInCountry business = new BusinessInCountry();
     	List<BusinessInCountry> list = business.getBusinessesByName();
-   
-    	//return extractOffer(list);
     	
     	/*DUMMY BEHAVIOR*/
     	List<BusinessInCountryBean> res = new ArrayList<>();
@@ -58,8 +56,6 @@ public class ViewBusinessControl {
     public List<BusinessInCountryBean> retrieveBusinessesByCountry(CountryBean bean) {
     	BusinessInCountry offer = new BusinessInCountry();
     	List<BusinessInCountry> list = offer.getBusinessesByPlace();
-    	   
-    	//return extractOffer(list);
     	
     	/*DUMMY BEHAVIOR*/
     	List<BusinessInCountryBean> res = new ArrayList<>();
@@ -75,9 +71,7 @@ public class ViewBusinessControl {
     public List<BusinessInCountryBean> retrieveBusinesses(CountryBean country, BusinessInCountryBean bus){
     	BusinessInCountry offer = new BusinessInCountry();
     	List<BusinessInCountry> list = offer.getBusinessesInCountry();
-    	   
-    	//return extractOffer(list);
-    	
+
     	/*DUMMY BEHAVIOR*/
     	List<BusinessInCountryBean> res = new ArrayList<>();
     	for(BusinessInCountry i: list) {

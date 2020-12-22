@@ -1,6 +1,6 @@
 package logic.application;
 
-import logic.presentation.Screens;
+import logic.presentation.Scenes;
 
 /**Singleton*/
 public class SessionFacade {
@@ -9,12 +9,12 @@ public class SessionFacade {
 
 	private Users currUserType;
 	private Long accountID;
-	private Screens curr;
-	private Screens prev;
+	private Scenes curr;
+	private Scenes prev;
 
 	private SessionFacade() {
 		currUserType = null;
-		curr = Screens.MAIN;
+		curr = Scenes.MAIN;
 	}
 	
 	public static SessionFacade getSession() {
@@ -28,7 +28,7 @@ public class SessionFacade {
 		return currUserType;
 	}
 
-	public Screens getScreen() {
+	public Scenes getScreen() {
 		return curr;
 	}
 	
@@ -36,12 +36,12 @@ public class SessionFacade {
 		this.currUserType = currUser;
 	}
 
-	public void setScreen(Screens next) {
+	public void setScreen(Scenes next) {
 		this.prev = this.curr;
 		this.curr = next;
 	}
 	
-	public Screens getPrevScreen() {
+	public Scenes getPrevScreen() {
 		return prev;
 	}
 	

@@ -39,7 +39,8 @@ public class LoginControl {
     		SessionFacade.getSession().setCurrUserType(account.getType());
 		
 		} catch (SQLException se) {
-			throw new DatabaseFailureException("Something went wrong. Please, retry later.");
+			//throw new DatabaseFailureException("Something went wrong. Please, retry later.");
+			se.printStackTrace();
 		} catch (FailedLoginException fe) {
 			throw new FailedLoginException("Login failed. Please, correct your credentials or Sign Up.");
 		}

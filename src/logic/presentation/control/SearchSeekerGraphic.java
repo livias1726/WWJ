@@ -19,7 +19,7 @@ import logic.bean.CountryBean;
 import logic.bean.JobBean;
 import logic.bean.OfferBean;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Screens;
+import logic.presentation.Scenes;
 
 public class SearchSeekerGraphic implements Initializable {
 	
@@ -111,13 +111,13 @@ public class SearchSeekerGraphic implements Initializable {
 			controller = new OfferResultsGraphic(toolBar, job);	
 		}
 		
-		stage.setScene(GraphicHandler.switchScreen(Screens.OFFERS, controller));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.OFFERS, controller));
 	}
 	
 	@FXML
 	public void login() {
 		Stage stage = (Stage)searchPane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Screens.LOGIN, null));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
 	}
 	
 	@FXML
@@ -126,7 +126,7 @@ public class SearchSeekerGraphic implements Initializable {
 		SessionFacade.getSession().setCurrUserType(null);
 		
 		Stage stage = (Stage)searchPane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Screens.MAIN, null));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.MAIN, null));
 	}
 	
 	@FXML
@@ -145,7 +145,7 @@ public class SearchSeekerGraphic implements Initializable {
 	
 	@FXML
 	public void goBack(){
-		Screens prev = SessionFacade.getSession().getPrevScreen();			
+		Scenes prev = SessionFacade.getSession().getPrevScreen();			
 		Stage stage = (Stage)searchPane.getScene().getWindow();			
 		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}

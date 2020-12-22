@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="680.0" prefWidth="1180.0" styleClass="account_ext" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.RecruiterAccountGraphic">
+<AnchorPane fx:id="pane" prefHeight="680.0" prefWidth="1180.0" styleClass="account_ext" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="logic.presentation.control.RecruiterAccountGraphic">
    <children>
       <ToolBar prefHeight="60.0" prefWidth="1180.0" styleClass="toolbar">
          <items>

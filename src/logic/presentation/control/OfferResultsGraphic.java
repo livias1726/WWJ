@@ -5,12 +5,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -26,7 +22,7 @@ import logic.bean.CountryBean;
 import logic.bean.JobBean;
 import logic.bean.OfferBean;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Screens;
+import logic.presentation.Scenes;
 
 public class OfferResultsGraphic implements Initializable {
 	
@@ -71,11 +67,7 @@ public class OfferResultsGraphic implements Initializable {
 		pane.getChildren().add(toolBar);
 		
 		//Add listener to filters choice box
-		order.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-			public void changed(ObservableValue ov,
-					Number value, Number newValue) { 
-					orderResults(offers, newValue);
-			}});
+		order.getSelectionModel().selectedIndexProperty().addListener((obv, oldValue, newValue) -> orderResults(offers, newValue));
 		
 		order.setItems(items);
 		order.setValue(items.get(0));
@@ -98,6 +90,10 @@ public class OfferResultsGraphic implements Initializable {
 		initResults(offers);
 	}
 	
+	private void orderResults(List <OfferBean> list, Number num) {
+		/*Sort results according to choiceBox*/
+	}
+	
 	private void initResults(List <OfferBean> list) {
 		
 		for(OfferBean i: list) {
@@ -109,26 +105,20 @@ public class OfferResultsGraphic implements Initializable {
 			TextArea brief = new TextArea(i.getTaskDescription());
 			res.setText(title + "\n" + brief);	
 			
-			res.setOnAction(new EventHandler<ActionEvent>() {
-				public void handle(ActionEvent event) {
-					Stage stage = (Stage)pane.getScene().getWindow();
-					stage.setScene(GraphicHandler.switchScreen(Screens.OFFER, new OfferDetailsGraphic(i)));
-				}
+			res.setOnAction(event -> {		
+				Stage stage = (Stage)pane.getScene().getWindow();
+				stage.setScene(GraphicHandler.switchScreen(Scenes.OFFER, new OfferDetailsGraphic(i)));
 			});
 			
 			
 			resultsBox.getChildren().add(res);
 		}
 	}
-	
-	private void orderResults(List <OfferBean> list, Number num) {
-		/*Sort results according to choiceBox*/
-	}
 
 	@FXML
 	public void login() {
 		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Screens.LOGIN, null));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
 	}
 	
 	@FXML
@@ -137,7 +127,7 @@ public class OfferResultsGraphic implements Initializable {
 		SessionFacade.getSession().setCurrUserType(null);
 		
 		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Screens.MAIN, null));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.MAIN, null));
 	}
 	
 	@FXML
@@ -161,7 +151,7 @@ public class OfferResultsGraphic implements Initializable {
 	
 	@FXML
 	public void goBack(){
-		Screens prev = SessionFacade.getSession().getPrevScreen();			
+		Scenes prev = SessionFacade.getSession().getPrevScreen();			
 		Stage stage = (Stage)pane.getScene().getWindow();			
 		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}

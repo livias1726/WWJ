@@ -21,7 +21,7 @@ public class GraphicHandler {
 		/**/ 
 	}
 	
-	public static FXMLLoader loadFXML(Screens s) {
+	public static FXMLLoader loadFXML(Scenes s) {
 		switch(s) {
 			case LOGIN: 
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "login.fxml"));
@@ -50,11 +50,26 @@ public class GraphicHandler {
 		}
 	}
 	
-	public static Scene switchScreen(Screens next, Initializable controller) {
+	public static FXMLLoader loadFXML(Sections s) {
+		switch(s) {
+			case PERSONAL_INFO: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "personal_info.fxml"));
+			case COMPANY_INFO: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "company.fxml"));
+			case OFFERS_INFO: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "offers_recruiter.fxml"));
+			case CANDIDATES_INFO: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "candidates.fxml"));
+			default:
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "non_lo_so.fxml"));
+		}
+	}
+	
+	public static Scene switchScreen(Scenes next, Initializable controller) {
 		SessionFacade.getSession().setScreen(next);
 		
 		try {			
-			if (next.equals(Screens.MAIN)) {
+			if (next.equals(Scenes.MAIN)) {
 				SessionFacade.getSession().setCurrUserType(null);
 				return new Scene(loadFXML(next).load());
 				
@@ -70,6 +85,22 @@ public class GraphicHandler {
 		}catch (IOException e){
 			e.printStackTrace();
 			return null;
+		}	
+	}
+	
+	public static void openSection(AnchorPane parent, Sections sec, Initializable controller) {
+	
+		try {			
+			FXMLLoader loader = loadFXML(sec);
+			if (controller != null) {
+				loader.setController(controller);
+			}	
+			
+			AnchorPane pane = loader.load();
+			Scene scene = new Scene(pane);
+			parent.getChildren().setAll(scene.getRoot());
+		}catch (IOException e){
+			e.printStackTrace();
 		}	
 	}
 	
@@ -96,6 +127,10 @@ public class GraphicHandler {
 		
 		alert.setContentText(content);
 		return alert.showAndWait();
+	}
+	
+	public static void popUpAdv() {
+		/*Method to implement pop up advertisement when changing screen*/
 	}
 	
 }

@@ -51,63 +51,21 @@ public class ViewOfferControl {
     	Offer offer = new Offer(null, bean.getName());
     	List<Offer> list = offer.getOffersByPosition();
    
-    	//return extractOffer(list);
-    	
-    	/*DUMMY BEHAVIOR*/
-    	List<OfferBean> res = new ArrayList<>();
-    	for(Offer i: list) {
-    		OfferBean item = new OfferBean();
-    		item.setPosition(new JobBean());
-    		item.getPosition().setName(i.getPosition().getName());
-    		item.setBranch(new AddressBean());
-    		item.getBranch().setState(i.getBranch().getState());
-    		
-    		res.add(item);
-    	}
-    	
-    	return res;
+    	return extractOffer(list);
     }
     
     public List<OfferBean> retrieveOffersByCountry(CountryBean bean) {
     	Offer offer = new Offer(bean.getName(), null);
     	List<Offer> list = offer.getOffersByPlace();
     	   
-    	//return extractOffer(list);
-    	
-    	/*DUMMY BEHAVIOR*/
-    	List<OfferBean> res = new ArrayList<>();
-    	for(Offer i: list) {
-    		OfferBean item = new OfferBean();
-    		item.setPosition(new JobBean());
-    		item.getPosition().setName(i.getPosition().getName());
-    		item.setBranch(new AddressBean());
-    		item.getBranch().setState(i.getBranch().getState());
-    		
-    		res.add(item);
-    	}
-    	
-    	return res;
+    	return extractOffer(list);
     }
     
     public List<OfferBean> retrieveOffers(CountryBean country, JobBean job){
     	Offer offer = new Offer(country.getName(), job.getName());
     	List<Offer> list = offer.getOffers();
     	   
-    	//return extractOffer(list);
-    	
-    	/*DUMMY BEHAVIOR*/
-    	List<OfferBean> res = new ArrayList<>();
-    	for(Offer i: list) {
-    		OfferBean item = new OfferBean();
-    		item.setPosition(new JobBean());
-    		item.getPosition().setName(i.getPosition().getName());
-    		item.setBranch(new AddressBean());
-    		item.getBranch().setState(i.getBranch().getState());
-    		
-    		res.add(item);
-    	}
-    	
-    	return res;
+    	return extractOffer(list);
     }
     
     private List<OfferBean> extractOffer(List<Offer> src) {

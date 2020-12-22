@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import logic.application.SessionFacade;
 import logic.application.Users;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Screens;
+import logic.presentation.Scenes;
 
 public class MainGraphic implements Initializable {
 	
@@ -35,7 +35,7 @@ public class MainGraphic implements Initializable {
 		SessionFacade.getSession().setCurrUserType(Users.ENTREPRENEUR);
 		
 		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Screens.SEARCH_ENTR, null));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.SEARCH_ENTR, null));
 	}
 	
 	@FXML
@@ -43,7 +43,7 @@ public class MainGraphic implements Initializable {
 		SessionFacade.getSession().setCurrUserType(Users.SEEKER);
 	
 		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Screens.SEARCH_SEEK, null));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.SEARCH_SEEK, null));
 	}
 	
 	@FXML
@@ -53,7 +53,7 @@ public class MainGraphic implements Initializable {
 		}
 		
 		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Screens.LOGIN, null));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
 	}
 	
 	@FXML

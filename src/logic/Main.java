@@ -7,14 +7,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Screens;
+import logic.presentation.Scenes;
 
 public class Main extends Application {
 	
 	@Override
 	public void start(Stage stage) throws IOException {
 			
-		Scene scene = GraphicHandler.switchScreen(Screens.MAIN, null);
+		Scene scene = GraphicHandler.switchScreen(Scenes.MAIN, null);
 		try {
 			initStage(stage, scene);
 			

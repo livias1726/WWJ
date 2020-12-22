@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
@@ -27,7 +26,8 @@ import logic.application.SessionFacade;
 import logic.bean.AccountBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Screens;
+import logic.presentation.Scenes;
+import logic.presentation.Sections;
 
 public class AccountGraphic implements Initializable {
 
@@ -90,8 +90,7 @@ public class AccountGraphic implements Initializable {
 	
 	@FXML
 	protected void openPersonalInfo() {		
-		Scene scene = GraphicHandler.switchScreen(Screens.PERSONAL_INFO, new PersonalInfoGraphic(pane));
-		pane.getChildren().setAll(scene.getRoot());
+		GraphicHandler.openSection(pane, Sections.PERSONAL_INFO, new PersonalInfoGraphic(pane));
 	}
 			
 	@FXML
@@ -131,12 +130,12 @@ public class AccountGraphic implements Initializable {
 	private void logout(){
 		SessionFacade.getSession().setID(null);
 		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Screens.MAIN, null));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.MAIN, null));
 	}
 	
 	@FXML
 	public void goBack(){
-		Screens prev = SessionFacade.getSession().getPrevScreen();			
+		Scenes prev = SessionFacade.getSession().getPrevScreen();			
 		Stage stage = (Stage)pane.getScene().getWindow();			
 		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}

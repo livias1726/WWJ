@@ -21,7 +21,7 @@ import logic.bean.UserBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Screens;
+import logic.presentation.Scenes;
 
 public class SignUpGraphic implements Initializable {
 	
@@ -83,7 +83,7 @@ public class SignUpGraphic implements Initializable {
 	@FXML
 	public void goBack() {
 		Stage stage = (Stage)pane.getScene().getWindow();	
-		Screens prev = SessionFacade.getSession().getPrevScreen();	
+		Scenes prev = SessionFacade.getSession().getPrevScreen();	
 		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}
 	
@@ -111,13 +111,13 @@ public class SignUpGraphic implements Initializable {
 			Stage stage = (Stage)pane.getScene().getWindow();
 			
 			if(SessionFacade.getSession().getCurrUserType() == Users.SEEKER) {
-				stage.setScene(GraphicHandler.switchScreen(Screens.ACC_SEEK, null));
+				stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_SEEK, null));
 				
 			}else if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER) {
-				stage.setScene(GraphicHandler.switchScreen(Screens.ACC_REC, null));
+				stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_REC, null));
 				
 			}else {
-				stage.setScene(GraphicHandler.switchScreen(Screens.ACC_ENTR, null));
+				stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_ENTR, null));
 			}
 
 		} catch (FailedLoginException le) {
@@ -129,13 +129,13 @@ public class SignUpGraphic implements Initializable {
 	
 	private void refresh() {
 		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Screens.SIGN_UP, null));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.SIGN_UP, null));
 	}
 
 	@FXML
 	public void login() {
 		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Screens.LOGIN, null));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
 	}
 	
 }

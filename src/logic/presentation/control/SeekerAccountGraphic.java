@@ -12,7 +12,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Screens;
+import logic.presentation.Scenes;
 
 public class SeekerAccountGraphic extends AccountGraphic {
 		
@@ -59,7 +59,7 @@ public class SeekerAccountGraphic extends AccountGraphic {
 	@FXML
 	public void openSearchPage(){
 		Stage stage = (Stage)pane.getScene().getWindow();			
-		stage.setScene(GraphicHandler.switchScreen(Screens.SEARCH_SEEK, null));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.SEARCH_SEEK, null));
 	}
 	
 	@FXML

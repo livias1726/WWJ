@@ -20,7 +20,7 @@ import logic.bean.UserBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Screens;
+import logic.presentation.Scenes;
 
 public class LoginGraphic implements Initializable {
 	@FXML
@@ -68,19 +68,19 @@ public class LoginGraphic implements Initializable {
 		Stage stage = (Stage)logPane.getScene().getWindow();
 	
 		if(SessionFacade.getSession().getCurrUserType() == Users.SEEKER) {
-			stage.setScene(GraphicHandler.switchScreen(Screens.ACC_SEEK, null));
+			stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_SEEK, null));
 			
 		}else if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER) {
-			stage.setScene(GraphicHandler.switchScreen(Screens.ACC_REC, null));
+			stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_REC, null));
 			
 		}else {
-			stage.setScene(GraphicHandler.switchScreen(Screens.ACC_ENTR, null));
+			stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_ENTR, null));
 		}
 	}
 	
 	private void refresh() {
 		Stage stage = (Stage)logPane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Screens.LOGIN, null));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
 	}
 
 	@FXML
@@ -100,12 +100,12 @@ public class LoginGraphic implements Initializable {
 	@FXML
 	public void displaySignUp(){
 		Stage stage = (Stage)logPane.getScene().getWindow();		
-		stage.setScene(GraphicHandler.switchScreen(Screens.SIGN_UP, null));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.SIGN_UP, null));
 	}
 	
 	@FXML
 	public void goBack(){
-		Screens prev = SessionFacade.getSession().getPrevScreen();		
+		Scenes prev = SessionFacade.getSession().getPrevScreen();		
 		Stage stage = (Stage)logPane.getScene().getWindow();	
 		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}

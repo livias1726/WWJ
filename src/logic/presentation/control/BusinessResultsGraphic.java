@@ -4,8 +4,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -19,7 +17,7 @@ import logic.bean.BusinessInCountryBean;
 import logic.bean.CountryBean;
 import logic.bean.OfferBean;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Screens;
+import logic.presentation.Scenes;
 
 public class BusinessResultsGraphic implements Initializable {
 	
@@ -85,26 +83,24 @@ public class BusinessResultsGraphic implements Initializable {
 			res.setPrefHeight(70);
 			res.setPrefWidth(resultsBox.getPrefWidth() - (resultsBox.getSpacing())*2);
 			
-			res.setOnAction(new EventHandler<ActionEvent>() {
-				public void handle(ActionEvent event) {
+			res.setOnAction(event -> {
 					Stage stage = (Stage)pane.getScene().getWindow();
-					stage.setScene(GraphicHandler.switchScreen(Screens.BUSINESS, new BusinessDetailsGraphic(i)));
+					stage.setScene(GraphicHandler.switchScreen(Scenes.BUSINESS, new BusinessDetailsGraphic(i)));
 				}
-			});
-			
-			
+			);
+		
 			resultsBox.getChildren().add(res);
 		}
 	}
 	
-	private void orderResults(List <OfferBean> list, Number num) {
+	public void orderResults(List <OfferBean> list, Number num) {
 		/*Sort results according to choiceBox*/
 	}
 
 	@FXML
 	public void login() {
 		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Screens.LOGIN, null));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
 	}
 	
 	@FXML
@@ -113,7 +109,7 @@ public class BusinessResultsGraphic implements Initializable {
 		SessionFacade.getSession().setCurrUserType(null);
 		
 		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Screens.MAIN, null));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.MAIN, null));
 	}
 	
 	@FXML
@@ -137,7 +133,7 @@ public class BusinessResultsGraphic implements Initializable {
 	
 	@FXML
 	public void goBack(){
-		Screens prev = SessionFacade.getSession().getPrevScreen();			
+		Scenes prev = SessionFacade.getSession().getPrevScreen();			
 		Stage stage = (Stage)pane.getScene().getWindow();			
 		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}

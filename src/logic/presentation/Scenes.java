@@ -1,6 +1,6 @@
 package logic.presentation;
 
-public enum Screens {
+public enum Scenes {
 	MAIN,
 	SEARCH_SEEK,
 	OFFERS,
@@ -11,10 +11,6 @@ public enum Screens {
 	ACC_REC,
 	ACC_SEEK,
 	ACC_ENTR,
-	PERSONAL_INFO,
-	COMPANY_INFO,
-	OFFERS_INFO,
-	CANDIDATES_INFO,
 	LOGIN,
 	SIGN_UP;
 }

@@ -121,12 +121,12 @@ public class PersonalInfoGraphic implements Initializable {
 
     @FXML
     void addTitles(ActionEvent event) {
-
+    	/**/
     }
 
     @FXML
     void saveChanges(ActionEvent event) {
-
+    	/**/
     }
 
     @FXML
