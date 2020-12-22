@@ -699,3 +699,51 @@ margin-left:700px;
 	top: 100px;
 	
 }
+
+.text_title{
+	position: absolute;
+	width: 380px;
+	height: 40px;
+
+	font-size: 22px;
+	line-height: 32px;
+	
+	top:162px;
+	left:20px;
+	border:0;
+}
+
+.text_subtitle{
+	position: absolute;
+	width: 280px;
+	height: 40px;
+
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 32px;
+	
+	top:195px;
+	left:40px;
+	border:0;
+}
+
+.text_subsubtitle{
+	position: absolute;
+	width: 260px;
+	height: 40px;
+
+	font-size: 15px;
+	line-height: 32px;
+	
+	top:230px;
+	left:60px;
+	border:0;
+}
+
+.text_input{
+	position:relative;
+    width:200px; 
+    height:20px; 
+    font-size: 15px;
+    color:black;
+}
