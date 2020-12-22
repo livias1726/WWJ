@@ -616,3 +616,71 @@ margin-left:700px;
     top:600px;
     left:-30px;
 }
+
+.change_btn{
+	color: white;
+    font-size: 15px;
+    font-style: bold;
+    text-align:center;
+    position:relative
+}
+
+.savechange_btn{
+	color: white;
+    font-size: 15px;
+    font-style: bold;
+    text-align:center;
+    position:relative
+}
+
+.companyname{
+	position:relative;
+    width:250px; 
+    height:40px; 
+    top:230px;
+    left:-100px;
+    border:0;
+    font-size: 15px;
+    color:black;
+}
+
+.companybranches{
+	position:relative;
+    width:250px; 
+    height:40px; 
+    top:230px;
+    left:10px;
+    border:0;
+    font-size: 15px;
+    color:black;
+}
+
+.companydescription{
+	position:relative;
+    width:250px; 
+    height:40px; 
+    top:400px;
+    left:210px;
+    border:0;
+    font-size: 15px;
+    color:black;
+}
+
+.companyheadquarter{
+	position:relative;
+    width:250px; 
+    height:40px; 
+    top:400px;
+    left:320px;
+    border:0;
+    font-size: 15px;
+    color:black;
+}
+
+.add_btn{
+	color: white;
+    font-size: 15px;
+    font-style: bold;
+    text-align:center;
+    position:relative
+}
