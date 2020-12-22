@@ -21,28 +21,28 @@
 	    		<div style="float:right;">
 	    			<button class="search_btn" style="width:120px; height:60px; top:10px; background-color: dodgerblue; margin-left:600px">Sign In</button>
 				</div>
-				<div class="scheletro_offer_det" style="text-size:150px;text-align:center">Create an account<br>
+				<div class="scheletro_signUp" style="text-size:150px;text-align:center">CREATE AN ACCOUNT<br>
 					<div style="margin-top: 40px">
 				    	<label for="firstName" style="color:black;font-size:20px;margin-left:-640px">First Name</label>
 				        <input type="text" id="firstName" name="firstName" style="margin-left: 40px;height:15px">
 				    </div>
-				    <div style="margin-top: 40px">
+				    <div style="margin-top: -25px">
 				    	<label for="eMail" style="color:black;font-size:20px;margin-left:-600px">Email</label>
 				        <input type="text" id="eMail" name="eMail" style="margin-left: 42px;height:15px">
 				    </div>
-				    <div style="margin-top: 40px">
-				    	<label for="password" style="color:black;font-size:20px;margin-left:-670px">Password</label>
+				    <div style="margin-top: -25px">
+				    	<label for="password" style="color:black;font-size:20px;margin-left:-665px">Password</label>
 				        <input type="text" id="password" name="password" style="margin-left: 75px;height:15px">
 				    </div>
-				    <div style="margin-top: -150px;float:right">
+				    <div style="margin-top: -195px;float:right">
 				    	<label for="lastName" style="color:black;font-size:20px;margin-right:40px">Last Name</label>
 				        <input type="text" id="lastName" name="lastName" style="margin-right:250px;height:15px">
 				    </div>
-				    <div style="margin-top: -75px;float:right">
+				    <div style="margin-top: -140px;float:right">
 				    	<label for="confirmEmail" style="color:black;font-size:20px;margin-right:40px">Confirm email</label>
 				        <input type="text" id="confirmEmail" name="confirmEmail" style="margin-right:250px;height:15px">
 				    </div>
-				    <div style="margin-top: -10px;float:right">
+				    <div style="margin-top: -85px;float:right">
 				    	<label for="confirmPassword" style="color:black;font-size:20px;margin-right:40px">Confirm Password</label>
 				        <input type="text" id="confirmPassword" name="confirmPassword" style="margin-right:250px;height:15px">
 				    </div><br>

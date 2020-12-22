@@ -684,3 +684,18 @@ margin-left:700px;
     text-align:center;
     position:relative
 }
+
+.scheletro_signUp{
+	color:dodgerblue;
+	font-style:bold;
+	font-size:70px;
+	padding-left:40px;
+	padding-top:15px;
+	background:#C6D6D3;
+	position: absolute;
+	width: 96%;
+	height: 95%;
+	left: 20px;
+	top: 100px;
+	
+}
