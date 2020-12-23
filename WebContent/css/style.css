@@ -694,7 +694,7 @@ margin-left:700px;
 	background:#C6D6D3;
 	position: absolute;
 	width: 96%;
-	height: 95%;
+	height: 200%;
 	left: 20px;
 	top: 100px;
 	
@@ -747,3 +747,12 @@ margin-left:700px;
     font-size: 15px;
     color:black;
 }
+
+.orizzontale {
+  border-bottom: 1px solid #000;
+  padding-bottom: 20px;
+  margin-top: 300px;
+  margin-left: 300px;
+  width: 300px;
+}
+

@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div>
-			<form action="seekerProfile.jsp" name="seekerProfileform" method="POST">
+			<form action="cv.jsp" name="cvform" method="POST">
 				<div class="dropdown" style="float:right;">
 	    				<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
 	    			<div class="dropdown-content" style="right:0;">
