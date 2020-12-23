@@ -729,7 +729,7 @@ margin-left:700px;
 
 .text_subsubtitle{
 	position: absolute;
-	width: 260px;
+	width: 550px;
 	height: 40px;
 
 	font-size: 15px;
@@ -756,3 +756,10 @@ margin-left:700px;
   width: 300px;
 }
 
+.saveresults_btn{
+	color: white;
+    font-size: 15px;
+    font-style: bold;
+    text-align:center;
+    position:relative	
+}
