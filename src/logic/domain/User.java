@@ -2,7 +2,6 @@ package logic.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 public class User implements Serializable{
 	
@@ -14,7 +13,6 @@ public class User implements Serializable{
 	private String pwd;
 	private String city;
 	private LocalDate birth;
-	private List<String> titles;
 	
 	public User() {
 		/**/
@@ -78,14 +76,6 @@ public class User implements Serializable{
 
 	public void setBirth(LocalDate birth) {
 		this.birth = birth;
-	}
-
-	public List<String> getTitles() {
-		return titles;
-	}
-
-	public void setTitles(List<String> titles) {
-		this.titles = titles;
 	}
 
 }

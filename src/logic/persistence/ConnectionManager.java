@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionManager {
-	private static String user = "root";
-    private static String pass = "admin";
+	private static String user = "wwj_user";
+    private static String pass = "worldwidejob";
     private static String url = "jdbc:mysql://127.0.0.1:3306/wwj_db?serverTimezone=UTC";
     private static String driver = "com.mysql.cj.jdbc.Driver";
     

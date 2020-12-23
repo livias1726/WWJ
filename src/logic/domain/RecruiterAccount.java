@@ -1,6 +1,9 @@
 package logic.domain;
 
+import java.sql.SQLException;
 import java.util.List;
+
+import logic.persistence.dao.CompanyDAO;
 
 public class RecruiterAccount extends Account {
 
@@ -13,20 +16,29 @@ public class RecruiterAccount extends Account {
 	public Company getCompany() {
 		return company;
 	}
+	
 	public void setCompany(Company company) {
 		this.company = company;
 	}
+	
 	public List<Offer> getOffers() {
 		return offers;
 	}
+	
 	public void setOffers(List<Offer> offers) {
 		this.offers = offers;
 	}
+	
 	public List<Candidate> getCandidates() {
 		return candidates;
 	}
+	
 	public void setCandidates(List<Candidate> candidates) {
 		this.candidates = candidates;
+	}
+	
+	public Company getCompanyInfoFromDB(Long id) throws SQLException {
+		return CompanyDAO.selectCompanyInfo(id);
 	}
 
 }

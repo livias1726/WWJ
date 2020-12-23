@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="candidatesPane" prefHeight="588.0" prefWidth="1136.0" styleClass="section_views" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="candidatesPane" prefHeight="588.0" prefWidth="1136.0" styleClass="section_views" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
    <children>
       <Button layoutX="81.0" layoutY="535.0" mnemonicParsing="false" text="Delete" />
       <Button layoutX="1091.0" layoutY="21.0" mnemonicParsing="false" onAction="#closeCandidatesSection" prefHeight="25.0" prefWidth="25.0" styleClass="close_btn">

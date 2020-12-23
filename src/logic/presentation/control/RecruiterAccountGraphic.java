@@ -5,7 +5,7 @@ import logic.presentation.GraphicHandler;
 import logic.presentation.Sections;
 
 public class RecruiterAccountGraphic extends AccountGraphic {
-    
+	
 	@FXML
 	public void openNewOffer(){
 		/*
@@ -15,7 +15,7 @@ public class RecruiterAccountGraphic extends AccountGraphic {
 	
 	@FXML
 	protected void openCompanyInfo() {		
-		GraphicHandler.openSection(pane, Sections.COMPANY_INFO, new ComapnyInfoGraphic(pane));
+		GraphicHandler.openSection(pane, Sections.COMPANY_INFO, new CompanyInfoGraphic(pane));
 	}
 	
 	@FXML

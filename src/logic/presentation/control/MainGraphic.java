@@ -1,12 +1,13 @@
 package logic.presentation.control;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
@@ -23,11 +24,12 @@ public class MainGraphic implements Initializable {
 	private Button recBtn;
 	
 	@FXML
-	private ToolBar toolBar;
+    private Hyperlink buyAdLink;
+
 
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
-		/*No op*/
+		/**/
 	}
 	
 	@FXML
@@ -58,10 +60,13 @@ public class MainGraphic implements Initializable {
 	
 	@FXML
 	public void openOnlineDoc() {
-		/*
-		 * Handle http request and html doc
-		 */
+		/**/
 	}
+	
+	@FXML
+    void openAdMarketplace() {
+		/**/
+    }
 	
 	@FXML
 	private void closeApp(){

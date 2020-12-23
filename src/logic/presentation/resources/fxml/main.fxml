@@ -17,7 +17,7 @@
 
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1180.0" styleClass="main" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="logic.presentation.control.MainGraphic">
    <children>
-      <HBox layoutX="181.0" layoutY="392.0" spacing="100.0">
+      <HBox layoutX="181.0" layoutY="451.0" spacing="100.0">
          <children>
             <Button mnemonicParsing="false" onAction="#searchSeeker" prefHeight="68.0" prefWidth="212.0" text="Job Seeker" textAlignment="CENTER">
                <font>
@@ -54,20 +54,20 @@
             </Button>
          </children>
       </HBox>
-      <ToolBar fx:id="toolBar" prefHeight="60.0" prefWidth="1180.0" styleClass="toolbar">
+      <ToolBar prefHeight="60.0" prefWidth="1180.0" styleClass="toolbar">
          <effect>
             <DropShadow blurType="ONE_PASS_BOX" color="#0f318d" />
          </effect>
          <items>
-            <HBox fx:id="leftBoc" prefHeight="50.0" prefWidth="158.0">
+            <HBox prefHeight="50.0" prefWidth="158.0">
                <children>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="main_icon" />
                </children>
             </HBox>
             <Pane prefHeight="50.0" prefWidth="723.0" />
-            <HBox fx:id="rightBox" alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="268.0" spacing="20.0">
+            <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="268.0" spacing="20.0">
                <children>
-                  <Hyperlink text="Buy AD space">
+                  <Hyperlink onAction="#openAdMarketplace" text="Buy AD space">
                      <HBox.margin>
                         <Insets top="13.0" />
                      </HBox.margin>

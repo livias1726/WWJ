@@ -27,7 +27,6 @@ public class Main extends Application {
 	
 	private void initStage(Stage stage, Scene scene) {
 		stage.setTitle("WorldWideJob");
-		stage.centerOnScreen();
 		stage.setScene(scene);
 	}
 	

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1180.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="logic.presentation.control.SignUpGraphic">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1180.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="logic.presentation.control.SignUpGraphic">
    <children>
       <Button layoutX="33.0" layoutY="24.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="back_btn">
          <effect>
@@ -23,7 +23,12 @@
       </Button>
       <VBox alignment="CENTER" layoutX="322.0" layoutY="137.0" minWidth="600.0" prefHeight="318.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="145.0" AnchorPane.leftAnchor="322.0" AnchorPane.rightAnchor="320.0" AnchorPane.topAnchor="137.0">
          <children>
-            <HBox fx:id="radioBox" spacing="50.0" visible="false">
+            <Label alignment="TOP_CENTER" text="CREATE AN ACCOUNT" textAlignment="CENTER" textFill="#4069d3">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <HBox fx:id="radioBox" prefHeight="17.0" prefWidth="538.0" spacing="50.0">
                <children>
                   <RadioButton fx:id="seekRadio" mnemonicParsing="false" onMouseClicked="#setUser" text="Job Seeker">
                      <HBox.margin>
@@ -36,9 +41,6 @@
                   <RadioButton fx:id="recRadio" mnemonicParsing="false" onMouseClicked="#setUser" text="Recruiter" toggleGroup="$radioUser" />
                   <RadioButton fx:id="entreRadio" mnemonicParsing="false" onMouseClicked="#setUser" text="Entrepreneur" toggleGroup="$radioUser" />
                </children>
-               <VBox.margin>
-                  <Insets right="50.0" />
-               </VBox.margin>
             </HBox>
             <HBox prefHeight="27.0" prefWidth="538.0" spacing="50.0">
                <children>
@@ -101,6 +103,9 @@
                <effect>
                   <InnerShadow color="#0f318d" />
                </effect>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
             </Button>
          </children>
       </VBox>
@@ -112,10 +117,5 @@
             <InnerShadow color="#0f338c" />
          </effect>
       </Button>
-      <Label alignment="TOP_CENTER" layoutX="434.0" layoutY="115.0" text="CREATE AN ACCOUNT" textAlignment="CENTER" textFill="#4069d3">
-         <font>
-            <Font name="System Bold" size="30.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

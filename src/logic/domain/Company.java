@@ -3,14 +3,17 @@ package logic.domain;
 import java.io.Serializable;
 import java.util.List;
 
-import logic.bean.AddressBean;
-
 public class Company implements Serializable{
 	
 	private static final long serialVersionUID = -880952940086847441L;
 	private String name;
 	private String description;
-	private List<AddressBean> branches;
+	private Address headquarter;
+	private List<Address> branches;
+	
+	public Company() {
+		/**/
+	}
 	
 	public String getName() {
 		return name;
@@ -28,11 +31,19 @@ public class Company implements Serializable{
 		this.description = description;
 	}
 	
-	public List<AddressBean> getBranches() {
+	public Address getHeadquarter() {
+		return headquarter;
+	}
+
+	public void setHeadquarter(Address headquarter) {
+		this.headquarter = headquarter;
+	}
+	
+	public List<Address> getBranches() {
 		return branches;
 	}
 	
-	public void setBranches(List<AddressBean> branches) {
+	public void setBranches(List<Address> branches) {
 		this.branches = branches;
 	}
 }

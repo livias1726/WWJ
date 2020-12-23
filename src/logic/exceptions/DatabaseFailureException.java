@@ -3,9 +3,10 @@ package logic.exceptions;
 public class DatabaseFailureException extends Exception {
 
 	private static final long serialVersionUID = -8848305700376272314L;
+	private static final String MESSAGE = "Something went wrong. Please, retry later.";
 	
-	public DatabaseFailureException(String message) {
-		super(message);
+	public DatabaseFailureException() {
+		super(MESSAGE);
 	}
 
 }

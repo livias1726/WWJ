@@ -61,7 +61,7 @@ public class GraphicHandler {
 			case CANDIDATES_INFO: 
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "candidates.fxml"));
 			default:
-				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "non_lo_so.fxml"));
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "main.fxml"));
 		}
 	}
 	
@@ -98,6 +98,7 @@ public class GraphicHandler {
 			
 			AnchorPane pane = loader.load();
 			Scene scene = new Scene(pane);
+			
 			parent.getChildren().setAll(scene.getRoot());
 		}catch (IOException e){
 			e.printStackTrace();

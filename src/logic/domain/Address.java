@@ -1,7 +1,10 @@
 package logic.domain;
 
-public class Address {
-	
+import java.io.Serializable;
+
+public class Address implements Serializable{
+
+	private static final long serialVersionUID = -1805865521526758480L;
 	private String state;
 	private String city;
 	private int postalCode;

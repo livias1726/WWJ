@@ -1,7 +1,6 @@
 package logic.bean;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import logic.application.control.AccountControl;
 import logic.exceptions.DatabaseFailureException;
@@ -15,7 +14,6 @@ public class UserBean {
 	private String lastName;
 	private String city;
 	private LocalDate birth;
-	private List<String> titles;
 	
 	public UserBean() {
 		/*Default constructor*/
@@ -72,14 +70,6 @@ public class UserBean {
 
 	public void setBirth(LocalDate birth) {
 		this.birth = birth;
-	}
-
-	public List<String> getTitles() {
-		return titles;
-	}
-
-	public void setTitles(List<String> titles) {
-		this.titles = titles;
 	}
 	
 	public boolean checkFieldValidity(String str) {

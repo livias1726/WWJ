@@ -7,17 +7,18 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="companyPane" prefHeight="588.0" prefWidth="1136.0" styleClass="section_views" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="companyPane" prefHeight="588.0" prefWidth="1136.0" styleClass="section_views" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.CompanyInfoGraphic">
    <children>
-      <Button fx:id="changeCompanyBtn" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" text="Change">
+      <Button fx:id="changeCompanyBtn" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#changeInfo" text="Change">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="addBranchesBtn" layoutX="898.0" layoutY="152.0" mnemonicParsing="false" text="Add">
+      <Button fx:id="addBranchesBtn" layoutX="983.0" layoutY="195.0" mnemonicParsing="false" onAction="#addBranches" text="Add" visible="false">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -27,49 +28,70 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="saveCompanyBtn" layoutX="1021.0" layoutY="530.0" mnemonicParsing="false" onAction="#saveChanges" text="Save changes">
+      <Button fx:id="saveCompanyBtn" layoutX="1021.0" layoutY="530.0" mnemonicParsing="false" onAction="#saveChanges" text="Save changes" visible="false">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <VBox layoutX="198.0" layoutY="294.0" prefHeight="161.0" prefWidth="368.0">
+      <VBox layoutX="581.0" layoutY="150.0" prefHeight="288.0" prefWidth="385.0" spacing="30.0">
          <children>
-            <Label prefHeight="27.0" prefWidth="140.0" text="Decription">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <TextArea fx:id="description" editable="false" prefHeight="173.0" prefWidth="269.0" />
+            <VBox prefHeight="161.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="123.0" text="Branches">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="45.0">
+                     <children>
+                        <Label text="Street " />
+                        <Label text="Number" />
+                        <Label text="Postal code" />
+                        <Label text="City" />
+                        <Label text="State" />
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="list">
+                     <children>
+                        <ListView fx:id="branchList" prefHeight="200.0" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="54.0" prefWidth="250.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="123.0" text="Headquarter">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="headquarter" editable="false" prefHeight="25.0" prefWidth="187.0" />
+               </children>
+            </VBox>
          </children>
       </VBox>
-      <VBox layoutX="198.0" layoutY="125.0" prefHeight="54.0" prefWidth="241.0">
+      <VBox layoutX="115.0" layoutY="147.0" prefHeight="294.0" prefWidth="385.0" spacing="30.0">
          <children>
-            <Label prefHeight="17.0" prefWidth="149.0" text="Name">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="nameCompany" editable="false" prefHeight="25.0" prefWidth="245.0" />
-         </children>
-      </VBox>
-      <VBox layoutX="635.0" layoutY="294.0" prefHeight="54.0" prefWidth="250.0">
-         <children>
-            <Label prefHeight="27.0" prefWidth="123.0" text="Headquarter">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="headquarter" editable="false" prefHeight="25.0" prefWidth="187.0" />
-         </children>
-      </VBox>
-      <VBox layoutX="635.0" layoutY="125.0" prefHeight="161.0" prefWidth="250.0">
-         <children>
-            <Label prefHeight="27.0" prefWidth="123.0" text="Branches">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <ListView fixedCellSize="24.0" prefHeight="125.0" prefWidth="187.0" />
+            <VBox prefHeight="54.0" prefWidth="241.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="149.0" text="Name">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nameCompany" editable="false" prefHeight="25.0" prefWidth="245.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="161.0" prefWidth="368.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="140.0" text="Decription">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="description" editable="false" prefHeight="173.0" prefWidth="269.0" styleClass="list" wrapText="true" />
+               </children>
+            </VBox>
          </children>
       </VBox>
    </children>

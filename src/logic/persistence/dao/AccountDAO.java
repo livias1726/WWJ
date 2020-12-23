@@ -21,62 +21,33 @@ public class AccountDAO {
 	private AccountDAO() {
 		/**/
 	}
-
-	public static List<String> selectNotifications(long id) throws SQLException {
-		CallableStatement stmt = null;
-		ResultSet res = null;
-		List<String> notif = new ArrayList<>();
-		
-		try (Connection conn = ConnectionManager.getConnection()){
-        	
-        	stmt = conn.prepareCall(RoutinesIdentifier.GET_NOTIFICATIONS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        	
-			res = RoutinesManager.bindParametersAndExec(stmt, (int)id);
-			
-            if (res.first()){           	
-            	do {
-            		notif.add(res.getString("content"));
-            	}while(res.next());
-            }
-           
-            res.close();          
-        } catch (SQLException | ClassNotFoundException e) {
-        	throw new SQLException("An error occured while trying to retrieve the notifications."); 
-		} finally {
-			if(stmt != null) {
-				stmt.close();
-			}
-		}
-        
-        return notif;
-	}
-
+	
 	public static Account selectAccount(long id) throws SQLException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
 		Account account = null;
 		
-		try (Connection conn = ConnectionManager.getConnection()){
-        	
+		try{
+			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.FETCH_ACCOUNT, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
         	
 			res = RoutinesManager.bindParametersAndExec(stmt, (int)id);
 			
             if (res.first()){           	
-            	 long idA = res.getInt("id");
-            	 
-                 User user = new User();
-                 user.setFirstName(res.getString("first_name"));
-                 user.setFirstName(res.getString("last_name"));
-                 
-                 Users type = Users.stringToUsers(res.getString("role"));
-                 
-                 boolean premium = res.getBoolean("premium");
-                 
-                 account = new Account(user, type, idA);
-                 account.setPremium(premium);
+            	long idA = res.getInt("id");
+              	 
+                User user = new User();
+                user.setFirstName(res.getString("first_name"));
+                user.setLastName(res.getString("last_name"));
+                
+                Users type = Users.stringToUsers(res.getString("role"));
+                
+                boolean premium = res.getBoolean("premium");
+                
+                account = new Account(user, type, idA);
+                account.setPremium(premium);
             }
-           
+            
             res.close();
            
         } catch (SQLException | ClassNotFoundException e) {
@@ -95,8 +66,8 @@ public class AccountDAO {
 		ResultSet res = null;
 		Account account = null;
         
-        try (Connection conn = ConnectionManager.getConnection()){
-        	
+        try {
+        	Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.LOGIN, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			res = RoutinesManager.bindParametersAndExec(stmt, email, password);
 			
@@ -131,8 +102,8 @@ public class AccountDAO {
 	    	CallableStatement stmt = null;
 	    	boolean ret = false;
 	        
-	        try (Connection conn = ConnectionManager.getConnection()){
-	        	
+	        try {
+	        	Connection conn = ConnectionManager.getConnection();
 	        	stmt = conn.prepareCall(RoutinesIdentifier.SIGNUP);	        	
 				RoutinesManager.bindParametersAndExec(stmt, email, password, firstName, lastName, role);
 			    
@@ -148,5 +119,34 @@ public class AccountDAO {
 
 	        return ret;
 	    }
+
+	public static List<String> selectNotifications(long id) throws SQLException {
+		CallableStatement stmt = null;
+		ResultSet res = null;
+		List<String> notif = new ArrayList<>();
+		
+		try {
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.GET_NOTIFICATIONS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        	
+			res = RoutinesManager.bindParametersAndExec(stmt, (int)id);
+			
+            if (res.first()){           	
+            	do {
+            		notif.add(res.getString("content"));
+            	}while(res.next());
+            }
+           
+            res.close();          
+        } catch (SQLException | ClassNotFoundException e) {
+        	throw new SQLException("An error occured while trying to retrieve the notifications."); 
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
+        
+        return notif;
+	}
 	
 }

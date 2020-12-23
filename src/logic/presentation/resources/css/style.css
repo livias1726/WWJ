@@ -229,3 +229,7 @@
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
 }
+
+.list{
+	-fx-border-color: blue;
+}

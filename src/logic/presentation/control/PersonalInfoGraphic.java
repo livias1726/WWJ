@@ -3,16 +3,14 @@ package logic.presentation.control;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import logic.bean.UserBean;
 import logic.exceptions.DatabaseFailureException;
@@ -24,13 +22,7 @@ public class PersonalInfoGraphic implements Initializable {
     private AnchorPane personalPane;
 
     @FXML
-    private ListView<String> titles;
-
-    @FXML
     private Button changeBtn;
-
-    @FXML
-    private Button addBtn;
 
     @FXML
     private Button saveBtn;
@@ -72,7 +64,6 @@ public class PersonalInfoGraphic implements Initializable {
 	    	initBindings();
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
-			closePersonalInfo(null);
 		}
 	}
     
@@ -83,10 +74,6 @@ public class PersonalInfoGraphic implements Initializable {
     	pwdField.setText(user.getPassword());
     	city.setText(user.getCity());
     	birth.setValue(user.getBirth());
-    	
-    	for(String i: user.getTitles()) {
-    		titles.getItems().add(i);
-    	}
     }
     
     private void initPasswordVisibility() {
@@ -105,32 +92,25 @@ public class PersonalInfoGraphic implements Initializable {
     
     private void initBindings() {
     	changeBtn.visibleProperty().bind(saveBtn.visibleProperty().not());
-    	addBtn.visibleProperty().bind(saveBtn.visibleProperty());
     	nameField.editableProperty().bind(saveBtn.visibleProperty());
     	lastNameField.editableProperty().bind(saveBtn.visibleProperty());
     	emailField.editableProperty().bind(saveBtn.visibleProperty());
     	city.editableProperty().bind(saveBtn.visibleProperty());
     	birth.editableProperty().bind(saveBtn.visibleProperty());
-    	titles.editableProperty().bind(saveBtn.visibleProperty());
     }
     
     @FXML
-    void changeInfo(ActionEvent event) {
+    void changeInfo() {
     	changeBtn.setVisible(false);
     }
-
+    
     @FXML
-    void addTitles(ActionEvent event) {
+    void saveChanges() {
     	/**/
     }
 
     @FXML
-    void saveChanges(ActionEvent event) {
-    	/**/
-    }
-
-    @FXML
-    void closePersonalInfo(ActionEvent event) {
+    void closePersonalInfo() {
     	parent.getChildren().removeAll(personalPane.getScene().getRoot());
     }
 

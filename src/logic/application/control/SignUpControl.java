@@ -37,7 +37,7 @@ public class SignUpControl {
 				LoginControl.getInstance().tryLogin(email, password);
 			}
 		} catch (SQLException e) {
-			throw new DatabaseFailureException("Something went wrong. Please, retry later.");
+			throw new DatabaseFailureException();
 		}
     }
 }

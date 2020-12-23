@@ -1,5 +1,8 @@
 package logic.application;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import logic.presentation.Scenes;
 
 /**Singleton*/
@@ -10,7 +13,8 @@ public class SessionFacade {
 	private Users currUserType;
 	private Long accountID;
 	private Scenes curr;
-	private Scenes prev;
+	private List<Scenes> prev;
+	private int counter = 0;
 
 	private SessionFacade() {
 		currUserType = null;
@@ -27,22 +31,25 @@ public class SessionFacade {
 	public Users getCurrUserType() {
 		return currUserType;
 	}
-
-	public Scenes getScreen() {
-		return curr;
-	}
 	
 	public void setCurrUserType(Users currUser) {
 		this.currUserType = currUser;
 	}
 
 	public void setScreen(Scenes next) {
-		this.prev = this.curr;
+		if(counter == 0) {
+			this.prev = new ArrayList<>();
+		}
+		this.prev.add(this.curr);
+		this.counter++;
 		this.curr = next;
 	}
 	
 	public Scenes getPrevScreen() {
-		return prev;
+		this.curr = prev.get(counter);
+		prev.remove(counter);
+		this.counter--;
+		return curr;
 	}
 	
 	public Long getID() {

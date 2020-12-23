@@ -17,7 +17,7 @@ public class AccountControl {
 	private static AccountControl instance = null;
 
     private AccountControl() {
-    	/*Default constructor*/
+    	/*Singleton*/
     }
 
     public static AccountControl getInstance() {
@@ -31,10 +31,11 @@ public class AccountControl {
     public AccountBean retrieveAccount() throws DatabaseFailureException{
     	Account account = new Account();
     	try {
-			account.getAccountFromDB(SessionFacade.getSession().getID());
+			account = account.getAccountFromDB(SessionFacade.getSession().getID());
 		} catch (SQLException e) {
-			throw new DatabaseFailureException("Something went wrong. Please, retry later.");
-		}   	
+			throw new DatabaseFailureException();
+		}  
+    	
     	return modelToBean(account);
     }
     
@@ -60,7 +61,7 @@ public class AccountControl {
 		try {
 			user = account.getPersonalInfoFromDB(SessionFacade.getSession().getID());
 		} catch (SQLException e) {
-			throw new DatabaseFailureException("Something went wrong. Please, retry later.");
+			throw new DatabaseFailureException();
 		}
     	
     	return modelToBean(user);	
@@ -72,10 +73,7 @@ public class AccountControl {
     	bean.setLastName(user.getLastName());
     	bean.setCity(user.getCity());
     	bean.setBirth(user.getBirth());
-    	for(String i: user.getTitles()) {
-    		bean.getTitles().add(i);
-    	}
-    	
+ 
     	return bean;
     }
     
@@ -92,7 +90,7 @@ public class AccountControl {
 		try {
 			return account.getNotificationsFromDB(SessionFacade.getSession().getID());
 		} catch (SQLException e) {
-			throw new DatabaseFailureException("Something went wrong. Please, retry later.");
+			throw new DatabaseFailureException();
 		}
 	}	
 }

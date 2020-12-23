@@ -60,7 +60,6 @@ public class AccountGraphic implements Initializable {
 			account = new AccountBean().getAccount();
 		} catch (DatabaseFailureException e1) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e1.getMessage());
-			goBack();
 		}
 		
 		if(account != null) {

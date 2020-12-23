@@ -21,20 +21,16 @@ public class UserDAO {
 		CallableStatement stmt = null;
 		ResultSet res = null;
 		User user = null;
-		
-		try (Connection conn = ConnectionManager.getConnection()){
-        	
+
+		try {
+			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.FETCH_USER, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        	
 			res = RoutinesManager.bindParametersAndExec(stmt, (int)id);
 			
             if (res.first()){           	
-            	user = new User(res.getString("email"), res.getString("password"), res.getString("first_name"), res.getString("last_name"));
+            	user = new User(res.getString("email"), res.getString("pwd"), res.getString("first_name"), res.getString("last_name"));
             	user.setCity(res.getString("city"));
             	user.setBirth(res.getDate("birth").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-            	do {
-            		user.getTitles().add(res.getString("title"));
-            	}while(res.next());
             }
            
             res.close();          
