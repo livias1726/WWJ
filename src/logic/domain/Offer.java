@@ -13,6 +13,7 @@ public class Offer implements Serializable{
 	
 	private static final long serialVersionUID = -764074719381746296L;
 	
+	private int id;
 	private String companyName;
 	private Job position;
 	private String taskDescription;
@@ -23,6 +24,7 @@ public class Offer implements Serializable{
 	private float baseSalary;
 	private LocalDate expiration;
 	private LocalDate upload;
+	private int candidates;
 	
 	public String getCompanyName() {
 		return companyName;
@@ -103,7 +105,22 @@ public class Offer implements Serializable{
 	public void setRequirements(List<String> requirements) {
 		this.requirements = requirements;
 	}
+	
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public int getCandidates() {
+		return candidates;
+	}
+
+	public void setCandidates(int candidates) {
+		this.candidates = candidates;
+	}
 
 	public List<Offer> getOffersByPosition(String job) throws NoResultFoundException, SQLException{
 		return OfferDAO.selectByJob(job);
@@ -115,6 +132,14 @@ public class Offer implements Serializable{
 	
 	public List<Offer> getOffers(String country, String job) throws NoResultFoundException, SQLException{
 		return OfferDAO.selectOffers(country, job);
+	}
+
+	public List<Offer> getOffersByRecruiter(Long id) throws SQLException {
+		return OfferDAO.selectPublishedOffers(id);
+	}
+
+	public Offer getOffer(Integer id) throws SQLException {
+		return OfferDAO.selectOffer(id);
 	}
 
 }

@@ -4,10 +4,13 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.util.List;
 
+import logic.application.control.RecruiterAccountControl;
 import logic.application.control.ViewOfferControl;
+import logic.exceptions.DatabaseFailureException;
 
 public class OfferBean {
 
+	private int id;
 	private String companyName;
 	private JobBean position;
 	private String taskDescription;
@@ -18,6 +21,7 @@ public class OfferBean {
 	private float baseSalary;
 	private LocalDate expiration;
 	private LocalDate upload;
+	private int candidates;
 	
 	public OfferBean() {
 		/*Constructor*/
@@ -104,18 +108,40 @@ public class OfferBean {
 		this.baseSalary = baseSalary;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getCandidates() {
+		return candidates;
+	}
+
+	public void setCandidates(int candidates) {
+		this.candidates = candidates;
+	}
+
+	
 	public List<OfferBean> getOffers(CountryBean country, JobBean job){
-		ViewOfferControl controller = ViewOfferControl.getInstance();
-		return controller.retrieveOffers(country, job);
+		return ViewOfferControl.getInstance().retrieveOffers(country, job);
 	}
 	
 	public List<OfferBean> getOffers(CountryBean country){
-		ViewOfferControl controller = ViewOfferControl.getInstance();
-		return controller.retrieveOffersByCountry(country);
+		return ViewOfferControl.getInstance().retrieveOffersByCountry(country);
 	}
 	
 	public List<OfferBean> getOffers(JobBean job){
-		ViewOfferControl controller = ViewOfferControl.getInstance();
-		return controller.retrieveOffersByJob(job);
+		return ViewOfferControl.getInstance().retrieveOffersByJob(job);
+	}
+
+	public List<OfferBean> getPublishedOffers() throws DatabaseFailureException {
+		return RecruiterAccountControl.getInstance().retrievePublishedOffers();
+	}
+
+	public OfferBean getOffer(Integer id) throws DatabaseFailureException {
+		return ViewOfferControl.getInstance().retrieveOfferById(id);
 	}
 }

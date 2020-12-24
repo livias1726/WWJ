@@ -1,13 +1,19 @@
 package logic.application.control;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import logic.application.SessionFacade;
 import logic.bean.AddressBean;
 import logic.bean.CompanyBean;
-import logic.bean.RecruiterAccountBean;
+import logic.bean.JobBean;
+import logic.bean.OfferBean;
 import logic.domain.Address;
 import logic.domain.Company;
+import logic.domain.Offer;
 import logic.domain.RecruiterAccount;
 import logic.exceptions.DatabaseFailureException;
 
@@ -25,21 +31,6 @@ public class RecruiterAccountControl {
         }
 
         return instance;
-    }
-    
-    /*DUMMY*/
-    public RecruiterAccountBean retrieveRecAccount() {
-    	/*
-    	 * Access the DB and deserialize the account info related to the id
-    	 */
-        return new RecruiterAccountBean();
-    }
-    
-    /*DUMMY*/
-    public void updateCompany(RecruiterAccountBean bean){
-    	/*
-    	 * Access the DB and update info
-    	 */   	
     }
 
 	public CompanyBean retrieveCompanyInfo() throws DatabaseFailureException {
@@ -81,5 +72,39 @@ public class RecruiterAccountControl {
 		
 		return bean;
 	}
-   
+
+	public List<OfferBean> retrievePublishedOffers() throws DatabaseFailureException {
+		List<Offer> list = null;
+		Offer offer = new Offer();
+		
+		try {
+			list = offer.getOffersByRecruiter(SessionFacade.getSession().getID());
+		} catch (SQLException e) {
+			Logger.getLogger(RecruiterAccountControl.class.getName()).log(Level.SEVERE, null, e);
+			throw new DatabaseFailureException();
+		}
+		
+		return modelToBean(list);
+	}
+	
+	private List<OfferBean> modelToBean(List<Offer> src){
+		List<OfferBean> dest = new ArrayList<>();
+		for(Offer i: src) {
+			OfferBean bean = new OfferBean();		
+			bean.setId(i.getId());
+			
+			JobBean jobBean = new JobBean();
+			jobBean.setName(i.getPosition().getName());
+			bean.setPosition(jobBean);
+			
+			bean.setUpload(i.getUpload());
+			bean.setExpiration(i.getExpiration());
+			bean.setCandidates(i.getCandidates());
+			
+			dest.add(bean);
+		}
+		
+		return dest;
+	}
+		
 }

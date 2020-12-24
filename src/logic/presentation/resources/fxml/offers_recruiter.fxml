@@ -19,13 +19,13 @@
       </Button>
       <HBox layoutX="91.0" layoutY="40.0" prefHeight="17.0" prefWidth="200.0" spacing="20.0">
          <children>
-            <RadioButton mnemonicParsing="false" selected="true" text="All">
+            <RadioButton fx:id="allRadio" mnemonicParsing="false" selected="true" text="All">
                <toggleGroup>
                   <ToggleGroup fx:id="views" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="Active" toggleGroup="$views" />
-            <RadioButton mnemonicParsing="false" text="Expired" toggleGroup="$views" />
+            <RadioButton fx:id="actRadio" mnemonicParsing="false" text="Active" toggleGroup="$views" />
+            <RadioButton fx:id="expRadio" mnemonicParsing="false" text="Expired" toggleGroup="$views" />
          </children>
       </HBox>
       <ScrollPane layoutX="86.0" layoutY="75.0" prefHeight="463.0" prefWidth="961.0">
@@ -34,10 +34,11 @@
                <children>
                   <TableView fx:id="table" prefHeight="463.0" prefWidth="963.0">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="Number" />
-                        <TableColumn prefWidth="156.0" text="Position" />
-                        <TableColumn minWidth="0.0" prefWidth="105.0" text="Upload Date" />
-                        <TableColumn prefWidth="113.0" text="Expiration Date" />
+                        <TableColumn fx:id="numCol" prefWidth="75.0" text="Number" />
+                        <TableColumn fx:id="posCol" prefWidth="156.0" text="Position" />
+                        <TableColumn fx:id="upCol" minWidth="0.0" prefWidth="105.0" text="Upload Date" />
+                        <TableColumn fx:id="exCol" prefWidth="113.0" text="Expiration Date" />
+                        <TableColumn fx:id="candCol" prefWidth="75.0" text="Candidates" />
                      </columns>
                   </TableView>
                </children>

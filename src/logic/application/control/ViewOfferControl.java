@@ -11,6 +11,7 @@ import logic.bean.OfferBean;
 import logic.domain.Country;
 import logic.domain.Job;
 import logic.domain.Offer;
+import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
 
 public class ViewOfferControl {
@@ -115,5 +116,20 @@ public class ViewOfferControl {
     	
     	return dest;
     }
+
+	public OfferBean retrieveOfferById(Integer id) throws DatabaseFailureException {
+		Offer offer = new Offer();
+		try {
+			offer = offer.getOffer(id);
+		} catch (SQLException e) {
+			throw new DatabaseFailureException();
+		}
+		
+		return modelToBean(offer);
+	}
+
+	private OfferBean modelToBean(Offer offer) {
+		return null;
+	}
 
 }
