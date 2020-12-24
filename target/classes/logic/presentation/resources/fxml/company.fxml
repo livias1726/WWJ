@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="companyPane" prefHeight="588.0" prefWidth="1136.0" styleClass="section_views" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.CompanyInfoGraphic">
+<AnchorPane fx:id="companyPane" prefHeight="588.0" prefWidth="1136.0" styleClass="section_views" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="logic.presentation.control.CompanyInfoGraphic">
    <children>
       <Button fx:id="changeCompanyBtn" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#changeInfo" text="Change">
          <cursor>

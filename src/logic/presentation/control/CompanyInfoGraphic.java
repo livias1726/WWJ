@@ -1,6 +1,5 @@
 package logic.presentation.control;
 
-import java.awt.TextArea;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -12,8 +11,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import logic.bean.AddressBean;
 import logic.bean.CompanyBean;
 import logic.exceptions.DatabaseFailureException;
@@ -44,12 +45,6 @@ public class CompanyInfoGraphic implements Initializable {
 
     @FXML
     private TextArea description;
-
-	private AnchorPane parent;
-	
-	public CompanyInfoGraphic(AnchorPane pane) {
-		this.parent = pane;
-	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -105,6 +100,7 @@ public class CompanyInfoGraphic implements Initializable {
 	
 	@FXML
     void closeCompanySection(ActionEvent event) {
-		parent.getChildren().removeAll(companyPane.getScene().getRoot());
+		Stage st = (Stage)companyPane.getScene().getWindow();
+    	st.close();
     }
 }

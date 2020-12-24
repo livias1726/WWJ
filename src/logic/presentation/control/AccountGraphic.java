@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -21,7 +22,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-
 import logic.application.SessionFacade;
 import logic.bean.AccountBean;
 import logic.exceptions.DatabaseFailureException;
@@ -88,8 +88,10 @@ public class AccountGraphic implements Initializable {
 	}
 	
 	@FXML
-	protected void openPersonalInfo() {		
-		GraphicHandler.openSection(pane, Sections.PERSONAL_INFO, new PersonalInfoGraphic(pane));
+	protected void openPersonalInfo(ActionEvent event) {	
+		Stage popup = GraphicHandler.openSection(pane, Sections.PERSONAL_INFO, null);
+		popup.centerOnScreen();
+		popup.show();
 	}
 			
 	@FXML

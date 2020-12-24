@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<AnchorPane fx:id="offersPane" prefHeight="588.0" prefWidth="1136.0" styleClass="section_views" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="offersPane" prefHeight="588.0" prefWidth="1136.0" styleClass="section_views" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.OffersInfoGraphic">
    <children>
       <Button layoutX="1083.0" layoutY="23.0" mnemonicParsing="false" onAction="#closeOffersSection" prefHeight="25.0" prefWidth="25.0" styleClass="close_btn">
          <cursor>
@@ -31,15 +30,14 @@
       </HBox>
       <ScrollPane layoutX="86.0" layoutY="75.0" prefHeight="463.0" prefWidth="961.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="465.0" prefWidth="960.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="457.0" prefWidth="958.0">
                <children>
-                  <TableView prefHeight="463.0" prefWidth="963.0">
+                  <TableView fx:id="table" prefHeight="463.0" prefWidth="963.0">
                      <columns>
                         <TableColumn prefWidth="75.0" text="Number" />
                         <TableColumn prefWidth="156.0" text="Position" />
                         <TableColumn minWidth="0.0" prefWidth="105.0" text="Upload Date" />
                         <TableColumn prefWidth="113.0" text="Expiration Date" />
-                        <TableColumn prefWidth="75.0" />
                      </columns>
                   </TableView>
                </children>

@@ -10,7 +10,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
-
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import logic.application.SessionFacade;
 
 public class GraphicHandler {
@@ -88,8 +90,7 @@ public class GraphicHandler {
 		}	
 	}
 	
-	public static void openSection(AnchorPane parent, Sections sec, Initializable controller) {
-	
+	private static Scene switchScreen(Sections sec, Initializable controller) {	
 		try {			
 			FXMLLoader loader = loadFXML(sec);
 			if (controller != null) {
@@ -97,12 +98,21 @@ public class GraphicHandler {
 			}	
 			
 			AnchorPane pane = loader.load();
-			Scene scene = new Scene(pane);
-			
-			parent.getChildren().setAll(scene.getRoot());
+			return new Scene(pane);
 		}catch (IOException e){
 			e.printStackTrace();
+			return null;
 		}	
+	}
+	
+	public static Stage openSection(AnchorPane parent, Sections sec, Initializable controller) {
+		Stage popupStage = new Stage(StageStyle.TRANSPARENT);
+		
+		popupStage.initOwner(parent.getScene().getWindow());
+        popupStage.initModality(Modality.APPLICATION_MODAL);
+		popupStage.setScene(switchScreen(sec, controller));
+		
+		return popupStage;
 	}
 	
 	public static Optional<ButtonType> popUpMsg(AlertType type, String content) {

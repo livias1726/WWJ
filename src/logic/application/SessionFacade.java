@@ -44,7 +44,7 @@ public class SessionFacade {
 		this.counter++;
 		this.curr = next;
 	}
-	
+
 	public Scenes getPrevScreen() {
 		this.curr = prev.get(counter);
 		prev.remove(counter);

@@ -1,35 +1,28 @@
 package logic.domain;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
+import java.sql.SQLException;
+import java.sql.Time;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+
+import logic.exceptions.NoResultFoundException;
+import logic.persistence.dao.OfferDAO;
 
 public class Offer implements Serializable{
 	
 	private static final long serialVersionUID = -764074719381746296L;
 	
 	private String companyName;
-	private Array workingTimeSlot;
+	private Job position;
+	private String taskDescription;
+	private List<String> requirements;
 	private Address branch;
+	private Time start;
+	private Time finish;
+	private float baseSalary;
 	private LocalDate expiration;
 	private LocalDate upload;
-	private String taskDescription;
-	private Job position;
-	private List<Requirement> requirements;
-	private float baseSalary;
-	
-	public Offer(String branch, String position) {
-		Job job = new Job();
-		job.setName(position);
-		
-		Address add = new Address();
-		add.setState(branch);
-		
-		this.position = job;
-		this.branch = add;
-	}
 	
 	public String getCompanyName() {
 		return companyName;
@@ -37,14 +30,6 @@ public class Offer implements Serializable{
 
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
-	}
-
-	public Array getWorkingTimeSlot() {
-		return workingTimeSlot;
-	}
-
-	public void setWorkingTimeSlot(Array workingTimeSlot) {
-		this.workingTimeSlot = workingTimeSlot;
 	}
 
 	public Address getBranch() {
@@ -79,14 +64,6 @@ public class Offer implements Serializable{
 		this.position = position;
 	}
 
-	public List<Requirement> getRequirements() {
-		return requirements;
-	}
-
-	public void setRequirements(List<Requirement> requirements) {
-		this.requirements = requirements;
-	}
-
 	public float getBaseSalary() {
 		return baseSalary;
 	}
@@ -94,38 +71,50 @@ public class Offer implements Serializable{
 	public void setBaseSalary(float baseSalary) {
 		this.baseSalary = baseSalary;
 	}
+	
+	public LocalDate getUpload() {
+		return upload;
+	}
 
-	public List<Offer> getOffersByPosition(){
-		/**DAO INTERACTION*/
-		
-		/*DUMMY BEHAVIOR*/
-		List<Offer> list = new ArrayList<>();
-		String job = "Software Engineer";
-		list.add(new Offer("Canada", job));
-		list.add(new Offer("Germany", job));
-		list.add(new Offer("California, USA", job));
-		return list;
+	public void setUpload(LocalDate upload) {
+		this.upload = upload;
+	}
+
+	public Time getStart() {
+		return start;
+	}
+
+	public void setStart(Time start) {
+		this.start = start;
+	}
+
+	public Time getFinish() {
+		return finish;
+	}
+
+	public void setFinish(Time finish) {
+		this.finish = finish;
 	}
 	
-	public List<Offer> getOffersByPlace(){
-		/**DAO INTERACTION*/
-		
-		/*DUMMY BEHAVIOR*/
-		List<Offer> list = new ArrayList<>();
-		String country = "Canada";
-		list.add(new Offer(country, "Software Engineer"));
-		list.add(new Offer(country, "Chemist"));
-		list.add(new Offer(country, "Psychiatrist"));
-		return list;
+	public List<String> getRequirements() {
+		return requirements;
+	}
+
+	public void setRequirements(List<String> requirements) {
+		this.requirements = requirements;
+	}
+
+
+	public List<Offer> getOffersByPosition(String job) throws NoResultFoundException, SQLException{
+		return OfferDAO.selectByJob(job);
 	}
 	
-	public List<Offer> getOffers(){
-		/**DAO INTERACTION*/
-		
-		/*DUMMY BEHAVIOR*/
-		List<Offer> list = new ArrayList<>();		
-		list.add(new Offer("Canada", "Software Engineer"));
-		return list;
+	public List<Offer> getOffersByPlace(String country) throws NoResultFoundException, SQLException{
+		return OfferDAO.selectByPlace(country);
+	}
+	
+	public List<Offer> getOffers(String country, String job) throws NoResultFoundException, SQLException{
+		return OfferDAO.selectOffers(country, job);
 	}
 
 }

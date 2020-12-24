@@ -1,6 +1,7 @@
 package logic.presentation.control;
 
 import javafx.fxml.FXML;
+import javafx.stage.Stage;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Sections;
 
@@ -14,18 +15,21 @@ public class RecruiterAccountGraphic extends AccountGraphic {
 	}
 	
 	@FXML
-	protected void openCompanyInfo() {		
-		GraphicHandler.openSection(pane, Sections.COMPANY_INFO, new CompanyInfoGraphic(pane));
+	protected void openCompanyInfo() {	
+		Stage popup = GraphicHandler.openSection(pane, Sections.COMPANY_INFO, null);
+		popup.show();
 	}
 	
 	@FXML
-	protected void openOffersInfo() {		
-		GraphicHandler.openSection(pane, Sections.OFFERS_INFO, new OffersInfoGraphic(pane));
+	protected void openOffersInfo() {	
+		Stage popup = GraphicHandler.openSection(pane, Sections.OFFERS_INFO, null);
+		popup.show();
 	}
 	
 	@FXML
-	protected void openCandidatesInfo() {		
-		GraphicHandler.openSection(pane, Sections.CANDIDATES_INFO, new CandidatesInfoGraphic(pane));
+	protected void openCandidatesInfo() {
+		Stage popup = GraphicHandler.openSection(pane, Sections.CANDIDATES_INFO, new CandidatesInfoGraphic(pane));
+		popup.show();
 	}
 
 }

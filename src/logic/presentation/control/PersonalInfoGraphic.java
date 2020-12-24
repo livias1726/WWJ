@@ -12,6 +12,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import logic.bean.UserBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
@@ -47,12 +48,6 @@ public class PersonalInfoGraphic implements Initializable {
 
     @FXML
     private CheckBox showBtn;
-    
-    private AnchorPane parent;
-    
-    public PersonalInfoGraphic(AnchorPane pane) {
-    	this.parent = pane;
-    }
     
     @Override
 	public void initialize(URL url, ResourceBundle res) {
@@ -91,7 +86,8 @@ public class PersonalInfoGraphic implements Initializable {
     }
     
     private void initBindings() {
-    	changeBtn.visibleProperty().bind(saveBtn.visibleProperty().not());
+    	saveBtn.visibleProperty().bind(changeBtn.visibleProperty().not());
+    	
     	nameField.editableProperty().bind(saveBtn.visibleProperty());
     	lastNameField.editableProperty().bind(saveBtn.visibleProperty());
     	emailField.editableProperty().bind(saveBtn.visibleProperty());
@@ -111,7 +107,7 @@ public class PersonalInfoGraphic implements Initializable {
 
     @FXML
     void closePersonalInfo() {
-    	parent.getChildren().removeAll(personalPane.getScene().getRoot());
+    	Stage st = (Stage)personalPane.getScene().getWindow();
+    	st.close();
     }
-
 }

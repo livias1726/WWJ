@@ -1,6 +1,6 @@
 package logic.bean;
 
-import java.lang.reflect.Array;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -9,33 +9,34 @@ import logic.application.control.ViewOfferControl;
 public class OfferBean {
 
 	private String companyName;
-	private Array workingTimeSlot;
+	private JobBean position;
+	private String taskDescription;
+	private List<String> requirements;
 	private AddressBean branch;
+	private Time start;
+	private Time finish;
+	private float baseSalary;
 	private LocalDate expiration;
 	private LocalDate upload;
-	private String taskDescription;
-	private JobBean position;
-	private List<RequirementBean> requirements;
-	private float baseSalary;
 	
 	public OfferBean() {
 		/*Constructor*/
 	}
 	
-	public String getCompanyName() {
-		return companyName;
+	public JobBean getPosition() {
+		return position;
 	}
 
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-	
-	public Array getWorkingTimeSlot() {
-		return workingTimeSlot;
+	public void setPosition(JobBean position) {
+		this.position = position;
 	}
 
-	public void setWorkingTimeSlot(Array workingTimeSlot) {
-		this.workingTimeSlot = workingTimeSlot;
+	public List<String> getRequirements() {
+		return requirements;
+	}
+
+	public void setRequirements(List<String> requirements) {
+		this.requirements = requirements;
 	}
 
 	public AddressBean getBranch() {
@@ -46,6 +47,31 @@ public class OfferBean {
 		this.branch = branch;
 	}
 
+	public Time getStart() {
+		return start;
+	}
+
+	public void setStart(Time start) {
+		this.start = start;
+	}
+
+	public Time getFinish() {
+		return finish;
+	}
+
+	public void setFinish(Time finish) {
+		this.finish = finish;
+	}
+
+	
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+	
 	public LocalDate getExpiration() {
 		return expiration;
 	}
@@ -68,22 +94,6 @@ public class OfferBean {
 
 	public void setTaskDescription(String taskDescription) {
 		this.taskDescription = taskDescription;
-	}
-
-	public JobBean getPosition() {
-		return position;
-	}
-
-	public void setPosition(JobBean position) {
-		this.position = position;
-	}
-
-	public List<RequirementBean> getRequirements() {
-		return requirements;
-	}
-
-	public void setRequirements(List<RequirementBean> requirements) {
-		this.requirements = requirements;
 	}
 
 	public float getBaseSalary() {

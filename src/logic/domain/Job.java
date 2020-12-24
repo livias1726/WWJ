@@ -1,10 +1,12 @@
 package logic.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Job {
+public class Job implements Serializable{
 
+	private static final long serialVersionUID = 7555734428882964601L;
 	private String name;
 	private String category;
 	
