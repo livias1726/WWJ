@@ -25,24 +25,14 @@ public class OfferDAO {
 	public static List<Offer> selectByPlace(String country) throws NoResultFoundException, SQLException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
-		List<Offer> list = null;
+		List<Offer> list = new ArrayList<>();
 
 		try {
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.GET_OFFERS_BY_COUNTRY, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			res = RoutinesManager.bindParametersAndExec(stmt, country);
 			
-            if (!res.first()){           	
-            	throw new NoResultFoundException();
-            }
-            
-            res.first();
-            
-            do {
-            	/*fetch results*/
-            }while(res.next());
-            
-            res.close();          
+			processResearch(res, list);     
         } catch (SQLException | ClassNotFoundException e) {
         	throw new SQLException("An error occured while trying to retrieve search by country results."); 
 		} finally {
@@ -57,24 +47,14 @@ public class OfferDAO {
 	public static List<Offer> selectOffers(String country, String job) throws NoResultFoundException, SQLException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
-		List<Offer> list = null;
+		List<Offer> list = new ArrayList<>();
 
 		try {
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.GET_OFFERS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			res = RoutinesManager.bindParametersAndExec(stmt, country, job);
 			
-            if (!res.first()){           	
-            	throw new NoResultFoundException();
-            }
-            
-            res.first();
-            
-            do {
-            	/*fetch results*/
-            }while(res.next());
-            
-            res.close();          
+			processResearch(res, list);        
         } catch (SQLException | ClassNotFoundException e) {
         	throw new SQLException("An error occured while trying to retrieve offers search results."); 
 		} finally {
@@ -89,24 +69,14 @@ public class OfferDAO {
 	public static List<Offer> selectByJob(String job) throws NoResultFoundException, SQLException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
-		List<Offer> list = null;
+		List<Offer> list = new ArrayList<>();
 
 		try {
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.GET_OFFERS_BY_JOB, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			res = RoutinesManager.bindParametersAndExec(stmt, job);
 			
-            if (!res.first()){           	
-            	throw new NoResultFoundException();
-            }
-            
-            res.first();
-            
-            do {
-            	/*fetch results*/
-            }while(res.next());
-            
-            res.close();          
+            processResearch(res, list);
         } catch (SQLException | ClassNotFoundException e) {
         	throw new SQLException("An error occured while trying to retrieve search by job results."); 
 		} finally {
@@ -116,6 +86,29 @@ public class OfferDAO {
 		}
         
         return list;
+	}
+	
+	private static void processResearch(ResultSet res, List<Offer> list) throws SQLException, NoResultFoundException{
+		if (!res.first()){           	
+        	throw new NoResultFoundException();
+        }
+        
+        res.first();
+        
+        do {
+        	Offer offer = new Offer();
+        	offer.setCompanyName(res.getString("company"));
+        	
+        	Job position = new Job();
+        	position.setName(res.getString("position"));
+        	offer.setPosition(position);
+        	
+        	offer.setTaskDescription(res.getString("description"));
+        	
+        	list.add(offer);
+        }while(res.next());
+        
+        res.close();          
 	}
 
 	public static List<Offer> selectPublishedOffers(Long id) throws SQLException {

@@ -5,30 +5,42 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="candidatesPane" prefHeight="588.0" prefWidth="1136.0" styleClass="section_views" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<AnchorPane fx:id="candidatesPane" prefHeight="588.0" prefWidth="1136.0" styleClass="section_views" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.CandidatesInfoGraphic">
    <children>
-      <Button layoutX="81.0" layoutY="535.0" mnemonicParsing="false" text="Delete" />
       <Button layoutX="1091.0" layoutY="21.0" mnemonicParsing="false" onAction="#closeCandidatesSection" prefHeight="25.0" prefWidth="25.0" styleClass="close_btn">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ScrollPane layoutX="81.0" layoutY="68.0" prefHeight="452.0" prefWidth="973.0">
+      <ScrollPane layoutX="81.0" layoutY="68.0" prefHeight="380.0" prefWidth="973.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="974.0">
                <children>
-                  <TableView prefHeight="452.0" prefWidth="986.0">
+                  <TableView fx:id="table" prefHeight="432.0" prefWidth="986.0">
                      <columns>
-                        <TableColumn prefWidth="75.0" />
-                        <TableColumn prefWidth="97.0" text="Offer" />
-                        <TableColumn prefWidth="134.0" text="Candidate" />
+                        <TableColumn fx:id="boxCol" prefWidth="75.0" text="Select" />
+                        <TableColumn fx:id="offerCol" editable="false" prefWidth="97.0" text="Offer" />
+                        <TableColumn fx:id="candCol" editable="false" prefWidth="134.0" text="Candidate" />
                      </columns>
                   </TableView>
                </children>
             </AnchorPane>
         </content>
       </ScrollPane>
+      <Button fx:id="delBtn" disable="true" layoutX="932.0" layoutY="507.0" mnemonicParsing="false" onAction="#deleteSelected" prefHeight="52.0" prefWidth="122.0" styleClass="spec_btn" text="Delete" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <InnerShadow />
+         </effect>
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

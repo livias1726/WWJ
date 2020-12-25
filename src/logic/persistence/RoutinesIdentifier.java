@@ -17,4 +17,5 @@ public class RoutinesIdentifier {
 	public static final String GET_OFFERS_BY_JOB = "call retrieve_offers_by_job(?)";
 	public static final String GET_RECRUITERS_OFFERS = "call retrieve_recruiter_offers(?)";
 	public static final String GET_OFFER = "call retrieve_offer(?)";
+	public static final String GET_CANDIDATES = "call retrieve_candidates(?)";
 }

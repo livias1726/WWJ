@@ -1,6 +1,8 @@
 package logic.bean;
 
 import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import logic.application.control.AccountControl;
 import logic.exceptions.DatabaseFailureException;
@@ -85,9 +87,9 @@ public class UserBean {
     }
     
     public void verifySyntax() throws InvalidFieldException {
-    	String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
-	    
-		if(!email.matches(regex)) {
+    	Pattern pattern = Pattern.compile("^.+@.+\\..+$");
+    	Matcher matcher = pattern.matcher(email);
+    	if(!matcher.matches()) {
 			throw new InvalidFieldException("The email address is not valid");	
 		}
 	}

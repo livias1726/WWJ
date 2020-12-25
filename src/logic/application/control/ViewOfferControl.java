@@ -129,7 +129,36 @@ public class ViewOfferControl {
 	}
 
 	private OfferBean modelToBean(Offer offer) {
-		return null;
+		OfferBean bean = new OfferBean();
+		
+		bean.setCompanyName(offer.getCompanyName());
+    	
+    	JobBean job = new JobBean();
+    	job.setName(offer.getPosition().getName());
+    	bean.setPosition(job);
+    	
+    	bean.setTaskDescription(offer.getTaskDescription());
+    	
+    	AddressBean branch = new AddressBean();
+    	branch.setState(offer.getBranch().getState());
+    	branch.setCity(offer.getBranch().getCity());
+    	branch.setPostalCode(offer.getBranch().getPostalCode());
+    	branch.setStreet(offer.getBranch().getStreet());
+    	branch.setNumber(offer.getBranch().getNumber());
+    	bean.setBranch(branch);
+    	
+    	bean.setStart(offer.getStart());
+    	bean.setFinish(offer.getFinish());
+    	bean.setBaseSalary(offer.getBaseSalary());
+    	bean.setExpiration(offer.getExpiration());
+    	
+    	List<String> requirements = new ArrayList<>();
+    	for(String i: offer.getRequirements()) {
+    		requirements.add(i);
+    	}
+		
+		bean.setRequirements(requirements);
+		return bean;
 	}
 
 }

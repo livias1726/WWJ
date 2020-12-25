@@ -1,0 +1,54 @@
+package logic.persistence.dao;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import logic.domain.Candidate;
+import logic.persistence.ConnectionManager;
+import logic.persistence.RoutinesIdentifier;
+import logic.persistence.RoutinesManager;
+
+public class CandidateDAO {
+	
+	private CandidateDAO() {
+		/**/
+	}
+
+	public static List<Candidate> selectCandidates(Long id) throws SQLException {
+		CallableStatement stmt = null;
+		ResultSet res = null;
+		List<Candidate> list = new ArrayList<>();
+		
+		try{
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.GET_CANDIDATES, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        	
+			res = RoutinesManager.bindParametersAndExec(stmt, id.intValue());
+			
+            if (res.first()){           	
+            	Candidate cand = new Candidate();
+            	cand.setOffer(res.getInt("offer"));
+            	cand.setSeeker(res.getInt("candidate"));
+            	cand.setName(res.getString("first_name") + " " + res.getString("last_name"));
+            	
+            	list.add(cand);
+            }
+            
+            res.close();
+           
+        } catch (SQLException | ClassNotFoundException e) {
+        	throw new SQLException("An error occured while trying to retrieve the candidates list."); 
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
+        
+        return list;
+	}
+
+}
