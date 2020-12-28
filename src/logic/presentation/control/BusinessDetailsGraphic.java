@@ -8,10 +8,7 @@ import logic.bean.BusinessInCountryBean;
 
 public class BusinessDetailsGraphic implements Initializable {
 
-	private BusinessInCountryBean business;
-	
 	public BusinessDetailsGraphic(BusinessInCountryBean b) {
-		this.business = b;
 	}
 	
 	@Override

@@ -83,7 +83,7 @@ public class SignUpGraphic implements Initializable {
 	@FXML
 	public void goBack() {
 		Stage stage = (Stage)pane.getScene().getWindow();	
-		Scenes prev = SessionFacade.getSession().getPrevScreen();	
+		Scenes prev = SessionFacade.getSession().getPrevScene();	
 		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}
 	
@@ -92,7 +92,7 @@ public class SignUpGraphic implements Initializable {
 		UserBean credentials = new UserBean(email.getText(), pwd.getText());
 		
 		try {
-			credentials.verifyFields();
+			credentials.verifyFields(email.getText(), pwd.getText(), firstName.getText(), lastName.getText());
 			credentials.verifyEqualFields(confEmail.getText(), confPwd.getText());
 			credentials.verifySyntax();
 		} catch (InvalidFieldException e) {

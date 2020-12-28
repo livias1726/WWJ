@@ -31,7 +31,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <VBox layoutX="345.0" layoutY="120.0" prefHeight="256.0" prefWidth="601.0" spacing="50.0">
+      <VBox layoutX="320.0" layoutY="120.0" prefHeight="256.0" prefWidth="601.0" spacing="50.0">
          <children>
             <HBox prefHeight="52.0" prefWidth="465.0" spacing="50.0">
                <children>
@@ -97,7 +97,7 @@
                         <TextField fx:id="emailField" editable="false" prefHeight="25.0" prefWidth="187.0" />
                      </children>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="205.0">
+                  <VBox fx:id="pwdBox" prefHeight="200.0" prefWidth="205.0">
                      <children>
                         <Label prefHeight="27.0" prefWidth="123.0" text="Password">
                            <font>

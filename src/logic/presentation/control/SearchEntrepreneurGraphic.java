@@ -12,11 +12,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToolBar;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
+import logic.bean.BusinessBean;
 import logic.bean.BusinessInCountryBean;
 import logic.bean.CountryBean;
+import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
 
@@ -76,12 +79,15 @@ public class SearchEntrepreneurGraphic implements Initializable {
 		}
 		
 		//Edit combo boxes: retrieve from DB
-		CountryBean country = new CountryBean();
-		List<String> cList = country.getCountries(new BusinessInCountryBean());
+		List<String> cList = null;
+		List<String> bList = null;
+		try {
+			cList = (new CountryBean()).getCountries();
+			bList = (new BusinessBean()).getBusinesses();	
+		} catch (DatabaseFailureException e) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+		}
 		placeSearch.getItems().addAll(cList);
-		
-		BusinessInCountryBean bus = new BusinessInCountryBean();
-		List<String> bList = bus.getBusinesses();	
 		businessSearch.getItems().addAll(bList);
 	}
 	
@@ -144,7 +150,7 @@ public class SearchEntrepreneurGraphic implements Initializable {
 	
 	@FXML
 	public void goBack(){
-		Scenes prev = SessionFacade.getSession().getPrevScreen();			
+		Scenes prev = SessionFacade.getSession().getPrevScene();			
 		Stage stage = (Stage)searchPane.getScene().getWindow();			
 		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}

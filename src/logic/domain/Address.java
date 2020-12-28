@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class Address implements Serializable{
 
 	private static final long serialVersionUID = -1805865521526758480L;
+	
+	private Country country;
 	private String state;
 	private String city;
 	private int postalCode;
@@ -50,5 +52,12 @@ public class Address implements Serializable{
 	public void setState(String name) {
 		this.state = name;
 	}
+	
+	public Country getCountry() {
+		return country;
+	}
 
+	public void setCountry(Country country) {
+		this.country = country;
+	}
 }

@@ -56,10 +56,9 @@ public class AccountControl {
     
     public UserBean retrievePersonalInfo() throws DatabaseFailureException {
     	
-    	Account account = new Account();
-    	User user;
+    	User user = new User();
 		try {
-			user = account.getPersonalInfoFromDB(SessionFacade.getSession().getID());
+			user = user.getPersonalInfoFromDB(SessionFacade.getSession().getID());
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();
 		}
@@ -77,10 +76,6 @@ public class AccountControl {
     	return bean;
     }
     
-    public void updateAccount() {
-    	/*Update personal info for the account*/
-    }
-    
     public void updateAccountPic(File img) {
     	/*Update image field for the account*/
     }
@@ -89,6 +84,17 @@ public class AccountControl {
 		Account account = new Account();
 		try {
 			return account.getNotificationsFromDB(SessionFacade.getSession().getID());
+		} catch (SQLException e) {
+			throw new DatabaseFailureException();
+		}
+	}
+
+	public void changePersonalInfo(UserBean bean) throws DatabaseFailureException {
+    	User user = new User(bean.getFirstName(), bean.getLastName(), bean.getEmail(), bean.getPassword());
+    	user.setCity(bean.getCity());
+    	user.setBirth(bean.getBirth());
+		try {
+			user.savePersonalInfoOnDB(SessionFacade.getSession().getID());
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();
 		}

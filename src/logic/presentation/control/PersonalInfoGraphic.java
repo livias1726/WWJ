@@ -1,20 +1,24 @@
 package logic.presentation.control;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.bean.UserBean;
 import logic.exceptions.DatabaseFailureException;
+import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
 
 public class PersonalInfoGraphic implements Initializable {
@@ -49,6 +53,9 @@ public class PersonalInfoGraphic implements Initializable {
     @FXML
     private CheckBox showBtn;
     
+    @FXML
+    private VBox pwdBox;
+    
     @Override
 	public void initialize(URL url, ResourceBundle res) {
     	UserBean user;
@@ -59,6 +66,7 @@ public class PersonalInfoGraphic implements Initializable {
 	    	initBindings();
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+			closePersonalInfo();
 		}
 	}
     
@@ -72,17 +80,18 @@ public class PersonalInfoGraphic implements Initializable {
     }
     
     private void initPasswordVisibility() {
-    	TextField pwdUnmasked = new TextField();
-		pwdUnmasked.setManaged(false);
-		pwdUnmasked.setVisible(false);
-		
-		pwdUnmasked.managedProperty().bind(showBtn.selectedProperty());
-		pwdUnmasked.visibleProperty().bind(showBtn.selectedProperty());
+    	TextField unmasked = new TextField();
+    	unmasked.setVisible(false);
+    	unmasked.setManaged(false);
+		pwdBox.getChildren().add(unmasked);
+
+		unmasked.managedProperty().bind(showBtn.selectedProperty());
+		unmasked.visibleProperty().bind(showBtn.selectedProperty());
 
 		pwdField.managedProperty().bind(showBtn.selectedProperty().not());
-		pwdField.visibleProperty().bind(showBtn.selectedProperty().not());	
-		
-		pwdUnmasked.textProperty().bindBidirectional(pwdField.textProperty());
+		pwdField.visibleProperty().bind(showBtn.selectedProperty().not());
+
+	    unmasked.textProperty().bindBidirectional(pwdField.textProperty());
     }
     
     private void initBindings() {
@@ -96,17 +105,44 @@ public class PersonalInfoGraphic implements Initializable {
     }
     
     @FXML
-    void changeInfo() {
+    public void changeInfo() {
     	changeBtn.setVisible(false);
     }
     
     @FXML
-    void saveChanges() {
-    	/**/
+    public void saveChanges() {
+    	Optional<ButtonType> result = GraphicHandler.popUpMsg(AlertType.CONFIRMATION, "Do you really want to save this changes?");
+    	if(!result.isPresent() || (result.get() == ButtonType.CANCEL)) {
+    		return;
+    	}
+    	
+    	UserBean bean = new UserBean(emailField.getText(), pwdField.getText());
+    	bean.setFirstName(nameField.getText());
+    	bean.setLastName(lastNameField.getText());
+    	
+    	try {
+			bean.verifyFields(emailField.getText(), pwdField.getText(), nameField.getText(), lastNameField.getText());
+			bean.verifySyntax();
+		} catch (InvalidFieldException e) {
+			GraphicHandler.popUpMsg(AlertType.WARNING, e.getMessage());
+			return;
+		} 
+
+    	bean.setCity(city.getText());
+    	bean.setBirth(birth.getValue());
+    
+    	try {
+			bean.savePersonalInfo();
+		} catch (DatabaseFailureException e) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+			closePersonalInfo();
+		}
+    	
+    	changeBtn.setVisible(true);
     }
 
     @FXML
-    void closePersonalInfo() {
+    public void closePersonalInfo() {
     	Stage st = (Stage)personalPane.getScene().getWindow();
     	st.close();
     }

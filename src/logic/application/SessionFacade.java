@@ -14,7 +14,7 @@ public class SessionFacade {
 	private Long accountID;
 	private Scenes curr;
 	private List<Scenes> prev;
-	private int counter = 0;
+	private int counter = -1;
 
 	private SessionFacade() {
 		currUserType = null;
@@ -36,18 +36,20 @@ public class SessionFacade {
 		this.currUserType = currUser;
 	}
 
-	public void setScreen(Scenes next) {
-		if(counter == 0) {
+	public void setScene(Scenes next) {
+		if(counter == -1) {
 			this.prev = new ArrayList<>();
+		}else {
+			this.prev.add(this.curr);
 		}
-		this.prev.add(this.curr);
+		
 		this.counter++;
 		this.curr = next;
 	}
 
-	public Scenes getPrevScreen() {
-		this.curr = prev.get(counter);
-		prev.remove(counter);
+	public Scenes getPrevScene() {
+		this.curr = prev.get(counter-1);
+		prev.remove(counter-1);
 		this.counter--;
 		return curr;
 	}

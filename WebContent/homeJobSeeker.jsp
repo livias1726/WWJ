@@ -6,7 +6,7 @@
 <jsp:setProperty name="countryBean" property="*"/>
 
 <% if (request.getParameter("country") != null) {
-        if (countryBean.verifyJobSeekerResearch()) { %>
+        if (countryBean.getCountries() != null) { %>
         	<jsp:forward page="jobOffers.jsp"/>
       <%}
     }

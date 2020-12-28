@@ -5,31 +5,13 @@ import java.util.List;
 import logic.application.control.ViewBusinessControl;
 import logic.domain.Country;
 
-public class BusinessInCountryBean {
+public class BusinessInCountryBean extends BusinessBean{
 
-	private String name;
-	private String category;
 	private float averageManagementCost;
 	private float averageEarnings;
 	private float description;
 	private Country country;
 		
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
 	public float getAverageManagementCost() {
 		return averageManagementCost;
 	}
@@ -62,11 +44,6 @@ public class BusinessInCountryBean {
 		this.country = country;
 	}
 
-	public List<String> getBusinesses(){
-		ViewBusinessControl control = ViewBusinessControl.getInstance();
-		return control.retrieveBusinesses();
-	}
-	
 	public List<BusinessInCountryBean> getBusinesses(CountryBean country, BusinessInCountryBean bus){
 		ViewBusinessControl controller = ViewBusinessControl.getInstance();
 		return controller.retrieveBusinesses(country, bus);

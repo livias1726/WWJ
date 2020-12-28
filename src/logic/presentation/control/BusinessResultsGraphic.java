@@ -133,7 +133,7 @@ public class BusinessResultsGraphic implements Initializable {
 	
 	@FXML
 	public void goBack(){
-		Scenes prev = SessionFacade.getSession().getPrevScreen();			
+		Scenes prev = SessionFacade.getSession().getPrevScene();			
 		Stage stage = (Stage)pane.getScene().getWindow();			
 		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}

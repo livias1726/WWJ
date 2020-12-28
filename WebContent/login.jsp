@@ -1,14 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+
+<jsp:useBean id="accountBean" scope="request" class="logic.bean.AccountBean"/>
 <jsp:useBean id="userBean" scope="request" class="logic.bean.UserBean"/>
 
-<jsp:setProperty name="userBean" property="*"/>
+<jsp:setProperty name="accountBean" property="*"/>
+
+<%@ page errorPage="error.jsp" %>  
 
 <% if (request.getParameter("login") != null) {
-        if (userBean.verifyLogin()) { %>
-        	<jsp:forward page="next.jsp"/>
-      <%}
+		userBean.setEmail(request.getParameter("email"));
+		userBean.setPassword(request.getParameter("password"));
+		accountBean.setUser(userBean);
+        accountBean.login(); %>
+        <jsp:forward page="next.jsp"/>
+      <%
     }
 %>
 <html lang="en">

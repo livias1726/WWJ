@@ -3,12 +3,9 @@ package logic.bean;
 import java.util.List;
 
 import logic.application.control.ViewOfferControl;
+import logic.exceptions.DatabaseFailureException;
 
 public class JobBean {
-	
-	public JobBean() {
-		/*Constructor*/
-	}
 	
 	private String name;
 	private String category;
@@ -29,8 +26,7 @@ public class JobBean {
 		this.category = category;
 	}
 	
-	public List<String> getJobs(){
-		ViewOfferControl control = ViewOfferControl.getInstance();
-		return control.retrieveJobs();
+	public List<String> getJobs() throws DatabaseFailureException{
+		return ViewOfferControl.getInstance().retrieveJobs();
 	}	
 }

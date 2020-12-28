@@ -96,15 +96,19 @@ public class UserBean {
     
     public void verifyEqualFields(String email, String pwd) throws InvalidFieldException {
     	if(!email.equals(this.email)) {
-    		throw new InvalidFieldException("The email addresses do not match");
+    		throw new InvalidFieldException("Email addresses do not match");
     	}
     	
     	if(!pwd.equals(this.password)) {
-    		throw new InvalidFieldException("The passwords do not match");
+    		throw new InvalidFieldException("Passwords do not match");
     	}
     }
    
 	public UserBean getPersonalInfo() throws DatabaseFailureException {
 		return AccountControl.getInstance().retrievePersonalInfo();
+	}
+
+	public void savePersonalInfo() throws DatabaseFailureException {
+		AccountControl.getInstance().changePersonalInfo(this);
 	}
 }

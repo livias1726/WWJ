@@ -8,7 +8,6 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
-import logic.domain.Address;
 import logic.domain.Job;
 import logic.domain.Offer;
 import logic.exceptions.NoResultFoundException;
@@ -33,7 +32,7 @@ public class OfferDAO {
 			res = RoutinesManager.bindParametersAndExec(stmt, country);
 			
 			processResearch(res, list);     
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to retrieve search by country results."); 
 		} finally {
 			if(stmt != null) {
@@ -55,7 +54,7 @@ public class OfferDAO {
 			res = RoutinesManager.bindParametersAndExec(stmt, country, job);
 			
 			processResearch(res, list);        
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to retrieve offers search results."); 
 		} finally {
 			if(stmt != null) {
@@ -77,7 +76,7 @@ public class OfferDAO {
 			res = RoutinesManager.bindParametersAndExec(stmt, job);
 			
             processResearch(res, list);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to retrieve search by job results."); 
 		} finally {
 			if(stmt != null) {
@@ -101,6 +100,7 @@ public class OfferDAO {
         	
         	Job position = new Job();
         	position.setName(res.getString("position"));
+        	position.setCategory(res.getString("category"));
         	offer.setPosition(position);
         	
         	offer.setTaskDescription(res.getString("description"));
@@ -139,7 +139,7 @@ public class OfferDAO {
             }
 
             res.close();          
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to retrieve recruiter's offers."); 
 		} finally {
 			if(stmt != null) {
@@ -168,15 +168,7 @@ public class OfferDAO {
             	offer.setPosition(job);
             	
             	offer.setTaskDescription(res.getString("description"));
-            	
-            	Address branch = new Address();
-            	branch.setState(res.getString("state"));
-            	branch.setCity(res.getString("city"));
-            	branch.setPostalCode(res.getInt("postal_code"));
-            	branch.setStreet(res.getString("street"));
-            	branch.setNumber(res.getInt("number"));
-            	offer.setBranch(branch);
-            	
+            	   	
             	offer.setStart(res.getTime("start"));
             	offer.setFinish(res.getTime("finish"));
             	offer.setBaseSalary(res.getFloat("base_salary"));
@@ -189,7 +181,7 @@ public class OfferDAO {
             }
 
             res.close();          
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to retrieve offer details."); 
 		} finally {
 			if(stmt != null) {

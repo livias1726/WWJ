@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="companyPane" prefHeight="588.0" prefWidth="1136.0" styleClass="section_views" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="logic.presentation.control.CompanyInfoGraphic">
+<AnchorPane fx:id="companyPane" prefHeight="588.0" prefWidth="1136.0" styleClass="section_views" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.CompanyInfoGraphic">
    <children>
       <Button fx:id="changeCompanyBtn" layoutX="24.0" layoutY="24.0" mnemonicParsing="false" onAction="#changeInfo" text="Change">
          <cursor>
@@ -23,7 +23,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="1084.0" layoutY="24.0" mnemonicParsing="false" onAction="#closeCompanySection" prefHeight="25.0" prefWidth="25.0" styleClass="close_btn">
+      <Button layoutX="1084.0" layoutY="24.0" mnemonicParsing="false" onAction="#closeCompanyInfo" prefHeight="25.0" prefWidth="25.0" styleClass="close_btn">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -33,9 +33,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <VBox layoutX="581.0" layoutY="150.0" prefHeight="288.0" prefWidth="385.0" spacing="30.0">
+      <VBox layoutX="568.0" layoutY="150.0" prefHeight="288.0" prefWidth="465.0" spacing="30.0">
          <children>
-            <VBox prefHeight="161.0" prefWidth="250.0">
+            <VBox prefHeight="161.0" prefWidth="403.0">
                <children>
                   <Label prefHeight="27.0" prefWidth="123.0" text="Branches">
                      <font>
@@ -49,6 +49,7 @@
                         <Label text="Postal code" />
                         <Label text="City" />
                         <Label text="State" />
+                        <Label text="Country" />
                      </children>
                   </HBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" styleClass="list">
@@ -70,7 +71,7 @@
             </VBox>
          </children>
       </VBox>
-      <VBox layoutX="115.0" layoutY="147.0" prefHeight="294.0" prefWidth="385.0" spacing="30.0">
+      <VBox layoutX="117.0" layoutY="147.0" prefHeight="294.0" prefWidth="385.0" spacing="30.0">
          <children>
             <VBox prefHeight="54.0" prefWidth="241.0">
                <children>

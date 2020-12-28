@@ -7,6 +7,7 @@ import java.util.List;
 import logic.application.control.RecruiterAccountControl;
 import logic.application.control.ViewOfferControl;
 import logic.exceptions.DatabaseFailureException;
+import logic.exceptions.NoResultFoundException;
 
 public class OfferBean {
 
@@ -22,10 +23,6 @@ public class OfferBean {
 	private LocalDate expiration;
 	private LocalDate upload;
 	private int candidates;
-	
-	public OfferBean() {
-		/*Constructor*/
-	}
 	
 	public JobBean getPosition() {
 		return position;
@@ -125,15 +122,15 @@ public class OfferBean {
 	}
 
 	
-	public List<OfferBean> getOffers(CountryBean country, JobBean job){
+	public List<OfferBean> getOffers(CountryBean country, JobBean job) throws DatabaseFailureException, NoResultFoundException{
 		return ViewOfferControl.getInstance().retrieveOffers(country, job);
 	}
 	
-	public List<OfferBean> getOffers(CountryBean country){
+	public List<OfferBean> getOffers(CountryBean country) throws DatabaseFailureException, NoResultFoundException{
 		return ViewOfferControl.getInstance().retrieveOffersByCountry(country);
 	}
 	
-	public List<OfferBean> getOffers(JobBean job){
+	public List<OfferBean> getOffers(JobBean job) throws DatabaseFailureException, NoResultFoundException{
 		return ViewOfferControl.getInstance().retrieveOffersByJob(job);
 	}
 

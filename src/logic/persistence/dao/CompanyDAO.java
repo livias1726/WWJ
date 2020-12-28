@@ -4,9 +4,12 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import logic.domain.Address;
 import logic.domain.Company;
+import logic.domain.Country;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
@@ -24,7 +27,7 @@ public class CompanyDAO {
 
 		try {
 			Connection conn = ConnectionManager.getConnection();
-        	stmt = conn.prepareCall(RoutinesIdentifier.FETCH_COMPANY, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        	stmt = conn.prepareCall(RoutinesIdentifier.GET_COMPANY, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			res = RoutinesManager.bindParametersAndExec(stmt, id.intValue());
 			
             if (res.first()){           	
@@ -32,28 +35,42 @@ public class CompanyDAO {
             	company.setName(res.getString("name"));
             	company.setDescription(res.getString("description"));
             	
-            	Address headquarter = new Address();
-            	headquarter.setState(res.getString("head_state"));
-            	headquarter.setCity(res.getString("head_city"));
-            	headquarter.setPostalCode(res.getInt("head_pc"));
-            	headquarter.setStreet(res.getString("head_street"));
-            	headquarter.setNumber(res.getInt("head_number"));
+            	Address head = new Address();
             	
-            	company.setHeadquarter(headquarter);
+            	Country country = new Country();
+            	country.setName(res.getString("head_country"));
+            	head.setCountry(country);
             	
+            	head.setState(res.getString("head_state"));
+            	head.setCity(res.getString("head_city"));
+            	head.setPostalCode(res.getInt("head_pc"));
+            	head.setStreet(res.getString("head_street"));
+            	head.setNumber(res.getInt("head_number"));
+            	
+            	company.setHeadquarter(head);
+
+            	List<Address> branches = new ArrayList<>();
             	do {
             		Address branch = new Address();
+            		
+            		Country cBranch = new Country();
+            		cBranch.setName(res.getString("country"));
+                	branch.setCountry(cBranch);
+                	
             		branch.setState(res.getString("state"));
             		branch.setCity(res.getString("city"));
             		branch.setPostalCode(res.getInt("postal_code"));
             		branch.setStreet(res.getString("street"));
             		branch.setNumber(res.getInt("number"));
-            		company.getBranches().add(branch);
+                	
+                	branches.add(branch);
             	}while(res.next());
+            	
+            	company.setBranches(branches);
             }
            
             res.close();          
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to retrieve company information."); 
 		} finally {
 			if(stmt != null) {
@@ -62,6 +79,26 @@ public class CompanyDAO {
 		}
         
         return company;
+	}
+
+	public static void updateCompanyInfo(Company company, Long id) throws SQLException {
+		CallableStatement stmt = null;
+
+		try {
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.UPDATE_COMPANY, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			RoutinesManager.bindParametersAndExec(stmt, id.toString(), company.getName(), company.getDescription(), 
+						company.getHeadquarter().getCountry().getName(), company.getHeadquarter().getState(), company.getHeadquarter().getCity(),
+						String.valueOf(company.getHeadquarter().getPostalCode()), company.getHeadquarter().getStreet(),
+						String.valueOf(company.getHeadquarter().getNumber()));
+       
+        } catch (SQLException e) {
+        	throw new SQLException("An error occured while trying to update company information."); 
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
 	}
 
 }

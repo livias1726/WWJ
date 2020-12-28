@@ -8,10 +8,7 @@ import logic.bean.OfferBean;
 
 public class OfferDetailsGraphic implements Initializable {
 
-	private OfferBean offer;
-	
 	public OfferDetailsGraphic(OfferBean o) {
-		this.offer = o;
 	}
 	
 	@Override

@@ -40,7 +40,7 @@ public class CandidateDAO {
             
             res.close();
            
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to retrieve the candidates list."); 
 		} finally {
 			if(stmt != null) {

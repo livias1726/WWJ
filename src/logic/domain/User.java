@@ -1,7 +1,10 @@
 package logic.domain;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.time.LocalDate;
+
+import logic.persistence.dao.UserDAO;
 
 public class User implements Serializable{
 	
@@ -76,6 +79,14 @@ public class User implements Serializable{
 
 	public void setBirth(LocalDate birth) {
 		this.birth = birth;
+	}
+	
+	public User getPersonalInfoFromDB(Long id) throws SQLException {
+		return UserDAO.selectPersonalInfo(id);
+	}
+
+	public void savePersonalInfoOnDB(Long id) throws SQLException {
+		UserDAO.updatePersonalInfo(this, id);
 	}
 
 }

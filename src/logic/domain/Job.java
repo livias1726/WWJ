@@ -1,8 +1,10 @@
 package logic.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
+
+import logic.persistence.dao.JobDAO;
 
 public class Job implements Serializable{
 
@@ -26,12 +28,7 @@ public class Job implements Serializable{
 		this.name = name;
 	}
 	
-	public List<String> getAvailableJobs(){
-		/**DAO INTERACTION*/
-		
-		/*DUMMY BEHAVIOR*/
-		List<String> list = new ArrayList<>();
-		list.add("Software engineer");
-		return list;
+	public List<String> getAvailableJobs() throws SQLException{
+		return JobDAO.selectJobs();
 	}
 }

@@ -26,7 +26,7 @@ public class RoutinesManager {
 		return executeStmt(stmt);
 	}
 
-	private static ResultSet executeStmt(CallableStatement stmt) throws SQLException {
+	public static ResultSet executeStmt(CallableStatement stmt) throws SQLException {
 		if(stmt.execute()) {
 			return stmt.getResultSet();
 		}else {

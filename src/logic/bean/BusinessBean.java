@@ -3,6 +3,7 @@ package logic.bean;
 import java.util.List;
 
 import logic.application.control.ViewBusinessControl;
+import logic.exceptions.DatabaseFailureException;
 
 public class BusinessBean {
 	private String name;
@@ -15,8 +16,7 @@ public class BusinessBean {
 		this.name = name;
 	}
 
-	public List<String> getBusinesses(){
-		ViewBusinessControl control = ViewBusinessControl.getInstance();
-		return control.retrieveBusinesses();
+	public List<String> getBusinesses() throws DatabaseFailureException{
+		return ViewBusinessControl.getInstance().retrieveBusinesses();
 	}
 }

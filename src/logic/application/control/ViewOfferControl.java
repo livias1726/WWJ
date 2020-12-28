@@ -8,13 +8,13 @@ import logic.bean.AddressBean;
 import logic.bean.CountryBean;
 import logic.bean.JobBean;
 import logic.bean.OfferBean;
-import logic.domain.Country;
+import logic.domain.Address;
 import logic.domain.Job;
 import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
 
-public class ViewOfferControl {
+public class ViewOfferControl extends ViewResultsControl{
 	
 	private static ViewOfferControl instance = null;
 
@@ -29,56 +29,54 @@ public class ViewOfferControl {
 
         return instance;
     }
-    
-    public List<String> retrieveCountries(){  	
-    	Country country = new Country();
-    	
-    	return country.getAvailableCountries();
-    }
-    
-    public List<String> retrieveJobs(){  	
+   
+    public List<String> retrieveJobs() throws DatabaseFailureException{  	
     	Job job = new Job();
     	
-    	return job.getAvailableJobs();
+    	try {
+			return job.getAvailableJobs();
+		} catch (SQLException e) {
+			throw new DatabaseFailureException();
+		}
     }
     
-    public List<OfferBean> retrieveOffersByJob(JobBean bean) {
+    public List<OfferBean> retrieveOffersByJob(JobBean bean) throws DatabaseFailureException, NoResultFoundException {
     	Offer offer = new Offer();
     	List<Offer> list = null;
 		try {
 			list = offer.getOffersByPosition(bean.getName());
 		} catch (NoResultFoundException e) {
-			e.printStackTrace();
+			throw new NoResultFoundException();
 		} catch (SQLException se) {
-			se.printStackTrace();
+			throw new DatabaseFailureException();
 		}
    
     	return modelToBean(list);
     }
     
-    public List<OfferBean> retrieveOffersByCountry(CountryBean bean) {
+    public List<OfferBean> retrieveOffersByCountry(CountryBean bean) throws DatabaseFailureException, NoResultFoundException {
     	Offer offer = new Offer();
     	List<Offer> list = null;
 		try {
 			list = offer.getOffersByPlace(bean.getName());
 		} catch (NoResultFoundException e) {
-			e.printStackTrace();
+			throw new NoResultFoundException();
 		} catch (SQLException se) {
-			se.printStackTrace();
+			throw new DatabaseFailureException();
 		}
     	   
     	return modelToBean(list);
     }
     
-    public List<OfferBean> retrieveOffers(CountryBean country, JobBean job){
+    public List<OfferBean> retrieveOffers(CountryBean country, JobBean job) throws DatabaseFailureException, NoResultFoundException{
     	Offer offer = new Offer();
     	List<Offer> list = null;
 		try {
 			list = offer.getOffers(country.getName(), job.getName());
 		} catch (NoResultFoundException e) {
-			e.printStackTrace();
+			throw new NoResultFoundException();
 		} catch (SQLException se) {
-			se.printStackTrace();
+			throw new DatabaseFailureException();
 		}
     	   
     	return modelToBean(list);
@@ -87,25 +85,10 @@ public class ViewOfferControl {
     private List<OfferBean> modelToBean(List<Offer> src) {
     	List<OfferBean> dest = new ArrayList<>();
     	for(Offer i: src) {
-    		OfferBean offerBean = new OfferBean();
-    		
+    		OfferBean offerBean = new OfferBean();  		
     		offerBean.setCompanyName(i.getCompanyName());
-    		offerBean.setStart(i.getStart());
-    		offerBean.setFinish(i.getFinish());
     		offerBean.setTaskDescription(i.getTaskDescription());
-    		offerBean.setBaseSalary(i.getBaseSalary());
-    		offerBean.setExpiration(i.getExpiration());
-    		
-    		offerBean.setRequirements(i.getRequirements());
-    	
-    		AddressBean address = new AddressBean();
-    		address.setCity(i.getBranch().getCity());
-    		address.setNumber(i.getBranch().getNumber());
-    		address.setPostalCode(i.getBranch().getPostalCode());
-    		address.setState(i.getBranch().getState());
-    		address.setStreet(i.getBranch().getStreet());    		
-    		offerBean.setBranch(address);
-    		
+
     		JobBean job = new JobBean();
     		job.setName(i.getPosition().getName());
     		job.setCategory(i.getPosition().getCategory());  		
@@ -138,15 +121,7 @@ public class ViewOfferControl {
     	bean.setPosition(job);
     	
     	bean.setTaskDescription(offer.getTaskDescription());
-    	
-    	AddressBean branch = new AddressBean();
-    	branch.setState(offer.getBranch().getState());
-    	branch.setCity(offer.getBranch().getCity());
-    	branch.setPostalCode(offer.getBranch().getPostalCode());
-    	branch.setStreet(offer.getBranch().getStreet());
-    	branch.setNumber(offer.getBranch().getNumber());
-    	bean.setBranch(branch);
-    	
+    	bean.setBranch(extractAddressBean(offer.getBranch()));	
     	bean.setStart(offer.getStart());
     	bean.setFinish(offer.getFinish());
     	bean.setBaseSalary(offer.getBaseSalary());
@@ -158,6 +133,22 @@ public class ViewOfferControl {
     	}
 		
 		bean.setRequirements(requirements);
+		return bean;
+	}
+
+	private AddressBean extractAddressBean(Address ent) {
+		AddressBean bean = new AddressBean();
+		
+		CountryBean country = new CountryBean();
+		country.setName(ent.getCountry().getName());		
+		bean.setCountry(country);
+		
+		bean.setState(ent.getState());
+		bean.setCity(ent.getCity());
+		bean.setPostalCode(ent.getPostalCode());
+		bean.setStreet(ent.getStreet());
+		bean.setNumber(ent.getNumber());
+		
 		return bean;
 	}
 

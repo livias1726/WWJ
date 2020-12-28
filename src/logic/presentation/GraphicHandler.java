@@ -68,7 +68,7 @@ public class GraphicHandler {
 	}
 	
 	public static Scene switchScreen(Scenes next, Initializable controller) {
-		SessionFacade.getSession().setScreen(next);
+		SessionFacade.getSession().setScene(next);
 		
 		try {			
 			if (next.equals(Scenes.MAIN)) {

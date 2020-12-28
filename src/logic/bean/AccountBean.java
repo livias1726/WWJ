@@ -73,10 +73,6 @@ public class AccountBean {
 		return AccountControl.getInstance().retrieveAccount();
 	}
 	
-	public void updateInfo(){
-		AccountControl.getInstance().updateAccount();
-	}
-	
 	public void updatePic(File img) {
 		AccountControl.getInstance().updateAccountPic(img);
 	}

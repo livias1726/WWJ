@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import logic.application.SessionFacade;
 import logic.bean.AddressBean;
 import logic.bean.CompanyBean;
+import logic.bean.CountryBean;
 import logic.bean.JobBean;
 import logic.bean.OfferBean;
 import logic.domain.Address;
@@ -49,26 +50,29 @@ public class RecruiterAccountControl {
 		CompanyBean bean = new CompanyBean();
 		bean.setName(company.getName());
 		bean.setDescription(company.getDescription());
+
+		bean.setHeadquarter(extractAddressBean(company.getHeadquarter()));
 		
-		AddressBean head = new AddressBean();
-		head.setState(company.getHeadquarter().getState());
-		head.setCity(company.getHeadquarter().getCity());
-		head.setPostalCode(company.getHeadquarter().getPostalCode());
-		head.setStreet(company.getHeadquarter().getStreet());
-		head.setNumber(company.getHeadquarter().getNumber());
-		
-		bean.setHeadquarter(head);
-		
+		List<AddressBean> branches = new ArrayList<>();
 		for(Address i: company.getBranches()) {
-			AddressBean branch = new AddressBean();
-			branch.setState(i.getState());
-			branch.setCity(i.getCity());
-			branch.setPostalCode(i.getPostalCode());
-			branch.setStreet(i.getStreet());
-			branch.setNumber(i.getNumber());
-			
-			bean.getBranches().add(branch);
+			branches.add(extractAddressBean(i));
 		}
+		
+		return bean;
+	}
+
+	private AddressBean extractAddressBean(Address ent) {
+		AddressBean bean = new AddressBean();
+		
+		CountryBean country = new CountryBean();
+		country.setName(ent.getCountry().getName());
+		
+		bean.setCountry(country);
+		bean.setState(ent.getState());
+		bean.setCity(ent.getCity());
+		bean.setPostalCode(ent.getPostalCode());
+		bean.setStreet(ent.getStreet());
+		bean.setNumber(ent.getNumber());
 		
 		return bean;
 	}
@@ -105,6 +109,16 @@ public class RecruiterAccountControl {
 		}
 		
 		return dest;
+	}
+
+	public void changeCompanyInfo() throws DatabaseFailureException {
+		Company company = new Company();
+    	
+		try {
+			company.saveCompanyInfoOnDB(SessionFacade.getSession().getID());
+		} catch (SQLException e) {
+			throw new DatabaseFailureException();
+		}
 	}
 		
 }

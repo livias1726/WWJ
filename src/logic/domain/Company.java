@@ -1,7 +1,10 @@
 package logic.domain;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
+
+import logic.persistence.dao.CompanyDAO;
 
 public class Company implements Serializable{
 	
@@ -10,11 +13,7 @@ public class Company implements Serializable{
 	private String description;
 	private Address headquarter;
 	private List<Address> branches;
-	
-	public Company() {
-		/**/
-	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -38,12 +37,16 @@ public class Company implements Serializable{
 	public void setHeadquarter(Address headquarter) {
 		this.headquarter = headquarter;
 	}
-	
+
 	public List<Address> getBranches() {
 		return branches;
 	}
-	
+
 	public void setBranches(List<Address> branches) {
 		this.branches = branches;
+	}
+
+	public void saveCompanyInfoOnDB(Long id) throws SQLException {
+		CompanyDAO.updateCompanyInfo(this, id);
 	}
 }

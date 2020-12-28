@@ -3,8 +3,8 @@ package logic.bean;
 
 import java.util.List;
 
-import logic.application.control.ViewBusinessControl;
-import logic.application.control.ViewOfferControl;
+import logic.application.control.ViewResultsControl;
+import logic.exceptions.DatabaseFailureException;
 
 public class CountryBean {
 	private String name;
@@ -17,13 +17,8 @@ public class CountryBean {
 		this.name = name;
 	}
 
-	public List<String> getCountries(OfferBean off){
-		ViewOfferControl control = ViewOfferControl.getInstance();
-		return control.retrieveCountries();
+	public List<String> getCountries() throws DatabaseFailureException{
+		return ViewResultsControl.getInstance().retrieveCountries();
 	}
 	
-	public List<String> getCountries(BusinessInCountryBean bus){
-		ViewBusinessControl control = ViewBusinessControl.getInstance();
-		return control.retrieveCountries();
-	}
 }

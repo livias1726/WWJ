@@ -1,7 +1,6 @@
 package logic.presentation.control;
 
 import java.net.URL;
-
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -14,6 +13,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToolBar;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -21,6 +21,8 @@ import logic.application.SessionFacade;
 import logic.bean.CountryBean;
 import logic.bean.JobBean;
 import logic.bean.OfferBean;
+import logic.exceptions.DatabaseFailureException;
+import logic.exceptions.NoResultFoundException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
 
@@ -67,31 +69,46 @@ public class OfferResultsGraphic implements Initializable {
 		pane.getChildren().add(toolBar);
 		
 		//Add listener to filters choice box
-		order.getSelectionModel().selectedIndexProperty().addListener((obv, oldValue, newValue) -> orderResults(offers, newValue));
-		
+		order.getSelectionModel().selectedIndexProperty().addListener((obv, oldValue, newValue) -> orderResults(offers, newValue));		
 		order.setItems(items);
 		order.setValue(items.get(0));
 		
 		OfferBean offer = new OfferBean();
 		
-		if(searchedJob != null) {
-			if(searchedCountry != null) {
-				offers = offer.getOffers(searchedCountry, searchedJob);
-				searchIDLbl.setText(searchedJob.getName() + "in" + searchedCountry.getName());
+		try {
+			if(searchedJob != null) {
+				if(searchedCountry != null) {
+					
+						offers = offer.getOffers(searchedCountry, searchedJob);
+					
+					searchIDLbl.setText(searchedJob.getName() + "in" + searchedCountry.getName());
+				} else {
+					offers = offer.getOffers(searchedJob);
+					searchIDLbl.setText(searchedJob.getName());
+				}			
 			} else {
-				offers = offer.getOffers(searchedJob);
-				searchIDLbl.setText(searchedJob.getName());
-			}			
-		} else {
-			offers = offer.getOffers(searchedCountry);	
-			searchIDLbl.setText(searchedCountry.getName());
+				offers = offer.getOffers(searchedCountry);	
+				searchIDLbl.setText(searchedCountry.getName());
+			}
+		} catch (DatabaseFailureException e) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+			goBack();
+		} catch (NoResultFoundException ne) {
+			GraphicHandler.popUpMsg(AlertType.INFORMATION, ne.getMessage());
+			goBack();
 		}
 		
 		initResults(offers);
 	}
 	
-	private void orderResults(List <OfferBean> list, Number num) {
-		/*Sort results according to choiceBox*/
+	private void orderResults(List <OfferBean> list, Number filter) {
+		list.sort((OfferBean o1, OfferBean o2) -> {
+			if(filter.intValue() == 0) {
+        		return o1.getUpload().compareTo(o2.getUpload());
+        	}else {
+        		return o1.getExpiration().compareTo(o2.getExpiration());
+        	}    
+	    });
 	}
 	
 	private void initResults(List <OfferBean> list) {
@@ -151,7 +168,7 @@ public class OfferResultsGraphic implements Initializable {
 	
 	@FXML
 	public void goBack(){
-		Scenes prev = SessionFacade.getSession().getPrevScreen();			
+		Scenes prev = SessionFacade.getSession().getPrevScene();			
 		Stage stage = (Stage)pane.getScene().getWindow();			
 		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}

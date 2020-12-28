@@ -48,7 +48,7 @@ public class LoginGraphic implements Initializable {
 	public void signInClicked() {
 		UserBean credentials = new UserBean(email.getText(), pwd.getText());
 		try {
-			credentials.verifyFields();		
+			credentials.verifyFields(email.getText(), pwd.getText());		
 		} catch (InvalidFieldException ie) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, "Please, fill out every field");
 			refresh();
@@ -105,7 +105,7 @@ public class LoginGraphic implements Initializable {
 	
 	@FXML
 	public void goBack(){
-		Scenes prev = SessionFacade.getSession().getPrevScreen();		
+		Scenes prev = SessionFacade.getSession().getPrevScene();		
 		Stage stage = (Stage)logPane.getScene().getWindow();	
 		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}

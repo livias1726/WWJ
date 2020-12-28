@@ -6,7 +6,7 @@ import logic.application.control.RecruiterAccountControl;
 import logic.exceptions.DatabaseFailureException;
 
 public class CompanyBean {
-	
+
 	private String name;
 	private String description;
 	private AddressBean headquarter;
@@ -28,14 +28,6 @@ public class CompanyBean {
 		this.description = description;
 	}
 	
-	public List<AddressBean> getBranches() {
-		return branches;
-	}
-	
-	public void setBranches(List<AddressBean> branches) {
-		this.branches = branches;
-	}
-
 	public AddressBean getHeadquarter() {
 		return headquarter;
 	}
@@ -43,8 +35,20 @@ public class CompanyBean {
 	public void setHeadquarter(AddressBean headquarter) {
 		this.headquarter = headquarter;
 	}
-	
+
+	public List<AddressBean> getBranches() {
+		return branches;
+	}
+
+	public void setBranches(List<AddressBean> branches) {
+		this.branches = branches;
+	}
+
 	public CompanyBean getCompanyInfo() throws DatabaseFailureException {
 		return RecruiterAccountControl.getInstance().retrieveCompanyInfo();
+	}
+
+	public void saveCompanyInfo() throws DatabaseFailureException {
+		RecruiterAccountControl.getInstance().changeCompanyInfo();
 	}
 }

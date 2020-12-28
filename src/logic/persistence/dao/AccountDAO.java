@@ -29,7 +29,7 @@ public class AccountDAO {
 		
 		try{
 			Connection conn = ConnectionManager.getConnection();
-        	stmt = conn.prepareCall(RoutinesIdentifier.FETCH_ACCOUNT, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        	stmt = conn.prepareCall(RoutinesIdentifier.GET_ACCOUNT, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
         	
 			res = RoutinesManager.bindParametersAndExec(stmt, (int)id);
 			
@@ -50,7 +50,7 @@ public class AccountDAO {
             
             res.close();
            
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to retrieve the account."); 
 		} finally {
 			if(stmt != null) {
@@ -87,7 +87,7 @@ public class AccountDAO {
             
             res.close();
            
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to login."); 
 		} finally {
 			if(stmt != null) {
@@ -109,7 +109,7 @@ public class AccountDAO {
 			    
 				ret = true;
 	            
-	        } catch (SQLException | ClassNotFoundException e) {
+	        } catch (SQLException e) {
 	        	throw new SQLException("An error occured while trying to create the account."); 
 			} finally {
 				if(stmt != null) {
@@ -138,7 +138,7 @@ public class AccountDAO {
             }
            
             res.close();          
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to retrieve the notifications."); 
 		} finally {
 			if(stmt != null) {

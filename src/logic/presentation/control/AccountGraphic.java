@@ -49,10 +49,6 @@ public class AccountGraphic implements Initializable {
 	@FXML 
 	protected Label nameLbl;
 
-	public AccountGraphic() {
-		/**/
-	}
-	
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
 		AccountBean account = null;
@@ -60,6 +56,7 @@ public class AccountGraphic implements Initializable {
 			account = new AccountBean().getAccount();
 		} catch (DatabaseFailureException e1) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e1.getMessage());
+			goBack();
 		}
 		
 		if(account != null) {
@@ -88,7 +85,7 @@ public class AccountGraphic implements Initializable {
 	}
 	
 	@FXML
-	protected void openPersonalInfo(ActionEvent event) {	
+	protected void openPersonalInfo(ActionEvent event) {
 		Stage popup = GraphicHandler.openSection(pane, Sections.PERSONAL_INFO, null);
 		popup.centerOnScreen();
 		popup.show();
@@ -136,7 +133,7 @@ public class AccountGraphic implements Initializable {
 	
 	@FXML
 	public void goBack(){
-		Scenes prev = SessionFacade.getSession().getPrevScreen();			
+		Scenes prev = SessionFacade.getSession().getPrevScene();			
 		Stage stage = (Stage)pane.getScene().getWindow();			
 		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}

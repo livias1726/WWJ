@@ -1,6 +1,14 @@
 package logic.bean;
 
+import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import logic.exceptions.BadAddressException;
+
 public class AddressBean {
+
+	private CountryBean country;
 	private String state;
 	private String city;
 	private int postalCode;
@@ -45,5 +53,36 @@ public class AddressBean {
 	
 	public void setState(String name) {
 		this.state = name;
+	}
+	
+	public CountryBean getCountry() {
+		return country;
+	}
+
+	public void setCountry(CountryBean country) {
+		this.country = country;
+	}
+
+	public void tokenizerAddress(String text) throws BadAddressException {
+		StringTokenizer token = new StringTokenizer(text, ", ");
+		
+		verifyAddressSyntax(text);
+		
+		CountryBean c = new CountryBean();
+		c.setName(token.nextToken());
+		this.setCountry(c);
+		
+		this.setState(token.nextToken());
+		this.setPostalCode(Integer.parseInt(token.nextToken()));
+		this.setStreet(token.nextToken());
+		this.setNumber(Integer.parseInt(token.nextToken()));	
+	}
+
+	private void verifyAddressSyntax(String str) throws BadAddressException {
+		Pattern pattern = Pattern.compile("\\D+, \\d+, \\d+, \\D+, \\D+, \\D+");
+    	Matcher matcher = pattern.matcher(str);
+    	if(!matcher.matches()) {
+			throw new BadAddressException(str + "is not a valid address. Please, follow the labels.");	
+		}
 	}
 }

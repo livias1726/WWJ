@@ -1,5 +1,6 @@
 package logic.application.control;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,9 +8,9 @@ import logic.bean.BusinessInCountryBean;
 import logic.bean.CountryBean;
 import logic.domain.Business;
 import logic.domain.BusinessInCountry;
-import logic.domain.Country;
+import logic.exceptions.DatabaseFailureException;
 
-public class ViewBusinessControl {
+public class ViewBusinessControl extends ViewResultsControl{
 	
 	private static ViewBusinessControl instance = null;
 
@@ -25,16 +26,13 @@ public class ViewBusinessControl {
         return instance;
     }
     
-    public List<String> retrieveCountries(){  	
-    	Country country = new Country();
-    	
-    	return country.getAvailableCountries();
-    }
-    
-    public List<String> retrieveBusinesses(){
-    	
+    public List<String> retrieveBusinesses() throws DatabaseFailureException{
 		Business business = new Business();
-    	return business.getAvailableBusinesses();
+    	try {
+			return business.getAvailableBusinesses();
+		} catch (SQLException e) {
+			throw new DatabaseFailureException();
+		}
     }
     
     public List<BusinessInCountryBean> retrieveBusinessesByName(BusinessInCountryBean bean) {
