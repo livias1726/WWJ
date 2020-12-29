@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="680.0" prefWidth="1180.0" styleClass="results" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="logic.presentation.control.OfferResultsGraphic">
+<AnchorPane fx:id="pane" prefHeight="680.0" prefWidth="1180.0" styleClass="results" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.OfferResultsGraphic">
    <children>
       <Pane layoutX="42.0" layoutY="100.0" prefHeight="50.0" prefWidth="233.0" styleClass="result_titles">
          <children>
@@ -29,7 +28,7 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" styleClass="filter_box">
                <children>
-                  <Label layoutX="17.0" layoutY="7.0" text="Order by">
+                  <Label layoutX="15.0" layoutY="7.0" text="Order by">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -39,9 +38,9 @@
             <ChoiceBox fx:id="order" prefHeight="34.0" prefWidth="237.0" />
          </children>
       </HBox>
-      <VBox layoutX="42.0" layoutY="248.0" prefHeight="324.0" prefWidth="233.0" styleClass="filter_box">
+      <VBox fx:id="filterBox" layoutX="42.0" layoutY="248.0" prefHeight="324.0" prefWidth="233.0" spacing="10.0" styleClass="filter_box">
          <children>
-            <Label text="Filters">
+            <Label fx:id="filterLab" text="Filters">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>

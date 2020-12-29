@@ -30,7 +30,7 @@ public class JobDAO {
 			if(res.first()) {
 				list = new ArrayList<>();
 				do {
-					list.add(res.getString("name"));
+					list.add(res.getString("category"));
 				}while(res.next());
 			}
         } catch (SQLException e) {

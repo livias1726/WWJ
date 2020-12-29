@@ -3,59 +3,57 @@ package logic.bean;
 import java.util.List;
 
 import logic.application.control.ViewBusinessControl;
-import logic.domain.Country;
+import logic.exceptions.DatabaseFailureException;
+import logic.exceptions.NoResultFoundException;
 
 public class BusinessInCountryBean extends BusinessBean{
 
-	private float averageManagementCost;
-	private float averageEarnings;
-	private float description;
-	private Country country;
-		
-	public float getAverageManagementCost() {
+	private Float averageManagementCost;
+	private Float averageEarnings;
+	private String description;
+	private CountryBean country;
+	
+	public Float getAverageManagementCost() {
 		return averageManagementCost;
 	}
 
-	public void setAverageManagementCost(float averageManagementCost) {
+	public void setAverageManagementCost(Float averageManagementCost) {
 		this.averageManagementCost = averageManagementCost;
 	}
 
-	public float getAverageEarnings() {
+	public Float getAverageEarnings() {
 		return averageEarnings;
 	}
 
-	public void setAverageEarnings(float averageEarnings) {
+	public void setAverageEarnings(Float averageEarnings) {
 		this.averageEarnings = averageEarnings;
 	}
 
-	public float getDescription() {
+	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(float description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public Country getCountry() {
+	public CountryBean getCountry() {
 		return country;
 	}
 
-	public void setCountry(Country country) {
+	public void setCountry(CountryBean country) {
 		this.country = country;
 	}
 
-	public List<BusinessInCountryBean> getBusinesses(CountryBean country, BusinessInCountryBean bus){
-		ViewBusinessControl controller = ViewBusinessControl.getInstance();
-		return controller.retrieveBusinesses(country, bus);
+	public List<BusinessInCountryBean> getBusinesses(CountryBean country, BusinessInCountryBean bus) throws NoResultFoundException, DatabaseFailureException{
+		return ViewBusinessControl.getInstance().retrieveBusinesses(country, bus);
 	}
 	
-	public List<BusinessInCountryBean> getBusinesses(CountryBean country){
-		ViewBusinessControl controller = ViewBusinessControl.getInstance();
-		return controller.retrieveBusinessesByCountry(country);
+	public List<BusinessInCountryBean> getBusinesses(CountryBean country) throws NoResultFoundException, DatabaseFailureException{
+		return ViewBusinessControl.getInstance().retrieveBusinessesByCountry(country);
 	}
 	
-	public List<BusinessInCountryBean> getBusinesses(BusinessInCountryBean bus){
-		ViewBusinessControl controller = ViewBusinessControl.getInstance();
-		return controller.retrieveBusinessesByName(bus);
+	public List<BusinessInCountryBean> getBusinesses(BusinessInCountryBean bus) throws NoResultFoundException, DatabaseFailureException{
+		return ViewBusinessControl.getInstance().retrieveBusinessesByName(bus);
 	}
 }

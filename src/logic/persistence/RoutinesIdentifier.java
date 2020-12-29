@@ -24,4 +24,7 @@ public class RoutinesIdentifier {
 	public static final String GET_COUNTRIES = "call retrieve_countries()";
 	public static final String GET_JOBS = "call retrieve_jobs()";
 	public static final String GET_BUSINESSES = "call retrieve_businesses()";
+	public static final String GET_BUSINESS_IN_COUNTRY = "call retrieve_business_in_country(?, ?)";
+	public static final String GET_BUSINESS_BY_COUNTRY = "call retrieve_business_by_country(?)";
+	public static final String GET_BUSINESS_BY_NAME = "call retrieve_business_by_name(?)";
 }

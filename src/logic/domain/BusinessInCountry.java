@@ -1,35 +1,38 @@
 package logic.domain;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
+import logic.exceptions.NoResultFoundException;
+import logic.persistence.dao.BusinessDAO;
+
 public class BusinessInCountry extends Business {
-	private float averageManagementCost;
-	private float averageEarnings;
-	private float description;
+	private Float averageManagementCost;
+	private Float averageEarnings;
+	private String description;
 	private Country country;
 	
-	public float getAverageManagementCost() {
+	public Float getAverageManagementCost() {
 		return averageManagementCost;
 	}
 
-	public void setAverageManagementCost(float averageManagementCost) {
+	public void setAverageManagementCost(Float averageManagementCost) {
 		this.averageManagementCost = averageManagementCost;
 	}
 
-	public float getAverageEarnings() {
+	public Float getAverageEarnings() {
 		return averageEarnings;
 	}
 
-	public void setAverageEarnings(float averageEarnings) {
+	public void setAverageEarnings(Float averageEarnings) {
 		this.averageEarnings = averageEarnings;
 	}
 
-	public float getDescription() {
+	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(float description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
@@ -40,38 +43,16 @@ public class BusinessInCountry extends Business {
 	public void setCountry(Country country) {
 		this.country = country;
 	}
-
 	
-	public List<BusinessInCountry> getBusinessesByName(){
-		/**DAO INTERACTION*/
-		
-		/*DUMMY BEHAVIOR*/
-		List<BusinessInCountry> list = new ArrayList<>();
-
-		list.add(new BusinessInCountry());
-
-		return list;
+	public List<BusinessInCountry> getBusinessesByName(String business) throws SQLException, NoResultFoundException{
+		return BusinessDAO.selectBusinessByName(business);
 	}
 	
-	public List<BusinessInCountry> getBusinessesByPlace(){
-		/**DAO INTERACTION*/
-		
-		/*DUMMY BEHAVIOR*/
-		List<BusinessInCountry> list = new ArrayList<>();
-
-		list.add(new BusinessInCountry());
-
-		return list;
+	public List<BusinessInCountry> getBusinessesByPlace(String country) throws SQLException, NoResultFoundException{
+		return BusinessDAO.selectBusinessByCountry(country);
 	}
 	
-	public List<BusinessInCountry> getBusinessesInCountry(){
-		/**DAO INTERACTION*/
-		
-		/*DUMMY BEHAVIOR*/
-		List<BusinessInCountry> list = new ArrayList<>();
-
-		list.add(new BusinessInCountry());
-
-		return list;
+	public List<BusinessInCountry> getBusinessesInCountry(String country, String bus) throws SQLException, NoResultFoundException{
+		return BusinessDAO.selectBusinessInCountry(country, bus);
 	}
 }

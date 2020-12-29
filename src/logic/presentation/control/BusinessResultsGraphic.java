@@ -1,12 +1,16 @@
 package logic.presentation.control;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.AnchorPane;
@@ -15,7 +19,8 @@ import javafx.stage.Stage;
 import logic.application.SessionFacade;
 import logic.bean.BusinessInCountryBean;
 import logic.bean.CountryBean;
-import logic.bean.OfferBean;
+import logic.exceptions.DatabaseFailureException;
+import logic.exceptions.NoResultFoundException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
 
@@ -24,7 +29,11 @@ public class BusinessResultsGraphic implements Initializable {
 	private CountryBean searchedCountry;
 	private BusinessInCountryBean searchedBusiness;
 	private List<BusinessInCountryBean> businesses;
-	
+	private List<BusinessInCountryBean> results;	
+	private List<String> cList;
+    private List<String> bList;
+    private ObservableList<String> items = FXCollections.observableArrayList("Earnings", "Management cost");
+    
 	private ToolBar toolBar;
 		
 	@FXML
@@ -34,16 +43,21 @@ public class BusinessResultsGraphic implements Initializable {
 	private Label searchIDLbl;
 	
 	@FXML
+	private ChoiceBox<String> order;
+	
+	@FXML
 	private VBox resultsBox;
 	
-	public BusinessResultsGraphic(ToolBar t, CountryBean c) {
+	public BusinessResultsGraphic(ToolBar t, CountryBean c, List<String> list) {
 		this.toolBar = t;
 		this.searchedCountry = c;
+		this.bList = list;
 	}
 	
-	public BusinessResultsGraphic(ToolBar t, BusinessInCountryBean b) {
+	public BusinessResultsGraphic(ToolBar t, BusinessInCountryBean b, List<String> list) {
 		this.toolBar = t;
 		this.searchedBusiness = b;
+		this.cList = list;
 	}
 
 	public BusinessResultsGraphic(ToolBar t, CountryBean c, BusinessInCountryBean b) {
@@ -60,18 +74,32 @@ public class BusinessResultsGraphic implements Initializable {
 		//Get results
 		BusinessInCountryBean res = new BusinessInCountryBean();
 		
-		if(searchedBusiness != null) {
-			if(searchedCountry != null) {
-				businesses = res.getBusinesses(searchedCountry, searchedBusiness);
-				searchIDLbl.setText(searchedBusiness.getName() + "in" + searchedCountry.getName());
-			} else {
+		try {
+			if(searchedBusiness == null) {
+				businesses = res.getBusinesses(searchedCountry);
+				searchIDLbl.setText(searchedCountry.getName());
+				
+			} else if(searchedCountry == null) {
 				businesses = res.getBusinesses(searchedBusiness);
 				searchIDLbl.setText(searchedBusiness.getName());
-			}			
-		} else {
-			businesses = res.getBusinesses(searchedCountry);	
-			searchIDLbl.setText(searchedCountry.getName());
-		}
+				
+			} else {
+				businesses = res.getBusinesses(searchedCountry, searchedBusiness);
+				searchIDLbl.setText(searchedBusiness.getName() + "in" + searchedCountry.getName());
+			}
+		} catch (NoResultFoundException e) {
+			e.printStackTrace();
+		} catch (DatabaseFailureException de) {
+			de.printStackTrace();
+		}	
+		
+		results = new ArrayList<>();
+		results.addAll(businesses);
+		
+		//Add listener to filters choice box
+		order.getSelectionModel().selectedIndexProperty().addListener((obv, oldValue, newValue) -> orderResults(results, newValue));		
+		order.setItems(items);
+		order.setValue(items.get(0));
 		
 		initResults(businesses);
 	}
@@ -93,8 +121,14 @@ public class BusinessResultsGraphic implements Initializable {
 		}
 	}
 	
-	public void orderResults(List <OfferBean> list, Number num) {
-		/*Sort results according to choiceBox*/
+	public void orderResults(List <BusinessInCountryBean> list, Number filter) {
+		list.sort((BusinessInCountryBean b1, BusinessInCountryBean b2) -> {
+			if(filter.intValue() == 0) {
+        		return b1.getAverageEarnings().compareTo(b2.getAverageEarnings());
+        	}else {
+        		return b1.getAverageManagementCost().compareTo(b2.getAverageManagementCost());
+        	}    
+	    });
 	}
 
 	@FXML

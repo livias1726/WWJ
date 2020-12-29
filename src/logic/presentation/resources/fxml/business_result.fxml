@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="680.0" prefWidth="1180.0" styleClass="results" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="pane" prefHeight="680.0" prefWidth="1180.0" styleClass="results" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.BusinessResultsGraphic">
    <children>
       <Pane layoutX="42.0" layoutY="100.0" prefHeight="50.0" prefWidth="233.0" styleClass="result_titles">
          <children>
@@ -69,9 +69,9 @@
             </Pane>
             <ScrollPane prefHeight="432.0" prefWidth="634.0">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="444.0" prefWidth="634.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="419.0" prefWidth="634.0">
                      <children>
-                        <VBox fx:id="resultsBox" prefHeight="442.0" prefWidth="634.0" spacing="10.0" styleClass="result_box">
+                        <VBox fx:id="resultsBox" prefHeight="420.0" prefWidth="634.0" spacing="10.0" styleClass="result_box">
                            <padding>
                               <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                            </padding>

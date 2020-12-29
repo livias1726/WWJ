@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -41,6 +42,9 @@ public class SignUpGraphic implements Initializable {
 	private RadioButton entreRadio;
 	
 	@FXML
+    private ToggleGroup radioUser;
+	
+	@FXML
 	private TextField email;
 	
 	@FXML
@@ -65,15 +69,17 @@ public class SignUpGraphic implements Initializable {
 		if(user == null) {
 			radioBox.setVisible(true);
 		}	
+		
+		radioUser.selectedToggleProperty().addListener((obv, oldValue, newValue) -> setUser());
 	}
 	
 	@FXML
 	public void setUser(){
-		if(seekRadio.isArmed()) {
+		if(seekRadio.isSelected()) {
 			SessionFacade.getSession().setCurrUserType(Users.SEEKER);
-		}else if(recRadio.isArmed()) {
+		}else if(recRadio.isSelected()) {
 			SessionFacade.getSession().setCurrUserType(Users.RECRUITER);
-		}else if(entreRadio.isArmed()) {
+		}else if(entreRadio.isSelected()) {
 			SessionFacade.getSession().setCurrUserType(Users.ENTREPRENEUR);
 		}else {
 			SessionFacade.getSession().setCurrUserType(null);

@@ -64,6 +64,9 @@ public class SearchEntrepreneurGraphic implements Initializable {
     @FXML
     private ToolBar toolBar;
     
+    private List<String> cList;
+    private List<String> bList;
+    
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
 		//Edit search btn
@@ -79,8 +82,7 @@ public class SearchEntrepreneurGraphic implements Initializable {
 		}
 		
 		//Edit combo boxes: retrieve from DB
-		List<String> cList = null;
-		List<String> bList = null;
+		
 		try {
 			cList = (new CountryBean()).getCountries();
 			bList = (new BusinessBean()).getBusinesses();	
@@ -106,14 +108,14 @@ public class SearchEntrepreneurGraphic implements Initializable {
 				
 				controller = new BusinessResultsGraphic(toolBar, country, bus);			
 			}else {
-				controller = new BusinessResultsGraphic(toolBar, country);
+				controller = new BusinessResultsGraphic(toolBar, country, bList);
 			}
 			
 		}else {
 			BusinessInCountryBean bus = new BusinessInCountryBean();
 			bus.setName(businessSearch.getValue());
 			
-			controller = new BusinessResultsGraphic(toolBar, bus);	
+			controller = new BusinessResultsGraphic(toolBar, bus, cList);	
 		}
 		
 		stage.setScene(GraphicHandler.switchScreen(Scenes.BUSINESSES, controller));

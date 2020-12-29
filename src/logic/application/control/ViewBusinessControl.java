@@ -9,6 +9,7 @@ import logic.bean.CountryBean;
 import logic.domain.Business;
 import logic.domain.BusinessInCountry;
 import logic.exceptions.DatabaseFailureException;
+import logic.exceptions.NoResultFoundException;
 
 public class ViewBusinessControl extends ViewResultsControl{
 	
@@ -35,49 +36,57 @@ public class ViewBusinessControl extends ViewResultsControl{
 		}
     }
     
-    public List<BusinessInCountryBean> retrieveBusinessesByName(BusinessInCountryBean bean) {
+    public List<BusinessInCountryBean> retrieveBusinessesByName(BusinessInCountryBean bean) throws NoResultFoundException, DatabaseFailureException {
     	BusinessInCountry business = new BusinessInCountry();
-    	List<BusinessInCountry> list = business.getBusinessesByName();
+    	List<BusinessInCountry> list;
+		try {
+			list = business.getBusinessesByName(bean.getName());
+		} catch (NoResultFoundException e) {
+			throw new NoResultFoundException();
+		} catch (SQLException se) {
+			throw new DatabaseFailureException();
+		}
     	
-    	/*DUMMY BEHAVIOR*/
-    	List<BusinessInCountryBean> res = new ArrayList<>();
-    	for(BusinessInCountry i: list) {
-    		BusinessInCountryBean item = new BusinessInCountryBean();
-    		
-    		
-    		res.add(item);
-    	}
-    	
-    	return res;
+    	return modelToBean(list);
     }
     
-    public List<BusinessInCountryBean> retrieveBusinessesByCountry(CountryBean bean) {
+    public List<BusinessInCountryBean> retrieveBusinessesByCountry(CountryBean bean) throws NoResultFoundException, DatabaseFailureException {
     	BusinessInCountry offer = new BusinessInCountry();
-    	List<BusinessInCountry> list = offer.getBusinessesByPlace();
+    	List<BusinessInCountry> list;
+		try {
+			list = offer.getBusinessesByPlace(bean.getName());
+		} catch (NoResultFoundException e) {
+			throw new NoResultFoundException();
+		} catch (SQLException se) {
+			throw new DatabaseFailureException();
+		}
     	
-    	/*DUMMY BEHAVIOR*/
-    	List<BusinessInCountryBean> res = new ArrayList<>();
-    	for(BusinessInCountry i: list) {
-    		BusinessInCountryBean item = new BusinessInCountryBean();
-    		
-    		res.add(item);
-    	}
-    	
-    	return res;
+    	return modelToBean(list);
     }
     
-    public List<BusinessInCountryBean> retrieveBusinesses(CountryBean country, BusinessInCountryBean bus){
+    public List<BusinessInCountryBean> retrieveBusinesses(CountryBean country, BusinessInCountryBean bus) throws NoResultFoundException, DatabaseFailureException{
     	BusinessInCountry offer = new BusinessInCountry();
-    	List<BusinessInCountry> list = offer.getBusinessesInCountry();
+    	List<BusinessInCountry> list;
+		try {
+			list = offer.getBusinessesInCountry(country.getName(), bus.getName());
+		} catch (NoResultFoundException e) {
+			throw new NoResultFoundException();
+		} catch (SQLException se) {
+			throw new DatabaseFailureException();
+		}
 
-    	/*DUMMY BEHAVIOR*/
-    	List<BusinessInCountryBean> res = new ArrayList<>();
-    	for(BusinessInCountry i: list) {
-    		BusinessInCountryBean item = new BusinessInCountryBean();
+    	return modelToBean(list);
+    }
+
+	private List<BusinessInCountryBean> modelToBean(List<BusinessInCountry> src) {
+		List<BusinessInCountryBean> dest = new ArrayList<>();
+    	for(BusinessInCountry i: src) {
+    		BusinessInCountryBean bean = new BusinessInCountryBean();  		
     		
-    		res.add(item);
+    		
+    		dest.add(bean);
     	}
     	
-    	return res;
-    }
+    	return dest;
+	}
 }

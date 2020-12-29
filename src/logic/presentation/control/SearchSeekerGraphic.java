@@ -63,6 +63,9 @@ public class SearchSeekerGraphic implements Initializable {
     @FXML
     private ToolBar toolBar;
     
+    private List<String> cList;
+    private List<String> jList;
+    
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
 		//Edit search btn
@@ -78,8 +81,6 @@ public class SearchSeekerGraphic implements Initializable {
 		}
 		
 		//Edit combo boxes: retrieve from DB
-		List<String> cList = null;
-		List<String> jList = null;
 		try {
 			cList = (new CountryBean()).getCountries();
 			jList = (new JobBean()).getJobs();	
@@ -105,14 +106,14 @@ public class SearchSeekerGraphic implements Initializable {
 				
 				controller = new OfferResultsGraphic(toolBar, country, job);			
 			}else {
-				controller = new OfferResultsGraphic(toolBar, country);
+				controller = new OfferResultsGraphic(toolBar, country, jList);
 			}
 			
 		}else {
 			JobBean job = new JobBean();
 			job.setName(jobSearch.getValue());
 			
-			controller = new OfferResultsGraphic(toolBar, job);	
+			controller = new OfferResultsGraphic(toolBar, job, cList);	
 		}
 		
 		stage.setScene(GraphicHandler.switchScreen(Scenes.OFFERS, controller));
