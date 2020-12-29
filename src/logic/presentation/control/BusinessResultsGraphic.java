@@ -10,9 +10,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -33,17 +35,24 @@ public class BusinessResultsGraphic implements Initializable {
 	private List<String> cList;
     private List<String> bList;
     private ObservableList<String> items = FXCollections.observableArrayList("Earnings", "Management cost");
+    private List<CheckBox> filters = new ArrayList<>();
     
 	private ToolBar toolBar;
-		
+	
 	@FXML
-	private AnchorPane pane;
+	private AnchorPane resultsPane;
 	
 	@FXML 
 	private Label searchIDLbl;
 	
 	@FXML
 	private ChoiceBox<String> order;
+	
+	@FXML
+    private VBox filterBox;
+
+    @FXML
+    private Label filterLab;
 	
 	@FXML
 	private VBox resultsBox;
@@ -69,7 +78,7 @@ public class BusinessResultsGraphic implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
 		//Set toolbar
-		pane.getChildren().add(toolBar);
+		resultsPane.getChildren().add(toolBar);
 		
 		//Get results
 		BusinessInCountryBean res = new BusinessInCountryBean();
@@ -79,18 +88,38 @@ public class BusinessResultsGraphic implements Initializable {
 				businesses = res.getBusinesses(searchedCountry);
 				searchIDLbl.setText(searchedCountry.getName());
 				
+				filterLab.setText("Categories");
+				for(String i: bList) {
+					CheckBox item = new CheckBox(i);
+					filterBox.getChildren().add(item);
+					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterBusiness(businesses, item, newValue));
+					filters.add(item);
+				}
+				
 			} else if(searchedCountry == null) {
 				businesses = res.getBusinesses(searchedBusiness);
 				searchIDLbl.setText(searchedBusiness.getName());
 				
+				filterLab.setText("Countries");	
+				for(String i: cList) {
+					CheckBox item = new CheckBox(i);
+					filterBox.getChildren().add(item);
+					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterCountry(businesses, item, newValue));
+					filters.add(item);
+				}
+				
 			} else {
 				businesses = res.getBusinesses(searchedCountry, searchedBusiness);
 				searchIDLbl.setText(searchedBusiness.getName() + "in" + searchedCountry.getName());
+				
+				filterBox.setVisible(false);
 			}
 		} catch (NoResultFoundException e) {
-			e.printStackTrace();
+			GraphicHandler.popUpMsg(AlertType.INFORMATION, e.getMessage());
+			goBack();
 		} catch (DatabaseFailureException de) {
-			de.printStackTrace();
+			GraphicHandler.popUpMsg(AlertType.ERROR, de.getMessage());
+			goBack();
 		}	
 		
 		results = new ArrayList<>();
@@ -104,6 +133,50 @@ public class BusinessResultsGraphic implements Initializable {
 		initResults(businesses);
 	}
 	
+	private void filterCountry(List<BusinessInCountryBean> list, CheckBox item, Boolean newValue) {
+		if(Boolean.TRUE.equals(newValue)) {
+			if(list.containsAll(results)) {
+				results.clear();
+			}
+			
+			for(BusinessInCountryBean i: list) {
+				if(i.getCountry().getName().equals(item.getText())) {
+					results.add(i);
+				}
+			}
+		} else {
+			for(BusinessInCountryBean i: results) {
+				if(i.getCountry().getName().equals(item.getText())) {
+					results.remove(i);
+				}
+			}
+		}
+		
+		initResults(results);
+	}
+
+	private void filterBusiness(List<BusinessInCountryBean> list, CheckBox item, Boolean newValue) {
+		if(Boolean.TRUE.equals(newValue)) {
+			if(list.containsAll(results)) {
+				results.clear();
+			}
+			
+			for(BusinessInCountryBean i: list) {
+				if(i.getCategory().equals(item.getText())) {
+					results.add(i);
+				}
+			}
+		} else {
+			for(BusinessInCountryBean i: results) {
+				if(i.getCategory().equals(item.getText())) {
+					results.remove(i);
+				}
+			}
+		}
+		
+		initResults(results);
+	}
+
 	private void initResults(List <BusinessInCountryBean> list) {
 		
 		for(BusinessInCountryBean i: list) {
@@ -112,7 +185,7 @@ public class BusinessResultsGraphic implements Initializable {
 			res.setPrefWidth(resultsBox.getPrefWidth() - (resultsBox.getSpacing())*2);
 			
 			res.setOnAction(event -> {
-					Stage stage = (Stage)pane.getScene().getWindow();
+					Stage stage = (Stage)resultsPane.getScene().getWindow();
 					stage.setScene(GraphicHandler.switchScreen(Scenes.BUSINESS, new BusinessDetailsGraphic(i)));
 				}
 			);
@@ -133,7 +206,7 @@ public class BusinessResultsGraphic implements Initializable {
 
 	@FXML
 	public void login() {
-		Stage stage = (Stage)pane.getScene().getWindow();
+		Stage stage = (Stage)resultsPane.getScene().getWindow();
 		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
 	}
 	
@@ -142,7 +215,7 @@ public class BusinessResultsGraphic implements Initializable {
 		SessionFacade.getSession().setID(null);
 		SessionFacade.getSession().setCurrUserType(null);
 		
-		Stage stage = (Stage)pane.getScene().getWindow();
+		Stage stage = (Stage)resultsPane.getScene().getWindow();
 		stage.setScene(GraphicHandler.switchScreen(Scenes.MAIN, null));
 	}
 	
@@ -168,7 +241,7 @@ public class BusinessResultsGraphic implements Initializable {
 	@FXML
 	public void goBack(){
 		Scenes prev = SessionFacade.getSession().getPrevScene();			
-		Stage stage = (Stage)pane.getScene().getWindow();			
+		Stage stage = (Stage)resultsPane.getScene().getWindow();			
 		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}
 }

@@ -144,7 +144,7 @@ public class OfferResultsGraphic implements Initializable {
 			}
 		} else {
 			for(OfferBean i: results) {
-				if(i.getPosition().getCategory().equals(selected.getText())) {
+				if(i.getBranch().getCountry().getName().equals(selected.getText())) {
 					results.remove(i);
 				}
 			}
