@@ -116,7 +116,9 @@ public class PersonalInfoGraphic implements Initializable {
     		return;
     	}
     	
-    	UserBean bean = new UserBean(emailField.getText(), pwdField.getText());
+    	UserBean bean = new UserBean();
+    	bean.setEmail(emailField.getText());
+    	bean.setPassword(pwdField.getText());
     	bean.setFirstName(nameField.getText());
     	bean.setLastName(lastNameField.getText());
     	

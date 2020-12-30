@@ -115,6 +115,31 @@ public class BusinessDAO {
         
         return list;
 	}
+	
+	public static List<BusinessInCountry> selectFavourites(String id) throws SQLException {
+		CallableStatement stmt = null;
+		ResultSet res = null;
+		List<BusinessInCountry> list = new ArrayList<>();
+
+		try {
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.GET_FAVOURITE_BUSINESSES, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			res = RoutinesManager.bindParametersAndExec(stmt, id);
+			
+			processResearch(res, list);
+			
+        } catch (SQLException e) {
+        	throw new SQLException("An error occured while trying to retrieve favourite businesses."); 
+		} catch (NoResultFoundException e) {
+			/*No op*/
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
+        
+        return list;
+	}
 
 	private static void processResearch(ResultSet res, List<BusinessInCountry> list) throws NoResultFoundException, SQLException {
 		if(!res.first()) {
@@ -132,9 +157,10 @@ public class BusinessDAO {
 			business.setCountry(country);
 			
 			business.setDescription(res.getString("description"));
+			business.setAverageEarnings(res.getFloat("average_earnings"));
+			business.setAverageManagementCost(res.getFloat("average_costs"));
 			
 			list.add(business);
 		}while(res.next());
 	}
-
 }

@@ -21,11 +21,6 @@ public class UserBean {
 		/*Default constructor*/
 	}
 	
-    public UserBean(String e, String p) {
-    	this.password = p;
-    	this.email = e;
-    }
-    
     public String getEmail() {
 		return email;
 	}

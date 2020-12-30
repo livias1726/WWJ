@@ -123,7 +123,7 @@ public class OffersInfoGraphic implements Initializable {
     }
 	
 	@FXML
-    void closeOffersSection() {
+    public void closeOffersSection() {
 		Stage st = (Stage)offersPane.getScene().getWindow();
     	st.close();
     }

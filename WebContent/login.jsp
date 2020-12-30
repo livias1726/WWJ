@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" errorPage="error.jsp"%>
+<%@ page import="logic.bean.UserBean"
+		import="logic.bean.AccountBean"%>
 <!DOCTYPE html>
 
-<jsp:useBean id="accountBean" scope="request" class="logic.bean.AccountBean"/>
-<jsp:useBean id="userBean" scope="request" class="logic.bean.UserBean"/>
+<jsp:useBean id="userBean" class="logic.bean.UserBean" scope="request"/>
+<jsp:setProperty name="userBean" property="*"/>
 
+<jsp:useBean id="accountBean" class="logic.bean.AccountBean" scope="request"/>
 <jsp:setProperty name="accountBean" property="*"/>
-
-<%@ page errorPage="error.jsp" %>  
 
 <% if (request.getParameter("login") != null) {
 		userBean.setEmail(request.getParameter("email"));

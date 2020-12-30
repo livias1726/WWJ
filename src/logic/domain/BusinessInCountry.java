@@ -55,4 +55,8 @@ public class BusinessInCountry extends Business {
 	public List<BusinessInCountry> getBusinessesInCountry(String country, String bus) throws SQLException, NoResultFoundException{
 		return BusinessDAO.selectBusinessInCountry(country, bus);
 	}
+
+	public List<BusinessInCountry> getFavourites(Long id) throws SQLException {
+		return BusinessDAO.selectFavourites(id.toString());
+	}
 }

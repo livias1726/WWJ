@@ -2,6 +2,7 @@ package logic.bean;
 
 import java.util.List;
 
+import logic.application.control.EntrepreneurAccountControl;
 import logic.application.control.ViewBusinessControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
@@ -55,5 +56,9 @@ public class BusinessInCountryBean extends BusinessBean{
 	
 	public List<BusinessInCountryBean> getBusinesses(BusinessInCountryBean bus) throws NoResultFoundException, DatabaseFailureException{
 		return ViewBusinessControl.getInstance().retrieveBusinessesByName(bus);
+	}
+
+	public List<BusinessInCountryBean> getFavouriteBusinesses() throws DatabaseFailureException {
+		return EntrepreneurAccountControl.getInstance().retrieveFavourites();
 	}
 }

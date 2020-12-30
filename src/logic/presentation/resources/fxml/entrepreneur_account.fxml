@@ -29,7 +29,7 @@
                         <Insets left="10.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="back_btn">
+                  <Button mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="back_btn">
                      <HBox.margin>
                         <Insets left="20.0" top="10.0" />
                      </HBox.margin>

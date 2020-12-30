@@ -67,7 +67,9 @@ public class AccountControl {
 	}
     
     private UserBean modelToBean(User user) {
-    	UserBean bean = new UserBean(user.getEmail(), user.getPwd());
+    	UserBean bean = new UserBean();
+    	bean.setEmail(user.getEmail());
+    	bean.setPassword(user.getPwd());
     	bean.setFirstName(user.getFirstName());
     	bean.setLastName(user.getLastName());
     	bean.setCity(user.getCity());

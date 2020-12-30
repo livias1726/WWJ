@@ -1,34 +1,16 @@
 package logic.presentation.control;
 
 import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import logic.presentation.GraphicHandler;
+import logic.presentation.Sections;
 
 public class EntrepreneurAccountGraphic extends AccountGraphic {
 	
 	@FXML
-    private AnchorPane motivPane;
-
-    @FXML
-    private AnchorPane plansPane;
-	
-	@FXML
 	public void openPlanSection(){
-		plansPane.setVisible(true);
-	}
-	
-	@FXML
-	public void closePlanSection(){
-		plansPane.setVisible(false);
-	}
-	
-	@FXML
-	public void openMotivationSection(){
-		motivPane.setVisible(true);
-	}
-	
-	@FXML
-	public void closeMotivationSection(){
-		motivPane.setVisible(false);
+		Stage popup = GraphicHandler.openSection(pane, Sections.BUSINESS_INFO, null);
+		popup.show();
 	}
 	
 }

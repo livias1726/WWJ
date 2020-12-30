@@ -95,7 +95,9 @@ public class SignUpGraphic implements Initializable {
 	
 	@FXML
 	public void createAccount() {
-		UserBean credentials = new UserBean(email.getText(), pwd.getText());
+		UserBean credentials = new UserBean();
+		credentials.setEmail(email.getText());
+		credentials.setPassword(pwd.getText());
 		
 		try {
 			credentials.verifyFields(email.getText(), pwd.getText(), firstName.getText(), lastName.getText());

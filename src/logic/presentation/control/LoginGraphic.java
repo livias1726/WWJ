@@ -46,7 +46,9 @@ public class LoginGraphic implements Initializable {
 		
 	@FXML
 	public void signInClicked() {
-		UserBean credentials = new UserBean(email.getText(), pwd.getText());
+		UserBean credentials = new UserBean();
+		credentials.setEmail(email.getText());
+		credentials.setPassword(pwd.getText());
 		try {
 			credentials.verifyFields(email.getText(), pwd.getText());		
 		} catch (InvalidFieldException ie) {

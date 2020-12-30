@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,9 +18,9 @@
 		  </div>
 		</div>
 		<div style="margin-left: 300px">
-		    <button class="main_btns" type="button" onClick="javascript:window.location='homeJobSeeker.jsp';">Job seeker</button>
+		    <button class="main_btns" type="button" onClick="javascript:window.location='seeker_research.jsp';">Job seeker</button>
 		    <button class="main_btns" type="button" onClick="javascript:window.location='login.jsp';">Recruiter</button>
-		    <button class="main_btns" type="button" onClick="javascript:window.location='jspsearchentr.jsp';">Entrepreneur</button>
+		    <button class="main_btns" type="button" onClick="javascript:window.location='entrepreneur_research.jsp';">Entrepreneur</button>
 		</div>
 	</body>
 </html>
