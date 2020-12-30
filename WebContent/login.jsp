@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" errorPage="error.jsp"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="logic.bean.UserBean"
 		import="logic.bean.AccountBean"%>
 <!DOCTYPE html>
@@ -9,15 +9,19 @@
 <jsp:useBean id="accountBean" class="logic.bean.AccountBean" scope="request"/>
 <jsp:setProperty name="accountBean" property="*"/>
 
+<%Class.forName("com.mysql.jdbc.Driver");%>
+
 <% if (request.getParameter("login") != null) {
 		userBean.setEmail(request.getParameter("email"));
 		userBean.setPassword(request.getParameter("password"));
 		accountBean.setUser(userBean);
         accountBean.login(); %>
-        <jsp:forward page="next.jsp"/>
-      <%
+        <% 
+        String redirectURL = "http://localhost:8080/WorldWideJob/recruiter'sProfile.jsp";
+        response.sendRedirect(redirectURL);
     }
 %>
+
 <html lang="en">
 	<head>
 		<meta charset="ISO-8859-1">
