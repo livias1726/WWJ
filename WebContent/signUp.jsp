@@ -1,6 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@ page import="logic.bean.UserBean"
+		import="logic.bean.AccountBean"%>
 <!DOCTYPE html>
+
+<jsp:useBean id="userBean" class="logic.bean.UserBean" scope="request"/>
+<jsp:setProperty name="userBean" property="*"/>
+
+<jsp:useBean id="accountBean" class="logic.bean.AccountBean" scope="request"/>
+<jsp:setProperty name="accountBean" property="*"/>
+
+<%Class.forName("com.mysql.jdbc.Driver");%>
+
+<% if (request.getParameter("signup") != null) {
+	userBean.setFirstName(request.getParameter("firstName"));
+	userBean.setLastName(request.getParameter("lastName"));
+	userBean.setEmail(request.getParameter("eMail"));
+	userBean.setPassword(request.getParameter("password"));
+	accountBean.setUser(userBean);
+	accountBean.signUp();%>
+	 <% 
+        String redirectURL = "http://localhost:8080/WorldWideJob/recruiter'sProfile.jsp";
+        response.sendRedirect(redirectURL);
+}
+%>
+
 <html lang="en">
 <head>
 	<meta charset="ISO-8859-1">
@@ -16,10 +40,10 @@
 	    			<img alt="" class="image" src="icons/main_icon.png" width=70px height=70px>
 	    		</div>
 				<div style="float:left">
-					<button class="arrow_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px"></button>
+					<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='login.jsp';"></button>
 	    		</div>
 	    		<div style="float:right;">
-	    			<button class="search_btn" style="width:120px; height:60px; top:10px; background-color: dodgerblue; margin-left:600px">Sign In</button>
+	    			<button class="search_btn" type="button" style="width:120px; height:60px; top:10px; background-color: dodgerblue; margin-left:600px" onClick="javascript:window.location='login.jsp';">Sign In</button>
 				</div>
 				<div class="scheletro_signUp" style="text-size:150px;text-align:center">CREATE AN ACCOUNT<br>
 					<div style="margin-top: 40px">
@@ -46,7 +70,7 @@
 				    	<label for="confirmPassword" style="color:black;font-size:20px;margin-right:40px">Confirm Password</label>
 				        <input type="text" id="confirmPassword" name="confirmPassword" style="margin-right:250px;height:15px">
 				    </div><br>
-				    <button class="search_btn" style="width:120px; height:60px; top:40px; background-color: dodgerblue; margin-left:-30px">Sign Up</button>
+				    <button class="search_btn" name="signup" style="width:120px; height:60px; top:40px; background-color: dodgerblue; margin-left:-30px">Sign Up</button>
 				</div>
 			</form>
 	</div>

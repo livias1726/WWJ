@@ -36,7 +36,7 @@
 		<div>
 		    <form action="login.jsp" name="logform" method="POST">
 		    	<div style="margin: 100px 0px 0px 750px">
-				  <button class="login_btns" type="button" onClick="javascript:window.location='signup.jsp';">Sign Up</button>
+				  <button class="login_btns" type="button" onClick="javascript:window.location='signUp.jsp';">Sign Up</button>
 				</div>
 		    	<fieldset class="login_frame">
     				<legend style="color: #0080FF; font-size: 30px; font-family: System;">LOGIN</legend>
