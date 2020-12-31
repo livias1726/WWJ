@@ -23,7 +23,7 @@ import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
 
-public class OffersInfoGraphic implements Initializable {
+public class PublishedOffersGraphic implements Initializable {
 	
 	@FXML
 	private AnchorPane offersPane;

@@ -38,4 +38,8 @@ public class CandidateBean {
 	public List<CandidateBean> getCandidates() throws DatabaseFailureException {
 		return CheckCandidatesControl.getInstance().retrieveCandidates();
 	}
+
+	public void deleteSelectedCandidates(List<Integer> selected) throws DatabaseFailureException {
+		CheckCandidatesControl.getInstance().removeCandidates(selected);
+	}
 }

@@ -8,8 +8,7 @@ import logic.persistence.dao.CountryDAO;
 
 public class Country implements Serializable{
 
-	private static final long serialVersionUID = 8047822125312096938L;
-	
+	private static final long serialVersionUID = 8047822125312096938L;	
 	private String name;
 	
 	public String getName() {

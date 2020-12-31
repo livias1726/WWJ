@@ -121,7 +121,6 @@ public class OfferBean {
 		this.candidates = candidates;
 	}
 
-	
 	public List<OfferBean> getOffers(CountryBean country, JobBean job) throws DatabaseFailureException, NoResultFoundException{
 		return ViewOfferControl.getInstance().retrieveOffers(country, job);
 	}

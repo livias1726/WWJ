@@ -52,4 +52,13 @@ public class CheckCandidatesControl {
 		
 		return dest;
 	}
+
+	public void removeCandidates(List<Integer> selected) throws DatabaseFailureException {
+		Candidate cand = new Candidate();
+		try {
+			cand.removeCandidatesFromDB(selected);
+		} catch (SQLException e) {
+			throw new DatabaseFailureException(); 
+		}
+	}
 }

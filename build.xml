@@ -55,15 +55,10 @@
         <path refid="JavaFX.userclasspath"/>
         <pathelement location="target/classes"/>
         <path refid="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath"/>
-        <path refid="Maven Dependencies.libraryclasspath"/>
         <pathelement location="lib/mysql-connector-java-8.0.22.jar"/>
-    </path>
-    <path id="run.Launcher.classpath">
-        <path refid="WorldWideJob.classpath"/>
         <path refid="Maven Dependencies.libraryclasspath"/>
-        <pathelement location="lib/mysql-connector-java-8.0.22.jar"/>
     </path>
-    <path id="run.User.classpath">
+    <path id="run.Main (1).classpath">
         <path refid="WorldWideJob.classpath"/>
         <path refid="Maven Dependencies.libraryclasspath"/>
         <pathelement location="lib/mysql-connector-java-8.0.22.jar"/>
@@ -105,14 +100,9 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="Launcher">
+    <target name="Main (1)">
         <java classname="logic.Main" failonerror="true" fork="yes">
-            <classpath refid="run.Launcher.classpath"/>
-        </java>
-    </target>
-    <target name="User">
-        <java classname="logic.User" failonerror="true" fork="yes">
-            <classpath refid="run.User.classpath"/>
+            <classpath refid="run.Main (1).classpath"/>
         </java>
     </target>
 </project>

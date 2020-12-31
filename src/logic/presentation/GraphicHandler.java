@@ -58,12 +58,18 @@ public class GraphicHandler {
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "personal_info.fxml"));
 			case COMPANY_INFO: 
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "company.fxml"));
-			case OFFERS_INFO: 
+			case PUBLISHED_OFFERS: 
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "offers_recruiter.fxml"));
-			case CANDIDATES_INFO: 
+			case CANDIDATES: 
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "candidates.fxml"));
-			case BUSINESS_INFO: 
+			case FAV_BUSINESSES: 
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "favourite_business.fxml"));
+			case CV_INFO: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "cv.fxml"));
+			case APPLICATIONS: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "applications.fxml"));
+			case FAV_OFFERS: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "favourite_offer.fxml"));
 			default:
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "main.fxml"));
 		}

@@ -22,13 +22,13 @@ public class RecruiterAccountGraphic extends AccountGraphic {
 	
 	@FXML
 	protected void openOffersInfo() {	
-		Stage popup = GraphicHandler.openSection(pane, Sections.OFFERS_INFO, null);
+		Stage popup = GraphicHandler.openSection(pane, Sections.PUBLISHED_OFFERS, null);
 		popup.show();
 	}
 	
 	@FXML
 	protected void openCandidatesInfo() {
-		Stage popup = GraphicHandler.openSection(pane, Sections.CANDIDATES_INFO, null);
+		Stage popup = GraphicHandler.openSection(pane, Sections.CANDIDATES, null);
 		popup.show();
 	}
 

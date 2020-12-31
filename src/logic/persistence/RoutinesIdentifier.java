@@ -28,4 +28,7 @@ public class RoutinesIdentifier {
 	public static final String GET_BUSINESS_BY_COUNTRY = "call retrieve_business_by_country(?)";
 	public static final String GET_BUSINESS_BY_NAME = "call retrieve_business_by_name(?)";
 	public static final String GET_FAVOURITE_BUSINESSES = "call retrieve_favourite_businesses(?)";
+	public static final String GET_APPLICATIONS = "call retrieve_applications(?)";
+	public static final String DELETE_CANDIDATES = "call delete_candidate(?)";
+	public static final String DELETE_APPLICATIONS = "call delete_application(?)";
 }

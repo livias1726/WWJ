@@ -16,15 +16,16 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ScrollPane layoutX="81.0" layoutY="68.0" prefHeight="380.0" prefWidth="973.0">
+      <ScrollPane layoutX="81.0" layoutY="68.0" prefHeight="414.0" prefWidth="973.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="455.0" prefWidth="974.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="403.0" prefWidth="974.0">
                <children>
-                  <TableView fx:id="table" prefHeight="432.0" prefWidth="986.0">
+                  <TableView fx:id="table" prefHeight="406.0" prefWidth="973.0">
                      <columns>
-                        <TableColumn fx:id="boxCol" prefWidth="75.0" text="Select" />
+                        <TableColumn fx:id="delCol" prefWidth="75.0" text="Select" />
                         <TableColumn fx:id="offerCol" editable="false" prefWidth="97.0" text="Offer" />
                         <TableColumn fx:id="candCol" editable="false" prefWidth="134.0" text="Candidate" />
+                        <TableColumn fx:id="idCol" editable="false" prefWidth="75.0" sortable="false" text="ID" visible="false" />
                      </columns>
                   </TableView>
                </children>

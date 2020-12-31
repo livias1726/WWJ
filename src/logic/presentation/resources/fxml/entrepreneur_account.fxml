@@ -17,14 +17,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="680.0" prefWidth="1180.0" styleClass="account_ext" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="logic.presentation.control.EntrepreneurAccountGraphic">
+<AnchorPane fx:id="pane" prefHeight="680.0" prefWidth="1180.0" styleClass="account_ext" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.EntrepreneurAccountGraphic">
    <children>
       <ToolBar layoutX="1.0" prefHeight="60.0" prefWidth="1180.0" styleClass="toolbar">
          <items>
             <HBox prefHeight="50.0" prefWidth="158.0">
                <children>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="main_icon" />
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="home_btn">
+                  <Button mnemonicParsing="false" onAction="#openSearchPage" prefHeight="30.0" prefWidth="30.0" styleClass="home_btn">
                      <HBox.margin>
                         <Insets left="10.0" top="10.0" />
                      </HBox.margin>

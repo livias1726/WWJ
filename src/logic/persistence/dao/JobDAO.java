@@ -34,7 +34,7 @@ public class JobDAO {
 				}while(res.next());
 			}
         } catch (SQLException e) {
-        	throw new SQLException("An error occured while trying to retrieve list of countries."); 
+        	throw new SQLException("An error occured while trying to retrieve list of jobs."); 
 		} finally {
 			if(stmt != null) {
 				stmt.close();

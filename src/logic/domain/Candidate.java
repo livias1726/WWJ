@@ -43,4 +43,8 @@ public class Candidate implements Serializable{
 		return CandidateDAO.selectCandidates(id);
 	}
 
+	public void removeCandidatesFromDB(List<Integer> selected) throws SQLException {
+		CandidateDAO.deleteCandidates(selected);
+	}
+
 }
