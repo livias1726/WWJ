@@ -44,6 +44,7 @@
 	    		<input class="place2" type="text" name="place2" value="" disabled style="background-color:white">
 	    		<input class="joboffers" type="text" name="joboffers" value="JOB OFFERS" disabled style="background-color:dodgerblue">
 	    		<input class="line" style="background-color:black">
+	    		<input class="offer" type="text" name="offer" value="" disabled style="background-color:#E4F5F2" >
 	    		<input class="order_by" type="text" name="orderby" value="  Ordered by:" disabled style="background-color:lightgrey">
 	    		<select class="order_select" name="orderselect" size="1" style="background-color:whitesmoke">
 	    			<option>most recent</option>

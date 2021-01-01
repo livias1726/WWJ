@@ -271,10 +271,21 @@
 	position: absolute;
 	width: 500px;
 	height: 0px;
-	left: 540px;
+	left: 520px;
 	top: 220px;
 	color:black;
 	border: 1px;
+}
+
+.offer{
+	position: absolute;
+	width:400px;
+    height:80px;
+    left: 570px;
+	top: 240px;
+    font-size:20px;
+    color:black;
+    border-color:black;
 }
 
 .order_by{
