@@ -1,7 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="logic.bean.JobBean"
+		import="logic.bean.CountryBean"%>
 <!DOCTYPE html>
 
+<jsp:useBean id="countryBean" scope="session" class="logic.bean.CountryBean"/>
+<jsp:setProperty name="countryBean" property="*"/>
+
+<jsp:useBean id="jobBean" scope="session" class="logic.bean.JobBean"/>
+<jsp:setProperty name="jobBean" property="*"/>
+
+
+<%Class.forName("com.mysql.jdbc.Driver");%>
 
 <html lang="en">
 	<head>
@@ -16,7 +26,7 @@
 	
 	<body>
 		<div>
-			<form action="jobSeekerResearchResult.jsp" name="researchresultjobseekform" method="POST">
+			<form action="JobSeekerResearchResult.jsp" name="researchresultjobseekform" method="POST">
 				<div class="dropdown" style="float:right;">
 	    			<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
 	    			<div class="dropdown-content" style="right:0;">
@@ -41,10 +51,10 @@
 	    		</div>
 	    		</div>
 	    		<div>
-	    		<input class="place2" type="text" name="place2" value="" disabled style="background-color:white">
+	    		<input class="place2" id="name_place" type="text" name="name_place" value="<%=countryBean.getName()%>" disabled style="background-color:white">
 	    		<input class="joboffers" type="text" name="joboffers" value="JOB OFFERS" disabled style="background-color:dodgerblue">
 	    		<input class="line" style="background-color:black">
-	    		<input class="offer" type="text" name="offer" value="" disabled style="background-color:#E4F5F2" >
+	    		<input class="offer" type="text" name="offer" value="<%=jobBean.getName()%>" disabled style="background-color:#E4F5F2" >
 	    		<input class="order_by" type="text" name="orderby" value="  Ordered by:" disabled style="background-color:lightgrey">
 	    		<select class="order_select" name="orderselect" size="1" style="background-color:whitesmoke">
 	    			<option>most recent</option>

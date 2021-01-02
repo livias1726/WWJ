@@ -1,6 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@ page import="logic.bean.BusinessBean"
+		import="logic.bean.CountryBean"%>
 <!DOCTYPE html>
+
+<jsp:useBean id="countryBean" scope="session" class="logic.bean.CountryBean"/>
+<jsp:setProperty name="countryBean" property="*"/>
+
+<jsp:useBean id="businessBean" scope="session" class="logic.bean.BusinessBean"/>
+<jsp:setProperty name="businessBean" property="*"/>
+
+<%Class.forName("com.mysql.jdbc.Driver");%>
 
 
 <html lang="en">
@@ -41,10 +51,10 @@
 	    		</div>
 	    		</div>
 	    		<div>
-	    		<input class="place2" type="text" name="place2" value="" disabled style="background-color:white">
+	    		<input class="place2" type="text" name="place2" value="<%=countryBean.getName()%>" disabled style="background-color:white">
 	    		<input class="joboffers" type="text" name="businesses" value="BUSINESSES" disabled style="background-color:dodgerblue">
 	    		<input class="line" style="background-color:black">
-	    		<input class="offer" type="text" name="business" value="" disabled style="background-color:#E4F5F2" >
+	    		<input class="offer" type="text" name="business" value="<%=businessBean.getName()%>" disabled style="background-color:#E4F5F2" >
 	    		<input class="order_by" type="text" name="orderby" value="  Ordered by:" disabled style="background-color:lightgrey">
 	    		<select class="order_select" name="orderselect" size="1" style="background-color:lightgrey">
 	    			<option>popularity</option>

@@ -9,6 +9,7 @@ import logic.exceptions.DatabaseFailureException;
 public class CountryBean {
 	private String name;
 	
+	
 	public String getName() {
 		return name;
 	}

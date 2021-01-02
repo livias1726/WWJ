@@ -1,6 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+
+<jsp:useBean id="businessBean" class="logic.bean.BusinessBean" scope="session"/>
+<jsp:setProperty name="businessBean" property="*"/>
+
+<jsp:useBean id="countryBean" class="logic.bean.CountryBean" scope="session"/>
+<jsp:setProperty name="countryBean" property="*"/>
+
+<%Class.forName("com.mysql.jdbc.Driver");%>
+
+<% if (request.getParameter("search") != null) {
+		countryBean.setName(request.getParameter("place"));
+		businessBean.setName(request.getParameter("business"));
+		
+		String redirectURL = "http://localhost:8080/WorldWideJob/EntrResearchResult.jsp";
+        response.sendRedirect(redirectURL);
+    }
+%>
+
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
@@ -13,7 +31,7 @@
 	<link href="css/style.css" rel="stylesheet">
 <body>
 	<div>
-			<form action="homeEntrepreneur.jsp" name="researchEntrepreneurform" method="POST">
+			<form action="entrepreneur_research.jsp" name="researchEntrepreneurform" method="POST">
 				<div style="float:right;">
 	    			<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
 	    		<div class="dropdown" style="float:left;">
@@ -27,15 +45,25 @@
 	    			<img alt="" class="" src="icons/main_icon.png" width=70px height=70px>
 	    		</div>
 	    		<div style="float:left">
-	    			<button class="home_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px;"></button>
+	    			<button class="home_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px;" onClick="javascript:window.location='index.jsp';"></button>
 	    		<div style="float:right;">
-	    			<button class="arrow_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px"></button>
+	    			<button class="arrow_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px;" onClick="javascript:window.location='index.jsp';"></button>
 	    		</div>
 	    		</div>
 	    		<div class="search_entr">Become your own boss.<br>Start a new business in the Country of your dreams.<br>
-	    		<input class="place_btn" type="text" name="place" value="place" style="background-color:white; border-color:black">
-	    		<input class="business_btn" type="text" name="business" value="business" style="background-color:white; border-color:black"><br>
-	    		<button class="search_btn" style="width:100px; height:50px; top:100px; background-color: dodgerblue; margin-right:-20px; border-color: black">Search</button>
+	    		<div class="dropdown">
+	    			<input class="place_btn" type="text" name="place" value="" style="background-color:white; border-color:black">
+	    		<div class="dropdown-content" style="right:0;">
+	    			<a></a>
+	    		</div>
+	    		</div>
+	    		<div class="dropdown">
+	    			<input class="business_btn" type="text" name="business" value="" style="background-color:white; border-color:black"><br>
+	    		<div class="dropdown-content" style="left:0;">
+	    			<a></a>
+	    		</div>
+	    		</div>
+	    		<button class="search_btn" type="submit" name="search" style="width:100px; height:50px; top:100px; background-color: dodgerblue; margin-right:-20px; border-color: black">Search</button>
 	    		</div>
 	    	</form>
 		</div>
