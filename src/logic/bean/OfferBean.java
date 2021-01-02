@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import logic.application.control.RecruiterAccountControl;
+import logic.application.control.SeekerAccountControl;
 import logic.application.control.ViewOfferControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
@@ -139,5 +140,9 @@ public class OfferBean {
 
 	public OfferBean getOffer(Integer id) throws DatabaseFailureException {
 		return ViewOfferControl.getInstance().retrieveOfferById(id);
+	}
+
+	public List<OfferBean> getFavouriteOffers() throws DatabaseFailureException {
+		return SeekerAccountControl.getInstance().retrieveFavourites();
 	}
 }

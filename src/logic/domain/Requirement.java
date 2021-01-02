@@ -4,31 +4,14 @@ import java.util.List;
 
 public class Requirement {
 	
-	private List<Language> lang;
-	private List<Education> edu;
-	private List<Experience> exp;
-	
-	public List<Language> getLang() {
-		return lang;
+	private List<String> req;
+
+	public List<String> getReq() {
+		return req;
+	}
+
+	public void setReq(List<String> req) {
+		this.req = req;
 	}
 	
-	public void setLang(List<Language> lang) {
-		this.lang = lang;
-	}
-	
-	public List<Education> getEdu() {
-		return edu;
-	}
-	
-	public void setEdu(List<Education> edu) {
-		this.edu = edu;
-	}
-	
-	public List<Experience> getExp() {
-		return exp;
-	}
-	
-	public void setExp(List<Experience> exp) {
-		this.exp = exp;
-	}
 }

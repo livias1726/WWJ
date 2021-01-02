@@ -1,14 +1,21 @@
 package logic.application.control;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import logic.application.SessionFacade;
 import logic.bean.ApplicationBean;
+import logic.bean.CVBean;
 import logic.bean.JobBean;
+import logic.bean.OfferBean;
 import logic.domain.Application;
+import logic.domain.CV;
+import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
+import logic.exceptions.NoResultFoundException;
 
 public class SeekerAccountControl {
 
@@ -35,12 +42,8 @@ public class SeekerAccountControl {
 			throw new DatabaseFailureException();
 		}
     	
-		return modelToBean(list);
-	}
-
-	private List<ApplicationBean> modelToBean(List<Application> src) {
 		List<ApplicationBean> dest = new ArrayList<>();
-		for(Application i: src) {
+		for(Application i: list) {
 			ApplicationBean bean = new ApplicationBean();
 			bean.setId(i.getId());
 			
@@ -63,5 +66,53 @@ public class SeekerAccountControl {
 		} catch (SQLException e) {
 			throw new DatabaseFailureException(); 
 		}
+	}
+
+	public CVBean retrieveCV(Integer id) throws DatabaseFailureException, NoResultFoundException {
+		CVBean bean = new CVBean();
+		try {
+			CV cv = new CV().getCVFromDB(id);
+			bean.setCv(cv.getCvDoc());
+		} catch (SQLException | IOException e) {
+			throw new DatabaseFailureException(); 
+		} catch (NoResultFoundException e) {
+			throw new NoResultFoundException("No CV document was found. Do you want to upload it?");
+		}
+
+		return bean;
+	}
+
+	public void updateCV(File curr) throws DatabaseFailureException {
+		try {
+			new CV().saveCV(curr, SessionFacade.getSession().getID().toString());
+		} catch (SQLException | IOException e) {
+			throw new DatabaseFailureException(); 
+		}
+	}
+
+	public List<OfferBean> retrieveFavourites() throws DatabaseFailureException {
+		Offer offer = new Offer();
+    	List<Offer> list;
+		try {
+			list = offer.getFavourites(SessionFacade.getSession().getID().intValue());
+		} catch (SQLException se) {
+			throw new DatabaseFailureException();
+		}
+    	
+		List<OfferBean> dest = new ArrayList<>();
+    	for(Offer i: list) {
+    		OfferBean offerBean = new OfferBean();  		
+    		offerBean.setCompanyName(i.getCompanyName());
+    		offerBean.setTaskDescription(i.getTaskDescription());
+
+    		JobBean job = new JobBean();
+    		job.setName(i.getPosition().getName());
+    		job.setCategory(i.getPosition().getCategory());  		
+    		offerBean.setPosition(job);
+    		
+    		dest.add(offerBean);
+    	}
+    	
+    	return dest;
 	}
 }

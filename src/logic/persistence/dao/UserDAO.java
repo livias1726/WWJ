@@ -27,14 +27,12 @@ public class UserDAO {
         	stmt = conn.prepareCall(RoutinesIdentifier.GET_USER);
 			res = RoutinesManager.bindParametersAndExec(stmt, id);
 			
-            if (!res.first()){           	
-            	throw new SQLException("An error occured while trying to retrieve personal information."); 
+            if (res.first()){           	
+            	user = new User(res.getString("email"), res.getString("pwd"), res.getString("first_name"), res.getString("last_name"));
+            	user.setCity(res.getString("city"));
+            	user.setBirth(res.getDate("birth").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             }
             
-            user = new User(res.getString("email"), res.getString("pwd"), res.getString("first_name"), res.getString("last_name"));
-        	user.setCity(res.getString("city"));
-        	user.setBirth(res.getDate("birth").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-           
             res.close();          
         } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to retrieve personal information."); 

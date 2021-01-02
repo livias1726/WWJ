@@ -86,30 +86,6 @@ public class OfferDAO {
         
         return list;
 	}
-	
-	private static void processResearch(ResultSet res, List<Offer> list) throws SQLException, NoResultFoundException{
-		if (!res.first()){           	
-        	throw new NoResultFoundException();
-        }
-        
-        res.first();
-        
-        do {
-        	Offer offer = new Offer();
-        	offer.setCompanyName(res.getString("company"));
-        	
-        	Job position = new Job();
-        	position.setName(res.getString("position"));
-        	position.setCategory(res.getString("category"));
-        	offer.setPosition(position);
-        	
-        	offer.setTaskDescription(res.getString("description"));
-        	
-        	list.add(offer);
-        }while(res.next());
-        
-        res.close();          
-	}
 
 	public static List<Offer> selectPublishedOffers(Long id) throws SQLException {
 		CallableStatement stmt = null;
@@ -192,4 +168,52 @@ public class OfferDAO {
         return offer;
 	}
 
+	public static List<Offer> selectFavourites(int id) throws SQLException {
+		CallableStatement stmt = null;
+		ResultSet res = null;
+		List<Offer> list = new ArrayList<>();
+
+		try {
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.GET_FAVOURITE_OFFERS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			res = RoutinesManager.bindParametersAndExec(stmt, id);
+			
+			processResearch(res, list);
+			
+        } catch (SQLException e) {
+        	throw new SQLException("An error occured while trying to retrieve favourite offers."); 
+		} catch (NoResultFoundException e) {
+			/*No op*/
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
+        
+        return list;
+	}
+
+	private static void processResearch(ResultSet res, List<Offer> list) throws SQLException, NoResultFoundException{
+		if (!res.first()){           	
+        	throw new NoResultFoundException();
+        }
+        
+        res.first();
+        
+        do {
+        	Offer offer = new Offer();
+        	offer.setCompanyName(res.getString("company"));
+        	
+        	Job position = new Job();
+        	position.setName(res.getString("position"));
+        	position.setCategory(res.getString("category"));
+        	offer.setPosition(position);
+        	
+        	offer.setTaskDescription(res.getString("description"));
+        	
+        	list.add(offer);
+        }while(res.next());
+        
+        res.close();          
+	}
 }

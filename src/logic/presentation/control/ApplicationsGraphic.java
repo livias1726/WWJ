@@ -120,7 +120,7 @@ public class ApplicationsGraphic implements Initializable {
     	ApplicationBean bean = new ApplicationBean();
 		try {
 			bean.deleteSelectedApplications((List<Integer>)selected);
-			/*refresh stage*/
+			initialize(null, null);
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}

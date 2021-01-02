@@ -9,4 +9,8 @@ public class NoResultFoundException extends Exception {
 		super(MESSAGE);
 	}
 
+	public NoResultFoundException(String string) {
+		super(string);
+	}
+
 }

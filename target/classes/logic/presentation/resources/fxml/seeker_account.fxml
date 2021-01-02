@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1180.0" styleClass="account_ext" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1180.0" styleClass="account_ext" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ToolBar fx:id="barSeek" prefHeight="60.0" prefWidth="1180.0" styleClass="toolbar">
          <items>
@@ -81,7 +81,7 @@
                <children>
                   <HBox prefHeight="199.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#openCVSection" text="Curriculum Vitae" textFill="WHITE">
+                        <Button fx:id="cvBtn" mnemonicParsing="false" onAction="#openCVPrivate" text="Curriculum Vitae" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>

@@ -142,4 +142,8 @@ public class Offer implements Serializable{
 		return OfferDAO.selectOffer(id);
 	}
 
+	public List<Offer> getFavourites(int id) throws SQLException {
+		return OfferDAO.selectFavourites(id);
+	}
+
 }
