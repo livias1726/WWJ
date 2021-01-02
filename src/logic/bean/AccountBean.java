@@ -73,6 +73,10 @@ public class AccountBean {
 		return AccountControl.getInstance().retrieveAccount();
 	}
 	
+	public AccountBean getAccount(Integer accountID) throws DatabaseFailureException {
+		return AccountControl.getInstance().retrieveAccount(accountID);
+	}
+	
 	public void updatePic(File img) {
 		AccountControl.getInstance().updateAccountPic(img);
 	}

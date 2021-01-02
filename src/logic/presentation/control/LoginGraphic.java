@@ -34,11 +34,7 @@ public class LoginGraphic implements Initializable {
 	
 	@FXML
 	private Button backBtn;
-	
-	public LoginGraphic() {
-		/*Default constructor*/
-	}
-	
+
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
 		/*Default behavior*/
@@ -70,7 +66,7 @@ public class LoginGraphic implements Initializable {
 		Stage stage = (Stage)logPane.getScene().getWindow();
 	
 		if(SessionFacade.getSession().getCurrUserType() == Users.SEEKER) {
-			stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_SEEK, null));
+			stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_SEEK, new SeekerAccountGraphic(SessionFacade.getSession().getID().intValue())));
 			
 		}else if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER) {
 			stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_REC, null));

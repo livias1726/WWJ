@@ -81,7 +81,7 @@ public class User implements Serializable{
 		this.birth = birth;
 	}
 	
-	public User getPersonalInfoFromDB(Long id) throws SQLException {
+	public User getPersonalInfoFromDB(Integer id) throws SQLException {
 		return UserDAO.selectPersonalInfo(id);
 	}
 

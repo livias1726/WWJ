@@ -14,8 +14,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import logic.application.SessionFacade;
 import logic.bean.UserBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
@@ -56,17 +58,36 @@ public class PersonalInfoGraphic implements Initializable {
     @FXML
     private VBox pwdBox;
     
-    @Override
+    @FXML
+    private HBox passHBox;
+    
+    private Integer id;
+    
+    public PersonalInfoGraphic(Integer accountID) {
+		this.id = accountID;
+	}
+    
+    public PersonalInfoGraphic() {
+		this.id = SessionFacade.getSession().getID().intValue();
+	}
+
+	@Override
 	public void initialize(URL url, ResourceBundle res) {
     	UserBean user;
 		try {
-			user = new UserBean().getPersonalInfo();
-			initInfo(user);	
-	    	initPasswordVisibility(); 	
-	    	initBindings();
+			user = new UserBean().getPersonalInfo(id);
+			initInfo(user);		    	
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			closePersonalInfo();
+		}
+		
+		if(SessionFacade.getSession().getID().intValue() != id) {
+			passHBox.setVisible(false);
+			changeBtn.setVisible(false);
+		}else {
+			initPasswordVisibility(); 	
+	    	initBindings();
 		}
 	}
     

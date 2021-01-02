@@ -17,9 +17,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1180.0" styleClass="account_ext" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="logic.presentation.control.SeekerAccountGraphic">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1180.0" styleClass="account_ext" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
    <children>
-      <ToolBar prefHeight="60.0" prefWidth="1180.0" styleClass="toolbar">
+      <ToolBar fx:id="barSeek" prefHeight="60.0" prefWidth="1180.0" styleClass="toolbar">
          <items>
             <HBox prefHeight="50.0" prefWidth="158.0">
                <children>
@@ -116,7 +116,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <HBox prefHeight="199.0" prefWidth="200.0">
+                  <HBox fx:id="privateHBox" prefHeight="199.0" prefWidth="200.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#openApplicationSection" text="Applications" textFill="WHITE">
                            <HBox.margin>
@@ -161,7 +161,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Button layoutX="56.0" layoutY="295.0" mnemonicParsing="false" onAction="#picSelect" prefHeight="15.0" prefWidth="219.0" styleClass="profile_btn" text="Change profile picture" />
+            <Button fx:id="changePicBtn" layoutX="56.0" layoutY="295.0" mnemonicParsing="false" onAction="#picSelect" prefHeight="15.0" prefWidth="219.0" styleClass="profile_btn" text="Change profile picture" />
             <Label fx:id="nameLbl" layoutX="309.0" layoutY="129.0" prefHeight="30.0" prefWidth="121.0" text="FName LName" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="16.0" />

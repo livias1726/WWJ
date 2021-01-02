@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToolBar;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -47,7 +48,12 @@ public class CandidatesInfoGraphic implements Initializable {
     @FXML
     private Button delBtn;
     
+    private ToolBar toolbar;
     private ObservableList<Integer> selected = FXCollections.observableArrayList();
+
+	public CandidatesInfoGraphic(ToolBar toolbar) {
+		this.toolbar = toolbar;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -98,7 +104,8 @@ public class CandidatesInfoGraphic implements Initializable {
 	}
 	
 	private void openSeekerProfile(Integer id) {
-		/**/
+		Stage stage = (Stage)candidatesPane.getScene().getWindow();			
+		stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_SEEK, new SeekerAccountGraphic(toolbar, id)));
 	}
 
 	private void openOfferDetails(Integer id) {
@@ -119,7 +126,7 @@ public class CandidatesInfoGraphic implements Initializable {
 		CandidateBean bean = new CandidateBean();
 		try {
 			bean.deleteSelectedCandidates((List<Integer>)selected);
-			/*refresh stage*/
+			initialize(null, null);
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}

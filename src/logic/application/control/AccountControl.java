@@ -39,6 +39,17 @@ public class AccountControl {
     	return modelToBean(account);
     }
     
+    public AccountBean retrieveAccount(Integer accountID) throws DatabaseFailureException {
+    	Account account = new Account();
+    	try {
+			account = account.getAccountFromDB(accountID);
+		} catch (SQLException e) {
+			throw new DatabaseFailureException();
+		}  
+    	
+    	return modelToBean(account);
+	}	
+    
     private AccountBean modelToBean(Account account) {
     	AccountBean bean = new AccountBean();
     	UserBean user = new UserBean();
@@ -54,11 +65,11 @@ public class AccountControl {
     	return bean;
     }
     
-    public UserBean retrievePersonalInfo() throws DatabaseFailureException {
+    public UserBean retrievePersonalInfo(Integer id) throws DatabaseFailureException {
     	
     	User user = new User();
 		try {
-			user = user.getPersonalInfoFromDB(SessionFacade.getSession().getID());
+			user = user.getPersonalInfoFromDB(id);
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();
 		}
@@ -100,5 +111,6 @@ public class AccountControl {
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();
 		}
-	}	
+	}
+
 }

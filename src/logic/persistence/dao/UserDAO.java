@@ -17,7 +17,7 @@ public class UserDAO {
 		/**/
 	}
 
-	public static User selectPersonalInfo(Long id) throws SQLException {
+	public static User selectPersonalInfo(Integer id) throws SQLException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
 		User user = null;
@@ -25,7 +25,7 @@ public class UserDAO {
 		try {
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.GET_USER);
-			res = RoutinesManager.bindParametersAndExec(stmt, id.toString());
+			res = RoutinesManager.bindParametersAndExec(stmt, id);
 			
             if (!res.first()){           	
             	throw new SQLException("An error occured while trying to retrieve personal information."); 

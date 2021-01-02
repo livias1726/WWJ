@@ -1,11 +1,15 @@
 package logic.presentation.control;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ToolBar;
 import javafx.stage.Stage;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Sections;
 
 public class RecruiterAccountGraphic extends AccountGraphic {
+	
+	@FXML
+	private ToolBar barRec;
 	
 	@FXML
 	public void openNewOffer(){
@@ -28,7 +32,7 @@ public class RecruiterAccountGraphic extends AccountGraphic {
 	
 	@FXML
 	protected void openCandidatesInfo() {
-		Stage popup = GraphicHandler.openSection(pane, Sections.CANDIDATES, null);
+		Stage popup = GraphicHandler.openSection(pane, Sections.CANDIDATES, new CandidatesInfoGraphic(barRec));
 		popup.show();
 	}
 
