@@ -1,7 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@ page import="logic.bean.BusinessBean"
+ 	import="logic.bean.CountryBean"
+ 	%>
+		
 <!DOCTYPE html>
 
+<jsp:useBean id="countryBean" scope="session" class="logic.bean.CountryBean"/>
+<jsp:setProperty name="countryBean" property="*"/>
+
+<jsp:useBean id="businessBean" scope="session" class="logic.bean.BusinessBean"/>
+<jsp:setProperty name="businessBean" property="*"/>
+
+<%Class.forName("com.mysql.jdbc.Driver");%>
 
 <html lang="en">
 	<head>
@@ -21,34 +32,43 @@
 	    			<div class="dropdown-content" style="right:0;">
 		     			<a href="">Buy Premium Version</a>
 		     			<a class="dropdown" href="">Support</a>
-		     			<a href="">Quit</a>
+		     			<a href="http://localhost:8080/WorldWideJob/entrepreneur_research.jsp">Quit</a>
 		     		</div>
 		     	</div>		
 		        <div class="dropdown" style="float:right;">
 	    			<button class="user_btn" style="background-color:lightblue;margin-right:10px;width:40px;height:40px;margin-top:10px"></button>
 		     		<div class="dropdown-content" style="right:0;">
-		     			<a href="">Login</a>
+		     			<a href="http://localhost:8080/WorldWideJob/login.jsp">Login</a>
 		     		</div>
 		     	</div>
 	    		<div style="float:left;width:70px;height:70px">
 	    			<img alt="" class="image" src="icons/main_icon.png" width=70px height=70px>
 	    		</div>
 	    		<div style="float:left">
-	    			<button class="home_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px;"></button>
+	    			<button class="home_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='index.jsp';"></button>
 	    		<div style="float:right;">
-	    			<button class="arrow_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px"></button>
+	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='EntrResearchResult.jsp';"></button>
 	    		</div>
 	    		</div>
 	    		<div>
-	    		<input class="place2" type="text" name="place2" value="" disabled style="background-color:white">
+	    		<input class="place2" type="text" name="place2" value="<%=countryBean.getName()%>" disabled style="background-color:white">	
 	    		<input class="busdetails" type="text" name="busdetails" value="" disabled style="background-color:#C6D6D3">
-	    		<input class="businessname" type="text" name="businessname" value="" disabled style="background-color:#C6D6D3">
+	    		<input class="businessname" type="text" name="businessname" value="<%=businessBean.getName()%>" disabled style="background-color:#C6D6D3">
 	    		<input class="thebusiness" type="text" name="thebusiness" value="The business" disabled style="background-color:#C6D6D3">
 	    		<input class="busdescription" type="text" name="busdescription" value="" disabled style="background-color:#E4F5F2">
 	    		<input class="insert_budget" type="text" name="insert_budget" value="Insert budget" disabled style="background-color:#C6D6D3"><br>
 	    		<input class="budget" type="text" name="budget" value="" style="background-color:#E4F5F2">
-	    		<button class="statistics_btn" style="width:150px; height:50px; top:100px; background-color: dodgerblue; margin-left:1050px; border-color: black">View statistics</button>
-	    		<button class="calculatefeasibility_btn" style="width:150px; height:50px; top:500px; background-color: dodgerblue; margin-left:350px; border-color: black">Calculate feasibility</button>
+	    		<button class="statistics_btn" type="button" style="width:150px; height:50px; top:100px; background-color: dodgerblue; margin-left:1050px; border-color: black" onClick="javascript:window.location='statistics.jsp';">View statistics</button>
+	    		<button class="calculatefeasibility_btn" name="calcFeas" style="width:150px; height:50px; top:500px; background-color: dodgerblue; margin-left:350px; border-color: black">Calculate feasibility</button>
+	    		<% if (request.getParameter("calcFeas") != null && !request.getParameter("budget").equals("")) {
+					String redirectURL = "http://localhost:8080/WorldWideJob/Feasibility.jsp";
+        			response.sendRedirect(redirectURL);
+    				}if(request.getParameter("calcFeas") != null && request.getParameter("budget").equals("")) { %>
+						<div class="alert" role="alert">
+							<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+							<strong style="color:black">Attenzione! Inserisci il tuo budget.</strong>
+						</div>
+					<%}%>
 	    		</div>
 	    	</form>
 		</div>

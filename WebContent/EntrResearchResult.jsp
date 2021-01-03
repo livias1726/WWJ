@@ -25,13 +25,13 @@
 	
 	<body>
 		<div>
-			<form action="jobSeekerResearchResult.jsp" name="researchresultjobseekform" method="POST">
+			<form action="EntrResearchResult.jsp" name="researchresultjobseekform" method="POST">
 				<div class="dropdown" style="float:right;">
 	    			<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
 	    			<div class="dropdown-content" style="right:0;">
 		     			<a href="">Buy Premium Version</a>
 		     			<a class="dropdown" href="">Support</a>
-		     			<a href="">Quit</a>
+		     			<a href="http://localhost:8080/WorldWideJob/entrepreneur_research.jsp">Quit</a>
 		     		</div>
 		     	</div>		
 		        <div class="dropdown" style="float:right;">
@@ -52,12 +52,18 @@
 	    		<div>
 	    		<%if (countryBean.getName() != null && businessBean.getName() != null){%>
 	    			<input class="place2" type="text" name="place2" value="<%=countryBean.getName()%>" disabled style="background-color:white">
-	    			<input class="offer" type="text" name="business" value="<%=businessBean.getName()%>" disabled style="background-color:#E4F5F2" >
+	    			<input class="offer" type="submit" name="business" value="<%=businessBean.getName()%>" style="background-color:#E4F5F2">
 	    		<%}else if (countryBean.getName() == null && businessBean.getName() != null){%>
-	    			<input class="offer" type="text" name="business" value="<%=businessBean.getName()%>" disabled style="background-color:#E4F5F2" >
+	    			<input class="offer" type="submit" name="business" value="<%=businessBean.getName()%>" style="background-color:#E4F5F2">
 	    		<%}else if (countryBean.getName() != null && businessBean.getName() == null){%>
 	    			<input class="place2" type="text" name="place2" value="<%=countryBean.getName()%>" disabled style="background-color:white">
 	    		<%}%>
+	    		
+	    		<% if (request.getParameter("business") != null){
+					businessBean.setName(request.getParameter("business"));
+					String redirectURL = "http://localhost:8080/WorldWideJob/businessDetails.jsp";
+    				response.sendRedirect(redirectURL); }%>
+    			
 	    		<input class="joboffers" type="text" name="businesses" value="BUSINESSES" disabled style="background-color:dodgerblue">
 	    		<input class="line" style="background-color:black">
 	    		<input class="order_by" type="text" name="orderby" value="  Ordered by:" disabled style="background-color:lightgrey">
