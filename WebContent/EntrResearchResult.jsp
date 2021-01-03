@@ -12,7 +12,6 @@
 
 <%Class.forName("com.mysql.jdbc.Driver");%>
 
-
 <html lang="en">
 	<head>
 		<meta charset="ISO-8859-1">
@@ -51,10 +50,16 @@
 	    		</div>
 	    		</div>
 	    		<div>
-	    		<input class="place2" type="text" name="place2" value="<%=countryBean.getName()%>" disabled style="background-color:white">
+	    		<%if (countryBean.getName() != null && businessBean.getName() != null){%>
+	    			<input class="place2" type="text" name="place2" value="<%=countryBean.getName()%>" disabled style="background-color:white">
+	    			<input class="offer" type="text" name="business" value="<%=businessBean.getName()%>" disabled style="background-color:#E4F5F2" >
+	    		<%}else if (countryBean.getName() == null && businessBean.getName() != null){%>
+	    			<input class="offer" type="text" name="business" value="<%=businessBean.getName()%>" disabled style="background-color:#E4F5F2" >
+	    		<%}else if (countryBean.getName() != null && businessBean.getName() == null){%>
+	    			<input class="place2" type="text" name="place2" value="<%=countryBean.getName()%>" disabled style="background-color:white">
+	    		<%}%>
 	    		<input class="joboffers" type="text" name="businesses" value="BUSINESSES" disabled style="background-color:dodgerblue">
 	    		<input class="line" style="background-color:black">
-	    		<input class="offer" type="text" name="business" value="<%=businessBean.getName()%>" disabled style="background-color:#E4F5F2" >
 	    		<input class="order_by" type="text" name="orderby" value="  Ordered by:" disabled style="background-color:lightgrey">
 	    		<select class="order_select" name="orderselect" size="1" style="background-color:lightgrey">
 	    			<option>popularity</option>

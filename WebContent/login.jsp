@@ -3,10 +3,10 @@
 		import="logic.bean.AccountBean"%>
 <!DOCTYPE html>
 
-<jsp:useBean id="userBean" class="logic.bean.UserBean" scope="request"/>
+<jsp:useBean id="userBean" class="logic.bean.UserBean" scope="session"/>
 <jsp:setProperty name="userBean" property="*"/>
 
-<jsp:useBean id="accountBean" class="logic.bean.AccountBean" scope="request"/>
+<jsp:useBean id="accountBean" class="logic.bean.AccountBean" scope="session"/>
 <jsp:setProperty name="accountBean" property="*"/>
 
 <%Class.forName("com.mysql.jdbc.Driver");%>

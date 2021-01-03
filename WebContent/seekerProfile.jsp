@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+
+<%Class.forName("com.mysql.jdbc.Driver");%>
+
 <html lang="en">
 	<head>
 		<meta charset="ISO-8859-1">
@@ -19,7 +22,7 @@
 	    			<div class="dropdown-content" style="right:0;">
 		     			<a href="">Buy Premium Version</a>
 		     			<a class="dropdown" href="">Support</a>
-		     			<a href="">Quit</a>
+		     			<a href="http://localhost:8080/WorldWideJob/seeker_research.jsp">Quit</a>
 		     		</div>
 		     	</div>
 		     	<div style="float:right;">
@@ -28,7 +31,7 @@
 		        	<div class="dropdown" style="float:right;">
 	    				<button class="user_btn" style="background-color:lightblue;margin-right:10px;width:40px;height:40px;margin-top:10px"></button>
 	    			<div class="dropdown-content" style="right:0;">
-		     			<a href="">Logout</a>
+		     			<a href="http://localhost:8080/WorldWideJob/login.jsp">Logout</a>
 		     		</div>
 		     	</div>
 		     	</div>
@@ -37,9 +40,9 @@
 	    			<img alt="" class="image" src="icons/main_icon.png" width=70px height=70px>
 	    		</div>
 	    		<div style="float:left">
-	    			<button class="home_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px;"></button>
+	    			<button class="home_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px;" onClick="javascript:window.location='index.jsp';"></button>
 	    		<div style="float:right;">
-	    			<button class="arrow_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px"></button>
+	    			<button class="arrow_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='seeker_research.jsp';"></button>
 	    		</div>
 	    		</div>
 	    		<div class="recruiter_acc">
@@ -52,10 +55,10 @@
 	    		</div>
 	    		<div id="container">
 				<ul id="griglia">
-				<li><button class="cv_btn" style="width:200px;height:160px;background-color:lightblue">Curriculum Vitae</button></li>
-				<li><button class="id_btn" style="width:200px;height:160px;background-color:lightblue"><br>Personal Info</button></li>
-				<li><button class="offers_btn" style="width:200px;height:160px;background-color:lightblue">Applications</button></li>
-				<li><button class="favourites_btn" style="width:200px;height:160px;background-color:lightblue">Favourites</button></li>
+				<li><button class="cv_btn" style="width:200px;height:160px;background-color:lightblue" onClick="javascript:window.location='cv.jsp';">Curriculum Vitae</button></li>
+				<li><button class="id_btn" style="width:200px;height:160px;background-color:lightblue" onClick="javascript:window.location='personalInfo.jsp';"><br>Personal Info</button></li>
+				<li><button class="offers_btn" style="width:200px;height:160px;background-color:lightblue" onClick="javascript:window.location='applictionsJobSeeker.jsp';">Applications</button></li>
+				<li><button class="favourites_btn" style="width:200px;height:160px;background-color:lightblue" onClick="javascript:window.location='favouriteJobOffers.jsp';">Favourites</button></li>
 				</ul>
 				</div>
 				</div>

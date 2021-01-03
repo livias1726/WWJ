@@ -9,15 +9,6 @@
 
 <%Class.forName("com.mysql.jdbc.Driver");%>
 
-<% if (request.getParameter("search") != null && (!request.getParameter("place").equals("") || !request.getParameter("business").equals(""))) {
-		countryBean.setName(request.getParameter("place"));
-		businessBean.setName(request.getParameter("business"));
-		
-		String redirectURL = "http://localhost:8080/WorldWideJob/EntrResearchResult.jsp";
-        response.sendRedirect(redirectURL);
-    }
-%>
-
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
@@ -47,6 +38,18 @@
 	    		</div>
 	    		</div>
 	    		<div class="search_entr">Become your own boss.<br>Start a new business in the Country of your dreams.<br>
+	    		<% if (request.getParameter("search") != null && (!request.getParameter("place").equals("") || !request.getParameter("business").equals(""))) {
+					countryBean.setName(request.getParameter("place"));
+					businessBean.setName(request.getParameter("business"));
+					String redirectURL = "http://localhost:8080/WorldWideJob/EntrResearchResult.jsp";
+        			response.sendRedirect(redirectURL);
+    				}
+					if (request.getParameter("search") != null && (request.getParameter("place").equals("") && request.getParameter("job").equals(""))){%>
+						<div class="alert" role="alert">
+							<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+							<strong style="color:black">Attenzione! Inserisci il paese oppure il business a cui sei interessato.</strong>
+						</div>
+					<%}%>
 	    		<div class="dropdown">
 	    			<input class="place_btn" type="text" name="place" value="" style="background-color:white; border-color:black">
 	    		<div class="dropdown-content">

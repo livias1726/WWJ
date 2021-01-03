@@ -48,14 +48,17 @@
 	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='seeker_research.jsp';"></button>
 	    		</div>
 	    		</div>
-	    		<%if(request.getParameter("place")!=null) {%>
+	    		<div>
+	    		<%if (countryBean.getName() != null && jobBean.getName() != null) {%>
 	    			<input class="place2" id="name_place" type="text" name="name_place" disabled value="<%=countryBean.getName()%>">
-	    		  <%} else {%>
-	    			<input class="place2" id="name_place" type="text" name="name_place" disabled value="<%=countryBean.getCountries()%>">
-	    		  <%}%>
+	    			<input class="offer" id="offer" type="text" name="offer" value="<%=jobBean.getName()%>" disabled style="background-color:#E4F5F2">
+	    		<%}else if (countryBean.getName() == null && jobBean.getName() != null) {%>
+	    			<input class="offer" id="offer" type="text" name="offer" value="<%=jobBean.getName()%>" disabled style="background-color:#E4F5F2">
+	    		<%}else if (countryBean.getName() != null && jobBean.getName() == null) {%>
+	    			<input class="place2" id="name_place" type="text" name="name_place" disabled value="<%=countryBean.getName()%>">
+	    		<%}%>
 	    		<input class="joboffers" type="text" name="joboffers" value="JOB OFFERS" disabled style="background-color:dodgerblue">
 	    		<input class="line" style="background-color:black">
-	    		<input class="offer" type="text" name="offer" value="<%=jobBean.getName()%>" disabled style="background-color:#E4F5F2">
 	    		<input class="order_by" type="text" name="orderby" value="  Ordered by:" disabled style="background-color:lightgrey">
 	    		<select class="order_select" name="orderselect" size="1" style="background-color:whitesmoke">
 	    			<option>most recent</option>
@@ -70,6 +73,7 @@
 	    		<input type="radio" name="category">Retail<br>
 	    		<input type="radio" name="category">Technology
 	    		</fieldset>
+	    		</div>
 	    	</form>	
 	    </div>
 	</body>

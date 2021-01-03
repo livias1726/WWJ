@@ -4,10 +4,10 @@
 		import="logic.bean.AccountBean"%>
 <!DOCTYPE html>
 
-<jsp:useBean id="userBean" class="logic.bean.UserBean" scope="request"/>
+<jsp:useBean id="userBean" class="logic.bean.UserBean" scope="session"/>
 <jsp:setProperty name="userBean" property="*"/>
 
-<jsp:useBean id="accountBean" class="logic.bean.AccountBean" scope="request"/>
+<jsp:useBean id="accountBean" class="logic.bean.AccountBean" scope="session"/>
 <jsp:setProperty name="accountBean" property="*"/>
 
 <%Class.forName("com.mysql.jdbc.Driver");%>
@@ -70,7 +70,7 @@
 				    	<label for="confirmPassword" style="color:black;font-size:20px;margin-right:40px">Confirm Password</label>
 				        <input type="text" id="confirmPassword" name="confirmPassword" style="margin-right:250px;height:15px">
 				    </div><br>
-				    <button class="search_btn" name="signup" style="width:120px; height:60px; top:40px; background-color: dodgerblue; margin-left:-30px">Sign Up</button>
+				    <button class="search_btn" type="submit" name="signup" style="width:120px; height:60px; top:40px; background-color: dodgerblue; margin-left:-30px">Sign Up</button>
 				</div>
 			</form>
 	</div>
