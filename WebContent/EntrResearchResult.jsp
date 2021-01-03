@@ -38,16 +38,16 @@
 		        <div class="dropdown" style="float:right;">
 	    			<button class="user_btn" style="background-color:lightblue;margin-right:10px;width:40px;height:40px;margin-top:10px"></button>
 		     		<div class="dropdown-content" style="right:0;">
-		     			<a href="">Login</a>
+		     			<a href="http://localhost:8080/WorldWideJob/login.jsp">Login</a>
 		     		</div>
 		     	</div>
 	    		<div style="float:left;width:70px;height:70px">
 	    			<img alt="" class="image" src="icons/main_icon.png" width=70px height=70px>
 	    		</div>
 	    		<div style="float:left">
-	    			<button class="home_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px;"></button>
+	    			<button class="home_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='index.jsp';"></button>
 	    		<div style="float:right;">
-	    			<button class="arrow_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px"></button>
+	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='entrepreneur_research.jsp';"></button>
 	    		</div>
 	    		</div>
 	    		<div>

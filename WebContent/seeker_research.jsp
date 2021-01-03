@@ -11,12 +11,11 @@
 
 <%Class.forName("com.mysql.jdbc.Driver");%>
 
-<%if (request.getParameter("search") != null){
+<%if (request.getParameter("search") != null && (!request.getParameter("place").equals("") || !request.getParameter("job").equals(""))){
 	countryBean.setName(request.getParameter("place"));
-	jobBean.setName(request.getParameter("job"));%>
-	<%
+	jobBean.setName(request.getParameter("job"));
 	String redirectURL = "http://localhost:8080/WorldWideJob/JobSeekerResearchResult.jsp";
-        response.sendRedirect(redirectURL);}%>
+    response.sendRedirect(redirectURL);} %>
 
 <html lang="en">
 	<head>
@@ -49,14 +48,12 @@
 	    		<div class="search_usr">Find the right job for you,<br>In the place you've always dreamed of.<br>
 	    		<div class="dropdown">
 	    			<input class="place_btn" type="text" name="place" id="place" value="" style="background-color:white; border-color:black">
-	    		<div class="dropdown-content" style="right:0;">
-	    			<a></a>
+	    		<div class="dropdown-content">
 	    		</div>
 	    		</div>
 	    		<div class="dropdown">
 	    			<input class="job_btn" type="text" name="job" value="" id="job" style="background-color:white; border-color:black"><br>
-	    		<div class="dropdown-content" style="left:0;">
-	    			<a></a>
+	    		<div class="dropdown-content">
 	    		</div>
 	    		</div>
 	    		<button class="search_btn" type="submit" name="search" style="width:100px; height:50px; top:100px; background-color: dodgerblue; margin-right:-20px; border-color: black">Search</button>
