@@ -99,7 +99,7 @@ public class AccountControl {
 	}
 
 	public void changePersonalInfo(UserBean bean) throws DatabaseFailureException {
-    	User user = new User(bean.getFirstName(), bean.getLastName(), bean.getEmail(), bean.getPassword());
+    	User user = new User(bean.getEmail(), bean.getPassword(), bean.getFirstName(), bean.getLastName());
     	user.setCity(bean.getCity());
     	user.setBirth(bean.getBirth());
 		try {

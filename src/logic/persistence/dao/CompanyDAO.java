@@ -31,8 +31,7 @@ public class CompanyDAO {
 			res = RoutinesManager.bindParametersAndExec(stmt, id.intValue());
 			
             if (res.first()){           	
-            	company = new Company();
-            	company.setName(res.getString("name"));
+            	company = new Company(res.getString("name"));
             	company.setDescription(res.getString("description"));
             	
             	Address head = new Address();
@@ -86,12 +85,25 @@ public class CompanyDAO {
 
 		try {
 			Connection conn = ConnectionManager.getConnection();
-        	stmt = conn.prepareCall(RoutinesIdentifier.UPDATE_COMPANY, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			RoutinesManager.bindParametersAndExec(stmt, id.toString(), company.getName(), company.getDescription(), 
-						company.getHeadquarter().getCountry().getName(), company.getHeadquarter().getState(), company.getHeadquarter().getCity(),
-						String.valueOf(company.getHeadquarter().getPostalCode()), company.getHeadquarter().getStreet(),
-						String.valueOf(company.getHeadquarter().getNumber()));
-       
+        	stmt = conn.prepareCall(RoutinesIdentifier.UPDATE_COMPANY);
+        	
+        	if(company.getHeadquarter() != null) {
+        		RoutinesManager.bindParametersAndExec(stmt, id.toString(), company.getName(), company.getDescription(), 
+													  company.getHeadquarter().getCountry().getName(), company.getHeadquarter().getState(), 
+													  company.getHeadquarter().getCity(), String.valueOf(company.getHeadquarter().getPostalCode()), 
+													  company.getHeadquarter().getStreet(), String.valueOf(company.getHeadquarter().getNumber()));
+        	}else {
+        		RoutinesManager.bindParametersAndExec(stmt, id.toString(), company.getName(), company.getDescription(), null, null, null, null, null, null);
+        	}
+			
+        	if(company.getBranches() != null) {
+        		for(Address i: company.getBranches()) {
+            		stmt = conn.prepareCall(RoutinesIdentifier.UPDATE_BRANCHES);
+            		RoutinesManager.bindParametersAndExec(stmt, id.toString(), i.getCountry().getName(), i.getState(), i.getCity(), 
+            											  String.valueOf(i.getPostalCode()), i.getStreet(), String.valueOf(i.getNumber()));
+            	}
+        	}
+        	
         } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to update company information."); 
 		} finally {

@@ -2,7 +2,6 @@ package logic.presentation.control;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
@@ -61,7 +60,7 @@ public class PublishedOffersGraphic implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		OfferBean bean = new OfferBean();
-		List <OfferBean> list = null;
+		ObservableList <OfferBean> list = null;
 		try {
 			list = bean.getPublishedOffers();
 			
@@ -76,7 +75,7 @@ public class PublishedOffersGraphic implements Initializable {
 			closeOffersSection();
 		}
 		
-		FilteredList<OfferBean> filteredList = new FilteredList<>((ObservableList<OfferBean>)list, p -> true);
+		FilteredList<OfferBean> filteredList = new FilteredList<>(list, p -> true);
 		table.itemsProperty().set(filteredList);
 		
 		allRadio.selectedProperty().addListener((observable, oldValue, newValue) -> showAll(filteredList));

@@ -49,6 +49,6 @@ public class CompanyBean {
 	}
 
 	public void saveCompanyInfo() throws DatabaseFailureException {
-		RecruiterAccountControl.getInstance().changeCompanyInfo();
+		RecruiterAccountControl.getInstance().changeCompanyInfo(this);
 	}
 }

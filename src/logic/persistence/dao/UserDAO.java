@@ -56,7 +56,13 @@ public class UserDAO {
 		try {
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.UPDATE_USER);
-			RoutinesManager.bindParametersAndExec(stmt, user.getEmail(), user.getPwd(), user.getFirstName(), user.getLastName(), user.getCity(), user.getBirth().toString(), id.toString());
+        	
+        	if(user.getBirth() != null) {
+        		RoutinesManager.bindParametersAndExec(stmt, user.getEmail(), user.getPwd(), user.getFirstName(), user.getLastName(), user.getCity(), user.getBirth().toString(), id.toString());
+        	}else {
+        		RoutinesManager.bindParametersAndExec(stmt, user.getEmail(), user.getPwd(), user.getFirstName(), user.getLastName(), user.getCity(), null, id.toString());
+        	}
+			
 			     
         } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to update personal information."); 

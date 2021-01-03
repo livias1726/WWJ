@@ -13,6 +13,14 @@ public class Company implements Serializable{
 	private String description;
 	private Address headquarter;
 	private List<Address> branches;
+	
+	public Company() {
+		/**/
+	}
+	
+	public Company(String name) {
+		this.name = name;
+	}
 
 	public String getName() {
 		return name;
@@ -44,6 +52,10 @@ public class Company implements Serializable{
 
 	public void setBranches(List<Address> branches) {
 		this.branches = branches;
+	}
+	
+	public Company getCompanyInfoFromDB(Long id) throws SQLException {
+		return CompanyDAO.selectCompanyInfo(id);
 	}
 
 	public void saveCompanyInfoOnDB(Long id) throws SQLException {

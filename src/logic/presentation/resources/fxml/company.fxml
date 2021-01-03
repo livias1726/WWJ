@@ -18,11 +18,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="addBranchesBtn" layoutX="983.0" layoutY="195.0" mnemonicParsing="false" onAction="#addBranches" text="Add" visible="false">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <Button layoutX="1084.0" layoutY="24.0" mnemonicParsing="false" onAction="#closeCompanyInfo" prefHeight="25.0" prefWidth="25.0" styleClass="close_btn">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -95,5 +90,6 @@
             </VBox>
          </children>
       </VBox>
+      <Button fx:id="addBtn" layoutX="1046.0" layoutY="195.0" mnemonicParsing="false" onAction="#addBranch" text="Add" visible="false" />
    </children>
 </AnchorPane>

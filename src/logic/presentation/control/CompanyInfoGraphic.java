@@ -31,7 +31,7 @@ public class CompanyInfoGraphic implements Initializable {
     private Button changeCompanyBtn;
 
     @FXML
-    private Button addBranchesBtn;
+    private Button addBtn;
 
     @FXML
     private Button saveCompanyBtn;
@@ -50,26 +50,20 @@ public class CompanyInfoGraphic implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		CompanyBean company;
+		CompanyBean company = null;
 		try {
 			company = new CompanyBean().getCompanyInfo();
-			initInfo(company);	 	
-	    	initBindings();
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
+		
+		if(company != null) {
+			initInfo(company);	 	
+		}
+		
+		initBindings();
 	}
 	
-	private void initBindings() {
-		saveCompanyBtn.visibleProperty().bind(changeCompanyBtn.visibleProperty().not());
-		
-    	nameCompany.editableProperty().bind(saveCompanyBtn.visibleProperty());
-    	description.editableProperty().bind(saveCompanyBtn.visibleProperty());
-    	branchList.editableProperty().bind(saveCompanyBtn.visibleProperty());
-    	headquarter.editableProperty().bind(saveCompanyBtn.visibleProperty());
-    	addBranchesBtn.visibleProperty().bind(saveCompanyBtn.visibleProperty());
-	}
-
 	private void initInfo(CompanyBean company) {
 		nameCompany.setText(company.getName());
     	description.setText(company.getDescription());
@@ -82,6 +76,17 @@ public class CompanyInfoGraphic implements Initializable {
     	branchList.setItems(list);
 	}
 	
+	private void initBindings() {
+		saveCompanyBtn.visibleProperty().bind(changeCompanyBtn.visibleProperty().not());
+		
+    	nameCompany.editableProperty().bind(saveCompanyBtn.visibleProperty());
+    	description.editableProperty().bind(saveCompanyBtn.visibleProperty());
+    	branchList.editableProperty().bind(saveCompanyBtn.visibleProperty());
+    	headquarter.editableProperty().bind(saveCompanyBtn.visibleProperty());
+    	addBtn.visibleProperty().bind(saveCompanyBtn.visibleProperty());
+	}
+
+	
 	private String buildAddress(AddressBean address) {
 		return address.getStreet() + ", " + address.getNumber() + ", " + address.getPostalCode() 
 								   + ", " + address.getCity() + ", " + address.getState() + ", " + address.getCountry();
@@ -93,10 +98,10 @@ public class CompanyInfoGraphic implements Initializable {
     }
 	
 	@FXML
-    public void addBranches() {
+    void addBranch() {
 		branchList.getItems().add("");
     }
-	
+
 	@FXML
     public void saveChanges() {
 		Optional<ButtonType> result = GraphicHandler.popUpMsg(AlertType.CONFIRMATION, "Do you really want to save this changes?");
@@ -110,9 +115,14 @@ public class CompanyInfoGraphic implements Initializable {
     	
     	AddressBean head = new AddressBean();
     	try {
-			head.tokenizerAddress(headquarter.getText());
+    		if(!headquarter.getText().isEmpty() && headquarter.getText() != null) {
+    			head.tokenizerAddress(headquarter.getText());
+    		}
+			
 			for(String i: branchList.getItems()) {
-	    		head.tokenizerAddress(i);
+				if(!i.isEmpty()) {
+					head.tokenizerAddress(i);
+	    		}
 	    	}
 	   
 		} catch (BadAddressException ba) {
