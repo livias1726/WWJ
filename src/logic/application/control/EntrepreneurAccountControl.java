@@ -35,12 +35,8 @@ public class EntrepreneurAccountControl{
 			throw new DatabaseFailureException();
 		}
     	
-    	return modelToBean(list);
-	}
-
-	private List<BusinessInCountryBean> modelToBean(List<BusinessInCountry> src) {
 		List<BusinessInCountryBean> dest = new ArrayList<>();
-    	for(BusinessInCountry i: src) {
+    	for(BusinessInCountry i: list) {
     		BusinessInCountryBean bean = new BusinessInCountryBean();  		
     		
     		bean.setName(i.getName());

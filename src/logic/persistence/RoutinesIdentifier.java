@@ -8,7 +8,7 @@ public class RoutinesIdentifier {
 	
 	public static final String LOGIN = "call wwj_db.login(?, ?)";
 	public static final String SIGNUP = "call wwj_db.add_user(?, ?, ?, ?, ?)";
-	public static final String GET_USER = "call wwj_db.retrieve_user(?)";
+	public static final String GET_USER = "call wwj_db.retrieve_user(?);";
 	public static final String GET_ACCOUNT = "call wwj_db.retrieve_account(?)";
 	public static final String GET_NOTIFICATIONS = "call wwj_db.retrieve_notifications(?)";
 	public static final String GET_COMPANY = "call wwj_db.retrieve_company(?)";

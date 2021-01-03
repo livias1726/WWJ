@@ -43,10 +43,6 @@ public class RecruiterAccountControl {
 			throw new DatabaseFailureException();
 		}
     	
-    	return modelToBean(company);	
-	}
-
-	private CompanyBean modelToBean(Company company) {
 		CompanyBean bean = new CompanyBean();
 		bean.setName(company.getName());
 		bean.setDescription(company.getDescription());
@@ -88,12 +84,8 @@ public class RecruiterAccountControl {
 			throw new DatabaseFailureException();
 		}
 		
-		return modelToBean(list);
-	}
-	
-	private List<OfferBean> modelToBean(List<Offer> src){
 		List<OfferBean> dest = new ArrayList<>();
-		for(Offer i: src) {
+		for(Offer i: list) {
 			OfferBean bean = new OfferBean();		
 			bean.setId(i.getId());
 			

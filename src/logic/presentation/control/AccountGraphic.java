@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -49,13 +48,13 @@ public class AccountGraphic implements Initializable {
 	@FXML 
 	protected Label nameLbl;
 		
-	protected Integer accountID;
+	protected Integer accountID = 0;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
 		AccountBean account = null;
 		try {
-			if(accountID == null) {
+			if(accountID == 0) {
 				account = new AccountBean().getAccount();
 			}else {
 				account = new AccountBean().getAccount(accountID);
@@ -91,7 +90,7 @@ public class AccountGraphic implements Initializable {
 	}
 	
 	@FXML
-	protected void openPersonalInfo(ActionEvent event) {
+	protected void openPersonalInfo() {
 		if(SessionFacade.getSession().getID().intValue() != accountID) {
 			Stage popup = GraphicHandler.openSection(pane, Sections.PERSONAL_INFO, new PersonalInfoGraphic(accountID));
 			popup.centerOnScreen();
@@ -101,7 +100,6 @@ public class AccountGraphic implements Initializable {
 			popup.centerOnScreen();
 			popup.show();
 		}
-		
 	}
 			
 	@FXML

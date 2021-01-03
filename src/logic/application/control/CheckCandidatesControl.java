@@ -34,13 +34,9 @@ public class CheckCandidatesControl {
 			throw new DatabaseFailureException(); 
 		}
 		
-		return modelToBean(list);
-	}
-
-	private List<CandidateBean> modelToBean(List<Candidate> src) {
 		List<CandidateBean> dest = new ArrayList<>();
 		
-		for(Candidate i: src) {
+		for(Candidate i: list) {
 			CandidateBean bean = new CandidateBean();
 			
 			bean.setOffer(i.getOffer());
