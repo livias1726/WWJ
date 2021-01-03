@@ -30,7 +30,7 @@
 	    			<div class="dropdown-content" style="right:0;">
 		     			<a href="">Buy Premium Version</a>
 		     			<a class="dropdown" href="">Support</a>
-		     			<a href="">Quit</a>
+		     			<a href="http://localhost:8080/WorldWideJob/seeker_research.jsp">Quit</a>
 		     		</div>
 		     	</div>		
 		        <div class="dropdown" style="float:right;">
@@ -51,12 +51,18 @@
 	    		<div>
 	    		<%if (countryBean.getName() != null && jobBean.getName() != null) {%>
 	    			<input class="place2" id="name_place" type="text" name="name_place" disabled value="<%=countryBean.getName()%>">
-	    			<input class="offer" id="offer" type="text" name="offer" value="<%=jobBean.getName()%>" disabled style="background-color:#E4F5F2">
+	    			<input class="offer" id="offer" type="submit" name="offer" value="<%=jobBean.getName()%>" style="background-color:#E4F5F2">
 	    		<%}else if (countryBean.getName() == null && jobBean.getName() != null) {%>
-	    			<input class="offer" id="offer" type="text" name="offer" value="<%=jobBean.getName()%>" disabled style="background-color:#E4F5F2">
+	    			<input class="offer" id="offer" type="submit" name="offer" value="<%=jobBean.getJobs()%>" style="background-color:#E4F5F2">
 	    		<%}else if (countryBean.getName() != null && jobBean.getName() == null) {%>
-	    			<input class="place2" id="name_place" type="text" name="name_place" disabled value="<%=countryBean.getName()%>">
+	    			<input class="place2" id="name_place" type="text" name="name_place" disabled value="<%=countryBean.getCountries()%>">
 	    		<%}%>
+	    		
+	    		<% if (request.getParameter("offer") != null){
+					jobBean.setName(request.getParameter("offer"));
+					String redirectURL = "http://localhost:8080/WorldWideJob/offerDetails.jsp";
+    				response.sendRedirect(redirectURL); }%>
+	    		
 	    		<input class="joboffers" type="text" name="joboffers" value="JOB OFFERS" disabled style="background-color:dodgerblue">
 	    		<input class="line" style="background-color:black">
 	    		<input class="order_by" type="text" name="orderby" value="  Ordered by:" disabled style="background-color:lightgrey">

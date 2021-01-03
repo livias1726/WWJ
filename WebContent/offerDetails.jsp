@@ -1,6 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="logic.bean.JobBean"
+		import="logic.bean.CountryBean"
+		import="logic.bean.OfferBean"%>
+    
 <!DOCTYPE html>
+
+<jsp:useBean id="countryBean" scope="session" class="logic.bean.CountryBean"/>
+<jsp:setProperty name="countryBean" property="*"/>
+
+<jsp:useBean id="jobBean" scope="session" class="logic.bean.JobBean"/>
+<jsp:setProperty name="jobBean" property="*"/>
+
+<jsp:useBean id="offerBean" scope="session" class="logic.bean.OfferBean"/>
+<jsp:setProperty name="offerBean" property="*"/>
+
+<%Class.forName("com.mysql.jdbc.Driver");%>
+
 <html lang="en">
 <head>
 		<meta charset="ISO-8859-1">
@@ -10,32 +26,40 @@
 
 		<title>WorldWideWeb - offerDetails</title>
 
-</head>
-<body>
-	<div>
+	</head>
+	<body>
+		<div>
 			<form action="offerDetails.jsp" name="offerDetailsform" method="POST">
-				<div style="float:right;">
-	    				<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
-		     	<div style="float:left;">
+				<div class="dropdown" style="float:right;">
+	    			<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
+		     		<div class="dropdown-content" style="right:0;">
+		     			<a href="">Buy Premium Version</a>
+		     			<a class="dropdown" href="">Support</a>
+		     			<a href="http://localhost:8080/WorldWideJob/seeker_research.jsp">Quit</a>
+		     		</div>
+		     	</div>	
+		     	<div class="dropdown" style="float:right;">
 	    			<button class="user_btn" style="background-color:lightblue;margin-right:10px;width:40px;height:40px;margin-top:10px"></button>
-		     	</div>
+		     		<div class="dropdown-content" style="right:0;">
+		     			<a href="http://localhost:8080/WorldWideJob/login.jsp">Login</a>
+		     		</div>
 		     	</div>
 	    		<div style="float:left;width:70px;height:70px">
 	    			<img alt="" class="image" src="icons/main_icon.png" width=70px height=70px>
 	    		</div>
 	    		<div style="float:left">
-	    			<button class="home_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px;"></button>
+	    			<button class="home_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px;" onClick="javascript:window.location='index.jsp';"></button>
 	    		<div style="float:right;">
-	    			<button class="arrow_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px"></button>
+	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='JobSeekerResearchResult.jsp';"></button>
 	    		</div>
 	    		</div>
 	    		<div>
 	    		<input class="place2" type="text" name="place2" value="" disabled style="background-color:white">
 	    		</div>
-	    		<div class="scheletro_offer_det">The Job<br>
+	    		<div class="scheletro_offer_det"><%=jobBean.getName()%><br>
 	    			<div style="margin-top: 40px">
 				    	<label for="position" style="color:black;font-size:20px;margin-left:15px">Position</label>
-				        <input type="text" id="position" name="position" style="margin-left: 40px">
+				        <input type="text" id="position" name="position" value="<%=offerBean.getPosition()%>" disabled style="margin-left: 40px">
 				    </div>
 				    <div style="margin-top: 40px">
 				    	<label for="qualificationNeeded" style="color:black;font-size:20px;margin-left:15px">Qualification needed</label>

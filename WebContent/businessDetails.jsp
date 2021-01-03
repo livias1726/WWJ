@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
  <%@ page import="logic.bean.BusinessBean"
  	import="logic.bean.CountryBean"
- 	%>
+ 	import="logic.bean.BusinessInCountryBean"%>
 		
 <!DOCTYPE html>
 
@@ -11,6 +11,9 @@
 
 <jsp:useBean id="businessBean" scope="session" class="logic.bean.BusinessBean"/>
 <jsp:setProperty name="businessBean" property="*"/>
+
+<jsp:useBean id="businessInCountryBean" scope="session" class="logic.bean.BusinessInCountryBean"/>
+<jsp:setProperty name="businessInCountryBean" property="*"/>
 
 <%Class.forName("com.mysql.jdbc.Driver");%>
 
