@@ -43,13 +43,13 @@ public class CandidatesInfoGraphic implements Initializable {
     private TableColumn<CandidateBean, String> candCol;
     
     @FXML
-    private TableColumn<CandidateBean, Integer> idCol;
+    private TableColumn<CandidateBean, Long> idCol;
     
     @FXML
     private Button delBtn;
     
     private ToolBar toolbar;
-    private ObservableList<Integer> selected = FXCollections.observableArrayList();
+    private ObservableList<Long> selected = FXCollections.observableArrayList();
 
 	public CandidatesInfoGraphic(ToolBar toolbar) {
 		this.toolbar = toolbar;
@@ -103,7 +103,7 @@ public class CandidatesInfoGraphic implements Initializable {
     	});
 	}
 	
-	private void openSeekerProfile(Integer id) {
+	private void openSeekerProfile(Long id) {
 		Stage stage = (Stage)candidatesPane.getScene().getWindow();			
 		stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_SEEK, new SeekerAccountGraphic(toolbar, id)));
 	}
@@ -125,7 +125,7 @@ public class CandidatesInfoGraphic implements Initializable {
 	public void deleteSelected() {
 		CandidateBean bean = new CandidateBean();
 		try {
-			bean.deleteSelectedCandidates((List<Integer>)selected);
+			bean.deleteSelectedCandidates((List<Long>)selected);
 			initialize(null, null);
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());

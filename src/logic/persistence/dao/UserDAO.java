@@ -17,20 +17,22 @@ public class UserDAO {
 		/**/
 	}
 
-	public static User selectPersonalInfo(Integer id) throws SQLException {
+	public static User selectPersonalInfo(long id) throws SQLException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
 		User user = null;
 
 		try {
 			Connection conn = ConnectionManager.getConnection();
-        	stmt = conn.prepareCall(RoutinesIdentifier.GET_USER);
-			res = RoutinesManager.bindParametersAndExec(stmt, id);
+        	stmt = conn.prepareCall(RoutinesIdentifier.GET_USER, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			res = RoutinesManager.bindParametersAndExec(stmt, (int)id);
 			
             if (res.first()){           	
             	user = new User(res.getString("email"), res.getString("pwd"), res.getString("first_name"), res.getString("last_name"));
             	user.setCity(res.getString("city"));
-            	user.setBirth(res.getDate("birth").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            	if(res.getDate("birth") != null) {
+            		user.setBirth(res.getDate("birth").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            	}
             }
             
             res.close();          

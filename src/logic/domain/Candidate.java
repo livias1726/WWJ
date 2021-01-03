@@ -43,7 +43,7 @@ public class Candidate implements Serializable{
 		return CandidateDAO.selectCandidates(id);
 	}
 
-	public void removeCandidatesFromDB(List<Integer> selected) throws SQLException {
+	public void removeCandidatesFromDB(List<Long> selected) throws SQLException {
 		CandidateDAO.deleteCandidates(selected);
 	}
 

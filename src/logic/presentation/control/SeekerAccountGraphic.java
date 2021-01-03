@@ -38,12 +38,12 @@ public class SeekerAccountGraphic extends AccountGraphic{
 	@FXML
 	private Button cvBtn;
 	
-	public SeekerAccountGraphic(ToolBar toolbar, Integer id) {
+	public SeekerAccountGraphic(ToolBar toolbar, Long id) {
 		this.barSeek = toolbar;
 		accountID = id;
 	}
 
-	public SeekerAccountGraphic(Integer id) {
+	public SeekerAccountGraphic(Long id) {
 		accountID = id;
 	}
 

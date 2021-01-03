@@ -22,8 +22,8 @@ public class CV implements Serializable {
 		this.cvDoc = file;
 	}
 
-	public CV getCVFromDB(Integer id) throws SQLException, IOException, NoResultFoundException {
-		return CvDAO.selectCVInfo(id);
+	public CV getCVFromDB(long accountID) throws SQLException, IOException, NoResultFoundException {
+		return CvDAO.selectCVInfo(accountID);
 	}
 
 	public void saveCV(File cv, String id) throws IOException, SQLException {

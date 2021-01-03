@@ -22,7 +22,7 @@ public class CvDAO {
 		/**/
 	}
 
-	public static CV selectCVInfo(Integer id) throws SQLException, IOException, NoResultFoundException {
+	public static CV selectCVInfo(long accountID) throws SQLException, IOException, NoResultFoundException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
 		CV cv = new CV();
@@ -30,7 +30,7 @@ public class CvDAO {
 		try {
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.GET_CV);
-			res = RoutinesManager.bindParametersAndExec(stmt, id);
+			res = RoutinesManager.bindParametersAndExec(stmt, (int)accountID);
 			
 			if(!res.first()) {
 				throw new NoResultFoundException();

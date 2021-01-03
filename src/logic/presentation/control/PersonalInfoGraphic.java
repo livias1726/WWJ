@@ -61,14 +61,14 @@ public class PersonalInfoGraphic implements Initializable {
     @FXML
     private HBox passHBox;
     
-    private Integer id;
+    private Long id;
     
-    public PersonalInfoGraphic(Integer accountID) {
+    public PersonalInfoGraphic(Long accountID) {
 		this.id = accountID;
 	}
     
     public PersonalInfoGraphic() {
-		this.id = SessionFacade.getSession().getID().intValue();
+		this.id = SessionFacade.getSession().getID();
 	}
 
 	@Override

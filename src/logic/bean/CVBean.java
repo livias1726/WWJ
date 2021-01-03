@@ -18,8 +18,8 @@ public class CVBean {
 		this.cv = cv;
 	}
 	
-	public CVBean getCVFile(Integer id) throws DatabaseFailureException, NoResultFoundException {
-		return SeekerAccountControl.getInstance().retrieveCV(id);
+	public CVBean getCVFile(Long accountID) throws DatabaseFailureException, NoResultFoundException {
+		return SeekerAccountControl.getInstance().retrieveCV(accountID);
 	}
 
 	public void uploadNewCV(File curr) throws DatabaseFailureException {

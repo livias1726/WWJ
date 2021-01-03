@@ -35,7 +35,7 @@ public class AccountDAO {
 			
             if (res.first()){           	
             	long idA = res.getInt("id");
-              	 
+     
                 User user = new User();
                 user.setFirstName(res.getString("first_name"));
                 user.setLastName(res.getString("last_name"));
@@ -47,9 +47,9 @@ public class AccountDAO {
                 account = new Account(user, type, idA);
                 account.setPremium(premium);
             }
-            
+
             res.close();
-           
+            
         } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to retrieve the account."); 
 		} finally {

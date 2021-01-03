@@ -48,7 +48,7 @@ public class AccountGraphic implements Initializable {
 	@FXML 
 	protected Label nameLbl;
 		
-	protected Integer accountID = 0;
+	protected Long accountID = (long) 0; 
 
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
@@ -91,7 +91,7 @@ public class AccountGraphic implements Initializable {
 	
 	@FXML
 	protected void openPersonalInfo() {
-		if(SessionFacade.getSession().getID().intValue() != accountID) {
+		if(SessionFacade.getSession().getID().equals(accountID)) {
 			Stage popup = GraphicHandler.openSection(pane, Sections.PERSONAL_INFO, new PersonalInfoGraphic(accountID));
 			popup.centerOnScreen();
 			popup.show();

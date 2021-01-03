@@ -51,15 +51,15 @@ public class CandidateDAO {
         return list;
 	}
 
-	public static void deleteCandidates(List<Integer> selected) throws SQLException {
+	public static void deleteCandidates(List<Long> selected) throws SQLException {
 		CallableStatement stmt = null;
 		
 		try{
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.DELETE_CANDIDATES, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);	
         	
-        	for(Integer i: selected) {
-        		RoutinesManager.bindParametersAndExec(stmt, selected.get(i));
+        	for(Long i: selected) {
+        		RoutinesManager.bindParametersAndExec(stmt, selected.get(i.intValue()).intValue());
         	}
 			
         } catch (SQLException e) {

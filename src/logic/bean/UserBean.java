@@ -99,7 +99,7 @@ public class UserBean {
     	}
     }
    
-	public UserBean getPersonalInfo(Integer id) throws DatabaseFailureException {
+	public UserBean getPersonalInfo(Long id) throws DatabaseFailureException {
 		return AccountControl.getInstance().retrievePersonalInfo(id);
 	}
 

@@ -73,7 +73,7 @@ public class AccountBean {
 		return AccountControl.getInstance().retrieveAccount();
 	}
 	
-	public AccountBean getAccount(Integer accountID) throws DatabaseFailureException {
+	public AccountBean getAccount(Long accountID) throws DatabaseFailureException {
 		return AccountControl.getInstance().retrieveAccount(accountID);
 	}
 	

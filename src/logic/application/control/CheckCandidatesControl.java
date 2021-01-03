@@ -49,7 +49,7 @@ public class CheckCandidatesControl {
 		return dest;
 	}
 
-	public void removeCandidates(List<Integer> selected) throws DatabaseFailureException {
+	public void removeCandidates(List<Long> selected) throws DatabaseFailureException {
 		Candidate cand = new Candidate();
 		try {
 			cand.removeCandidatesFromDB(selected);

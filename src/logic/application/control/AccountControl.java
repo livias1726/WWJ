@@ -39,7 +39,7 @@ public class AccountControl {
     	return modelToBean(account);
     }
     
-    public AccountBean retrieveAccount(Integer accountID) throws DatabaseFailureException {
+    public AccountBean retrieveAccount(Long accountID) throws DatabaseFailureException {
     	Account account = new Account();
     	try {
 			account = account.getAccountFromDB(accountID);
@@ -65,7 +65,7 @@ public class AccountControl {
     	return bean;
     }
     
-    public UserBean retrievePersonalInfo(Integer id) throws DatabaseFailureException {
+    public UserBean retrievePersonalInfo(Long id) throws DatabaseFailureException {
     	
     	User user = new User();
 		try {

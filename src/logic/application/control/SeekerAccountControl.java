@@ -68,10 +68,10 @@ public class SeekerAccountControl {
 		}
 	}
 
-	public CVBean retrieveCV(Integer id) throws DatabaseFailureException, NoResultFoundException {
+	public CVBean retrieveCV(Long accountID) throws DatabaseFailureException, NoResultFoundException {
 		CVBean bean = new CVBean();
 		try {
-			CV cv = new CV().getCVFromDB(id);
+			CV cv = new CV().getCVFromDB(accountID);
 			bean.setCv(cv.getCvDoc());
 		} catch (SQLException | IOException e) {
 			throw new DatabaseFailureException(); 

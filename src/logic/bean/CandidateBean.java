@@ -39,7 +39,7 @@ public class CandidateBean {
 		return CheckCandidatesControl.getInstance().retrieveCandidates();
 	}
 
-	public void deleteSelectedCandidates(List<Integer> selected) throws DatabaseFailureException {
+	public void deleteSelectedCandidates(List<Long> selected) throws DatabaseFailureException {
 		CheckCandidatesControl.getInstance().removeCandidates(selected);
 	}
 }

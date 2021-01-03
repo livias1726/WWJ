@@ -59,6 +59,7 @@ public class LoginGraphic implements Initializable {
 			account.login();
 		} catch (FailedLoginException fe) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, fe.getMessage());
+			refresh();
 		} catch(DatabaseFailureException de) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, de.getMessage());
 		}
@@ -66,7 +67,7 @@ public class LoginGraphic implements Initializable {
 		Stage stage = (Stage)logPane.getScene().getWindow();
 	
 		if(SessionFacade.getSession().getCurrUserType() == Users.SEEKER) {
-			stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_SEEK, new SeekerAccountGraphic(SessionFacade.getSession().getID().intValue())));
+			stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_SEEK, new SeekerAccountGraphic(SessionFacade.getSession().getID())));
 			
 		}else if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER) {
 			stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_REC, null));
