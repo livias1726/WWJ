@@ -63,7 +63,7 @@ public class ApplicationDAO {
 		
 		try{
 			Connection conn = ConnectionManager.getConnection();
-        	stmt = conn.prepareCall(RoutinesIdentifier.DELETE_APPLICATIONS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);	
+        	stmt = conn.prepareCall(RoutinesIdentifier.DELETE_APPLICATIONS);	
         	
         	for(Integer i: id) {
         		RoutinesManager.bindParametersAndExec(stmt, id.get(i));
@@ -71,6 +71,23 @@ public class ApplicationDAO {
 			
         } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to delete applications."); 
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
+	}
+
+	public static void insertSeekersApplication(int idApp, long idSeek) throws SQLException {
+		CallableStatement stmt = null;
+		
+		try{
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.INSERT_APPLICATION);	
+        	RoutinesManager.bindParametersAndExec(stmt, idApp, (int)idSeek);
+			
+        } catch (SQLException e) {
+        	throw new SQLException("An error occured while trying to insert an application."); 
 		} finally {
 			if(stmt != null) {
 				stmt.close();

@@ -13,7 +13,7 @@ public class Offer implements Serializable{
 	
 	private static final long serialVersionUID = -764074719381746296L;
 	
-	private int id;
+	protected int id;
 	private String companyName;
 	private Job position;
 	private String taskDescription;

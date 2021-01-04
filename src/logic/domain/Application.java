@@ -11,6 +11,14 @@ public class Application extends Offer{
 	private static final long serialVersionUID = 3765251218779132050L;
 	private LocalDate appDate;
 	
+	public Application() {
+		/**/
+	}
+	
+	public Application(int id) {
+		super.id = id;
+	}
+
 	public LocalDate getApplication() {
 		return appDate;
 	}
@@ -25,6 +33,10 @@ public class Application extends Offer{
 
 	public void removeApplicatinosFromDB(List<Integer> selected) throws SQLException {
 		ApplicationDAO.deleteSeekersApplications(selected);
+	}
+
+	public void addApplication(Long id) throws SQLException {
+		ApplicationDAO.insertSeekersApplication(this.id, id);
 	}
 
 }

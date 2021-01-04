@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import logic.application.control.ApplyToOfferControl;
 import logic.application.control.SeekerAccountControl;
 import logic.exceptions.DatabaseFailureException;
 
@@ -25,6 +26,10 @@ public class ApplicationBean extends OfferBean{
 
 	public void deleteSelectedApplications(List<Integer> selected) throws DatabaseFailureException {
 		SeekerAccountControl.getInstance().removeApplications(selected);
+	}
+
+	public void addToApplications() throws DatabaseFailureException {
+		ApplyToOfferControl.getInstance().apply(this); 
 	}
 
 }

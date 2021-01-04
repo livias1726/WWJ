@@ -34,4 +34,5 @@ public class RoutinesIdentifier {
 	public static final String GET_CV = "call wwj_db.retrieve_curriculum(?)";
 	public static final String UPDATE_CV = "call wwj_db.update_curriculum(?, ?)";
 	public static final String GET_FAVOURITE_OFFERS = "call wwj_db.retrieve_favourite_offers(?)";
+	public static final String INSERT_APPLICATION = "call wwj_db.insert_application(?, ?)";
 }
