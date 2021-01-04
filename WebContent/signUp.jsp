@@ -12,19 +12,20 @@
 
 <%Class.forName("com.mysql.jdbc.Driver");%>
 
-<% if (request.getParameter("signup") != null) {
+<%if(request.getParameter("signup") != null) {
 	userBean.setFirstName(request.getParameter("firstName"));
 	userBean.setLastName(request.getParameter("lastName"));
 	userBean.setEmail(request.getParameter("eMail"));
 	userBean.setPassword(request.getParameter("password"));
-	accountBean.setUser(userBean);
-	accountBean.signUp();%>
-	 <% 
-        String redirectURL = "http://localhost:8080/WorldWideJob/recruiter'sProfile.jsp";
-        response.sendRedirect(redirectURL);
-}
-%>
+	
+	accountBean.setType("SEEKER");
+	String redirectURL = "http://localhost:8080/WorldWideJob/seekerProfile.jsp";
+	response.sendRedirect(redirectURL);
 
+	accountBean.setUser(userBean);
+	accountBean.signUp();
+}
+	%>
 <html lang="en">
 <head>
 	<meta charset="ISO-8859-1">
@@ -43,9 +44,16 @@
 					<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='login.jsp';"></button>
 	    		</div>
 	    		<div style="float:right;">
-	    			<button class="search_btn" type="button" style="width:120px; height:60px; top:10px; background-color: dodgerblue; margin-left:600px" onClick="javascript:window.location='login.jsp';">Sign In</button>
+	    			<button class="search_btn" type="button" style="width:110px; height:50px; top:10px; background-color: dodgerblue; margin-left:600px" onClick="javascript:window.location='login.jsp';">Sign In</button>
 				</div>
-				<div class="scheletro_signUp" style="text-size:150px;text-align:center">CREATE AN ACCOUNT<br>
+				<div class="scheletro_signUp" style="top:70px;left:5px;text-align:center;">CREATE AN ACCOUNT
+					<div style="margin-top:100px;font-size:20px;color:black">
+	    			<input type="radio" name="category" id="Seek" value="Job Seeker">Job Seeker
+	    			&emsp;&emsp;
+	    			<input type="radio" name="category" id="Rec" value="Recruiter">Recruiter
+	    			&emsp;&emsp;
+	    			<input type="radio" name="category" id="Entr" value="Entrepreneur">Entrepreneur
+					</div>
 					<div style="margin-top: 40px">
 				    	<label for="firstName" style="color:black;font-size:20px;margin-left:-640px">First Name</label>
 				        <input type="text" id="firstName" name="firstName" style="margin-left: 40px;height:15px">
@@ -55,8 +63,8 @@
 				        <input type="text" id="eMail" name="eMail" style="margin-left: 42px;height:15px">
 				    </div>
 				    <div style="margin-top: -25px">
-				    	<label for="password" style="color:black;font-size:20px;margin-left:-665px">Password</label>
-				        <input type="text" id="password" name="password" style="margin-left: 75px;height:15px">
+				    	<label for="password" style="color:black;font-size:20px;margin-left:-625px">Password</label>
+				        <input type="text" id="password" name="password" style="margin-left: 40px;height:15px">
 				    </div>
 				    <div style="margin-top: -195px;float:right">
 				    	<label for="lastName" style="color:black;font-size:20px;margin-right:40px">Last Name</label>
@@ -70,10 +78,9 @@
 				    	<label for="confirmPassword" style="color:black;font-size:20px;margin-right:40px">Confirm Password</label>
 				        <input type="text" id="confirmPassword" name="confirmPassword" style="margin-right:250px;height:15px">
 				    </div><br>
-				    <button class="search_btn" type="submit" name="signup" style="width:120px; height:60px; top:40px; background-color: dodgerblue; margin-left:-30px">Sign Up</button>
+				    <button class="search_btn" type="submit" name="signup" style="width:110px; height:50px; top:40px; background-color: dodgerblue; margin-left:-30px" onClick="redirectProfile">Sign Up</button>
 				</div>
 			</form>
 	</div>
-
 </body>
 </html>

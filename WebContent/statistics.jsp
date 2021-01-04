@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="logic.bean.BusinessBean" %> 
+   
 <!DOCTYPE html>
+
+<jsp:useBean id="businessBean" scope="session" class="logic.bean.BusinessBean"/>
+<jsp:setProperty name="businessBean" property="*"/>
+
+<%Class.forName("com.mysql.jdbc.Driver");%>
+
+
 <html lang="en">
 <head>
 	<meta charset="ISO-8859-1">
@@ -16,7 +25,7 @@
 					<div class="dropdown" style="float:right;">
 						<button class="user_btn" style="background-color:lightblue;margin-right:10px;width:40px;height:40px;margin-top:10px"></button>
 					<div class="dropdown-content" style="right:0;">
-		     			<a href="">Logout</a>
+		     			<a href="http://localhost:8080/WorldWideJob/login.jsp">Logout</a>
 		     		</div>
 		     	</div>
 		     	</div>
@@ -24,14 +33,14 @@
 	    			<img alt="" class="image" src="icons/main_icon.png" width=70px height=70px>
 	    		</div>
 	    		<div style="float:left">
-	    			<button class="home_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px;"></button>
+	    			<button class="home_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='index.jsp';"></button>
 	    		<div style="float:right;">
-	    			<button class="arrow_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px"></button>
+	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='businessDetails.jsp';"></button>
 	    		</div>
 	    		</div>
-	    		<div class="scheletro_signUp">Statistics<br>
+	    		<div class="scheletro_signUp" style="top:70px; left:5px;">Statistics<br>
 	    			<div style="margin-top: 20px; margin-left:-30px">
-	    				<input type="text" id="businessName" name="businessName" disabled style="margin-left: 42px;height:15px">
+	    				<input type="text" id="businessName" name="businessName" disabled value="<%=businessBean.getName()%>" style="width:300px; height:40px;margin-top:10px;margin-left:30px">
 	    			</div>
 	    			<div style="margin-top: 40px;margin-left:-30px">
 				    	<label for="popularity" style="color:black;font-size:20px;margin-left:45px">Popularity over the years</label>
