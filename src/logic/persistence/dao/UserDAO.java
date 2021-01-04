@@ -38,9 +38,6 @@ public class UserDAO {
             res.close();          
         } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to retrieve personal information."); 
-        }catch(NumberFormatException ne) {
-        	ne.printStackTrace();
-        	System.exit(0);
 		} finally {
 			if(stmt != null) {
 				stmt.close();

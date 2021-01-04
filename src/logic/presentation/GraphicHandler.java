@@ -91,7 +91,6 @@ public class GraphicHandler {
 				return new Scene(pane);
 			}			
 		}catch (IOException e){
-			e.printStackTrace();
 			return null;
 		}	
 	}
@@ -106,7 +105,6 @@ public class GraphicHandler {
 			AnchorPane pane = loader.load();
 			return new Scene(pane);
 		}catch (IOException e){
-			e.printStackTrace();
 			return null;
 		}	
 	}
