@@ -20,7 +20,7 @@ public class Application extends Offer{
 	}
 
 	public List<Application> getApplications(Long id) throws SQLException {
-		return ApplicationDAO.selectSeekersApplications(id.toString());
+		return ApplicationDAO.selectSeekersApplications(id);
 	}
 
 	public void removeApplicatinosFromDB(List<Integer> selected) throws SQLException {

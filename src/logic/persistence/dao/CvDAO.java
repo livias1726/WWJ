@@ -36,9 +36,10 @@ public class CvDAO {
 				throw new NoResultFoundException();
 			}
 			
-			Blob blob = res.getBlob("document");			
-			byte [] array = blob.getBytes(1, (int)blob.length());
-		    File file = File.createTempFile("cv", ".binary", new File("../../presentation/resources/temp"));
+			Blob blob = res.getBlob("document");	
+
+			byte [] array = blob.getBytes(1, (int) blob.length());
+		    File file = new File("temp_cv.pdf");
 		    try(FileOutputStream out = new FileOutputStream(file)){
 		    	out.write(array);
 			    cv.setCvDoc(file);
@@ -48,7 +49,6 @@ public class CvDAO {
             
         } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to retrieve the cv."); 
- 
 		} finally {
 			if(stmt != null) {
 				stmt.close();
@@ -64,7 +64,7 @@ public class CvDAO {
 		try {
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.UPDATE_CV);
-			
+
         	byte[] fileContent = new byte[(int)cv.length()];
 
     	    try (FileInputStream is = new FileInputStream(cv)){

@@ -57,7 +57,7 @@ public class ApplicationsGraphic implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ApplicationBean bean = new ApplicationBean();
-		List <ApplicationBean> list = null;
+		ObservableList <ApplicationBean> list = null;
 		try {
 			list = bean.getApplications();
 			
@@ -71,7 +71,7 @@ public class ApplicationsGraphic implements Initializable {
 			closeApplicationSection();
 		}
 		
-		appTab.setItems((ObservableList<ApplicationBean>) list);
+		appTab.setItems(list);
 		
 		delBtn.disableProperty().bind(Bindings.size(selected).isEqualTo(0));
 		

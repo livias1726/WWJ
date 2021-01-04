@@ -32,6 +32,6 @@ public class RoutinesIdentifier {
 	public static final String DELETE_CANDIDATES = "call wwj_db.delete_candidate(?)";
 	public static final String DELETE_APPLICATIONS = "call wwj_db.delete_application(?)";
 	public static final String GET_CV = "call wwj_db.retrieve_curriculum(?)";
-	public static final String UPDATE_CV = "call wwj_db.update_curriculum(?)";
+	public static final String UPDATE_CV = "call wwj_db.update_curriculum(?, ?)";
 	public static final String GET_FAVOURITE_OFFERS = "call wwj_db.retrieve_favourite_offers(?)";
 }

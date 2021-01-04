@@ -72,8 +72,15 @@ public class SeekerAccountGraphic extends AccountGraphic{
 			cv = new CVBean().getCVFile(accountID);	    	
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+			return;
 		} catch (NoResultFoundException re) {
-			GraphicHandler.popUpMsg(AlertType.CONFIRMATION, re.getMessage());
+			GraphicHandler.popUpMsg(AlertType.INFORMATION, re.getMessage());
+			
+			Optional<ButtonType> res = GraphicHandler.popUpMsg(AlertType.CONFIRMATION, null);
+			if(res.isPresent() && res.get().getText().equals("Upload")) {
+				uploadCV();
+				return;
+			}	
 		}
 	
 		Optional<ButtonType> res = GraphicHandler.popUpMsg(AlertType.CONFIRMATION, "");

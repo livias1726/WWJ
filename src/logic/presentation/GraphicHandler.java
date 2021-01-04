@@ -63,11 +63,11 @@ public class GraphicHandler {
 			case CANDIDATES: 
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "candidates.fxml"));
 			case FAV_BUSINESSES: 
-				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "favourite_business.fxml"));
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "favourites_business.fxml"));
 			case APPLICATIONS: 
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "applications.fxml"));
 			case FAV_OFFERS: 
-				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "favourite_offer.fxml"));
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "favourites_offer.fxml"));
 			default:
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "main.fxml"));
 		}
@@ -130,7 +130,10 @@ public class GraphicHandler {
 				break;
 			case CONFIRMATION: 
 				alert.setHeaderText("Confirm"); 
-				if(content.isEmpty()) {
+				if(content == null) {
+					ButtonType upload = new ButtonType("Upload");
+					alert.getButtonTypes().setAll(upload);
+				}else if (content.isEmpty()){
 					ButtonType upload = new ButtonType("Upload");
 					ButtonType show = new ButtonType("Show");
 					alert.getButtonTypes().setAll(upload, show);

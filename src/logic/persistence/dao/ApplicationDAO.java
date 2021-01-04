@@ -20,7 +20,7 @@ public class ApplicationDAO {
 		/**/
 	}
 
-	public static List<Application> selectSeekersApplications(String str) throws SQLException {
+	public static List<Application> selectSeekersApplications(long id) throws SQLException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
 		List<Application> list = new ArrayList<>();
@@ -28,7 +28,7 @@ public class ApplicationDAO {
 		try {
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.GET_APPLICATIONS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			res = RoutinesManager.bindParametersAndExec(stmt, str);
+			res = RoutinesManager.bindParametersAndExec(stmt, (int)id);
 			
             if (res.first()){           	
             	do {

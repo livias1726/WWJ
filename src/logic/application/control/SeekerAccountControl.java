@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import logic.application.SessionFacade;
 import logic.bean.ApplicationBean;
 import logic.bean.CVBean;
@@ -33,7 +35,7 @@ public class SeekerAccountControl {
         return instance;
     }
 
-	public List<ApplicationBean> retrieveApplications() throws DatabaseFailureException {
+	public ObservableList<ApplicationBean> retrieveApplications() throws DatabaseFailureException {
 		Application app = new Application();
     	List<Application> list;
 		try {
@@ -42,7 +44,7 @@ public class SeekerAccountControl {
 			throw new DatabaseFailureException();
 		}
     	
-		List<ApplicationBean> dest = new ArrayList<>();
+		ObservableList<ApplicationBean> dest = FXCollections.observableArrayList();
 		for(Application i: list) {
 			ApplicationBean bean = new ApplicationBean();
 			bean.setId(i.getId());
