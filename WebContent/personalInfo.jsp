@@ -51,7 +51,7 @@
 				    </div>
 				    <div style="margin-top: 40px">
 				    	<label for="eMail" style="color:black;font-size:20px;margin-left:15px">Email</label>
-				        <input type="text" id="eMail" name="eMail" value="<%=accountBean.getAccount().getUser().getEmail()%>" style="margin-left: 75px;height:15px">
+				        <input type="text" id="eMail" name="eMail" value="<%=userBean.getEmail()%>" style="margin-left: 75px;height:15px">
 				    </div>
 				    <div style="margin-top: -140px;float:right">
 				    	<label for="lastName" style="color:black;font-size:20px;margin-right:40px">Last Name</label>
@@ -63,7 +63,7 @@
 				    </div>
 				    <div style="margin-top: -10px;float:right">
 				    	<label for="password" style="color:black;font-size:20px;margin-right:40px">Password</label>
-				        <input type="text" id="password" name="password" value="<%=accountBean.getAccount().getUser().getPassword()%>" style="margin-right:70px;height:15px"><input type="checkbox" name="select_all" style="margin-left:-30px">Show<br>
+				        <input type="password" id="pwd" name="pwd" value="<%=userBean.getPassword()%>" style="margin-right:70px;height:15px"><input type="checkbox" onClick="showPwd()" style="margin-left:-30px">Show<br>
 				    </div>
 				    <div style="margin-top: 40px">
 				    	<label for="title" style="color:black;font-size:20px;margin-left:350px">Titles/lines</label>
@@ -73,5 +73,13 @@
 				</div>
 	    	</form>
 	    </div>
+	    <script>function showPwd() {
+	        		var input = document.getElementById('pwd');
+	        			if (input.type === "password") {
+	          				input.type = "text";
+	        			} else {
+	          				input.type = "password";
+	        			}
+	      		}</script>
 </body>
 </html>
