@@ -54,12 +54,11 @@
 				<%}%>
 	    		<div class="dropdown">
 	    			<input class="place_btn" type="text" name="place" id="place" value="" style="background-color:white; border-color:black">
-	    		<div class="dropdown-content" style="right:0;"></div>
+	    		<div class="dropdown-content" style="right:0;"><%=countryBean.getCountries()%></div>
 	    		</div>
 	    		<div class="dropdown">
 	    			<input class="job_btn" type="text" name="job" value="" id="job" style="background-color:white; border-color:black"><br>
-	    		<div class="dropdown-content" style="right:0;">
-	    		</div>
+	    		<div class="dropdown-content" style="left:0;"><%=jobBean.getJobs()%></div>
 	    		</div>
 	    		<button class="search_btn" type="submit" name="search" style="width:100px; height:50px; top:100px; background-color: dodgerblue; margin-right:-20px; border-color: black">Search</button>
 	    		</div>

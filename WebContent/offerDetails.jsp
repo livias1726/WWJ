@@ -63,11 +63,11 @@
 				    </div>
 				    <div style="margin-top: 40px">
 				    	<label for="qualificationNeeded" style="color:black;font-size:20px;margin-left:15px">Qualification needed</label>
-				        <input type="text" id="qualificationNeeded" name="qualificationNeeded" style="margin-left: 40px;overflow-x:scroll;overflow-y:scroll">
+				        <input type="text" id="qualificationNeeded" name="qualificationNeeded" value="<%=offerBean.getRequirements()%>" style="margin-left: 40px;overflow-x:scroll;overflow-y:scroll">
 				    </div>
 				    <div style="margin-top: 40px">
 				    	<label for="activitiesDescription" style="color:black;font-size:20px;margin-left:15px">Activities description</label><br>
-				        <input type="text" id="activitiesDescription" name="activitiesDescription" style="margin-left: 40px;overflow-x:scroll;overflow-y:scroll;margin-top:10px">
+				        <input type="text" id="activitiesDescription" name="activitiesDescription" value="<%=offerBean.getTaskDescription()%>" style="margin-left: 40px;overflow-x:scroll;overflow-y:scroll;margin-top:10px">
 				    </div>
 				    <div style="margin-top:-290px;margin-right:20px;float:right">
 				    	<button class="star_btn" style="width:40px;height:40px;margin-left:1300px;margin-top:-2500px;background-color:transparent"></button> 
@@ -78,19 +78,19 @@
 				    <div style="margin-top:-270px;float:right;margin-right:100px;colore:grey;font-style:bold;font-size:20px;padding-right:40px;padding-top:50px">Additional Information<br>
 				    	<div style="margin-top: 40px;margin-right:-40px">
 				    		<label for="companyBranch" style="color:black;font-size:20px">Company branch</label>
-				        	<input type="text" id="companyBranch" name="companyBranch" style="height:40px"></div>
+				        	<input type="text" id="companyBranch" name="companyBranch" value="<%=offerBean.getBranch()%>" style="height:40px"></div>
 				    	<div style="margin-top: 40px;margin-right:-40px">
 				    		<label for="timeSlot" style="color:black;font-size:20px">Time slot</label>
-				        	<input type="text" id="timeSlot" name="timeSlot" style="width:60px"><input type="text" id="timeSlot" name="timeSlot" style="width:60px;margin-left:10px">
+				        	<input type="text" id="timeSlot" name="timeSlot" value="<%=offerBean.getStart()%>" style="width:60px"><input type="text" id="timeSlot" name="timeSlot" value="<%=offerBean.getFinish()%>" style="width:60px;margin-left:10px">
 				    	</div>
 				    	<div style="margin-top: 40px;margin-right:-40px">
 				    		<label for="baseSalary" style="color:black;font-size:20px">Base salary</label>
-				        	<input type="text" id="baseSalary" name="baseSalary">
+				        	<input type="text" id="baseSalary" name="baseSalary" value="<%=offerBean.getBaseSalary()%>">
 				    	</div>
 				    	<div style="margin-top:-30px;float:right;margin-right:100px;colore:grey;font-style:bold;font-size:20px;padding-right:40px;padding-top:50px">Others<br>
 				    		<div style="margin-top: 40px;margin-right:-40px">
 				    			<label for="expirationDate" style="color:black;font-size:20px">Expiration date</label>
-				        		<input type="text" id="expirationDate" name="expirationDate">
+				        		<input type="text" id="expirationDate" name="expirationDate" value="<%=offerBean.getExpiration()%>">
 				    		</div>
 				    	</div><br>
 				    	<button class="search_btn" style="width:100px; height:50px; top:40px; background-color: dodgerblue; margin-right:100px">Apply</button>

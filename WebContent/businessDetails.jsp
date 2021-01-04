@@ -58,7 +58,7 @@
 	    		<input class="busdetails" type="text" name="busdetails" value="" disabled style="background-color:#C6D6D3">
 	    		<input class="businessname" type="text" name="businessname" value="<%=businessBean.getName()%>" disabled style="background-color:#C6D6D3">
 	    		<input class="thebusiness" type="text" name="thebusiness" value="The business" disabled style="background-color:#C6D6D3">
-	    		<input class="busdescription" type="text" name="busdescription" value="" disabled style="background-color:#E4F5F2">
+	    		<input class="busdescription" type="text" name="busdescription" value="<%=businessInCountryBean.getDescription()%>" disabled style="background-color:#E4F5F2">
 	    		<input class="insert_budget" type="text" name="insert_budget" value="Insert budget" disabled style="background-color:#C6D6D3"><br>
 	    		<input class="budget" type="text" name="budget" value="" style="background-color:#E4F5F2">
 	    		<button class="statistics_btn" type="button" style="width:150px; height:50px; top:100px; background-color: dodgerblue; margin-left:1050px; border-color: black" onClick="javascript:window.location='statistics.jsp';">View statistics</button>

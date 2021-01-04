@@ -54,9 +54,11 @@
 	    			<input class="place2" type="text" name="place2" value="<%=countryBean.getName()%>" disabled style="background-color:white">
 	    			<input class="offer" type="submit" name="business" value="<%=businessBean.getName()%>" style="background-color:#E4F5F2">
 	    		<%}else if (countryBean.getName() == null && businessBean.getName() != null){%>
-	    			<input class="offer" type="submit" name="business" value="<%=businessBean.getName()%>" style="background-color:#E4F5F2">
+	    			<input class="place2" type="text" name="place2" value="<%=countryBean.getCountries()%>" disabled style="background-color:white">
+	    			<a class="offer" type="submit" href="http://localhost:8080/WorldWideJob/businessDetails.jsp"  style="background-color:#E4F5F2"><%=businessBean.getBusinesses()%></a>
 	    		<%}else if (countryBean.getName() != null && businessBean.getName() == null){%>
 	    			<input class="place2" type="text" name="place2" value="<%=countryBean.getName()%>" disabled style="background-color:white">
+	    			<a class="offer" type="submit" href="http://localhost:8080/WorldWideJob/businessDetails.jsp" style="background-color:#E4F5F2"><%=businessBean.getBusinesses()%></a>
 	    		<%}%>
 	    		
 	    		<% if (request.getParameter("business") != null){

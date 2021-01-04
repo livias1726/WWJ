@@ -49,13 +49,15 @@
 	    		</div>
 	    		</div>
 	    		<div>
-	    		<%if (countryBean.getName() != null && jobBean.getName() != null) {%>
+	    		<%if (countryBean.getName() != null && (jobBean.getName() != null)) {%>
 	    			<input class="place2" id="name_place" type="text" name="name_place" disabled value="<%=countryBean.getName()%>">
-	    			<input class="offer" id="offer" type="submit" name="offer" value="<%=jobBean.getName()%>" style="background-color:#E4F5F2">
-	    		<%}else if (countryBean.getName() == null && jobBean.getName() != null) {%>
-	    			<input class="offer" id="offer" type="submit" name="offer" value="<%=jobBean.getJobs()%>" style="background-color:#E4F5F2">
-	    		<%}else if (countryBean.getName() != null && jobBean.getName() == null) {%>
-	    			<input class="place2" id="name_place" type="text" name="name_place" disabled value="<%=countryBean.getCountries()%>">
+	    			<a class="offer" id="offer" type="submit" href="http://localhost:8080/WorldWideJob/offerDetails.jsp" style="background-color:#E4F5F2"><%=jobBean.getName()%></a>
+	    		<%}else if (request.getParameter("place") == null && (jobBean.getName() != null)) {%>
+	    			<input class="place2" id="name_place" type="text" name="name_place" disabled style="text-color:black" value="<%=countryBean.getCountries()%>">
+	    			<a class="offer" id="offer" type="submit" href="http://localhost:8080/WorldWideJob/offerDetails.jsp" style="background-color:#E4F5F2"><%=jobBean.getName()%></a>
+	    		<%}else if (countryBean.getName() != null && (jobBean.getName() == null)) {%>
+	    			<input class="place2" id="name_place" type="text" name="name_place" disabled value="<%=countryBean.getName()%>">
+	    			<a class="place2" id="name_place" type="text" href="http://localhost:8080/WorldWideJob/offerDetails.jsp"><%=jobBean.getJobs()%></a>
 	    		<%}%>
 	    		
 	    		<% if (request.getParameter("offer") != null){
