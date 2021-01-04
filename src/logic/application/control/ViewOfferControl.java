@@ -108,10 +108,6 @@ public class ViewOfferControl extends ViewResultsControl{
 			throw new DatabaseFailureException();
 		}
 		
-		return modelToBean(offer);
-	}
-
-	private OfferBean modelToBean(Offer offer) {
 		OfferBean bean = new OfferBean();
 		
 		bean.setCompanyName(offer.getCompanyName());
@@ -135,7 +131,7 @@ public class ViewOfferControl extends ViewResultsControl{
 		bean.setRequirements(requirements);
 		return bean;
 	}
-
+	
 	private AddressBean extractAddressBean(Address ent) {
 		AddressBean bean = new AddressBean();
 		

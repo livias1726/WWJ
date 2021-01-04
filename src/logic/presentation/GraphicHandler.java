@@ -95,7 +95,7 @@ public class GraphicHandler {
 		}	
 	}
 	
-	private static Scene switchScreen(Sections sec, Initializable controller) {	
+	public static Scene switchScreen(Sections sec, Initializable controller) {	
 		try {			
 			FXMLLoader loader = loadFXML(sec);
 			if (controller != null) {
