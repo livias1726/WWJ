@@ -56,6 +56,9 @@ public class OfferDetailsGraphic implements Initializable {
 
     @FXML
     private Button backBtn;
+    
+    @FXML
+    private Button favBtn;
 
 	private OfferBean offer;
 	
@@ -92,6 +95,23 @@ public class OfferDetailsGraphic implements Initializable {
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			goBack();
+		}
+    }
+	
+	@FXML
+    public void manageFavourite() {
+		OfferBean bean = new OfferBean();
+		bean.setId(offer.getId());
+		try {
+			if(favBtn.getStyle().equals("star_button_nset")) {
+				bean.addToFavourites();
+				favBtn.setStyle("star_button_set");
+			}else {
+				bean.removeFromFavourites();
+				favBtn.setStyle("star_button_nset");	
+			}
+		} catch (DatabaseFailureException e) {
+			/*Don't change the settings*/
 		}
     }
 

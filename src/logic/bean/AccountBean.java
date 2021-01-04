@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.security.auth.login.FailedLoginException;
 
+import logic.application.SessionFacade;
+import logic.application.Users;
 import logic.application.control.AccountControl;
 import logic.application.control.LoginControl;
 import logic.application.control.SignUpControl;
@@ -42,6 +44,9 @@ public class AccountBean {
 	}
 
 	public void setType(String type) {
+		if(SessionFacade.getSession().getCurrUserType() == null) {
+			SessionFacade.getSession().setCurrUserType(Users.stringToUsers(type));
+		}
 		this.type = type;
 	}
 	

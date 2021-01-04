@@ -216,4 +216,38 @@ public class OfferDAO {
         
         res.close();          
 	}
+
+	public static void insertIntoFavourite(int idFav, long idSeek) throws SQLException {
+		CallableStatement stmt = null;
+		
+		try{
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.INSERT_FAVOURITE);	
+        	RoutinesManager.bindParametersAndExec(stmt, idFav, (int)idSeek);
+			
+        } catch (SQLException e) {
+        	throw new SQLException("An error occured while trying to insert an offer to the favourite ones."); 
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
+	}
+
+	public static void deleteFromFavourite(int idFav, long idSeek) throws SQLException {
+		CallableStatement stmt = null;
+		
+		try{
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.DELETE_FAVOURITE);	
+        	RoutinesManager.bindParametersAndExec(stmt, idFav, (int)idSeek);
+			
+        } catch (SQLException e) {
+        	throw new SQLException("An error occured while trying to delete an offer from the favourite ones."); 
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
+	}
 }

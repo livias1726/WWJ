@@ -3,7 +3,6 @@ package logic.application.control;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -12,10 +11,8 @@ import logic.application.SessionFacade;
 import logic.bean.ApplicationBean;
 import logic.bean.CVBean;
 import logic.bean.JobBean;
-import logic.bean.OfferBean;
 import logic.domain.Application;
 import logic.domain.CV;
-import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
 
@@ -90,31 +87,5 @@ public class SeekerAccountControl {
 		} catch (SQLException | IOException e) {
 			throw new DatabaseFailureException(); 
 		}
-	}
-
-	public List<OfferBean> retrieveFavourites() throws DatabaseFailureException {
-		Offer offer = new Offer();
-    	List<Offer> list;
-		try {
-			list = offer.getFavourites(SessionFacade.getSession().getID().intValue());
-		} catch (SQLException se) {
-			throw new DatabaseFailureException();
-		}
-    	
-		List<OfferBean> dest = new ArrayList<>();
-    	for(Offer i: list) {
-    		OfferBean offerBean = new OfferBean();  		
-    		offerBean.setCompanyName(i.getCompanyName());
-    		offerBean.setTaskDescription(i.getTaskDescription());
-
-    		JobBean job = new JobBean();
-    		job.setName(i.getPosition().getName());
-    		job.setCategory(i.getPosition().getCategory());  		
-    		offerBean.setPosition(job);
-    		
-    		dest.add(offerBean);
-    	}
-    	
-    	return dest;
 	}
 }

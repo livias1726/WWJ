@@ -224,6 +224,18 @@
 	-fx-background-position: center;
 }
 
+.star_button_nset{
+	-fx-shape: "M 0 0.054 z M 15.422 18.129 l -5.264 -2.768 l -5.265 2.768 l 1.006 -5.863 L 1.64 8.114 l 5.887 -0.855 l 2.632 -5.334 l 2.633 5.334 l 5.885 0.855 l -4.258 4.152 L 15.422 18.129 z";
+	-fx-border-color: black;
+	-fx-background-color: trasparent;
+}
+
+.star_button_set{
+	-fx-shape: "M 0 0.054 z M 15.422 18.129 l -5.264 -2.768 l -5.265 2.768 l 1.006 -5.863 L 1.64 8.114 l 5.887 -0.855 l 2.632 -5.334 l 2.633 5.334 l 5.885 0.855 l -4.258 4.152 L 15.422 18.129 z";
+	-fx-border-color: white;
+	-fx-background-color: black;
+}
+
 .euro{
 	-fx-background-image: url('../icons/euro.png');
 	-fx-background-repeat: no-repeat;

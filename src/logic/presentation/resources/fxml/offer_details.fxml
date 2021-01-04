@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="1180.0" styleClass="result_box" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.OfferDetailsGraphic">
    <children>
       <Label fx:id="compLbl" layoutX="46.0" layoutY="37.0" text="Company Name">
@@ -144,6 +143,11 @@
          </effect>
       </Button>
       <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="back_btn">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="favBtn" layoutX="1078.0" layoutY="32.0" mnemonicParsing="false" onAction="#manageFavourite" prefHeight="40.0" prefWidth="40.0" styleClass="star_button_nset">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

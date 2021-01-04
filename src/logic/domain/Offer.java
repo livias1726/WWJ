@@ -146,4 +146,12 @@ public class Offer implements Serializable{
 		return OfferDAO.selectFavourites(id);
 	}
 
+	public void addFavourite(Long id) throws SQLException {
+		OfferDAO.insertIntoFavourite(this.id, id);
+	}
+
+	public void deleteFavourite(Long id) throws SQLException {
+		OfferDAO.deleteFromFavourite(this.id, id);
+	}
+
 }
