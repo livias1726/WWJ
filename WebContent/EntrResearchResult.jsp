@@ -11,6 +11,7 @@
 <jsp:setProperty name="businessBean" property="*"/>
 
 <%Class.forName("com.mysql.jdbc.Driver");%>
+<%System.out.println(countryBean.getName());%>
 
 <html lang="en">
 	<head>
@@ -50,15 +51,15 @@
 	    		</div>
 	    		</div>
 	    		<div>
-	    		<%if (countryBean.getName() != null && businessBean.getName() != null){%>
-	    			<input class="place2" type="text" name="place2" value="<%=countryBean.getName()%>" disabled style="background-color:white">
-	    			<input class="offer" type="submit" name="business" value="<%=businessBean.getName()%>" style="background-color:#E4F5F2">
-	    		<%}else if (countryBean.getName() == null && businessBean.getName() != null){%>
-	    			<input class="place2" type="text" name="place2" value="<%=countryBean.getCountries()%>" disabled style="background-color:white">
+	    		<%if ((String) countryBean.getName() == "" && businessBean.getName() != null) {%>
+	    			<input class="place2" name="place2" value="<%=countryBean.getCountries()%>" style="background-color:white">
+	    			<a class="offer" type="submit" href="http://localhost:8080/WorldWideJob/businessDetails.jsp"  style="background-color:#E4F5F2"><%=businessBean.getName()%></a>
+	    		<%}else if((String) businessBean.getName() == "" && countryBean.getName() != null) {%>
 	    			<a class="offer" type="submit" href="http://localhost:8080/WorldWideJob/businessDetails.jsp"  style="background-color:#E4F5F2"><%=businessBean.getBusinesses()%></a>
-	    		<%}else if (countryBean.getName() != null && businessBean.getName() == null){%>
-	    			<input class="place2" type="text" name="place2" value="<%=countryBean.getName()%>" disabled style="background-color:white">
-	    			<a class="offer" type="submit" href="http://localhost:8080/WorldWideJob/businessDetails.jsp" style="background-color:#E4F5F2"><%=businessBean.getBusinesses()%></a>
+	    			<input class="place2" name="place2" value="<%=countryBean.getName()%>" style="background-color:white">
+	    		<%}else if(countryBean.getName() != null && businessBean.getName() != null) {%>
+	    			<a class="offer" type="submit" href="http://localhost:8080/WorldWideJob/businessDetails.jsp"  style="background-color:#E4F5F2"><%=businessBean.getName()%></a>
+	    			<input class="place2" name="place2" value="<%=countryBean.getName()%>" style="background-color:white">
 	    		<%}%>
 	    		
 	    		<% if (request.getParameter("business") != null){

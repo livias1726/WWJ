@@ -43,20 +43,20 @@
 					businessBean.setName(request.getParameter("business"));
 					String redirectURL = "http://localhost:8080/WorldWideJob/EntrResearchResult.jsp";
         			response.sendRedirect(redirectURL);
-    				}
-					if (request.getParameter("search") != null && (request.getParameter("place").equals("") && request.getParameter("job").equals(""))){%>
+    			}
+				if (request.getParameter("search") != null && (request.getParameter("place").equals("") && request.getParameter("business").equals(""))){%>
 						<div class="alert" role="alert">
 							<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
 							<strong style="color:black">Attenzione! Inserisci il paese oppure il business a cui sei interessato.</strong>
 						</div>
-					<%}%>
+				<%}%>
 	    		<div class="dropdown">
 	    			<input class="place_btn" type="text" name="place" id="place" value="" style="background-color:white; border-color:black">
-	    		<div class="dropdown-content" style="right:0;"><%=countryBean.getCountries()%></div>
+	    		<div class="dropdown-content" style="right:0; text-color:black"><%=countryBean.getCountries()%></div>
 	    		</div>
 	    		<div class="dropdown">
-	    			<input class="job_btn" type="text" name="job" value="" id="job" style="background-color:white; border-color:black"><br>
-	    		<div class="dropdown-content" style="left:0;"><%=businessBean.getBusinesses()%></div>
+	    			<input class="job_btn" type="text" name="business" value="" id="business" style="background-color:white; border-color:black"><br>
+	    		<div class="dropdown-content" style="left:0; text-color:black"><%=businessBean.getBusinesses()%></div>
 	    		</div>
 	    		<button class="search_btn" type="submit" name="search" style="width:100px; height:50px; top:100px; background-color: dodgerblue; margin-right:-20px; border-color: black">Search</button>
 	    		</div>

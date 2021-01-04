@@ -49,17 +49,17 @@
 	    		</div>
 	    		</div>
 	    		<div>
-	    		<%if (countryBean.getName() != null && (jobBean.getName() != null)) {%>
-	    			<input class="place2" id="name_place" type="text" name="name_place" disabled value="<%=countryBean.getName()%>">
-	    			<a class="offer" id="offer" type="submit" href="http://localhost:8080/WorldWideJob/offerDetails.jsp" style="background-color:#E4F5F2"><%=jobBean.getName()%></a>
-	    		<%}else if (request.getParameter("place") == null && (jobBean.getName() != null)) {%>
-	    			<input class="place2" id="name_place" type="text" name="name_place" disabled style="text-color:black" value="<%=countryBean.getCountries()%>">
-	    			<a class="offer" id="offer" type="submit" href="http://localhost:8080/WorldWideJob/offerDetails.jsp" style="background-color:#E4F5F2"><%=jobBean.getName()%></a>
-	    		<%}else if (countryBean.getName() != null && (jobBean.getName() == null)) {%>
-	    			<input class="place2" id="name_place" type="text" name="name_place" disabled value="<%=countryBean.getName()%>">
-	    			<a class="place2" id="name_place" type="text" href="http://localhost:8080/WorldWideJob/offerDetails.jsp"><%=jobBean.getJobs()%></a>
+	    		<%if ((String) countryBean.getName() == "" && jobBean.getName() != null) {%>
+	    			<input class="place2" name="place2" value="<%=countryBean.getCountries()%>" style="background-color:white">
+	    			<a class="offer" type="submit" href="http://localhost:8080/WorldWideJob/offerDetails.jsp"  style="background-color:#E4F5F2"><%=jobBean.getName()%></a>
+	    		<%}else if((String) jobBean.getName() == "" && countryBean.getName() != null) {%>
+	    			<a class="offer" type="submit" href="http://localhost:8080/WorldWideJob/offerDetails.jsp"  style="background-color:#E4F5F2"><%=jobBean.getJobs()%></a>
+	    			<input class="place2" name="place2" value="<%=countryBean.getName()%>" style="background-color:white">
+	    		<%}else if(countryBean.getName() != null && jobBean.getName() != null) {%>
+	    			<a class="offer" type="submit" href="http://localhost:8080/WorldWideJob/offerDetails.jsp"  style="background-color:#E4F5F2"><%=jobBean.getName()%></a>
+	    			<input class="place2" name="place2" value="<%=countryBean.getName()%>" style="background-color:white">
 	    		<%}%>
-	    		
+	    			
 	    		<% if (request.getParameter("offer") != null){
 					jobBean.setName(request.getParameter("offer"));
 					String redirectURL = "http://localhost:8080/WorldWideJob/offerDetails.jsp";
