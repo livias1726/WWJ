@@ -43,27 +43,37 @@
 	    				<input type="text" id="businessName" name="businessName" disabled value="<%=businessBean.getName()%>" style="width:300px; height:40px;margin-top:10px;margin-left:30px">
 	    			</div>
 	    			<div style="margin-top: 40px;margin-left:-30px">
-				    	<label for="popularity" style="color:black;font-size:20px;margin-left:45px">Popularity over the years</label>
+				    	<label for="popularity" style="color:black;font-size:20px;margin-left:45px;top:20px">Popularity over the years</label>
 	    			</div>
-	    			<div class="orizzontale"></div>
-	    			<hr width="1" size="300" style="background-color:black;margin-left:300px;margin-top:-300px">
-	    			<div style="margin-top: 40px;margin-left:-30px">
+	    			<div class="orizzontale" style="margin-left:50px;"></div>
+	    			<hr width="1" size="300" style="background-color:black;margin-left:50px;margin-top:-300px">
+	    			<div style="margin-top: 40px;margin-left:250px">
 				    	<label for="costs" style="color:black;font-size:20px;margin-left:45px">Average earnings and costs</label>
 	    			</div>
 	    			<div class="orizzontale"></div>
 	    			<hr width="1" size="300" style="background-color:black;margin-left:300px;margin-top:-300px">
 	    			<div style="margin-top: -1000px; margin-left:700px">
-				    	<label for="budget" style="color:black;font-size:20px;margin-left:150px">Insert budget</label>
-				        <input type="text" id="budget" name="budget" disabled style="margin-left: 40px;height:30px;width:130px">
+				    	<label for="budget" style="color:black;font-size:20px;margin-left:40px">Insert budget</label>
+				    	<input class="budget" type="text" id="budget" name="budget" value="" style="background-color:#E4F5F2; margin-left:20px; top:0px;height:30px;width:140px">
 				    </div><br>
 				    <div style="margin-top:-160px">
-				    <button style="width:150px; height:50px; background-color: lightblue; margin-left:1200px;margin-top:-200px">Calculate feasibility</button>
+				    <button class="calculatefeasibility_btn" name="calcFeas" style="width:150px; height:50px; background-color: dodgerblue;border-color:blac;margin-left:1020px;margin-top:-200px">Calculate feasibility</button>
+	    			<% if (request.getParameter("calcFeas") != null && !request.getParameter("budget").equals("")) {
+					String redirectURL = "http://localhost:8080/WorldWideJob/Feasibility.jsp";
+        			response.sendRedirect(redirectURL);
+    				}
+	    			if(request.getParameter("calcFeas") != null && request.getParameter("budget").equals("")) { %>
+						<div class="alert" role="alert">
+							<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+							<strong style="color:black">Attenzione! Inserisci il tuo budget.</strong>
+						</div>
+					<%}%>
 	    			</div>
 	    			<div style="margin-top: 40px;margin-left:-30px">
-				    	<label for="competitors" style="color:black;font-size:20px;margin-left:800px">Competitors</label>
+				    	<label for="competitors" style="color:black;font-size:20px;margin-left:700px">Competitors</label>
 	    			</div>
-	    			<div class="orizzontale" style="margin-left:1000px"></div>
-	    			<hr width="1" size="300" style="background-color:black;margin-left:1000px;margin-top:-300px">
+	    			<div class="orizzontale" style="margin-left:700px"></div>
+	    			<hr width="1" size="300" style="background-color:black;margin-left:700px;margin-top:-300px">
 	    		</div>
 	    	</form>
 	    </div>
