@@ -72,10 +72,7 @@
         			response.sendRedirect(redirectURL);
     				}
 	    			if(request.getParameter("calcFeas") != null && request.getParameter("budget").equals("")) { %>
-						<div class="alert" role="alert">
-							<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-							<strong style="color:black">Attenzione! Inserisci il tuo budget.</strong>
-						</div>
+						<script>window.alert("Warning! Enter your budget.")</script>
 				<%}%>
 				</div>
 	    	</form>
