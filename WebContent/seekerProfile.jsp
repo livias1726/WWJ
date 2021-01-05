@@ -56,10 +56,10 @@
 	    		<div class="recruiter_acc">
 	    		<div class="profile_pic">
 	    		<div>
-	    			<!--  <input type="text" id="Lnamefname" name="LnameFname" disabled value="<%=accountBean.getAccount().getUser().getFirstName()%><%=""%><%=accountBean.getAccount().getUser().getLastName()%>" style="margin-left:290px;margin-top:20px;text-align:center;text-style:bold"><br> -->
+	    			<input type="text" id="Lnamefname" name="LnameFname" disabled value="<%=accountBean.getAccount().getUser().getFirstName()%><%=""%><%=accountBean.getAccount().getUser().getLastName()%>" style="margin-left:290px;margin-top:20px;text-align:center;text-style:bold"><br>
 	    			<label for="email" style="margin-top:40px;margin-left:330px">Job Seeker</label>
 	    		</div>
-	    		<button class="change_pic" style="background-color:lightgrey;width:250px;height:30px;margin-top:180px;margin-left:-7px">Change profile picture</button>
+	    		<button class="change_pic" name="change_pic" style="background-color:lightgrey;width:250px;height:30px;margin-top:180px;margin-left:-7px">Change profile picture</button>
 	    		</div>
 	    		<div id="container">
 				<ul id="griglia">

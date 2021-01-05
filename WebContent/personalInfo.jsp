@@ -69,7 +69,15 @@
 				    	<label for="title" style="color:black;font-size:20px;margin-left:350px">Titles/lines</label>
 				        <input type="text" id="title" name="title" style="margin-left: 75px;height:150px;width:300px"><button style="width:40px;height:40px;background-color:lightblue;margin-left:10px">Add</button>
 				    </div><br>
-				    <button class="search_btn" style="width:150px; height:90px; top:40px; background-color: dodgerblue; margin-left:600px">Change Info</button>
+				    <%if (request.getParameter("save_changes") != null) {
+				    	userBean.setFirstName(request.getParameter("firstName"));
+		   			  	userBean.setLastName(request.getParameter("lastName"));
+		   			  	userBean.setEmail(request.getParameter("eMail"));
+		   			  	userBean.setPassword(request.getParameter("pwd"));
+		   			  	userBean.setCity(request.getParameter("city"));
+		   				userBean.savePersonalInfo();
+		   			}%>
+				    <button class="search_btn" type="button" name="save_changes" id="info" onClick="changeText()" style="width:150px; height:90px; top:40px; background-color: dodgerblue; margin-left:600px">Change Info</button>
 				</div>
 	    	</form>
 	    </div>
@@ -81,5 +89,8 @@
 	          				input.type = "password";
 	        			}
 	      		}</script>
+	   <script>function changeText() {
+		   			document.getElementById('info').innerHTML = "Save Changes";
+	   }</script>
 </body>
 </html>
