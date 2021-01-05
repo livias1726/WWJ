@@ -47,15 +47,13 @@
 				if (request.getParameter("search") != null && (request.getParameter("place").equals("") && request.getParameter("business").equals(""))){%>
 						<script>window.alert("Warning! Enter the country or business you are interested in.")</script>
 				<%}%>
-	    		<div class="dropdown">
-	    			<input class="place_btn" type="text" name="place" id="place" value="" style="background-color:white; border-color:black">
-	    		<div class="dropdown-content" style="right:0; text-color:black"><%=countryBean.getCountries()%></div>
-	    		</div>
-	    		<div class="dropdown">
-	    			<input class="job_btn" type="text" name="business" value="" id="business" style="background-color:white; border-color:black"><br>
-	    		<div class="dropdown-content" style="left:0; text-color:black"><%=businessBean.getBusinesses()%></div>
-	    		</div>
-	    		<button class="search_btn" type="submit" name="search" style="width:100px; height:50px; top:100px; background-color: dodgerblue; margin-right:-20px; border-color: black">Search</button>
+	    		<select class="order_select" name="place" style="background-color:white;width:250px;height:30px;margin-left:200px;margin-right:130px;margin-top:130px">
+	    			<option><%=countryBean.getCountries()%></option>
+	    		</select> 
+	    		<select class="order_select" name="business" style="background-color:white;width:250px;height:30px;margin-right:200px;margin-left:750px;margin-top:130px">
+	    			<option><%=businessBean.getBusinesses()%></option>
+	    		</select> 
+	    		<button class="search_btn" type="submit" name="search" style="width:100px; height:50px; top:300px; background-color: dodgerblue; margin-right:-20px; border-color: black">Search</button>
 	    		</div>
 	    	</form>
 		</div>

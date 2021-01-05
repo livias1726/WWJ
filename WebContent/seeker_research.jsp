@@ -17,7 +17,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<link rel="icon" href="icons/search_usr.png">
-	    <link href="css/style.css" rel="stylesheet">
+	    <link href="css/style.css?ts=<?=time()?>&quot" rel="stylesheet">
 		
 		<title>WorldWideJob - seeker_research</title>
 	</head>
@@ -49,15 +49,13 @@
 	    		if (request.getParameter("search") != null && (request.getParameter("place").equals("") && request.getParameter("job").equals(""))){%>
   					<script>window.alert("Warning! Enter the country and job you are interested in.")</script>
 				<%}%>
-	    		<div class="dropdown">
-	    			<input class="place_btn" type="text" name="place" id="place" value="" style="background-color:white; border-color:black">
-	    		<div class="dropdown-content" style="right:0;"><%=countryBean.getCountries()%></div>
-	    		</div>
-	    		<div class="dropdown">
-	    			<input class="job_btn" type="text" name="job" value="" id="job" style="background-color:white; border-color:black"><br>
-	    		<div class="dropdown-content" style="left:0;"><%=jobBean.getJobs()%></div>
-	    		</div>
-	    		<button class="search_btn" type="submit" name="search" style="width:100px; height:50px; top:100px; background-color: dodgerblue; margin-right:-20px; border-color: black">Search</button>
+	    		<select class="order_select" name="place" style="background-color:white;width:250px;height:30px;margin-left:200px;margin-right:130px;margin-top:130px">
+	    			<option><%=countryBean.getCountries()%></option>
+	    		</select> 
+	    		<select class="order_select" name="job" style="background-color:white;width:250px;height:30px;margin-right:200px;margin-left:750px;margin-top:130px">
+	    			<option><%=jobBean.getJobs()%></option>
+	    		</select> 
+	    		<button class="search_btn" type="submit" name="search" style="width:100px; height:50px; top:300px; background-color: dodgerblue; margin-right:-20px; border-color: black">Search</button>
 	    		</div>
 	    	</form>
 		</div>
