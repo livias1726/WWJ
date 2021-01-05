@@ -70,8 +70,16 @@
 				        <input type="text" id="activitiesDescription" name="activitiesDescription" value="<%=offerBean.getTaskDescription()%>" style="margin-left: 40px;overflow-x:scroll;overflow-y:scroll;margin-top:10px">
 				    </div>
 				    <div style="margin-top:-290px;margin-right:20px;float:right">
-				    	<button class="star_btn" style="width:40px;height:40px;margin-left:1300px;margin-top:-2500px;background-color:transparent"></button> 
+				    	<button class="star_btn" name="star" style="width:40px;height:40px;margin-left:1300px;margin-top:-2500px;background-color:transparent"></button> 
 				    </div><br>
+				    <% if (request.getParameter("star") != null){
+					jobBean.setName(request.getParameter("position"));%>
+  					<div class="alert" role="alert">
+  						<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+  						<strong style="color:black">L'offerta è stata aggiunta ai preferiti!</strong>
+					</div>
+				<%}%>
+					
 				    <div style="margin-top:-130px;margin-right:130px;float:right">
 				    	<button class="map-offer_btn" style="width:40px;height:40px;margin-left:1300px;margin-top:-2500px;background-color:transparent"></button>
 				    </div>   
