@@ -57,10 +57,26 @@
 	    		<div class="profile_pic">
 	    		<div>
 	    			<input type="text" id="Lnamefname" name="LnameFname" disabled value="<%=accountBean.getAccount().getUser().getFirstName()%><%=""%><%=accountBean.getAccount().getUser().getLastName()%>" style="margin-left:290px;margin-top:20px;text-align:center;text-style:bold"><br>
-	    			<label for="email" style="margin-top:40px;margin-left:325px">Entrepreneur</label>
+	    			<label for="email" style="margin-top:5px;margin-left:325px">Entrepreneur</label>
 	    		</div>
-	    		<button class="change_pic" style="background-color:lightgrey;width:250px;height:30px;margin-top:180px;margin-left:-7px">Change profile picture</button>
-	    		</div>
+	    		<input class="change_pic" disabled value="Change profile picture:" style="text-align:center;background-color:white; border:0;width:250px;height:20px;margin-top:180px;margin-left:-5px"><br>
+				<input type='file' id='getval' style="margin-top:10px; margin-left:-5px" name="background-image"/><br/><br/>
+				<div id='clock' style="margin-top:-340px; margin-left:-5px"></div>
+				<script>
+				document.getElementById('getval').addEventListener('change', readURL, true);
+				function readURL(){
+				      var file = document.getElementById("getval").files[0];
+				      var reader = new FileReader();
+				      reader.onloadend = function(){
+				         document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";        
+				      }
+				      if(file){
+				         reader.readAsDataURL(file);
+				       }else{
+				       }
+				}
+				</script>
+				</div>
 	    		<div id="container">
 				<ul id="griglia">
 				<li><button class="profits_btn" type="button" style="width:200px;height:160px;background-color:lightblue" onClick="javascript:window.location='favouriteBusiness.jsp';">Business Plans</button></li>

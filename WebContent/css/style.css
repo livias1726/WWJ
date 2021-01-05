@@ -370,7 +370,6 @@
     width:100%; 
     height:100%; 
     background-image: url('../icons/profile_pic.png');
-	
 }
 
 .change_pic{
@@ -381,6 +380,13 @@
 	background-size:24px; 
     background-image: url('../icons/change_pic.png');
 	
+}
+
+#clock{
+      background-image:url('');
+      background-size:cover;
+      background-position: center;
+      height: 250px; width: 250px;
 }
 
 
@@ -793,3 +799,4 @@ margin-left:700px;
 .closebtn:hover {
   color: black;
 }
+
