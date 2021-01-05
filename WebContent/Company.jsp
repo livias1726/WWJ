@@ -1,11 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="logic.bean.CompanyBean"%>
+<%@ page import="logic.bean.CompanyBean"
+		import="logic.bean.AddressBean"
+		import="java.util.List"
+		import="java.util.ArrayList"%>
 
 <!DOCTYPE html>
 
 <jsp:useBean id="companyBean" class="logic.bean.CompanyBean" scope="session"/>
 <jsp:setProperty name="companyBean" property="*"/>
+
+<jsp:useBean id="addressBean" class="logic.bean.AddressBean" scope="session"/>
+<jsp:setProperty name="addressBean" property="*"/>
 
 <%Class.forName("com.mysql.jdbc.Driver");%>
 
@@ -53,19 +59,29 @@
 	    		</div>
 	    		<div>
 	    		<input class="favourite_container" type="text" name="company_container" value="" disabled style="background-color:#C6D6D3">	
-	    		<button class="change_btn" style="width:100px; height:50px; top:130px; left:-100px; background-color:dodgerblue">Change</button>
-	    		<button class="savechange_btn" style="width:100px; height:50px; top:550px; left:800px; background-color:dodgerblue">Save change</button>
+	    		<button class="savechange_btn" style="width:100px; height:50px; top:550px; left:800px; background-color:dodgerblue" onClick="changeInfo()">Save change</button>
 	    		<input class="companyname" type="text" name="companyname" value="Name" disabled style="background-color:#C6D6D3">	
 	    		<input class="companybranches" type="text" name="companybranches" value="Branches" disabled style="background-color:#C6D6D3">	
 	    		<input class="companydescription" type="text" name="companyndescription" value="Description" disabled style="background-color:#C6D6D3">	
 	    		<input class="companyheadquarter" type="text" name="companyheadquarter" value="Headquarter" disabled style="background-color:#C6D6D3">
 	    		<input class="companyname" type="text" name="inputName" value="<%=companyBean.getName()%>" style="background-color:white;top:175px;left:-305px;">
-	    		<input class="companybranches" type="text" name="inputBranches" value="<%=companyBean.getBranches()%>" style="background-color:white;top:230px;left:-197px;height:150px">
+	    		<input class="companybranches" type="text" name="inputBranches"	<ol value="<%=companyBean.getBranches()%>"</ol> style="background-color:white;top:230px;left:-197px;height:150px">
 	    		<input class="companydescription" type="text" name="inputDescription" value="<%=companyBean.getDescription()%>" style="background-color:white;top:350px;left:280px;">
 	    		<input class="companyheadquarter" type="text" name="inputHeadquarter" value="<%=companyBean.getHeadquarter()%>" style="background-color:white;top:350px;left:390px;">
 	    		<button class="add_btn" style="width:40px;height:40px;background-color:lightblue;top:76px;left:400px">Add</button>
 	    		</div>
 	    	</form>
 	    </div>
+	    <script>function changeInfo() {
+		   			<%if (request.getParameter("save_changes") != null) {
+				    	companyBean.setName(request.getParameter("inputName"));
+				    	companyBean.setDescription(request.getParameter("inputDescription"));
+				    	companyBean.setHeadquarter(addressBean);
+				    	List<AddressBean> branches = new ArrayList<>();
+				    	companyBean.setBranches(branches);
+				    	companyBean.saveCompanyInfo();
+				    	
+		   			}%>
+	   }</script>
 	</body>
 </html>
