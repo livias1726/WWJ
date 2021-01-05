@@ -100,14 +100,17 @@ public class OfferDetailsGraphic implements Initializable {
 	
 	@FXML
     public void manageFavourite() {
-		OfferBean bean = new OfferBean();
-		bean.setId(offer.getId());
+		if(SessionFacade.getSession().getID() == null) {
+    		Stage stage = (Stage)pane.getScene().getWindow();
+    		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
+    	}
+		
 		try {
 			if(favBtn.getStyle().equals("star_button_nset")) {
-				bean.addToFavourites();
+				offer.addToFavourites();
 				favBtn.setStyle("star_button_set");
 			}else {
-				bean.removeFromFavourites();
+				offer.removeFromFavourites();
 				favBtn.setStyle("star_button_nset");	
 			}
 		} catch (DatabaseFailureException e) {

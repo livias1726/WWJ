@@ -4,7 +4,6 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.ZoneId;
 
 import logic.domain.User;
 import logic.persistence.ConnectionManager;
@@ -30,11 +29,12 @@ public class UserDAO {
             if (res.first()){           	
             	user = new User(res.getString("email"), res.getString("pwd"), res.getString("first_name"), res.getString("last_name"));
             	user.setCity(res.getString("city"));
+
             	if(res.getDate("birth") != null) {
-            		user.setBirth(res.getDate("birth").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            		user.setBirth(res.getDate("birth").toLocalDate());
             	}
             }
-            
+
             res.close();          
         } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to retrieve personal information."); 

@@ -82,7 +82,7 @@ public class PersonalInfoGraphic implements Initializable {
 			closePersonalInfo();
 		}
 		
-		if(SessionFacade.getSession().getID().intValue() != id) {
+		if(!SessionFacade.getSession().getID().equals(id)) {
 			passHBox.setVisible(false);
 			changeBtn.setVisible(false);
 		}else {

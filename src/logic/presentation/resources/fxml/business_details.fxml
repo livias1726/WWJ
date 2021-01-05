@@ -13,10 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="591.0" prefWidth="1132.0" styleClass="result_box" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="1180.0" styleClass="result_box" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="44.0" layoutY="59.0" text="Business Name">
+      <Label fx:id="busLbl" layoutX="44.0" layoutY="59.0" text="Business Name">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
@@ -29,7 +28,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <HBox layoutX="51.0" layoutY="466.0" prefHeight="54.0" prefWidth="521.0" spacing="30.0">
+      <HBox layoutX="51.0" layoutY="547.0" prefHeight="54.0" prefWidth="521.0" spacing="30.0">
          <children>
             <Label prefHeight="20.0" prefWidth="88.0" text="Insert budget">
                <HBox.margin>
@@ -41,19 +40,19 @@
             </Label>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField prefHeight="30.0" prefWidth="197.0">
+                  <TextField fx:id="budgetTxt" prefHeight="30.0" prefWidth="197.0">
                      <HBox.margin>
                         <Insets top="10.0" />
                      </HBox.margin>
                   </TextField>
-                  <ComboBox prefHeight="30.0" prefWidth="30.0" styleClass="dollar">
+                  <ComboBox fx:id="currBox" prefHeight="30.0" prefWidth="30.0" styleClass="dollar">
                      <HBox.margin>
                         <Insets top="10.0" />
                      </HBox.margin>
                   </ComboBox>
                </children>
             </HBox>
-            <Button disable="true" layoutX="360.0" layoutY="10.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="178.0" styleClass="spec_btn" text="Calculate feasibility" textFill="WHITE">
+            <Button fx:id="feasBtn" disable="true" layoutX="360.0" layoutY="10.0" mnemonicParsing="false" onAction="#calculateFeasibility" prefHeight="54.0" prefWidth="178.0" styleClass="spec_btn" text="Calculate feasibility" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -66,8 +65,8 @@
             </Button>
          </children>
       </HBox>
-      <TextArea editable="false" layoutX="51.0" layoutY="153.0" prefHeight="186.0" prefWidth="455.0" wrapText="true" />
-      <Button layoutX="754.0" layoutY="439.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="178.0" styleClass="spec_btn" text="View statistics" textFill="WHITE">
+      <TextArea fx:id="descArea" editable="false" layoutX="51.0" layoutY="153.0" prefHeight="186.0" prefWidth="455.0" wrapText="true" />
+      <Button fx:id="statBtn" layoutX="754.0" layoutY="439.0" mnemonicParsing="false" onAction="#viewStatistics" prefHeight="54.0" prefWidth="178.0" styleClass="spec_btn" text="View statistics" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -83,7 +82,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label layoutX="51.0" layoutY="352.0" prefHeight="53.0" prefWidth="1030.0" text="Ranking brief" textFill="#000000b5">
+      <Label fx:id="rankLbl" layoutX="51.0" layoutY="352.0" prefHeight="53.0" prefWidth="1030.0" text="Ranking brief" textFill="#000000b5">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -129,5 +128,10 @@
             <Font size="16.0" />
          </font>
       </Label>
+      <Button fx:id="favBtn" layoutX="1076.0" layoutY="39.0" mnemonicParsing="false" onAction="#manageFavourite" prefHeight="40.0" prefWidth="40.0" styleClass="star_button_nset">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>
