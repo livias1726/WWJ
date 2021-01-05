@@ -35,6 +35,8 @@ public class RoutinesIdentifier {
 	public static final String UPDATE_CV = "call wwj_db.update_curriculum(?, ?)";
 	public static final String GET_FAVOURITE_OFFERS = "call wwj_db.retrieve_favourite_offers(?)";
 	public static final String INSERT_APPLICATION = "call wwj_db.insert_application(?, ?)";
-	public static final String INSERT_FAVOURITE = "call wwj_db.insert_favourite(?, ?)";
-	public static final String DELETE_FAVOURITE = "call wwj_db.delete_favourite(?, ?)";
+	public static final String INSERT_FAVOURITE_OFFER = "call wwj_db.insert_favourite_offer(?, ?)";
+	public static final String DELETE_FAVOURITE_OFFER = "call wwj_db.delete_favourite_offer(?, ?)";
+	public static final String INSERT_FAVOURITE_BUSINESS = "call wwj_db.insert_favourite_business(?, ?)";
+	public static final String DELETE_FAVOURITE_BUSINESS = "call wwj_db.delete_favourite_business(?, ?)";
 }

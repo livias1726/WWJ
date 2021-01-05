@@ -222,7 +222,7 @@ public class OfferDAO {
 		
 		try{
 			Connection conn = ConnectionManager.getConnection();
-        	stmt = conn.prepareCall(RoutinesIdentifier.INSERT_FAVOURITE);	
+        	stmt = conn.prepareCall(RoutinesIdentifier.INSERT_FAVOURITE_OFFER);	
         	RoutinesManager.bindParametersAndExec(stmt, idFav, (int)idSeek);
 			
         } catch (SQLException e) {
@@ -239,7 +239,7 @@ public class OfferDAO {
 		
 		try{
 			Connection conn = ConnectionManager.getConnection();
-        	stmt = conn.prepareCall(RoutinesIdentifier.DELETE_FAVOURITE);	
+        	stmt = conn.prepareCall(RoutinesIdentifier.DELETE_FAVOURITE_OFFER);	
         	RoutinesManager.bindParametersAndExec(stmt, idFav, (int)idSeek);
 			
         } catch (SQLException e) {

@@ -7,9 +7,19 @@ import logic.persistence.dao.BusinessDAO;
 
 public class Business {
 
-	private String category;
-	private String name;
+	protected int id;
+	protected String category;
+	protected String name;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
 	public String getCategory() {
 		return category;
 	}

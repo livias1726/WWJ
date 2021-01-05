@@ -149,6 +149,7 @@ public class BusinessDAO {
 		res.first();
 		do {
 			BusinessInCountry business = new BusinessInCountry();
+			business.setId(res.getInt("id"));
 			business.setName(res.getString("name"));
 			business.setCategory(res.getString("category"));
 			
@@ -162,5 +163,39 @@ public class BusinessDAO {
 			
 			list.add(business);
 		}while(res.next());
+	}
+
+	public static void insertIntoFavourite(int idFav, long idEnt) throws SQLException {
+		CallableStatement stmt = null;
+		
+		try{
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.INSERT_FAVOURITE_BUSINESS);	
+        	RoutinesManager.bindParametersAndExec(stmt, idFav, (int)idEnt);
+			
+        } catch (SQLException e) {
+        	throw new SQLException("An error occured while trying to insert a business to the favourite ones."); 
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
+	}
+
+	public static void deleteFromFavourite(int idFav, long idEnt) throws SQLException {
+		CallableStatement stmt = null;
+		
+		try{
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.DELETE_FAVOURITE_BUSINESS);	
+        	RoutinesManager.bindParametersAndExec(stmt, idFav, (int)idEnt);
+			
+        } catch (SQLException e) {
+        	throw new SQLException("An error occured while trying to delete a business from the favourite ones."); 
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
 	}
 }

@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
 import logic.bean.BusinessInCountryBean;
+import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
 import logic.presentation.Sections;
@@ -64,7 +65,7 @@ public class BusinessDetailsGraphic implements Initializable {
 		/*Add ranking*/
 	}
 	
-	/*@FXML
+	@FXML
     public void manageFavourite() {
     	if(SessionFacade.getSession().getID() == null) {
     		Stage stage = (Stage)pane.getScene().getWindow();
@@ -80,9 +81,9 @@ public class BusinessDetailsGraphic implements Initializable {
 				favBtn.setStyle("star_button_nset");	
 			}
 		} catch (DatabaseFailureException e) {
-			/*Don't change the settings
+			/*Don't change the settings*/
 		}
-    }*/
+    }
 
 	@FXML
 	public void calculateFeasibility() {

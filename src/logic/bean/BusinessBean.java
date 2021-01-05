@@ -6,9 +6,19 @@ import logic.application.control.ViewBusinessControl;
 import logic.exceptions.DatabaseFailureException;
 
 public class BusinessBean {
-	private String category;
-	private String name;
+	
+	protected int id;
+	protected String category;
+	protected String name;
 		
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}

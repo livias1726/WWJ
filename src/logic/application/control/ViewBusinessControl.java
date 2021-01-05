@@ -83,6 +83,7 @@ public class ViewBusinessControl extends ViewResultsControl{
     	for(BusinessInCountry i: src) {
     		BusinessInCountryBean bean = new BusinessInCountryBean();  		
     		
+    		bean.setId(i.getId());
     		bean.setName(i.getName());
     		bean.setDescription(i.getDescription());
     		bean.setCategory(i.getCategory());

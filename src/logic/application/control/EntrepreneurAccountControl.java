@@ -52,4 +52,24 @@ public class EntrepreneurAccountControl{
     	
     	return dest;
 	}
+
+	public void addNewFavourite(int id) throws DatabaseFailureException {
+		BusinessInCountry fav = new BusinessInCountry();
+		fav.setId(id);
+		try {
+			fav.addFavourite(SessionFacade.getSession().getID());
+		} catch (SQLException e) {
+			throw new DatabaseFailureException();
+		}
+	}
+
+	public void removeFavourites(int id) throws DatabaseFailureException {
+		BusinessInCountry fav = new BusinessInCountry();
+		fav.setId(id);
+		try {
+			fav.deleteFavourite(SessionFacade.getSession().getID());
+		} catch (SQLException e) {
+			throw new DatabaseFailureException();
+		}
+	}
 }

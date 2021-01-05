@@ -59,4 +59,12 @@ public class BusinessInCountry extends Business {
 	public List<BusinessInCountry> getFavourites(Long id) throws SQLException {
 		return BusinessDAO.selectFavourites(id.toString());
 	}
+
+	public void addFavourite(Long id) throws SQLException {
+		BusinessDAO.insertIntoFavourite(this.id, id);
+	}
+
+	public void deleteFavourite(Long id) throws SQLException {
+		BusinessDAO.deleteFromFavourite(this.id, id);
+	}
 }

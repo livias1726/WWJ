@@ -61,4 +61,12 @@ public class BusinessInCountryBean extends BusinessBean{
 	public List<BusinessInCountryBean> getFavouriteBusinesses() throws DatabaseFailureException {
 		return EntrepreneurAccountControl.getInstance().retrieveFavourites();
 	}
+
+	public void addToFavourites() throws DatabaseFailureException {
+		EntrepreneurAccountControl.getInstance().addNewFavourite(id);
+	}
+
+	public void removeFromFavourites() throws DatabaseFailureException {
+		EntrepreneurAccountControl.getInstance().removeFavourites(id);
+	}
 }
