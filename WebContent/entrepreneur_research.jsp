@@ -48,9 +48,11 @@
 						<script>window.alert("Warning! Enter the country or business you are interested in.")</script>
 				<%}%>
 	    		<select class="order_select" name="place" style="background-color:white;width:250px;height:30px;margin-left:200px;margin-right:130px;margin-top:130px">
+	    			<option>Place</option>
 	    			<option><%=countryBean.getCountries()%></option>
 	    		</select> 
 	    		<select class="order_select" name="business" style="background-color:white;width:250px;height:30px;margin-right:200px;margin-left:750px;margin-top:130px">
+	    			<option>Businesses</option>
 	    			<option><%=businessBean.getBusinesses()%></option>
 	    		</select> 
 	    		<button class="search_btn" type="submit" name="search" style="width:100px; height:50px; top:300px; background-color: dodgerblue; margin-right:-20px; border-color: black">Search</button>
