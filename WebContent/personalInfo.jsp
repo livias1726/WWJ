@@ -69,9 +69,10 @@
 				    	<label for="title" style="color:black;font-size:20px;margin-left:350px">Titles/lines</label>
 				        <input type="text" id="title" name="title" style="margin-left: 75px;height:150px;width:300px"><button style="width:40px;height:40px;background-color:lightblue;margin-left:10px">Add</button>
 				    </div><br>
-				    <button class="search_btn" type="submit" name="save_changes" id="info" onClick="changeText()" style="width:150px; height:90px; top:40px; background-color: dodgerblue; margin-left:600px">Change Info</button>
+				    <button class="search_btn" type="submit" name="save_changes" id="info" onClick="changeText()" style="width:150px; height:90px; top:40px; background-color: dodgerblue; margin-left:600px">Save changes</button>
 				</div>
 	    	</form>
+	    	
 	    </div>
 	    <script>function showPwd() {
 	        		var input = document.getElementById('pwd');
@@ -82,7 +83,6 @@
 	        			}
 	      		}</script>
 	   <script>function changeText() {
-		   			document.getElementById('info').innerHTML = "Save Changes";
 		   			<%if (request.getParameter("save_changes") != null) {
 				    	userBean.setEmail(request.getParameter("eMail"));
 						userBean.setPassword(request.getParameter("pwd"));
