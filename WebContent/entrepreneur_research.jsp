@@ -45,10 +45,7 @@
         			response.sendRedirect(redirectURL);
     			}
 				if (request.getParameter("search") != null && (request.getParameter("place").equals("") && request.getParameter("business").equals(""))){%>
-						<div class="alert" role="alert">
-							<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-							<strong style="color:black">Attenzione! Inserisci il paese oppure il business a cui sei interessato.</strong>
-						</div>
+						<script>window.alert("Warning! Enter the country or business you are interested in.")</script>
 				<%}%>
 	    		<div class="dropdown">
 	    			<input class="place_btn" type="text" name="place" id="place" value="" style="background-color:white; border-color:black">

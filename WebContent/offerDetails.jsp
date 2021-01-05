@@ -74,10 +74,7 @@
 				    </div><br>
 				    <% if (request.getParameter("star") != null){
 					jobBean.setName(request.getParameter("position"));%>
-  					<div class="alert" role="alert">
-  						<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-  						<strong style="color:black">L'offerta è stata aggiunta ai preferiti!</strong>
-					</div>
+  					<script>window.alert("The offer has been added to your favorites.")</script>
 				<%}%>
 					
 				    <div style="margin-top:-130px;margin-right:130px;float:right">
