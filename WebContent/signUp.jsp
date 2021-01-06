@@ -42,27 +42,27 @@
 					</div>
 					<div style="margin-top: 40px">
 				    	<label for="firstName" style="color:black;font-size:20px;margin-left:-640px">First Name</label>
-				        <input type="text" id="firstName" name="firstName" style="margin-left: 40px;height:15px">
+				        <input type="text" id="firstName" name="firstName" style="margin-left: 40px;height: 29px; width: 174px">
 				    </div>
 				    <div style="margin-top: -25px">
 				    	<label for="eMail" style="color:black;font-size:20px;margin-left:-600px">Email</label>
-				        <input type="text" id="eMail" name="eMail" style="margin-left: 42px;height:15px">
+				        <input type="text" id="eMail" name="eMail"style="margin-left: 40px;height: 29px; width: 174px">
 				    </div>
 				    <div style="margin-top: -25px">
 				    	<label for="password" style="color:black;font-size:20px;margin-left:-625px">Password</label>
-				        <input type="text" id="password" name="password" style="margin-left: 40px;height:15px">
+				        <input type="password" id="password" name="password" style="margin-left: 40px;height: 29px; width: 174px">
 				    </div>
 				    <div style="margin-top: -195px;float:right">
 				    	<label for="lastName" style="color:black;font-size:20px;margin-right:40px">Last Name</label>
-				        <input type="text" id="lastName" name="lastName" style="margin-right:250px;height:15px">
+				        <input type="text" id="lastName" name="lastName" style="margin-right:250px;height: 29px; width: 174px">
 				    </div>
 				    <div style="margin-top: -140px;float:right">
 				    	<label for="confirmEmail" style="color:black;font-size:20px;margin-right:40px">Confirm email</label>
-				        <input type="text" id="confirmEmail" name="confirmEmail" style="margin-right:250px;height:15px">
+				        <input type="text" id="confirmEmail" name="confirmEmail" style="margin-right:250px;height: 29px; width: 174px">
 				    </div>
 				    <div style="margin-top: -85px;float:right">
 				    	<label for="confirmPassword" style="color:black;font-size:20px;margin-right:40px">Confirm Password</label>
-				        <input type="text" id="confirmPassword" name="confirmPassword" style="margin-right:250px;height:15px">
+				        <input type="password" id="confirmPassword" name="confirmPassword" style="margin-right:250px;height: 29px; width: 174px">
 				    </div><br>
 				    <button class="search_btn" id="signup" type="submit" name="signup" style="width:110px; height:50px; top:40px; background-color: dodgerblue; margin-left:-30px">Sign Up</button>
 				</div>
@@ -81,9 +81,10 @@
 					
 					String redirectURL = "http://localhost:8080/WorldWideJob/seekerProfile.jsp";
 			        response.sendRedirect(redirectURL);
+			        return;
 				}%>
-        	}else if(rr[1].checked) {
-        		<%if(request.getParameter("signup") != null) {
+			}else if(rr[1].checked) {
+				<%if(request.getParameter("signup") != null) {
 					userBean.setFirstName(request.getParameter("firstName"));
 					userBean.setLastName(request.getParameter("lastName"));
 					userBean.setEmail(request.getParameter("eMail"));
@@ -94,9 +95,10 @@
 					
 					String redirectURL = "http://localhost:8080/WorldWideJob/recruiter'sProfile.jsp";
 			        response.sendRedirect(redirectURL);
+			        return;
 				}%>
-        	}else if(rr[2].checked) {
-        		<%if(request.getParameter("signup") != null) {
+			}else if(rr[2].checked) {
+				<%if(request.getParameter("signup") != null) {
 					userBean.setFirstName(request.getParameter("firstName"));
 					userBean.setLastName(request.getParameter("lastName"));
 					userBean.setEmail(request.getParameter("eMail"));
@@ -107,8 +109,9 @@
 					
 					String redirectURL = "http://localhost:8080/WorldWideJob/entrepreneur'sProfile.jsp";
 			        response.sendRedirect(redirectURL);
+			        return;
 				}%>
-        	}
-</script>
+			}
+	</script>
 </body>
 </html>

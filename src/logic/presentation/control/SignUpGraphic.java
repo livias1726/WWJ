@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 
 import javax.security.auth.login.FailedLoginException;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.value.ObservableObjectValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
@@ -12,11 +14,10 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
-import logic.application.Users;
 import logic.bean.AccountBean;
 import logic.bean.UserBean;
 import logic.exceptions.DatabaseFailureException;
@@ -28,10 +29,7 @@ public class SignUpGraphic implements Initializable {
 	
 	@FXML
 	private AnchorPane pane;
-	
-	@FXML
-	private HBox radioBox;
-	
+
 	@FXML
 	private RadioButton seekRadio;
 	
@@ -62,28 +60,80 @@ public class SignUpGraphic implements Initializable {
 	@FXML
 	private TextField lastName;
 	
+	@FXML
+    private Button signUpBtn;
+	
+	private int checked;
+	
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
-		Users user = SessionFacade.getSession().getCurrUserType();
-		
-		if(user == null) {
-			radioBox.setVisible(true);
-		}	
-		
-		radioUser.selectedToggleProperty().addListener((obv, oldValue, newValue) -> setUser());
+		signUpBtn.disableProperty().bind(Bindings.isNull((ObservableObjectValue<?>) radioUser.getSelectedToggle()));
+		seekRadio.selectedProperty().addListener((obs, oldV, newV) -> checked = 1);
+		recRadio.selectedProperty().addListener((obs, oldV, newV) -> checked = 2);
+		entreRadio.selectedProperty().addListener((obs, oldV, newV) -> checked = 3);
 	}
 	
 	@FXML
-	public void setUser(){
-		if(seekRadio.isSelected()) {
-			SessionFacade.getSession().setCurrUserType(Users.SEEKER);
-		}else if(recRadio.isSelected()) {
-			SessionFacade.getSession().setCurrUserType(Users.RECRUITER);
-		}else if(entreRadio.isSelected()) {
-			SessionFacade.getSession().setCurrUserType(Users.ENTREPRENEUR);
-		}else {
-			SessionFacade.getSession().setCurrUserType(null);
+	public void createAccount() {
+		
+		try {			
+			UserBean credentials = new UserBean();
+			credentials.setEmail(email.getText());
+			credentials.setPassword(pwd.getText());
+			credentials.setFirstName(firstName.getText());
+			credentials.setLastName(lastName.getText());
+			
+			AccountBean account = new AccountBean();
+			account.setUser(credentials);
+			
+			switch(checked) {
+				case 1:
+					account.setType("SEEKER");
+					break;
+				case 2:
+					account.setType("RECRUITER");
+					break;
+				case 3:
+					account.setType("ENTREPRENEUR");
+					break;
+				default:
+					account.setType(null);			
+			}
+			
+			account.signUp(confEmail.getText(), confPwd.getText());
+
+			Stage stage = (Stage)pane.getScene().getWindow();		
+			switch(account.getType()) {
+				case "SEEKER":
+					stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_SEEK, new SeekerAccountGraphic(SessionFacade.getSession().getID())));	
+					break;
+				case "RECRUITER":
+					stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_REC, null));
+					break;
+				case "ENTREPRENEUR":
+					stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_ENTR, null));
+					break;
+				default:
+			}
+			
+		} catch (InvalidFieldException e) {
+			GraphicHandler.popUpMsg(AlertType.WARNING, e.getMessage());
+			Stage stage = (Stage)pane.getScene().getWindow();
+			stage.setScene(GraphicHandler.switchScreen(Scenes.SIGN_UP, null));
+			
+		} catch (FailedLoginException le) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, le.getMessage());
+			login();
+			
+		} catch (DatabaseFailureException e) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
+	}
+	
+	@FXML
+	public void login() {
+		Stage stage = (Stage)pane.getScene().getWindow();
+		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
 	}
 	
 	@FXML
@@ -91,59 +141,6 @@ public class SignUpGraphic implements Initializable {
 		Stage stage = (Stage)pane.getScene().getWindow();	
 		Scenes prev = SessionFacade.getSession().getPrevScene();	
 		stage.setScene(GraphicHandler.switchScreen(prev, null));
-	}
-	
-	@FXML
-	public void createAccount() {
-		UserBean credentials = new UserBean();
-		credentials.setEmail(email.getText());
-		credentials.setPassword(pwd.getText());
-		
-		try {
-			credentials.verifyFields(email.getText(), pwd.getText(), firstName.getText(), lastName.getText());
-			credentials.verifyEqualFields(confEmail.getText(), confPwd.getText());
-			credentials.verifySyntax();
-		} catch (InvalidFieldException e) {
-			GraphicHandler.popUpMsg(AlertType.WARNING, e.getMessage());
-			refresh();
-		}	
-	
-		try {
-			AccountBean account = new AccountBean();
-			credentials.setFirstName(firstName.getText());
-			credentials.setLastName(lastName.getText());
-			account.setUser(credentials);
-			
-			account.signUp();
-			
-			Stage stage = (Stage)pane.getScene().getWindow();
-			
-			if(SessionFacade.getSession().getCurrUserType() == Users.SEEKER) {
-				stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_SEEK, new SeekerAccountGraphic(SessionFacade.getSession().getID())));
-				
-			}else if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER) {
-				stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_REC, null));
-				
-			}else {
-				stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_ENTR, null));
-			}
-
-		} catch (FailedLoginException le) {
-			GraphicHandler.popUpMsg(AlertType.ERROR, le.getMessage());
-		} catch (DatabaseFailureException e) {
-			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
-		}
-	}
-	
-	private void refresh() {
-		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Scenes.SIGN_UP, null));
-	}
-
-	@FXML
-	public void login() {
-		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
 	}
 	
 }

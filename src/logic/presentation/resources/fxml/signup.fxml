@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1180.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="logic.presentation.control.SignUpGraphic">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1180.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.SignUpGraphic">
    <children>
       <Button layoutX="33.0" layoutY="24.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="back_btn">
          <effect>
@@ -28,9 +28,9 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <HBox fx:id="radioBox" prefHeight="17.0" prefWidth="538.0" spacing="50.0">
+            <HBox prefHeight="17.0" prefWidth="538.0" spacing="50.0">
                <children>
-                  <RadioButton fx:id="seekRadio" mnemonicParsing="false" onMouseClicked="#setUser" text="Job Seeker">
+                  <RadioButton fx:id="seekRadio" mnemonicParsing="false" text="Job Seeker">
                      <HBox.margin>
                         <Insets left="90.0" />
                      </HBox.margin>
@@ -38,8 +38,8 @@
                         <ToggleGroup fx:id="radioUser" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="recRadio" mnemonicParsing="false" onMouseClicked="#setUser" text="Recruiter" toggleGroup="$radioUser" />
-                  <RadioButton fx:id="entreRadio" mnemonicParsing="false" onMouseClicked="#setUser" text="Entrepreneur" toggleGroup="$radioUser" />
+                  <RadioButton fx:id="recRadio" mnemonicParsing="false" text="Recruiter" toggleGroup="$radioUser" />
+                  <RadioButton fx:id="entreRadio" mnemonicParsing="false" text="Entrepreneur" toggleGroup="$radioUser" />
                </children>
             </HBox>
             <HBox prefHeight="27.0" prefWidth="538.0" spacing="50.0">
@@ -93,7 +93,7 @@
                   </PasswordField>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#createAccount" text="Sign Up" textFill="BLACK">
+            <Button fx:id="signUpBtn" mnemonicParsing="false" onAction="#createAccount" text="Sign Up" textFill="BLACK">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

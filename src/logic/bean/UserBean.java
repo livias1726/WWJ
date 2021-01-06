@@ -98,6 +98,20 @@ public class UserBean {
     		throw new InvalidFieldException("Passwords do not match");
     	}
     }
+    
+    public void verifySignUpSyntax(String email, String pwd) throws InvalidFieldException {
+    	verifyFields();
+		verifyEqualFields(email, pwd);
+		verifySyntax();
+	
+    	if(!email.equals(this.email)) {
+    		throw new InvalidFieldException("Email addresses do not match");
+    	}
+    	
+    	if(!pwd.equals(this.password)) {
+    		throw new InvalidFieldException("Passwords do not match");
+    	}
+    }
    
 	public UserBean getPersonalInfo(Long id) throws DatabaseFailureException {
 		return AccountControl.getInstance().retrievePersonalInfo(id);
