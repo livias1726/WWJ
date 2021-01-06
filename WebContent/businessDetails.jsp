@@ -60,7 +60,7 @@
 	    		<% if (request.getParameter("businessname") != null){
 					businessBean.setName(request.getParameter("businessname"));
 					String redirectURL = "http://localhost:8080/WorldWideJob/statistics.jsp";
-    				response.sendRedirect(redirectURL); }%>
+    				response.sendRedirect(redirectURL);}%>
 	    		<input class="thebusiness" type="text" name="thebusiness" value="The business" disabled style="background-color:#C6D6D3">
 	    		<input class="busdescription" type="text" name="busdescription" value="<%=businessInCountryBean.getDescription()%>" disabled style="background-color:#E4F5F2">
 	    		<input class="insert_budget" type="text" name="insert_budget" value="Insert budget" disabled style="background-color:#C6D6D3"><br>
