@@ -57,7 +57,7 @@
 	    		<div>
 	    		<input class="place2" type="text" name="place2" value="<%=countryBean.getName()%>" disabled style="background-color:white">	
 	    		<input class="busdetails" type="text" name="busdetails" value="" disabled style="background-color:#C6D6D3">
-	    		<input class="businessname" type="text" name="businessname" value="<%=businessBean.getName()%>" disabled style="background-color:#C6D6D3">
+	    		<input class="businessname" type="text" name="businessname" value="<%=businessInCountryBean.getName()%>" disabled style="background-color:#C6D6D3">
 	    		<% if ((String) businessBean.getName() != ""){
 					businessBean.setName(request.getParameter("businessname"));
 					String redirectURL = "http://localhost:8080/WorldWideJob/statistics.jsp";
@@ -77,7 +77,8 @@
 				<%}%>
 				<button class="star_btn" name="star" style="width:40px;height:40px;margin-left:1180px;margin-top:-600px;background-color:transparent" onClick="javascript:window.location='favouriteBusiness.jsp';"></button> 
 				<% if (request.getParameter("star") != null){
-					businessBean.setName(request.getParameter("businessname"));%>
+					businessInCountryBean.setName(request.getParameter("businessname"));
+					businessInCountryBean.addToFavourites();%>
   					<script>window.alert("The business has been added to your favorites.")</script>
 				<%}%>
 				</div>
