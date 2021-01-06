@@ -599,11 +599,6 @@ margin-left:700px;
 	top: 150px;
 	color:black;
 	border: 1px solid #56A6F0;
-	
-	background-image: url('../icons/star.png');
-	background-repeat: no-repeat;
-    background-position: top-left;
-	background-size:25px;
 }
 
 .calculatefeasibility_btn{

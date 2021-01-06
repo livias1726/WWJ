@@ -53,7 +53,12 @@
 	    		<div>
 	    		<input class="favourite_container" type="text" name="favourite_container" value="" disabled style="background-color:#C6D6D3">
 	    		<input class="favourite_title" type="text" name="favourite_title" value="Favourite job offers" disabled style="background-color:#C6D6D3">
-	    		<input class="favouritejoboffer_container" type="text" name="favouritejoboffer_container" value="<%=offerBean.getPosition()%>" disabled style="background-color:#56A6F0">
+	    		<input class="favouritejoboffer_container" type="text" name="favouritejoboffer_container" value="<%=offerBean.getPosition()%>" disabled style="text-align:center;background-color:#56A6F0">
+	    		<button class="star_btn" name="star" style="width:40px;height:40px;margin-left:725px;margin-top:145px;background-color:transparent"></button> 
+	    		<% if (request.getParameter("star") != null){%>
+	    			<input class="favouritejoboffer_container" type="text" name="favouritejoboffer_container" value="" disabled style="text-align:center;background-color:#56A6F0">
+  					<script>window.alert("The offer has been delete to your favorites.")</script>
+				<%}%>
 	    		<input class="order_by" type="text" name="orderby" value="  Ordered by:" disabled style="background-color:lightgrey">
 	    		<select class="order_select" name="orderselect" size="1" style="background-color:whitesmoke">
 	    			<option>expiration</option>

@@ -65,7 +65,7 @@
 	    		<input class="busdescription" type="text" name="busdescription" value="<%=businessInCountryBean.getDescription()%>" disabled style="background-color:#E4F5F2">
 	    		<input class="insert_budget" type="text" name="insert_budget" value="Insert budget" disabled style="background-color:#C6D6D3"><br>
 	    		<input class="budget" type="text" name="budget" id="budget" value="" style="background-color:#E4F5F2">
-	    		<button class="statistics_btn" type="button" style="width:150px; height:50px; top:100px; background-color: dodgerblue; margin-left:1050px; border-color: black" onClick="javascript:window.location='statistics.jsp';">View statistics</button>
+	    		<button class="statistics_btn" type="button" style="width:150px; height:50px; top:10px; right:-30px;background-color: dodgerblue; margin-left:1050px; border-color: black" onClick="javascript:window.location='statistics.jsp';">View statistics</button>
 	    		<button class="calculatefeasibility_btn" name="calcFeas" style="width:150px; height:50px; top:500px; background-color: dodgerblue; margin-left:350px; border-color: black">Calculate feasibility</button>
 	    		<% if (request.getParameter("calcFeas") != null && !request.getParameter("budget").equals("")) {
 					String redirectURL = "http://localhost:8080/WorldWideJob/Feasibility.jsp";
@@ -73,6 +73,11 @@
     				}
 	    			if(request.getParameter("calcFeas") != null && request.getParameter("budget").equals("")) { %>
 						<script>window.alert("Warning! Enter your budget.")</script>
+				<%}%>
+				<button class="star_btn" name="star" style="width:40px;height:40px;margin-left:1180px;margin-top:-600px;background-color:transparent"></button> 
+				<% if (request.getParameter("star") != null){
+					businessBean.setName(request.getParameter("businessname"));%>
+  					<script>window.alert("The business has been added to your favorites.")</script>
 				<%}%>
 				</div>
 	    	</form>

@@ -49,15 +49,21 @@
 	    		if (request.getParameter("search") != null && (request.getParameter("place").equals("") && request.getParameter("job").equals(""))){%>
   					<script>window.alert("Warning! Enter the country and job you are interested in.")</script>
 				<%}%>
-	    		<select class="order_select" name="place" style="background-color:white;width:250px;height:30px;margin-left:200px;margin-right:130px;margin-top:130px">
+				<div style="float:left;margin-top:157px;margin-left:240px;">
+	    			<img alt="" class="image" src="icons/map.png" width=30px height=29px>
+	    		</div>
+	    		<select class="order_select" name="place" style="background-color:white;width:250px;height:30px;margin-left:163px;margin-top:90px">
 	    			<option>Place</option>
 	    			<option><%=countryBean.getCountries()%></option>
 	    		</select> 
-	    		<select class="order_select" name="job" style="background-color:white;width:250px;height:30px;margin-right:200px;margin-left:750px;margin-top:130px">
+	    		<div style="float:left;margin-top:157px;margin-left:440px;color:white;">
+	    			<img alt="" class="image" src="icons/search.png" width=30px height=29px>
+	    		</div>
+	    		<select class="order_select" name="job" style="background-color:white;width:250px;height:30px;margin-right:200px;margin-left:638px;margin-top:90px">
 	    			<option>Job</option>
 	    			<option><%=jobBean.getJobs()%></option>
 	    		</select> 
-	    		<button class="search_btn" type="submit" name="search" style="width:100px; height:50px; top:300px; background-color: dodgerblue; margin-right:-20px; border-color: black">Search</button>
+	    		<button class="search_btn" type="submit" name="search" style="width:100px; height:50px; top:300px; background-color: dodgerblue; margin-left:-750px; border-color: black">Search</button>
 	    		</div>
 	    	</form>
 		</div>
