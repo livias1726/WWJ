@@ -2,8 +2,10 @@ package logic.bean;
 
 import java.util.List;
 
+import logic.application.control.PublishOfferControl;
 import logic.application.control.ViewOfferControl;
 import logic.exceptions.DatabaseFailureException;
+import logic.exceptions.InvalidFieldException;
 
 public class JobBean {
 	
@@ -26,7 +28,19 @@ public class JobBean {
 		this.category = category;
 	}
 	
-	public List<String> getJobs() throws DatabaseFailureException{
+	public List<String> getJobNames() throws DatabaseFailureException {
+		return PublishOfferControl.getInstance().retrieveJobs();
+	}
+
+	public List<String> getJobCategories() throws DatabaseFailureException {
 		return ViewOfferControl.getInstance().retrieveJobs();
 	}	
+
+	public void saveJob() throws InvalidFieldException, DatabaseFailureException {
+		if(this.category == null || this.name == null) {
+			throw new InvalidFieldException("Please, fill out every field!");
+		}
+		
+		PublishOfferControl.getInstance().saveNewJob(this);
+	}
 }

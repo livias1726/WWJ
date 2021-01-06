@@ -13,7 +13,6 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
 import logic.bean.CountryBean;
@@ -21,12 +20,10 @@ import logic.bean.JobBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
+import logic.presentation.SharedGraphicElems;
 
-public class SearchSeekerGraphic implements Initializable {
+public class SearchSeekerGraphic extends SharedGraphicElems implements Initializable {
 	
-	@FXML
-    private AnchorPane searchPane;
-
     @FXML
     private ComboBox<String> placeSearch;
 
@@ -83,7 +80,7 @@ public class SearchSeekerGraphic implements Initializable {
 		//Edit combo boxes: retrieve from DB
 		try {
 			cList = (new CountryBean()).getCountries();
-			jList = (new JobBean()).getJobs();	
+			jList = (new JobBean()).getJobCategories();	
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
@@ -93,7 +90,7 @@ public class SearchSeekerGraphic implements Initializable {
 	
 	@FXML
 	public void search() {
-		Stage stage = (Stage)searchPane.getScene().getWindow();
+		Stage stage = (Stage)pane.getScene().getWindow();
 		OfferResultsGraphic controller;
 		
 		if (placeSearch.getValue() != null && !placeSearch.getValue().equals("")) {
@@ -118,45 +115,5 @@ public class SearchSeekerGraphic implements Initializable {
 		
 		stage.setScene(GraphicHandler.switchScreen(Scenes.OFFERS, controller));
 	}
-	
-	@FXML
-	public void login() {
-		Stage stage = (Stage)searchPane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
-	}
-	
-	@FXML
-	public void logout() {
-		SessionFacade.getSession().setID(null);
-		SessionFacade.getSession().setCurrUserType(null);
-		
-		Stage stage = (Stage)searchPane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Scenes.MAIN, null));
-	}
-	
-	@FXML
-	public void openOnlineDoc() {
-		/*
-		 * Handle http request and html doc
-		 */
-	}
-	
-	@FXML
-	public void buyPremium() {
-		/*
-		 * Handle payment and upgrade
-		 */
-	}
-	
-	@FXML
-	public void goBack(){
-		Scenes prev = SessionFacade.getSession().getPrevScene();			
-		Stage stage = (Stage)searchPane.getScene().getWindow();			
-		stage.setScene(GraphicHandler.switchScreen(prev, null));
-	}
-	
-	@FXML
-	public void closeApp() {
-		System.exit(0);
-	}
+
 }

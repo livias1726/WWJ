@@ -4,35 +4,50 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="1180.0" styleClass="results" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="1180.0" styleClass="results" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="51.0" layoutY="77.0" text="The Job" textFill="#000000b6">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <VBox layoutX="82.0" layoutY="117.0" prefHeight="419.0" prefWidth="503.0" spacing="50.0">
+      <VBox layoutX="82.0" layoutY="117.0" prefHeight="433.0" prefWidth="482.0" spacing="50.0">
          <children>
-            <HBox prefHeight="19.0" prefWidth="503.0" spacing="100.0">
+            <VBox prefHeight="84.0" prefWidth="482.0">
                <children>
-                  <Label text="Position">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <TextArea prefHeight="10.0" prefWidth="200.0" />
+                  <HBox prefHeight="19.0" prefWidth="503.0" spacing="100.0">
+                     <children>
+                        <Label text="Position">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="jobCombo" editable="true" prefHeight="25.0" prefWidth="255.0" promptText="Job" />
+                     </children>
+                  </HBox>
+                  <Hyperlink fx:id="addJobLink" onAction="#showNewJob" text="Add a new job..." />
+                  <HBox fx:id="newJobBox" prefHeight="29.0" prefWidth="482.0" spacing="20.0" visible="false">
+                     <children>
+                        <TextField fx:id="jobNameTxt" prefHeight="25.0" prefWidth="163.0" promptText="Job name" />
+                        <TextField fx:id="jobCatTxt" prefHeight="25.0" prefWidth="165.0" promptText="Job category" />
+                        <Button mnemonicParsing="false" onAction="#addJob" text="Add" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="59.0">
                <children>
                   <Label text="Requirements">
@@ -40,20 +55,24 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <ListView editable="true" prefHeight="97.0" prefWidth="200.0" />
-                  <Button mnemonicParsing="false" text="Add" />
+                  <HBox prefHeight="97.0" prefWidth="323.0">
+                     <children>
+                        <ListView fx:id="reqList" editable="true" prefHeight="97.0" prefWidth="260.0" />
+                        <Button mnemonicParsing="false" onAction="#addRequirement" text="Add" />
+                     </children>
+                  </HBox>
                </children>
             </HBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+            <VBox prefHeight="199.0" prefWidth="422.0">
                <children>
                   <Label text="Activities description">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextArea prefHeight="200.0" prefWidth="200.0">
+                  <TextArea fx:id="descTxt" prefHeight="152.0" prefWidth="415.0">
                      <VBox.margin>
-                        <Insets bottom="10.0" right="30.0" />
+                        <Insets />
                      </VBox.margin>
                   </TextArea>
                </children>
@@ -67,7 +86,7 @@
       </Label>
       <VBox layoutX="623.0" layoutY="117.0" prefHeight="224.0" prefWidth="482.0" spacing="50.0">
          <children>
-            <HBox prefHeight="38.0" prefWidth="482.0" spacing="20.0">
+            <HBox prefHeight="27.0" prefWidth="482.0" spacing="20.0">
                <children>
                   <Label text="Company branch">
                      <font>
@@ -77,7 +96,7 @@
                         <Insets right="30.0" />
                      </HBox.margin>
                   </Label>
-                  <ChoiceBox prefHeight="41.0" prefWidth="250.0" />
+                  <ChoiceBox fx:id="choiceBranch" prefHeight="25.0" prefWidth="309.0" />
                </children>
             </HBox>
             <HBox prefHeight="24.0" prefWidth="519.0" spacing="30.0">
@@ -90,8 +109,8 @@
                         <Insets right="76.0" />
                      </HBox.margin>
                   </Label>
-                  <TextArea editable="false" prefHeight="38.0" prefWidth="110.0" />
-                  <TextArea editable="false" prefHeight="38.0" prefWidth="110.0" />
+                  <TextField fx:id="startTime" prefHeight="25.0" prefWidth="140.0" promptText="Start" />
+                  <TextField fx:id="finishTime" prefHeight="25.0" prefWidth="140.0" promptText="Finish" />
                </children>
             </HBox>
             <HBox prefHeight="14.0" prefWidth="519.0" spacing="93.0">
@@ -101,7 +120,12 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" />
+                  <HBox prefHeight="25.0" prefWidth="310.0">
+                     <children>
+                        <TextField fx:id="salary" prefHeight="25.0" prefWidth="277.0" />
+                        <ChoiceBox fx:id="currBox" prefHeight="25.0" prefWidth="45.0" />
+                     </children>
+                  </HBox>
                </children>
             </HBox>
          </children>
@@ -118,10 +142,10 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextArea editable="false" prefHeight="38.0" prefWidth="202.0" />
+            <DatePicker fx:id="expDate" prefHeight="25.0" prefWidth="313.0" />
          </children>
       </HBox>
-      <Button disable="true" layoutX="585.0" layoutY="591.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="178.0" styleClass="spec_btn" text="Publish" textFill="WHITE">
+      <Button fx:id="pubBtn" disable="true" layoutX="585.0" layoutY="591.0" mnemonicParsing="false" onAction="#publishOffer" prefHeight="57.0" prefWidth="178.0" styleClass="spec_btn" text="Publish" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -132,7 +156,7 @@
             <InnerShadow color="#062ca8" />
          </effect>
       </Button>
-      <Button layoutX="382.0" layoutY="591.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="178.0" text="Cancel" textFill="#5d6061">
+      <Button layoutX="382.0" layoutY="591.0" mnemonicParsing="false" onAction="#cancelForm" prefHeight="57.0" prefWidth="178.0" text="Cancel" textFill="#5d6061">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

@@ -47,6 +47,8 @@ public class GraphicHandler {
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "recruiter_account.fxml"));
 			case ACC_ENTR: 
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "entrepreneur_account.fxml"));
+			case PUBLISH_OFFER: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "publish.fxml"));
 			default:
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "main.fxml"));
 		}

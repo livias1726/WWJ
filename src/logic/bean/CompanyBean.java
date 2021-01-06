@@ -2,6 +2,7 @@ package logic.bean;
 
 import java.util.List;
 
+import logic.application.control.PublishOfferControl;
 import logic.application.control.RecruiterAccountControl;
 import logic.exceptions.DatabaseFailureException;
 
@@ -46,6 +47,10 @@ public class CompanyBean {
 
 	public CompanyBean getCompanyInfo() throws DatabaseFailureException {
 		return RecruiterAccountControl.getInstance().retrieveCompanyInfo();
+	}
+	
+	public List<AddressBean> getCompanyBranches() throws DatabaseFailureException {
+		return PublishOfferControl.getInstance().retrieveCompanyInfo();
 	}
 
 	public void saveCompanyInfo() throws DatabaseFailureException {

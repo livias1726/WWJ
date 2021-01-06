@@ -113,4 +113,40 @@ public class CompanyDAO {
 		}
 	}
 
+	public static List<Address> selectCompanyBranches(long id) throws SQLException {
+		CallableStatement stmt = null;
+		ResultSet res = null;
+		List<Address> branches = null;
+
+		try {
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.GET_COMPANY_BRANCHES, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			res = RoutinesManager.bindParametersAndExec(stmt, (int)id);
+			
+            if (res.first()){   
+            	branches = new ArrayList<>();
+            	do {
+            		Address branch = new Address();
+            		branch.setId(res.getInt("id"));
+       
+            		branch.setCity(res.getString("city"));
+            		branch.setStreet(res.getString("street"));
+            		branch.setNumber(res.getInt("number"));
+                	
+                	branches.add(branch);
+            	}while(res.next());
+            }
+           
+            res.close();          
+        } catch (SQLException e) {
+        	throw new SQLException("An error occured while trying to retrieve company branches."); 
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
+        
+        return branches;
+	}
+
 }

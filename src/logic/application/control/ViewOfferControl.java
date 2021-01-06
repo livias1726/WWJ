@@ -4,11 +4,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import logic.bean.AddressBean;
 import logic.bean.CountryBean;
 import logic.bean.JobBean;
 import logic.bean.OfferBean;
-import logic.domain.Address;
 import logic.domain.Job;
 import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
@@ -32,12 +30,16 @@ public class ViewOfferControl extends ViewResultsControl{
    
     public List<String> retrieveJobs() throws DatabaseFailureException{  	
     	Job job = new Job();
-    	
+    	List<String> categories = new ArrayList<>();
     	try {
-			return job.getAvailableJobs();
+			for(Job i: job.getAvailableJobs()) {
+				categories.add(i.getCategory());
+			}
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();
 		}
+    	
+    	return categories;
     }
     
     public List<OfferBean> retrieveOffersByJob(JobBean bean) throws DatabaseFailureException, NoResultFoundException {
@@ -117,7 +119,7 @@ public class ViewOfferControl extends ViewResultsControl{
     	bean.setPosition(job);
     	
     	bean.setTaskDescription(offer.getTaskDescription());
-    	bean.setBranch(extractAddressBean(offer.getBranch()));	
+    	bean.setBranch(AddressControl.getInstance().extractAddressBean(offer.getBranch()));	
     	bean.setStart(offer.getStart());
     	bean.setFinish(offer.getFinish());
     	bean.setBaseSalary(offer.getBaseSalary());
@@ -129,22 +131,6 @@ public class ViewOfferControl extends ViewResultsControl{
     	}
 		
 		bean.setRequirements(requirements);
-		return bean;
-	}
-	
-	private AddressBean extractAddressBean(Address ent) {
-		AddressBean bean = new AddressBean();
-		
-		CountryBean country = new CountryBean();
-		country.setName(ent.getCountry().getName());		
-		bean.setCountry(country);
-		
-		bean.setState(ent.getState());
-		bean.setCity(ent.getCity());
-		bean.setPostalCode(ent.getPostalCode());
-		bean.setStreet(ent.getStreet());
-		bean.setNumber(ent.getNumber());
-		
 		return bean;
 	}
 

@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="searchPane" maxHeight="68.0" maxWidth="1180.0" minHeight="680.0" minWidth="1180.0" prefHeight="680.0" prefWidth="1180.0" styleClass="se" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.SearchEntrepreneurGraphic">
+<AnchorPane fx:id="pane" maxHeight="68.0" maxWidth="1180.0" minHeight="680.0" minWidth="1180.0" prefHeight="680.0" prefWidth="1180.0" styleClass="se" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.SearchEntrepreneurGraphic">
    <children>
    	  <VBox alignment="CENTER" layoutX="233.0" layoutY="147.0" prefHeight="497.0" prefWidth="714.0" spacing="50.0">
 	   	 <children>

@@ -11,12 +11,10 @@ import javafx.collections.ObservableList;
 import logic.application.SessionFacade;
 import logic.bean.AddressBean;
 import logic.bean.CompanyBean;
-import logic.bean.CountryBean;
 import logic.bean.JobBean;
 import logic.bean.OfferBean;
 import logic.domain.Address;
 import logic.domain.Company;
-import logic.domain.Country;
 import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
 
@@ -50,33 +48,17 @@ public class RecruiterAccountControl {
 			bean.setName(company.getName());
 			bean.setDescription(company.getDescription());
 
-			bean.setHeadquarter(extractAddressBean(company.getHeadquarter()));
+			bean.setHeadquarter(AddressControl.getInstance().extractAddressBean(company.getHeadquarter()));
 			
 			List<AddressBean> branches = new ArrayList<>();
 			for(Address i: company.getBranches()) {
-				branches.add(extractAddressBean(i));
+				branches.add(AddressControl.getInstance().extractAddressBean(i));
 			}
 			
 			return bean;
 		}
 		
 		return null;
-	}
-
-	private AddressBean extractAddressBean(Address ent) {
-		AddressBean bean = new AddressBean();
-		
-		CountryBean country = new CountryBean();
-		country.setName(ent.getCountry().getName());
-		
-		bean.setCountry(country);
-		bean.setState(ent.getState());
-		bean.setCity(ent.getCity());
-		bean.setPostalCode(ent.getPostalCode());
-		bean.setStreet(ent.getStreet());
-		bean.setNumber(ent.getNumber());
-		
-		return bean;
 	}
 
 	public ObservableList<OfferBean> retrievePublishedOffers() throws DatabaseFailureException {
@@ -114,13 +96,13 @@ public class RecruiterAccountControl {
     	company.setDescription(bean.getDescription());
     	
     	if(bean.getHeadquarter() != null) {
-    		company.setHeadquarter(extractAddress(bean.getHeadquarter()));
+    		company.setHeadquarter(AddressControl.getInstance().extractAddress(bean.getHeadquarter()));
     	}
 
     	List<Address> branches = new ArrayList<>();
     	if(bean.getBranches() != null) {
     		for(AddressBean i: bean.getBranches()) {
-        		branches.add(extractAddress(i));
+        		branches.add(AddressControl.getInstance().extractAddress(i));
         	}
     	}
     	
@@ -132,21 +114,4 @@ public class RecruiterAccountControl {
 			throw new DatabaseFailureException();
 		}
 	}
-
-	private Address extractAddress(AddressBean bean) {
-		Address addr = new Address();
-		
-		Country country = new Country();
-		country.setName(bean.getCountry().getName());
-		
-		addr.setCountry(country);
-		addr.setState(bean.getState());
-		addr.setCity(bean.getCity());
-		addr.setPostalCode(bean.getPostalCode());
-		addr.setStreet(bean.getStreet());
-		addr.setNumber(bean.getNumber());
-		
-		return addr;
-	}
-		
 }

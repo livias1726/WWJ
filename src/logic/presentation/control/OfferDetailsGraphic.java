@@ -61,6 +61,7 @@ public class OfferDetailsGraphic implements Initializable {
     private Button favBtn;
 
 	private OfferBean offer;
+	private static String empty = "Not provided";
 	
 	public OfferDetailsGraphic(OfferBean o) {
 		this.offer = o;
@@ -70,19 +71,30 @@ public class OfferDetailsGraphic implements Initializable {
 	public void initialize(URL location, ResourceBundle resource) {
 		compLbl.setText(offer.getCompanyName());
 		jobTxt.setText(offer.getPosition().getName());
-		for(String i: offer.getRequirements()) {
-			reqList.getItems().add(i);
+		
+		if(offer.getRequirements() == null || offer.getRequirements().isEmpty()) {
+			reqList.getItems().add(empty);
+		}else {
+			for(String i: offer.getRequirements()) {
+				reqList.getItems().add(i);
+			}
 		}
+		
 		
 		descArea.setText(offer.getTaskDescription());
 		branch.setText(offer.getBranch().getStreet() + ", " + offer.getBranch().getNumber() + ", " + 
 					   offer.getBranch().getPostalCode() + ", " + offer.getBranch().getCity() + ", " + 
 					   offer.getBranch().getState() + ", " + offer.getBranch().getCountry());
 		
-		startTime.setText(offer.getStart().toString());
-		endTime.setText(offer.getFinish().toString());
-		salary.setText(String.valueOf(offer.getBaseSalary()));
-		
+		if(offer.getStart() == null && offer.getFinish() == null) {
+			startTime.setText(empty);
+			endTime.setText(empty);
+		}else {
+			startTime.setText(offer.getStart().toString());
+			endTime.setText(offer.getFinish().toString());
+		}
+
+		salary.setText(String.valueOf(offer.getBaseSalary()));	
 		expDate.setText(offer.getExpiration().toString());
 	}
 	

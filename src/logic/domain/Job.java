@@ -12,6 +12,15 @@ public class Job implements Serializable{
 	private String name;
 	private String category;
 	
+	public Job() {
+		/**/
+	}
+	
+	public Job(String name, String category) {
+		this.name = name;
+		this.category = category;				
+	}
+
 	public String getCategory() {
 		return category;
 	}
@@ -28,7 +37,12 @@ public class Job implements Serializable{
 		this.name = name;
 	}
 	
-	public List<String> getAvailableJobs() throws SQLException{
+	public List<Job> getAvailableJobs() throws SQLException{
 		return JobDAO.selectJobs();
 	}
+
+	public void addJobToDB() throws SQLException {
+		JobDAO.insertJob(name, category);
+	}
+
 }

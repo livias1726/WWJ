@@ -88,8 +88,7 @@ public class CompanyInfoGraphic implements Initializable {
 
 	
 	private String buildAddress(AddressBean address) {
-		return address.getStreet() + ", " + address.getNumber() + ", " + address.getPostalCode() 
-								   + ", " + address.getCity() + ", " + address.getState() + ", " + address.getCountry();
+		return address.toString();
 	}
 
 	@FXML

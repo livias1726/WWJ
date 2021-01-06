@@ -12,5 +12,6 @@ public enum Scenes {
 	ACC_SEEK,
 	ACC_ENTR,
 	LOGIN,
-	SIGN_UP;
+	SIGN_UP, 
+	PUBLISH_OFFER;
 }

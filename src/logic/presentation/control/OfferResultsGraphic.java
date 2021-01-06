@@ -16,10 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import logic.application.SessionFacade;
 import logic.bean.CountryBean;
 import logic.bean.JobBean;
 import logic.bean.OfferBean;
@@ -27,8 +25,9 @@ import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
+import logic.presentation.SharedGraphicElems;
 
-public class OfferResultsGraphic implements Initializable {
+public class OfferResultsGraphic extends SharedGraphicElems implements Initializable {
 	
 	private CountryBean searchedCountry;
 	private JobBean searchedJob;
@@ -40,9 +39,6 @@ public class OfferResultsGraphic implements Initializable {
 	private ObservableList<String> items = FXCollections.observableArrayList("Upload date", "Expiration date");
 	private ToolBar toolBar;
 		
-	@FXML
-	private AnchorPane pane;
-	
 	@FXML 
 	private Label searchIDLbl;
 	
@@ -204,46 +200,5 @@ public class OfferResultsGraphic implements Initializable {
 			
 			resultsBox.getChildren().add(res);
 		}
-	}
-
-	@FXML
-	public void login() {
-		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
-	}
-	
-	@FXML
-	public void logout() {
-		SessionFacade.getSession().setID(null);
-		SessionFacade.getSession().setCurrUserType(null);
-		
-		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Scenes.MAIN, null));
-	}
-	
-	@FXML
-	public void openOnlineDoc() {
-		/*
-		 * Handle http request and html doc
-		 */
-	}
-	
-	@FXML
-	public void buyPremium() {
-		/*
-		 * Handle payment and upgrade
-		 */
-	}
-	
-	@FXML
-	public void closeApp() {
-		System.exit(0);
-	}
-	
-	@FXML
-	public void goBack(){
-		Scenes prev = SessionFacade.getSession().getPrevScene();			
-		Stage stage = (Stage)pane.getScene().getWindow();			
-		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}
 }

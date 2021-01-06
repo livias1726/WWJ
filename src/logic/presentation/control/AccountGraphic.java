@@ -15,7 +15,6 @@ import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -25,13 +24,10 @@ import logic.application.SessionFacade;
 import logic.bean.AccountBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Scenes;
 import logic.presentation.Sections;
+import logic.presentation.SharedGraphicElems;
 
-public class AccountGraphic implements Initializable {
-
-	@FXML
-	protected AnchorPane pane;
+public class AccountGraphic extends SharedGraphicElems implements Initializable {
 	
 	@FXML
 	protected Pane picFrame;
@@ -120,38 +116,4 @@ public class AccountGraphic implements Initializable {
 		    bean.updatePic(newPic);
 		}
 	}	
-	
-	@FXML
-	private void openOnlineDoc(){
-		/*
-		 * Launch an html page with documentation
-		 */
-	}
-	
-	@FXML
-	private void buyPremium(){
-		/*
-		 * Redirect to payment check out
-		 */
-	}
-	
-	@FXML
-	private void logout(){
-		SessionFacade.getSession().setID(null);
-		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Scenes.MAIN, null));
-	}
-	
-	@FXML
-	public void goBack(){
-		Scenes prev = SessionFacade.getSession().getPrevScene();			
-		Stage stage = (Stage)pane.getScene().getWindow();			
-		stage.setScene(GraphicHandler.switchScreen(prev, null));
-	}
-	
-	@FXML
-	private void closeApp() {
-		System.exit(0);
-	}
-
 }

@@ -250,4 +250,30 @@ public class OfferDAO {
 			}
 		}
 	}
+
+	public static void insertNewOffer(Offer offer, Long id) throws SQLException {
+		CallableStatement stmt = null;
+		
+		try{
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.PUBLISH_OFFER);	
+        	RoutinesManager.bindParametersAndExec(stmt, offer.getPosition().getName(), id.toString(), String.valueOf(offer.getBaseSalary()), 
+        												offer.getTaskDescription(), offer.getExpiration().toString(), 
+        												String.valueOf(offer.getBranch().getId()), offer.getStart().toString(),
+        												offer.getFinish().toString());
+        	
+        	for(String i: offer.getRequirements()) {
+        		stmt = conn.prepareCall(RoutinesIdentifier.INSERT_REQUIREMENT);	
+        		RoutinesManager.bindParametersAndExec(stmt, id.toString(), i);
+        	}
+			
+        } catch (SQLException e) {
+        	throw new SQLException("An error occured while trying to publish the offer."); 
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
+	}
+
 }

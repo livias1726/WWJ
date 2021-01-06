@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import logic.domain.Job;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
@@ -17,10 +18,10 @@ public class JobDAO {
 		/**/
 	}
 
-	public static List<String> selectJobs() throws SQLException {
+	public static List<Job> selectJobs() throws SQLException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
-		List<String> list = null;
+		List<Job> list = null;
 
 		try {
 			Connection conn = ConnectionManager.getConnection();
@@ -30,7 +31,8 @@ public class JobDAO {
 			if(res.first()) {
 				list = new ArrayList<>();
 				do {
-					list.add(res.getString("category"));
+					Job job = new Job(res.getString("name"), res.getString("category"));
+					list.add(job);
 				}while(res.next());
 			}
         } catch (SQLException e) {
@@ -44,4 +46,20 @@ public class JobDAO {
         return list;
 	}
 
+	public static void insertJob(String name, String category) throws SQLException {
+		CallableStatement stmt = null;
+
+		try {
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.INSERT_JOB);
+			RoutinesManager.bindParametersAndExec(stmt, name, category);
+			
+        } catch (SQLException e) {
+        	throw new SQLException("An error occured while trying to insert a new job."); 
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
+	}
 }

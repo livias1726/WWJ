@@ -8,17 +8,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
 import logic.application.Users;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
+import logic.presentation.SharedGraphicElems;
 
-public class MainGraphic implements Initializable {
-	
-	@FXML
-	private AnchorPane pane;
+public class MainGraphic extends SharedGraphicElems implements Initializable {
 	
 	@FXML
 	private Button recBtn;
@@ -49,7 +46,7 @@ public class MainGraphic implements Initializable {
 	}
 	
 	@FXML
-	private void login() {
+	public void loginMain() {
 		if(recBtn.isArmed()) {
 			SessionFacade.getSession().setCurrUserType(Users.RECRUITER);
 		}
@@ -57,20 +54,9 @@ public class MainGraphic implements Initializable {
 		Stage stage = (Stage)pane.getScene().getWindow();
 		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
 	}
-	
+
 	@FXML
-	public void openOnlineDoc() {
-		/**/
-	}
-	
-	@FXML
-    void openAdMarketplace() {
+	public void openAdMarketplace() {
 		/**/
     }
-	
-	@FXML
-	private void closeApp(){
-		System.exit(0);
-	}
-	
 }

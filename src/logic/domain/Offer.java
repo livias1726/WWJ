@@ -154,4 +154,8 @@ public class Offer implements Serializable{
 		OfferDAO.deleteFromFavourite(this.id, id);
 	}
 
+	public void publish(Long id) throws SQLException {
+		OfferDAO.insertNewOffer(this, id);
+	}
+	
 }

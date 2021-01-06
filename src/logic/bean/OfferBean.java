@@ -6,9 +6,11 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import logic.application.control.FavouriteOffersControl;
+import logic.application.control.PublishOfferControl;
 import logic.application.control.RecruiterAccountControl;
 import logic.application.control.ViewOfferControl;
 import logic.exceptions.DatabaseFailureException;
+import logic.exceptions.InvalidFieldException;
 import logic.exceptions.NoResultFoundException;
 
 public class OfferBean {
@@ -153,5 +155,27 @@ public class OfferBean {
 
 	public void removeFromFavourites() throws DatabaseFailureException {
 		FavouriteOffersControl.getInstance().removeFavourites(this.id);
+	}
+
+	public void publishJobOffer() throws InvalidFieldException, DatabaseFailureException {
+		if(this.start != null) {
+			if(this.finish == null) {
+				throw new InvalidFieldException("Please, provide a 'Finish' time or remove alse the 'Start' one");
+			}else {
+				if(this.start.after(this.finish)) {
+					throw new InvalidFieldException("The 'Finish' time must be after the 'Start' time");
+				}
+			}
+		}
+		
+		if(this.start == null && this.finish != null) {
+			throw new InvalidFieldException("Please, provide a 'Start' time or remove alse the 'Finish' one");
+		}
+	
+		if(this.expiration.isBefore(LocalDate.now())) {
+			throw new InvalidFieldException("The Expiration date must be after in the future");
+		}
+			
+		PublishOfferControl.getInstance().publishNewOffer(this);
 	}
 }

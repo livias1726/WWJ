@@ -3,9 +3,9 @@ package logic.domain;
 import java.io.Serializable;
 
 public class Address implements Serializable{
-
 	private static final long serialVersionUID = -1805865521526758480L;
 	
+	private int id;
 	private Country country;
 	private String state;
 	private String city;
@@ -59,5 +59,17 @@ public class Address implements Serializable{
 
 	public void setCountry(Country country) {
 		this.country = country;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String toString() {
+		return this.getStreet() + ", " + this.getNumber() + ", " + this.getPostalCode() + ", " + this.getCity() + ", " + this.getState() + ", " + this.getCountry();
 	}
 }

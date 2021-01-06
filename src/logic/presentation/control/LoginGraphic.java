@@ -11,7 +11,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
 import logic.application.Users;
@@ -21,11 +20,10 @@ import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
+import logic.presentation.SharedGraphicElems;
 
-public class LoginGraphic implements Initializable {
-	@FXML
-	private AnchorPane logPane;
-
+public class LoginGraphic extends SharedGraphicElems implements Initializable {
+	
 	@FXML
 	private TextField email;
 	
@@ -64,7 +62,7 @@ public class LoginGraphic implements Initializable {
 			GraphicHandler.popUpMsg(AlertType.ERROR, de.getMessage());
 		}
 		
-		Stage stage = (Stage)logPane.getScene().getWindow();
+		Stage stage = (Stage)pane.getScene().getWindow();
 	
 		if(SessionFacade.getSession().getCurrUserType() == Users.SEEKER) {
 			stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_SEEK, new SeekerAccountGraphic(SessionFacade.getSession().getID())));
@@ -78,7 +76,7 @@ public class LoginGraphic implements Initializable {
 	}
 	
 	private void refresh() {
-		Stage stage = (Stage)logPane.getScene().getWindow();
+		Stage stage = (Stage)pane.getScene().getWindow();
 		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
 	}
 
@@ -98,14 +96,8 @@ public class LoginGraphic implements Initializable {
 	
 	@FXML
 	public void displaySignUp(){
-		Stage stage = (Stage)logPane.getScene().getWindow();		
+		Stage stage = (Stage)pane.getScene().getWindow();		
 		stage.setScene(GraphicHandler.switchScreen(Scenes.SIGN_UP, null));
 	}
-	
-	@FXML
-	public void goBack(){
-		Scenes prev = SessionFacade.getSession().getPrevScene();		
-		Stage stage = (Stage)logPane.getScene().getWindow();	
-		stage.setScene(GraphicHandler.switchScreen(prev, null));
-	}
+
 }

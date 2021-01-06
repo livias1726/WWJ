@@ -15,18 +15,17 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import logic.application.SessionFacade;
 import logic.bean.BusinessInCountryBean;
 import logic.bean.CountryBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
+import logic.presentation.SharedGraphicElems;
 
-public class BusinessResultsGraphic implements Initializable {
+public class BusinessResultsGraphic extends SharedGraphicElems implements Initializable {
 	
 	private CountryBean searchedCountry;
 	private BusinessInCountryBean searchedBusiness;
@@ -38,9 +37,6 @@ public class BusinessResultsGraphic implements Initializable {
     private List<CheckBox> filters = new ArrayList<>();
     
 	private ToolBar toolBar;
-	
-	@FXML
-	private AnchorPane resultsPane;
 	
 	@FXML 
 	private Label searchIDLbl;
@@ -78,7 +74,7 @@ public class BusinessResultsGraphic implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
 		//Set toolbar
-		resultsPane.getChildren().add(toolBar);
+		pane.getChildren().add(toolBar);
 		
 		//Get results
 		BusinessInCountryBean res = new BusinessInCountryBean();
@@ -185,7 +181,7 @@ public class BusinessResultsGraphic implements Initializable {
 			res.setPrefWidth(resultsBox.getPrefWidth() - (resultsBox.getSpacing())*2);
 			
 			res.setOnAction(event -> {
-					Stage stage = (Stage)resultsPane.getScene().getWindow();
+					Stage stage = (Stage)pane.getScene().getWindow();
 					stage.setScene(GraphicHandler.switchScreen(Scenes.BUSINESS, new BusinessDetailsGraphic(i)));
 				}
 			);
@@ -203,45 +199,5 @@ public class BusinessResultsGraphic implements Initializable {
         	}    
 	    });
 	}
-
-	@FXML
-	public void login() {
-		Stage stage = (Stage)resultsPane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
-	}
 	
-	@FXML
-	public void logout() {
-		SessionFacade.getSession().setID(null);
-		SessionFacade.getSession().setCurrUserType(null);
-		
-		Stage stage = (Stage)resultsPane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Scenes.MAIN, null));
-	}
-	
-	@FXML
-	public void openOnlineDoc() {
-		/*
-		 * Handle http request and html doc
-		 */
-	}
-	
-	@FXML
-	public void buyPremium() {
-		/*
-		 * Handle payment and upgrade
-		 */
-	}
-	
-	@FXML
-	public void closeApp() {
-		System.exit(0);
-	}
-	
-	@FXML
-	public void goBack(){
-		Scenes prev = SessionFacade.getSession().getPrevScene();			
-		Stage stage = (Stage)resultsPane.getScene().getWindow();			
-		stage.setScene(GraphicHandler.switchScreen(prev, null));
-	}
 }

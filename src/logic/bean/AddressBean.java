@@ -8,6 +8,7 @@ import logic.exceptions.BadAddressException;
 
 public class AddressBean {
 
+	private int id;
 	private CountryBean country;
 	private String state;
 	private String city;
@@ -62,6 +63,18 @@ public class AddressBean {
 	public void setCountry(CountryBean country) {
 		this.country = country;
 	}
+	
+	public String toString() {
+		return this.getStreet() + ", " + this.getNumber() + ", " + this.getPostalCode() + ", " + this.getCity() + ", " + this.getState() + ", " + this.getCountry();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public void tokenizerAddress(String text) throws BadAddressException {
 		StringTokenizer token = new StringTokenizer(text, ", ");
@@ -84,5 +97,25 @@ public class AddressBean {
     	if(!matcher.matches()) {
 			throw new BadAddressException(str + "is not a valid address. Please, follow the labels.");	
 		}
+	}
+
+	public void toAddress(String value) {
+		StringTokenizer token = new StringTokenizer(value, ", ");
+		
+		try {
+			verifyAddressSyntax(value);
+		} catch (BadAddressException e) {
+			/**/
+		}
+		
+		this.setStreet(token.nextToken());
+		this.setNumber(Integer.parseInt(token.nextToken()));
+		this.setPostalCode(Integer.parseInt(token.nextToken()));
+		this.setCity(token.nextToken());
+		this.setState(token.nextToken());
+		
+		CountryBean c = new CountryBean();
+		c.setName(token.nextToken());
+		this.setCountry(c);	
 	}
 }
