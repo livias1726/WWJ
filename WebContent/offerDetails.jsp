@@ -70,7 +70,7 @@
 				        <input type="text" id="activitiesDescription" name="activitiesDescription" value="<%=offerBean.getTaskDescription()%>" style="margin-left: 40px;overflow-x:scroll;overflow-y:scroll;margin-top:10px">
 				    </div>
 				    <div style="margin-top:-290px;margin-right:20px;float:right">
-				    	<button class="star_btn" name="star" style="width:40px;height:40px;margin-left:1300px;margin-top:-2500px;background-color:transparent"></button> 
+				    	<button class="star_btn" name="star" style="width:40px;height:40px;margin-left:1300px;margin-top:-2500px;background-color:transparent" onClick="javascript:window.location='favouriteJobOffers.jsp';"></button> 
 				    </div><br>
 				    <% if (request.getParameter("star") != null){
 					jobBean.setName(request.getParameter("position"));%>

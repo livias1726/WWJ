@@ -74,7 +74,7 @@
 	    			if(request.getParameter("calcFeas") != null && request.getParameter("budget").equals("")) { %>
 						<script>window.alert("Warning! Enter your budget.")</script>
 				<%}%>
-				<button class="star_btn" name="star" style="width:40px;height:40px;margin-left:1180px;margin-top:-600px;background-color:transparent"></button> 
+				<button class="star_btn" name="star" style="width:40px;height:40px;margin-left:1180px;margin-top:-600px;background-color:transparent" onClick="javascript:window.location='favouriteBusiness.jsp';"></button> 
 				<% if (request.getParameter("star") != null){
 					businessBean.setName(request.getParameter("businessname"));%>
   					<script>window.alert("The business has been added to your favorites.")</script>
