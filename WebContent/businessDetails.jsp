@@ -33,6 +33,7 @@
 				<div class="dropdown" style="float:right;">
 	    			<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
 	    			<div class="dropdown-content" style="right:0;">
+	    				<a href="http://localhost:8080/WorldWideJob/favouriteBusiness.jsp">Favourite businesses</a>
 		     			<a href="">Buy Premium Version</a>
 		     			<a class="dropdown" href="">Support</a>
 		     			<a href="http://localhost:8080/WorldWideJob/entrepreneur_research.jsp">Quit</a>
@@ -57,7 +58,7 @@
 	    		<input class="place2" type="text" name="place2" value="<%=countryBean.getName()%>" disabled style="background-color:white">	
 	    		<input class="busdetails" type="text" name="busdetails" value="" disabled style="background-color:#C6D6D3">
 	    		<input class="businessname" type="text" name="businessname" value="<%=businessBean.getName()%>" disabled style="background-color:#C6D6D3">
-	    		<% if (request.getParameter("businessname") != null){
+	    		<% if ((String) businessBean.getName() != ""){
 					businessBean.setName(request.getParameter("businessname"));
 					String redirectURL = "http://localhost:8080/WorldWideJob/statistics.jsp";
     				response.sendRedirect(redirectURL);}%>

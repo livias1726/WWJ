@@ -73,7 +73,8 @@
 				    	<button class="star_btn" name="star" style="width:40px;height:40px;margin-left:1300px;margin-top:-2500px;background-color:transparent" onClick="javascript:window.location='favouriteJobOffers.jsp';"></button> 
 				    </div><br>
 				    <% if (request.getParameter("star") != null){
-					jobBean.setName(request.getParameter("position"));%>
+						offerBean.setPosition(jobBean);
+						offerBean.addToFavourites();%>
   					<script>window.alert("The offer has been added to your favorites.")</script>
 				<%}%>
 					
