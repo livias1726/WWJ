@@ -16,8 +16,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import logic.application.SessionFacade;
 import logic.bean.CountryBean;
 import logic.bean.JobBean;
 import logic.bean.OfferBean;
@@ -25,9 +27,8 @@ import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
-import logic.presentation.SharedGraphicElems;
 
-public class OfferResultsGraphic extends SharedGraphicElems implements Initializable {
+public class OfferResultsGraphic implements Initializable {
 	
 	private CountryBean searchedCountry;
 	private JobBean searchedJob;
@@ -38,7 +39,10 @@ public class OfferResultsGraphic extends SharedGraphicElems implements Initializ
     private List<CheckBox> filters = new ArrayList<>();
 	private ObservableList<String> items = FXCollections.observableArrayList("Upload date", "Expiration date");
 	private ToolBar toolBar;
-		
+	
+	@FXML
+	private AnchorPane pane;
+	
 	@FXML 
 	private Label searchIDLbl;
 	
@@ -200,5 +204,12 @@ public class OfferResultsGraphic extends SharedGraphicElems implements Initializ
 			
 			resultsBox.getChildren().add(res);
 		}
+	}
+	
+	@FXML
+	public void goBack(){
+		Scenes prev = SessionFacade.getSession().getPrevScene();			
+		Stage stage = (Stage)pane.getScene().getWindow();			
+		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}
 }

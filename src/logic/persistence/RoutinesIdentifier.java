@@ -39,7 +39,7 @@ public class RoutinesIdentifier {
 	public static final String DELETE_FAVOURITE_OFFER = "call wwj_db.delete_favourite_offer(?, ?)";
 	public static final String INSERT_FAVOURITE_BUSINESS = "call wwj_db.insert_favourite_business(?, ?)";
 	public static final String DELETE_FAVOURITE_BUSINESS = "call wwj_db.delete_favourite_business(?, ?)";
-	public static final String PUBLISH_OFFER = "call wwj_db.publish_offer(?, ?)";
+	public static final String PUBLISH_OFFER = "call wwj_db.publish_offer(?, ?, ?, ?, ?, ?, ?, ?)";
 	public static final String GET_COMPANY_BRANCHES = "call wwj_db.retrieve_company_branches(?)";
 	public static final String INSERT_JOB = "call wwj_db.insert_job(?, ?)";
 	public static final String INSERT_REQUIREMENT = "call wwj_db.insert_requirement(?, ?)";

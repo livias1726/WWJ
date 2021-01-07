@@ -32,6 +32,14 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
+                  <Button mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="back_btn">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
             <Pane prefHeight="50.0" prefWidth="755.0" />

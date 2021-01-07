@@ -1,7 +1,8 @@
 package logic.presentation.control;
 
 import java.net.URL;
-import java.sql.Time;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +22,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
+import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Alert.AlertType;
@@ -58,6 +60,9 @@ public class OfferFormGraphic implements Initializable{
 
     @FXML
     private ListView<String> reqList;
+    
+    @FXML
+    private TextField reqTxt;
 
     @FXML
     private TextArea descTxt;
@@ -82,24 +87,27 @@ public class OfferFormGraphic implements Initializable{
     
     @FXML
     private ChoiceBox<String> currBox;
-    
-    private ToolBar bar;
+
+    private ToolBar toolbar;
     private List<Integer> branchId;
     private List<Integer> jobId;
-
-	/*public OfferFormGraphic(ToolBar bar) {
-		this.bar = bar;
-	}*/
+    
+	public OfferFormGraphic(ToolBar bar) {
+		this.toolbar = bar;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//pane.getChildren().add(bar);
+		pane.getChildren().add(toolbar);
+
 		try {
+			branchId = new ArrayList<>();
 			for(AddressBean i: new CompanyBean().getCompanyBranches()) {
 				choiceBranch.getItems().add(i.toString());
 				branchId.add(i.getId());
 			}
 			
+			jobId = new ArrayList<>();
 			for(JobBean i: new JobBean().getJobs()) {
 				jobCombo.getItems().add(i.getName());
 				jobId.add(i.getId());
@@ -115,6 +123,8 @@ public class OfferFormGraphic implements Initializable{
 	    ObservableList<String> currency = FXCollections.observableArrayList("$", "£", "€");
 		currBox.setItems(currency);
 		currBox.setValue(currency.get(0));
+		
+		reqList.setCellFactory(TextFieldListCell.forListView());
 	
 		pubBtn.disableProperty().bind((jobCombo.valueProperty().isNull())
 											 .or(reqList.itemsProperty().isNull())
@@ -139,24 +149,29 @@ public class OfferFormGraphic implements Initializable{
 		
 		try {
 			bean.saveJob();
+			
+			jobNameTxt.clear();
+			jobCatTxt.clear();
+			newJobBox.setVisible(false);
+			
+			jobCombo.getItems().clear();
+			jobId.clear();
+			for(JobBean i: new JobBean().getJobs()) {
+				jobCombo.getItems().add(i.getName());
+				jobId.add(i.getId());
+			}
 		} catch (InvalidFieldException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
-			return;
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+			goBack();
 		}
-		
-		//refresh();
     }
 	
-	/*private void refresh() {
-		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Scenes.PUBLISH_OFFER, new OfferFormGraphic(bar)));
-	}*/
-
 	@FXML
 	public void addRequirement() {
-		reqList.getItems().add("");
+		reqList.getItems().add(reqTxt.getText());
+		reqTxt.clear();
     }
 	
 	@FXML
@@ -189,8 +204,8 @@ public class OfferFormGraphic implements Initializable{
     	branch.setId(branchId.get(choiceBranch.getSelectionModel().getSelectedIndex()));
     	offer.setBranch(branch);
 
-    	offer.setStart(Time.valueOf(startTime.getText()));
-    	offer.setFinish(Time.valueOf(finishTime.getText()));
+    	offer.setStart(LocalTime.parse(startTime.getText(), DateTimeFormatter.ofPattern("H[:mm]")));
+    	offer.setFinish(LocalTime.parse(finishTime.getText(), DateTimeFormatter.ofPattern("H[:mm]")));
     	
     	offer.setBaseSalary(currBox.getValue() + " " + salary.getText());
     	offer.setExpiration(expDate.getValue());
@@ -205,14 +220,12 @@ public class OfferFormGraphic implements Initializable{
 		}
     }
 
-	@FXML
 	public void goToHome() {
 		Stage stage = (Stage)pane.getScene().getWindow();			
 		stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_REC, null));
     }
 	
-	@FXML
-	protected void goBack(){
+	public void goBack(){
 		Scenes prev = SessionFacade.getSession().getPrevScene();			
 		Stage stage = (Stage)pane.getScene().getWindow();			
 		stage.setScene(GraphicHandler.switchScreen(prev, null));

@@ -145,8 +145,8 @@ public class OfferDAO {
             	
             	offer.setTaskDescription(res.getString("description"));
             	   	
-            	offer.setStart(res.getTime("start"));
-            	offer.setFinish(res.getTime("finish"));
+            	offer.setStart(res.getTime("start").toLocalTime());
+            	offer.setFinish(res.getTime("finish").toLocalTime());
             	offer.setBaseSalary(res.getString("base_salary"));
             	offer.setExpiration(res.getDate("expiration").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             	
@@ -253,22 +253,33 @@ public class OfferDAO {
 
 	public static void insertNewOffer(Offer offer, Long id) throws SQLException {
 		CallableStatement stmt = null;
+		ResultSet res = null;
 		
 		try{
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.PUBLISH_OFFER);	
-        	RoutinesManager.bindParametersAndExec(stmt, offer.getPosition().getName(), id.toString(), String.valueOf(offer.getBaseSalary()), 
-        												offer.getTaskDescription(), offer.getExpiration().toString(), 
-        												String.valueOf(offer.getBranch().getId()), offer.getStart().toString(),
-        												offer.getFinish().toString());
+        
+        	res = RoutinesManager.bindParametersAndExec(stmt, 
+        			String.valueOf(offer.getPosition().getId()), id.toString(), offer.getBaseSalary(), 
+        			offer.getTaskDescription(), offer.getExpiration().toString(), String.valueOf(offer.getBranch().getId()), 
+        			offer.getStart().toString(), offer.getFinish().toString());
+
+        	String off;
+        	if(res.next()) {
+        		off = String.valueOf(res.getInt("id"));
+        	}else {
+        		throw new SQLException();
+        	}
+        	
+        	res.close();
         	
         	for(String i: offer.getRequirements()) {
         		stmt = conn.prepareCall(RoutinesIdentifier.INSERT_REQUIREMENT);	
-        		RoutinesManager.bindParametersAndExec(stmt, id.toString(), i);
+        		RoutinesManager.bindParametersAndExec(stmt, off, i);
         	}
 			
         } catch (SQLException e) {
-        	throw new SQLException("An error occured while trying to publish the offer."); 
+        	throw new SQLException("An error occured while trying to publish the offer.");
 		} finally {
 			if(stmt != null) {
 				stmt.close();

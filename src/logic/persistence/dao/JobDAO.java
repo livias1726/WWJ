@@ -32,6 +32,7 @@ public class JobDAO {
 				list = new ArrayList<>();
 				do {
 					Job job = new Job(res.getString("name"), res.getString("category"));
+					job.setId(res.getInt("id"));
 					list.add(job);
 				}while(res.next());
 			}

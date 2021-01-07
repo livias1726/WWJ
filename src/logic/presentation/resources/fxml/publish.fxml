@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1180.0" styleClass="results" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="logic.presentation.control.OfferFormGraphic">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1180.0" styleClass="results" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="51.0" layoutY="77.0" text="The Job" textFill="#000000b6">
          <font>
@@ -48,19 +48,24 @@
                   </HBox>
                </children>
             </VBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="59.0">
+            <HBox prefHeight="152.0" prefWidth="482.0" spacing="59.0">
                <children>
                   <Label text="Requirements">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <HBox prefHeight="97.0" prefWidth="323.0">
+                  <VBox prefHeight="81.0" prefWidth="284.0">
                      <children>
-                        <ListView fx:id="reqList" editable="true" prefHeight="97.0" prefWidth="260.0" />
-                        <Button mnemonicParsing="false" onAction="#addRequirement" text="Add" />
+                        <ListView fx:id="reqList" editable="true" prefHeight="158.0" prefWidth="284.0" />
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="reqTxt" prefHeight="25.0" prefWidth="246.0" promptText="Requirement" />
+                              <Button mnemonicParsing="false" onAction="#addRequirement" text="Add" />
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
+                  </VBox>
                </children>
             </HBox>
             <VBox prefHeight="199.0" prefWidth="422.0">
@@ -109,8 +114,8 @@
                         <Insets right="76.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="startTime" prefHeight="25.0" prefWidth="140.0" promptText="Start" />
-                  <TextField fx:id="finishTime" prefHeight="25.0" prefWidth="140.0" promptText="Finish" />
+                  <TextField fx:id="startTime" prefHeight="25.0" prefWidth="140.0" promptText="Start (hh:mm)" />
+                  <TextField fx:id="finishTime" prefHeight="25.0" prefWidth="140.0" promptText="Finish (hh:mm)" />
                </children>
             </HBox>
             <HBox prefHeight="14.0" prefWidth="519.0" spacing="93.0">

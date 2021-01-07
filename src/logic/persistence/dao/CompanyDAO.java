@@ -86,8 +86,7 @@ public class CompanyDAO {
         	}
         	
         } catch (SQLException e) {
-        	//throw new SQLException("An error occured while trying to update company information."); 
-        	e.printStackTrace();
+        	throw new SQLException("An error occured while trying to update company information."); 
 		} finally {
 			if(stmt != null) {
 				stmt.close();

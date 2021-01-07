@@ -19,7 +19,7 @@
 
 <AnchorPane fx:id="pane" prefHeight="680.0" prefWidth="1180.0" styleClass="account_ext" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.EntrepreneurAccountGraphic">
    <children>
-      <ToolBar fx:id="toolbar" layoutX="1.0" prefHeight="60.0" prefWidth="1180.0" styleClass="toolbar">
+      <ToolBar layoutX="1.0" prefHeight="60.0" prefWidth="1180.0" styleClass="toolbar">
          <items>
             <HBox prefHeight="50.0" prefWidth="158.0">
                <children>

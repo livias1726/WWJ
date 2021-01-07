@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToolBar;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
@@ -20,9 +21,11 @@ import logic.bean.JobBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
-import logic.presentation.SharedGraphicElems;
 
-public class SearchSeekerGraphic extends SharedGraphicElems implements Initializable {
+public class SearchSeekerGraphic implements Initializable {
+	
+	@FXML
+	private AnchorPane pane;
 	
     @FXML
     private ComboBox<String> placeSearch;

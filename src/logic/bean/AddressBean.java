@@ -71,4 +71,9 @@ public class AddressBean {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	@Override
+	public String toString() {
+		return this.countryName + ", " + this.state + ", " + this.city + ", " + this.street + ", " + this.number + ", " + this.postalCode;
+	}
 }

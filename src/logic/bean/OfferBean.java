@@ -1,7 +1,7 @@
 package logic.bean;
 
-import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -21,8 +21,8 @@ public class OfferBean {
 	private String taskDescription;
 	private List<String> requirements;
 	private AddressBean branch;
-	private Time start;
-	private Time finish;
+	private LocalTime start;
+	private LocalTime finish;
 	private String baseSalary;
 	private LocalDate expiration;
 	private LocalDate upload;
@@ -52,23 +52,22 @@ public class OfferBean {
 		this.branch = branch;
 	}
 
-	public Time getStart() {
+	public LocalTime getStart() {
 		return start;
 	}
 
-	public void setStart(Time start) {
+	public void setStart(LocalTime start) {
 		this.start = start;
 	}
 
-	public Time getFinish() {
+	public LocalTime getFinish() {
 		return finish;
 	}
 
-	public void setFinish(Time finish) {
+	public void setFinish(LocalTime finish) {
 		this.finish = finish;
 	}
 
-	
 	public String getCompanyName() {
 		return companyName;
 	}
@@ -162,7 +161,7 @@ public class OfferBean {
 			if(this.finish == null) {
 				throw new InvalidFieldException("Please, provide a 'Finish' time or remove alse the 'Start' one");
 			}else {
-				if(this.start.after(this.finish)) {
+				if(this.start.isAfter(this.finish)) {
 					throw new InvalidFieldException("The 'Finish' time must be after the 'Start' time");
 				}
 			}

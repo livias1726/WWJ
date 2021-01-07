@@ -2,8 +2,8 @@ package logic.domain;
 
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import logic.exceptions.NoResultFoundException;
@@ -19,8 +19,8 @@ public class Offer implements Serializable{
 	private String taskDescription;
 	private List<String> requirements;
 	private Address branch;
-	private Time start;
-	private Time finish;
+	private LocalTime start;
+	private LocalTime finish;
 	private String baseSalary;
 	private LocalDate expiration;
 	private LocalDate upload;
@@ -81,23 +81,23 @@ public class Offer implements Serializable{
 	public void setUpload(LocalDate upload) {
 		this.upload = upload;
 	}
-
-	public Time getStart() {
+	
+	public LocalTime getStart() {
 		return start;
 	}
 
-	public void setStart(Time start) {
+	public void setStart(LocalTime start) {
 		this.start = start;
 	}
 
-	public Time getFinish() {
+	public LocalTime getFinish() {
 		return finish;
 	}
 
-	public void setFinish(Time finish) {
+	public void setFinish(LocalTime finish) {
 		this.finish = finish;
 	}
-	
+
 	public List<String> getRequirements() {
 		return requirements;
 	}

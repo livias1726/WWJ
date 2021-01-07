@@ -37,7 +37,7 @@ public class PublishOfferControl {
 		try {
 			comp = comp.getCompanyInfo(SessionFacade.getSession().getID());
 			if(comp == null || comp.getBranches() == null) {
-				throw new IncompleteAccountException("Your Company info is still not complete. Please, complete this section before publishing an offer");
+				throw new IncompleteAccountException("Your Company info is still incomplete. Please, complete the section before publishing an offer");
 			}
 			
 			for(Address i: comp.getBranches()) {
@@ -46,7 +46,7 @@ public class PublishOfferControl {
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();
 		}
-		
+
 		return bean;
 	}
 
@@ -55,7 +55,7 @@ public class PublishOfferControl {
 		Offer offer = new Offer();
 		
     	Job job = new Job();
-    	job.setName(bean.getPosition().getName());
+    	job.setId(bean.getPosition().getId());
     	offer.setPosition(job);
     	
     	offer.setTaskDescription(bean.getTaskDescription());
