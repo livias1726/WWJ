@@ -34,11 +34,11 @@
 				</div>
 				<div class="scheletro_signUp" style="top:70px;left:5px;text-align:center;">CREATE AN ACCOUNT
 					<div style="margin-top:100px;font-size:20px;color:black">
-	    			<input type="radio" name="category" id="Seek" value="Job Seeker">Job Seeker
+	    			<input type="radio" name="category" id="Seek" value="jobseeker">Job Seeker
 	    			&emsp;&emsp;
-	    			<input type="radio" name="category" id="Rec" value="Recruiter">Recruiter
+	    			<input type="radio" name="category" id="Rec" value="recruiter">Recruiter
 	    			&emsp;&emsp;
-	    			<input type="radio" name="category" id="Entr" value="Entrepreneur">Entrepreneur
+	    			<input type="radio" name="category" id="Entr" value="entrepreneur">Entrepreneur
 					</div>
 					<div style="margin-top: 40px">
 				    	<label for="firstName" style="color:black;font-size:20px;margin-left:-640px">First Name</label>
@@ -64,54 +64,54 @@
 				    	<label for="confirmPassword" style="color:black;font-size:20px;margin-right:40px">Confirm Password</label>
 				        <input type="password" id="confirmPassword" name="confirmPassword" style="margin-right:250px;height: 29px; width: 174px">
 				    </div><br>
-				    <button class="search_btn" id="signup" type="submit" name="signup" style="width:110px; height:50px; top:40px; background-color: dodgerblue; margin-left:-30px">Sign Up</button>
+				    <button class="search_btn" id="signup" type="submit" name="signup" style="width:110px; height:50px; top:40px; background-color: dodgerblue; margin-left:-30px" onClick="redirectProfile()">SignUp</button>
 				</div>
 			</form>
 	</div>
-	<script>var rr = document.signUpform.category;
-			if(rr[0].checked){
-				<%if(request.getParameter("signup") != null) {
-					userBean.setFirstName(request.getParameter("firstName"));
-					userBean.setLastName(request.getParameter("lastName"));
-					userBean.setEmail(request.getParameter("eMail"));
-					userBean.setPassword(request.getParameter("password"));
-					accountBean.setType("SEEKER");
-					accountBean.setUser(userBean);
-					accountBean.signUp();
-					
-					String redirectURL = "http://localhost:8080/WorldWideJob/seekerProfile.jsp";
-			        response.sendRedirect(redirectURL);
-			        return;
-				}%>
-			}else if(rr[1].checked) {
-				<%if(request.getParameter("signup") != null) {
-					userBean.setFirstName(request.getParameter("firstName"));
-					userBean.setLastName(request.getParameter("lastName"));
-					userBean.setEmail(request.getParameter("eMail"));
-					userBean.setPassword(request.getParameter("password"));
-					accountBean.setType("RECRUITER");
-					accountBean.setUser(userBean);
-					accountBean.signUp();
-					
-					String redirectURL = "http://localhost:8080/WorldWideJob/recruiter'sProfile.jsp";
-			        response.sendRedirect(redirectURL);
-			        return;
-				}%>
-			}else if(rr[2].checked) {
-				<%if(request.getParameter("signup") != null) {
-					userBean.setFirstName(request.getParameter("firstName"));
-					userBean.setLastName(request.getParameter("lastName"));
-					userBean.setEmail(request.getParameter("eMail"));
-					userBean.setPassword(request.getParameter("password"));
-					accountBean.setType("ENTREPRENEUR");
-					accountBean.setUser(userBean);
-					accountBean.signUp();
-					
-					String redirectURL = "http://localhost:8080/WorldWideJob/entrepreneur'sProfile.jsp";
-			        response.sendRedirect(redirectURL);
-			        return;
-				}%>
-			}
-	</script>
+	<script>
+	function redirectProfile(){
+		<%if (request.getParameter("signup") != null) {%>
+			<%if("jobseeker".equals(request.getParameter("category"))){
+				userBean.setFirstName(request.getParameter("firstName"));
+		  		userBean.setLastName(request.getParameter("lastName"));
+		  		userBean.setEmail(request.getParameter("eMail"));
+		  		userBean.setPassword(request.getParameter("password"));
+		  		accountBean.setUser(userBean);
+				accountBean.setType("SEEKER");
+				accountBean.signUp(userBean.getEmail(), userBean.getPassword());
+				String redirectURL = "http://localhost:8080/WorldWideJob/seekerProfile.jsp";
+				response.sendRedirect(redirectURL);%>
+				break;
+			<%}%>
+			<%if("recruiter".equals(request.getParameter("category"))){
+				userBean.setFirstName(request.getParameter("firstName"));
+		  		userBean.setLastName(request.getParameter("lastName"));
+		  		userBean.setEmail(request.getParameter("eMail"));
+		  		userBean.setPassword(request.getParameter("password"));
+		  		accountBean.setUser(userBean);
+				accountBean.setType("RECRUITER");
+				accountBean.signUp(userBean.getEmail(), userBean.getPassword());
+				String redirectURL = "http://localhost:8080/WorldWideJob/recruiter'sProfile.jsp";
+				response.sendRedirect(redirectURL);%>
+				break;
+			<%}%>
+			<%if("entrepreneur".equals(request.getParameter("category"))){
+				userBean.setFirstName(request.getParameter("firstName"));
+		  		userBean.setLastName(request.getParameter("lastName"));
+		  		userBean.setEmail(request.getParameter("eMail"));
+		  		userBean.setPassword(request.getParameter("password"));
+		  		accountBean.setUser(userBean);
+				accountBean.setType("ENTREPRENEUR");
+				accountBean.signUp(userBean.getEmail(), userBean.getPassword());
+				String redirectURL = "http://localhost:8080/WorldWideJob/entrepreneur'sProfile.jsp";
+				response.sendRedirect(redirectURL);%>
+				break;
+			<%}%>
+<%}%>
+}
+	
+				
+				
+</script>
 </body>
 </html>
