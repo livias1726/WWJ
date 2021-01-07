@@ -15,7 +15,7 @@
 	<meta charset="ISO-8859-1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<link href="css/style.css?ts=<?=time()?>&quot" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
 	<title>WorldWideJob - statistics</title>
 </head>
 <body>
@@ -59,7 +59,7 @@
 				    <div style="margin-top:-160px">
 				    <button class="calculatefeasibility_btn" name="calcFeas" style="width:150px; height:50px; background-color: dodgerblue;border-color:blac;margin-left:1020px;margin-top:-200px">Calculate feasibility</button>
 	    			<% if (request.getParameter("calcFeas") != null && !request.getParameter("budget").equals("")) {
-					String redirectURL = "http://localhost:8080/WorldWideJob/Feasibility.jsp";
+					String redirectURL = "http://localhost:8080/WorldWideJob/feasibility.jsp";
         			response.sendRedirect(redirectURL);
     				}
 	    			if(request.getParameter("calcFeas") != null && request.getParameter("budget").equals("")) { %>

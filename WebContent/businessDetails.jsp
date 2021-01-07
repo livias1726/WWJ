@@ -22,7 +22,6 @@
 		<meta charset="ISO-8859-1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<link rel="icon" href="icons/search_usr.png">
 	    <link href="css/style.css" rel="stylesheet">
 		
 		<title>WorldWideJob - BusinessDetails</title>
@@ -36,7 +35,7 @@
 	    				<a href="http://localhost:8080/WorldWideJob/favouriteBusiness.jsp">Favourite businesses</a>
 		     			<a href="">Buy Premium Version</a>
 		     			<a class="dropdown" href="">Support</a>
-		     			<a href="http://localhost:8080/WorldWideJob/entrepreneur_research.jsp">Quit</a>
+		     			<a href="http://localhost:8080/WorldWideJob/entrepreneurResearch.jsp">Quit</a>
 		     		</div>
 		     	</div>		
 		        <div class="dropdown" style="float:right;">
@@ -51,7 +50,7 @@
 	    		<div style="float:left">
 	    			<button class="home_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='index.jsp';"></button>
 	    		<div style="float:right;">
-	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='EntrResearchResult.jsp';"></button>
+	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='entrResearchResult.jsp';"></button>
 	    		</div>
 	    		</div>
 	    		<div>
@@ -69,7 +68,7 @@
 	    		<button class="statistics_btn" type="button" style="width:150px; height:50px; top:10px; right:-30px;background-color: dodgerblue; margin-left:1050px; border-color: black" onClick="javascript:window.location='statistics.jsp';">View statistics</button>
 	    		<button class="calculatefeasibility_btn" name="calcFeas" style="width:150px; height:50px; top:500px; background-color: dodgerblue; margin-left:350px; border-color: black">Calculate feasibility</button>
 	    		<% if (request.getParameter("calcFeas") != null && !request.getParameter("budget").equals("")) {
-					String redirectURL = "http://localhost:8080/WorldWideJob/Feasibility.jsp";
+					String redirectURL = "http://localhost:8080/WorldWideJob/feasibility.jsp";
         			response.sendRedirect(redirectURL);
     				}
 	    			if(request.getParameter("calcFeas") != null && request.getParameter("budget").equals("")) { %>

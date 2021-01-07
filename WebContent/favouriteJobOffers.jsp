@@ -14,10 +14,9 @@
 		<meta charset="ISO-8859-1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<link rel="icon" href="icons/search_usr.png">
 	    <link href="css/style.css" rel="stylesheet">
 		
-		<title>WorldWideJob - FavouriteJobOffers</title>
+		<title>WorldWideJob - favouriteJobOffers</title>
 		
 	</head>
 	<body>
@@ -29,7 +28,7 @@
 		     			<a href="http://localhost:8080/WorldWideJob/favouriteJobOffers.jsp">Favourite job offers</a>
 		     			<a href="">Buy Premium Version</a>
 		     			<a class="dropdown" href="">Support</a>
-		     			<a href="http://localhost:8080/WorldWideJob/seeker_research.jsp">Quit</a>
+		     			<a href="http://localhost:8080/WorldWideJob/seekerResearch.jsp">Quit</a>
 		     		</div>
 		     	</div>
 		     	<div style="float:right;">
@@ -54,7 +53,7 @@
 	    		<div>
 	    		<input class="favourite_container" type="text" name="favourite_container" value="" disabled style="background-color:#C6D6D3">
 	    		<input class="favourite_title" type="text" name="favourite_title" value="Favourite job offers" disabled style="background-color:#C6D6D3">
-	    		<input class="favouritejoboffer_container" type="text" name="favouritejoboffer_container" value="<%=offerBean.getFavouriteOffers()%>" disabled style="text-align:center;background-color:#56A6F0">
+	    		<input class="favouritejoboffer_container" type="text" name="favouritejoboffer_container" value="" disabled style="text-align:center;background-color:#56A6F0">
 	    		<button class="star_btn" name="star" style="width:40px;height:40px;margin-left:725px;margin-top:145px;background-color:transparent"></button> 
 	    		<% if (request.getParameter("star") != null){%>
 	    			<input class="favouritejoboffer_container" type="text" name="favouritejoboffer_container" value="" disabled style="text-align:center;background-color:#56A6F0">

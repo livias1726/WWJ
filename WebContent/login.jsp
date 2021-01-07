@@ -15,12 +15,23 @@
 		userBean.setEmail(request.getParameter("email"));
 		userBean.setPassword(request.getParameter("password"));
 		accountBean.setUser(userBean);
-        accountBean.login(); %>
-        <% 
-        String redirectURL = "http://localhost:8080/WorldWideJob/recruiter'sProfile.jsp";
-        response.sendRedirect(redirectURL);
-    }
-%>
+		accountBean.login(); 
+        if("SEEKER".equals(accountBean.getAccount().getType())) {
+        	String redirectURL = "http://localhost:8080/WorldWideJob/seekerProfile.jsp";
+        	response.sendRedirect(redirectURL);
+        	return;
+        }
+        if("RECRUITER".equals(accountBean.getAccount().getType())) {
+        	String redirectURL = "http://localhost:8080/WorldWideJob/recruiterProfile.jsp";
+        	response.sendRedirect(redirectURL);
+        	return;
+        }
+        if("ENTREPRENEUR".equals(accountBean.getAccount().getType())) {
+          	String redirectURL = "http://localhost:8080/WorldWideJob/entrepreneurProfile.jsp";
+        	response.sendRedirect(redirectURL);
+        	return;
+        }
+   }%>
 
 <html lang="en">
 	<head>
@@ -30,7 +41,7 @@
 		<link rel="icon" href="icons/main_icon.png">
 	    <link href="css/style.css" rel="stylesheet">
 	    
-	    <title>WorldWideJob - Login</title>
+	    <title>WorldWideJob - login</title>
 	</head>
 	<body>
 		<div>

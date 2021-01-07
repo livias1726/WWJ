@@ -91,7 +91,7 @@
 		  		accountBean.setUser(userBean);
 				accountBean.setType("RECRUITER");
 				accountBean.signUp(userBean.getEmail(), userBean.getPassword());
-				String redirectURL = "http://localhost:8080/WorldWideJob/recruiter'sProfile.jsp";
+				String redirectURL = "http://localhost:8080/WorldWideJob/recruiterProfile.jsp";
 				response.sendRedirect(redirectURL);%>
 				break;
 			<%}%>
@@ -103,7 +103,7 @@
 		  		accountBean.setUser(userBean);
 				accountBean.setType("ENTREPRENEUR");
 				accountBean.signUp(userBean.getEmail(), userBean.getPassword());
-				String redirectURL = "http://localhost:8080/WorldWideJob/entrepreneur'sProfile.jsp";
+				String redirectURL = "http://localhost:8080/WorldWideJob/entrepreneurProfile.jsp";
 				response.sendRedirect(redirectURL);%>
 				break;
 			<%}%>

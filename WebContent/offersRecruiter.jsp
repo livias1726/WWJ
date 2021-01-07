@@ -10,11 +10,11 @@
 		<link rel="icon" href="icons/search_usr.png">
 	    <link href="css/style.css" rel="stylesheet">
 		
-		<title>WorldWideJob - OffersRecruiter</title>
+		<title>WorldWideJob - offersRecruiter</title>
 	</head>
 	<body>
 		<div>
-			<form action="candidates.jsp" name="candidates" method="POST">
+			<form action="offersRecruiter.jsp" name="offersRecruiter" method="POST">
 				<div class="dropdown" style="float:right;">
 	    			<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
 		     		<div class="dropdown-content" style="right:0;">

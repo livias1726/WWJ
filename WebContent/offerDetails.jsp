@@ -6,13 +6,13 @@
     
 <!DOCTYPE html>
 
-<jsp:useBean id="countryBean" scope="session" class="logic.bean.CountryBean"/>
+<jsp:useBean id="countryBean" class="logic.bean.CountryBean" scope="session"/>
 <jsp:setProperty name="countryBean" property="*"/>
 
-<jsp:useBean id="jobBean" scope="session" class="logic.bean.JobBean"/>
+<jsp:useBean id="jobBean" class="logic.bean.JobBean" scope="session"/>
 <jsp:setProperty name="jobBean" property="*"/>
 
-<jsp:useBean id="offerBean" scope="session" class="logic.bean.OfferBean"/>
+<jsp:useBean id="offerBean" class="logic.bean.OfferBean" scope="session"/>
 <jsp:setProperty name="offerBean" property="*"/>
 
 <%Class.forName("com.mysql.jdbc.Driver");%>
@@ -35,7 +35,7 @@
 		     		<div class="dropdown-content" style="right:0;">
 		     			<a href="">Buy Premium Version</a>
 		     			<a class="dropdown" href="">Support</a>
-		     			<a href="http://localhost:8080/WorldWideJob/seeker_research.jsp">Quit</a>
+		     			<a href="http://localhost:8080/WorldWideJob/seekerResearch.jsp">Quit</a>
 		     		</div>
 		     	</div>	
 		     	<div class="dropdown" style="float:right;">
@@ -50,7 +50,7 @@
 	    		<div style="float:left">
 	    			<button class="home_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px;" onClick="javascript:window.location='index.jsp';"></button>
 	    		<div style="float:right;">
-	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='JobSeekerResearchResult.jsp';"></button>
+	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='jobSeekerResearchResult.jsp';"></button>
 	    		</div>
 	    		</div>
 	    		<div>
@@ -70,14 +70,8 @@
 				        <input type="text" id="activitiesDescription" name="activitiesDescription" value="<%=offerBean.getTaskDescription()%>" style="margin-left: 40px;overflow-x:scroll;overflow-y:scroll;margin-top:10px">
 				    </div>
 				    <div style="margin-top:-290px;margin-right:20px;float:right">
-				    	<button class="star_btn" name="star" style="width:40px;height:40px;margin-left:1300px;margin-top:-2500px;background-color:transparent" onClick="javascript:window.location='favouriteJobOffers.jsp';"></button> 
+				    	<button class="star_btn" type="submit" name="star" style="width:40px;height:40px;margin-left:1300px;margin-top:-2500px;background-color:transparent" onClick="addFavorites()"></button> 
 				    </div><br>
-				    <% if (request.getParameter("star") != null){
-						offerBean.setPosition(jobBean);
-						offerBean.addToFavourites();%>
-  					<script>window.alert("The offer has been added to your favorites.")</script>
-				<%}%>
-					
 				    <div style="margin-top:-130px;margin-right:130px;float:right">
 				    	<button class="map-offer_btn" style="width:40px;height:40px;margin-left:1300px;margin-top:-2500px;background-color:transparent"></button>
 				    </div>   
@@ -104,5 +98,13 @@
 				</div>
 	    	</form>
 	    </div>
+	    <script>function addFavorites() {
+	    	<%if (request.getParameter("star") != null) {
+		    	offerBean.setPosition(jobBean);
+		    	offerBean.addToFavourites();
+		    	System.out.println("ciao");%>
+		    	window.alert("Aggiunto ai preferiti.");
+		    <%}%>
+	    }</script>
 </body>
 </html>

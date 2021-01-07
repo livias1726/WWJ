@@ -18,10 +18,9 @@
 		<meta charset="ISO-8859-1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<link rel="icon" href="icons/search_usr.png">
 	    <link href="css/style.css" rel="stylesheet">
 		
-		<title>WorldWideJob - FavouriteBusiness</title>
+		<title>WorldWideJob - favouriteBusiness</title>
 		
 	</head>
 	<body>
@@ -32,7 +31,7 @@
 		     		<div class="dropdown-content" style="right:0;">
 		     			<a href="">Buy Premium Version</a>
 		     			<a class="dropdown" href="">Support</a>
-		     			<a href="http://localhost:8080/WorldWideJob/entrepreneur_research.jsp">Quit</a>
+		     			<a href="http://localhost:8080/WorldWideJob/entrepreneurResearch.jsp">Quit</a>
 		     		</div>
 		     	</div>
 		     	<div style="float:right;">
@@ -40,7 +39,7 @@
 		        <div class="dropdown" style="float:right;">
 	    			<button class="user_btn" style="background-color:lightblue;margin-right:10px;width:40px;height:40px;margin-top:10px"></button>
 		     		<div class="dropdown-content" style="right:0;">
-		     			<a href="http://localhost:8080/WorldWideJob/entrepreneur'sProfile.jsp">Account</a>
+		     			<a href="http://localhost:8080/WorldWideJob/entrepreneurProfile.jsp">Account</a>
 		     			<a href="http://localhost:8080/WorldWideJob/login.jsp">Logout</a>
 		     		</div>
 		     	</div>
@@ -51,7 +50,7 @@
 	    		<div style="float:left">
 	    			<button class="home_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='index.jsp';"></button>
 	    		<div style="float:right;">
-	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='entrepreneur'sProfile.jsp';"></button>
+	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='entrepreneurProfile.jsp';"></button>
 	    		</div>
 	    		</div>
 	    		<div>
