@@ -46,6 +46,10 @@ public class SessionFacade {
 		this.counter++;
 		this.curr = next;
 	}
+	
+	public Scenes getScene() {
+		return curr;
+	}
 
 	public Scenes getPrevScene() {
 		this.curr = prev.get(counter-1);

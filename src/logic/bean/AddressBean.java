@@ -1,18 +1,13 @@
 package logic.bean;
 
-import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import logic.exceptions.BadAddressException;
-
 public class AddressBean {
 
 	private int id;
 	private CountryBean country;
+	private String countryName; //used for tableview in company info section
 	private String state;
 	private String city;
-	private int postalCode;
+	private String postalCode;
 	private String street;
 	private int number;
 
@@ -24,11 +19,11 @@ public class AddressBean {
 		this.city = city;
 	}
 
-	public int getPostalCode() {
+	public String getPostalCode() {
 		return postalCode;
 	}
 
-	public void setPostalCode(int postalCode) {
+	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
 
@@ -62,10 +57,11 @@ public class AddressBean {
 
 	public void setCountry(CountryBean country) {
 		this.country = country;
+		this.countryName = country.getName();
 	}
-	
-	public String toString() {
-		return this.getStreet() + ", " + this.getNumber() + ", " + this.getPostalCode() + ", " + this.getCity() + ", " + this.getState() + ", " + this.getCountry();
+
+	public String getCountryName() {
+		return countryName;
 	}
 
 	public int getId() {
@@ -74,48 +70,5 @@ public class AddressBean {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public void tokenizerAddress(String text) throws BadAddressException {
-		StringTokenizer token = new StringTokenizer(text, ", ");
-		
-		verifyAddressSyntax(text);
-		
-		CountryBean c = new CountryBean();
-		c.setName(token.nextToken());
-		this.setCountry(c);
-		
-		this.setState(token.nextToken());
-		this.setPostalCode(Integer.parseInt(token.nextToken()));
-		this.setStreet(token.nextToken());
-		this.setNumber(Integer.parseInt(token.nextToken()));	
-	}
-
-	private void verifyAddressSyntax(String str) throws BadAddressException {
-		Pattern pattern = Pattern.compile("\\D+, \\d+, \\d+, \\D+, \\D+, \\D+");
-    	Matcher matcher = pattern.matcher(str);
-    	if(!matcher.matches()) {
-			throw new BadAddressException(str + "is not a valid address. Please, follow the labels.");	
-		}
-	}
-
-	public void toAddress(String value) {
-		StringTokenizer token = new StringTokenizer(value, ", ");
-		
-		try {
-			verifyAddressSyntax(value);
-		} catch (BadAddressException e) {
-			/**/
-		}
-		
-		this.setStreet(token.nextToken());
-		this.setNumber(Integer.parseInt(token.nextToken()));
-		this.setPostalCode(Integer.parseInt(token.nextToken()));
-		this.setCity(token.nextToken());
-		this.setState(token.nextToken());
-		
-		CountryBean c = new CountryBean();
-		c.setName(token.nextToken());
-		this.setCountry(c);	
 	}
 }

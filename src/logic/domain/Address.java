@@ -9,7 +9,7 @@ public class Address implements Serializable{
 	private Country country;
 	private String state;
 	private String city;
-	private int postalCode;
+	private String postalCode;
 	private String street;
 	private int number;
 
@@ -21,11 +21,11 @@ public class Address implements Serializable{
 		this.city = city;
 	}
 
-	public int getPostalCode() {
+	public String getPostalCode() {
 		return postalCode;
 	}
 
-	public void setPostalCode(int postalCode) {
+	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
 

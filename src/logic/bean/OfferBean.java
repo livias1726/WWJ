@@ -23,7 +23,7 @@ public class OfferBean {
 	private AddressBean branch;
 	private Time start;
 	private Time finish;
-	private float baseSalary;
+	private String baseSalary;
 	private LocalDate expiration;
 	private LocalDate upload;
 	private int candidates;
@@ -101,14 +101,14 @@ public class OfferBean {
 		this.taskDescription = taskDescription;
 	}
 
-	public float getBaseSalary() {
+	public String getBaseSalary() {
 		return baseSalary;
 	}
 
-	public void setBaseSalary(float baseSalary) {
+	public void setBaseSalary(String baseSalary) {
 		this.baseSalary = baseSalary;
 	}
-	
+
 	public int getId() {
 		return id;
 	}

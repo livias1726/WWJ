@@ -7,7 +7,6 @@ import java.util.List;
 import logic.bean.CountryBean;
 import logic.bean.JobBean;
 import logic.bean.OfferBean;
-import logic.domain.Job;
 import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
@@ -27,21 +26,7 @@ public class ViewOfferControl extends ViewResultsControl{
 
         return instance;
     }
-   
-    public List<String> retrieveJobs() throws DatabaseFailureException{  	
-    	Job job = new Job();
-    	List<String> categories = new ArrayList<>();
-    	try {
-			for(Job i: job.getAvailableJobs()) {
-				categories.add(i.getCategory());
-			}
-		} catch (SQLException e) {
-			throw new DatabaseFailureException();
-		}
-    	
-    	return categories;
-    }
-    
+       
     public List<OfferBean> retrieveOffersByJob(JobBean bean) throws DatabaseFailureException, NoResultFoundException {
     	Offer offer = new Offer();
     	List<Offer> list = null;

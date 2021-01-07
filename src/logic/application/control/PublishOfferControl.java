@@ -6,18 +6,18 @@ import java.util.List;
 
 import logic.application.SessionFacade;
 import logic.bean.AddressBean;
-import logic.bean.JobBean;
 import logic.bean.OfferBean;
 import logic.domain.Address;
 import logic.domain.Company;
 import logic.domain.Job;
 import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
+import logic.exceptions.IncompleteAccountException;
 
 public class PublishOfferControl {
 	
 	private static PublishOfferControl instance = null;
-
+	
     private PublishOfferControl() {
     	/*Default constructor*/
     }
@@ -29,15 +29,20 @@ public class PublishOfferControl {
 
         return instance;
     }
-
-	public List<AddressBean> retrieveCompanyInfo() throws DatabaseFailureException {
+    
+	public List<AddressBean> retrieveCompanyInfo() throws DatabaseFailureException, IncompleteAccountException {
     	Company comp = new Company();
     	List<AddressBean> bean = new ArrayList<>();
 		
 		try {
-			for(Address i: comp.getCompanyInfoFromDB(SessionFacade.getSession().getID()).getBranches()) {
-				bean.add(AddressControl.getInstance().extractAddressBean(i));
+			comp = comp.getCompanyInfo(SessionFacade.getSession().getID());
+			if(comp == null || comp.getBranches() == null) {
+				throw new IncompleteAccountException("Your Company info is still not complete. Please, complete this section before publishing an offer");
 			}
+			
+			for(Address i: comp.getBranches()) {
+				bean.add(AddressControl.getInstance().extractAddressBean(i));
+			}		
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();
 		}
@@ -72,29 +77,6 @@ public class PublishOfferControl {
 		
 		try {
 			offer.publish(SessionFacade.getSession().getID());
-		} catch (SQLException e) {
-			throw new DatabaseFailureException();
-		}
-	}
-
-	public List<String> retrieveJobs() throws DatabaseFailureException {
-		Job job = new Job();
-    	List<String> names = new ArrayList<>();
-    	try {
-			for(Job i: job.getAvailableJobs()) {
-				names.add(i.getName());
-			}
-		} catch (SQLException e) {
-			throw new DatabaseFailureException();
-		}
-    	
-    	return names;
-	}
-
-	public void saveNewJob(JobBean bean) throws DatabaseFailureException {
-		Job job = new Job(bean.getName(), bean.getCategory());
-		try {
-			job.addJobToDB();
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();
 		}

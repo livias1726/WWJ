@@ -35,10 +35,10 @@ public class RecruiterAccountControl {
     }
 
 	public CompanyBean retrieveCompanyInfo() throws DatabaseFailureException {
-		Company company;
+		Company company = null;
 		
 		try {
-			company = new Company().getCompanyInfoFromDB(SessionFacade.getSession().getID());
+			company = new Company().getCompanyInfo(SessionFacade.getSession().getID());
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();
 		}
@@ -47,13 +47,12 @@ public class RecruiterAccountControl {
 			CompanyBean bean = new CompanyBean();
 			bean.setName(company.getName());
 			bean.setDescription(company.getDescription());
-
-			bean.setHeadquarter(AddressControl.getInstance().extractAddressBean(company.getHeadquarter()));
 			
 			List<AddressBean> branches = new ArrayList<>();
 			for(Address i: company.getBranches()) {
 				branches.add(AddressControl.getInstance().extractAddressBean(i));
 			}
+			bean.setBranches(branches);
 			
 			return bean;
 		}
@@ -94,18 +93,11 @@ public class RecruiterAccountControl {
 	public void changeCompanyInfo(CompanyBean bean) throws DatabaseFailureException {
 		Company company = new Company(bean.getName());
     	company.setDescription(bean.getDescription());
-    	
-    	if(bean.getHeadquarter() != null) {
-    		company.setHeadquarter(AddressControl.getInstance().extractAddress(bean.getHeadquarter()));
-    	}
-
+    
     	List<Address> branches = new ArrayList<>();
-    	if(bean.getBranches() != null) {
-    		for(AddressBean i: bean.getBranches()) {
-        		branches.add(AddressControl.getInstance().extractAddress(i));
-        	}
-    	}
-    	
+    	for(AddressBean i: bean.getBranches()) {
+			branches.add(AddressControl.getInstance().extractAddress(i));
+    	} 	
     	company.setBranches(branches);
     	
 		try {

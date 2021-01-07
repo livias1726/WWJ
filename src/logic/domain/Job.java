@@ -9,6 +9,7 @@ import logic.persistence.dao.JobDAO;
 public class Job implements Serializable{
 
 	private static final long serialVersionUID = 7555734428882964601L;
+	private int id;
 	private String name;
 	private String category;
 	
@@ -21,6 +22,14 @@ public class Job implements Serializable{
 		this.category = category;				
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getCategory() {
 		return category;
 	}

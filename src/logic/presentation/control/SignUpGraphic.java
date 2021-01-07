@@ -3,33 +3,30 @@ package logic.presentation.control;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.security.auth.login.FailedLoginException;
-
-import javafx.beans.binding.Bindings;
-import javafx.beans.value.ObservableObjectValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
 import logic.bean.AccountBean;
 import logic.bean.UserBean;
 import logic.exceptions.DatabaseFailureException;
+import logic.exceptions.DuplicateUserException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
 
 public class SignUpGraphic implements Initializable {
-	
+
 	@FXML
 	private AnchorPane pane;
-
+	
 	@FXML
 	private RadioButton seekRadio;
 	
@@ -67,7 +64,9 @@ public class SignUpGraphic implements Initializable {
 	
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
-		signUpBtn.disableProperty().bind(Bindings.isNull((ObservableObjectValue<?>) radioUser.getSelectedToggle()));
+		signUpBtn.disableProperty().bind(seekRadio.selectedProperty()
+				.or(recRadio.selectedProperty())
+				.or(entreRadio.selectedProperty()).not());
 		seekRadio.selectedProperty().addListener((obs, oldV, newV) -> checked = 1);
 		recRadio.selectedProperty().addListener((obs, oldV, newV) -> checked = 2);
 		entreRadio.selectedProperty().addListener((obs, oldV, newV) -> checked = 3);
@@ -116,15 +115,8 @@ public class SignUpGraphic implements Initializable {
 				default:
 			}
 			
-		} catch (InvalidFieldException e) {
+		} catch (DuplicateUserException | InvalidFieldException e) {
 			GraphicHandler.popUpMsg(AlertType.WARNING, e.getMessage());
-			Stage stage = (Stage)pane.getScene().getWindow();
-			stage.setScene(GraphicHandler.switchScreen(Scenes.SIGN_UP, null));
-			
-		} catch (FailedLoginException le) {
-			GraphicHandler.popUpMsg(AlertType.ERROR, le.getMessage());
-			login();
-			
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
@@ -137,9 +129,9 @@ public class SignUpGraphic implements Initializable {
 	}
 	
 	@FXML
-	public void goBack() {
-		Stage stage = (Stage)pane.getScene().getWindow();	
-		Scenes prev = SessionFacade.getSession().getPrevScene();	
+	public void goBack(){
+		Scenes prev = SessionFacade.getSession().getPrevScene();			
+		Stage stage = (Stage)pane.getScene().getWindow();			
 		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}
 	

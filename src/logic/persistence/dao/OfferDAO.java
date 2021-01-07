@@ -147,7 +147,7 @@ public class OfferDAO {
             	   	
             	offer.setStart(res.getTime("start"));
             	offer.setFinish(res.getTime("finish"));
-            	offer.setBaseSalary(res.getFloat("base_salary"));
+            	offer.setBaseSalary(res.getString("base_salary"));
             	offer.setExpiration(res.getDate("expiration").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             	
             	List<String> requirements = new ArrayList<>();

@@ -5,12 +5,12 @@ import java.util.List;
 import logic.application.control.PublishOfferControl;
 import logic.application.control.RecruiterAccountControl;
 import logic.exceptions.DatabaseFailureException;
+import logic.exceptions.IncompleteAccountException;
 
 public class CompanyBean {
 
 	private String name;
 	private String description;
-	private AddressBean headquarter;
 	private List<AddressBean> branches;
 	
 	public String getName() {
@@ -29,14 +29,6 @@ public class CompanyBean {
 		this.description = description;
 	}
 	
-	public AddressBean getHeadquarter() {
-		return headquarter;
-	}
-
-	public void setHeadquarter(AddressBean headquarter) {
-		this.headquarter = headquarter;
-	}
-
 	public List<AddressBean> getBranches() {
 		return branches;
 	}
@@ -49,7 +41,7 @@ public class CompanyBean {
 		return RecruiterAccountControl.getInstance().retrieveCompanyInfo();
 	}
 	
-	public List<AddressBean> getCompanyBranches() throws DatabaseFailureException {
+	public List<AddressBean> getCompanyBranches() throws DatabaseFailureException, IncompleteAccountException {
 		return PublishOfferControl.getInstance().retrieveCompanyInfo();
 	}
 

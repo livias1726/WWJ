@@ -19,8 +19,8 @@ public class RoutinesIdentifier {
 	public static final String GET_OFFER = "call wwj_db.retrieve_offer(?)";
 	public static final String GET_CANDIDATES = "call wwj_db.retrieve_candidates(?)";
 	public static final String UPDATE_USER = "call wwj_db.update_user(?,?,?,?,?,?,?)";
-	public static final String UPDATE_COMPANY = "call wwj_db.update_company(?,?,?,?,?,?,?,?,?)";
-	public static final String UPDATE_BRANCHES = "call wwj_db.update_address(?,?)";
+	public static final String UPDATE_COMPANY = "call wwj_db.update_company(?,?,?)";
+	public static final String UPDATE_BRANCHES = "call wwj_db.update_branch(?,?,?,?,?,?,?,?)";
 	public static final String GET_COUNTRIES = "call wwj_db.retrieve_countries()";
 	public static final String GET_JOBS = "call wwj_db.retrieve_jobs()";
 	public static final String GET_BUSINESSES = "call wwj_db.retrieve_businesses()";

@@ -11,14 +11,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import logic.bean.AddressBean;
 import logic.bean.CompanyBean;
-import logic.exceptions.BadAddressException;
+import logic.bean.CountryBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 
@@ -26,6 +29,27 @@ public class CompanyInfoGraphic implements Initializable {
 
 	@FXML
     private AnchorPane companyPane;
+	
+	@FXML
+    private HBox addBox;
+
+    @FXML
+    private TextField countryTxt;
+
+    @FXML
+    private TextField stateTxt;
+
+    @FXML
+    private TextField cityTxt;
+
+    @FXML
+    private TextField streetTxt;
+
+    @FXML
+    private TextField numberTxt;
+
+    @FXML
+    private TextField zipTxt;
 
     @FXML
     private Button changeCompanyBtn;
@@ -37,10 +61,28 @@ public class CompanyInfoGraphic implements Initializable {
     private Button saveCompanyBtn;
 
     @FXML
-    private TextField headquarter;
+    private TableView<AddressBean> branchTable;
+    
+    @FXML
+    private TableColumn<AddressBean, CountryBean> countryCol;
 
     @FXML
-    private ListView<String> branchList;
+    private TableColumn<AddressBean, String> stateCol;
+
+    @FXML
+    private TableColumn<AddressBean, String> cityCol;
+
+    @FXML
+    private TableColumn<AddressBean, String> streetCol;
+
+    @FXML
+    private TableColumn<AddressBean, Integer> numCol;
+
+    @FXML
+    private TableColumn<AddressBean, String> zipCol;
+
+    @FXML
+    private TableColumn<AddressBean, Integer> idCol;
     
     @FXML
     private TextField nameCompany;
@@ -48,6 +90,8 @@ public class CompanyInfoGraphic implements Initializable {
     @FXML
     private TextArea description;
 
+    private ObservableList<AddressBean> list = FXCollections.observableArrayList();
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		CompanyBean company = null;
@@ -58,37 +102,27 @@ public class CompanyInfoGraphic implements Initializable {
 		}
 		
 		if(company != null) {
-			initInfo(company);	 	
+			nameCompany.setText(company.getName());
+	    	description.setText(company.getDescription());
+    	
+	    	list.setAll(company.getBranches());
+	    	
+	    	countryCol.setCellValueFactory(new PropertyValueFactory<>("countryName"));
+			stateCol.setCellValueFactory(new PropertyValueFactory<>("state"));
+			cityCol.setCellValueFactory(new PropertyValueFactory<>("city"));
+			streetCol.setCellValueFactory(new PropertyValueFactory<>("street"));
+			numCol.setCellValueFactory(new PropertyValueFactory<>("number"));
+			zipCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+			idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+			
+			branchTable.setItems(list);
 		}
 		
-		initBindings();
-	}
-	
-	private void initInfo(CompanyBean company) {
-		nameCompany.setText(company.getName());
-    	description.setText(company.getDescription());
-    	headquarter.setText(buildAddress(company.getHeadquarter()));
-    	
-    	ObservableList<String> list = FXCollections.observableArrayList();
-    	for(AddressBean i: company.getBranches()) {		
-    		list.add(buildAddress(i));  		
-    	}
-    	branchList.setItems(list);
-	}
-	
-	private void initBindings() {
-		saveCompanyBtn.visibleProperty().bind(changeCompanyBtn.visibleProperty().not());
-		
+		saveCompanyBtn.visibleProperty().bind(changeCompanyBtn.visibleProperty().not());	
     	nameCompany.editableProperty().bind(saveCompanyBtn.visibleProperty());
     	description.editableProperty().bind(saveCompanyBtn.visibleProperty());
-    	branchList.editableProperty().bind(saveCompanyBtn.visibleProperty());
-    	headquarter.editableProperty().bind(saveCompanyBtn.visibleProperty());
+    	addBox.visibleProperty().bind(saveCompanyBtn.visibleProperty());
     	addBtn.visibleProperty().bind(saveCompanyBtn.visibleProperty());
-	}
-
-	
-	private String buildAddress(AddressBean address) {
-		return address.toString();
 	}
 
 	@FXML
@@ -98,7 +132,25 @@ public class CompanyInfoGraphic implements Initializable {
 	
 	@FXML
     void addBranch() {
-		branchList.getItems().add("");
+		AddressBean newBranch = new AddressBean();
+		CountryBean country = new CountryBean();
+		country.setName(countryTxt.getText());
+		newBranch.setCountry(country);
+		newBranch.setState(stateTxt.getText());
+		newBranch.setCity(cityTxt.getText());
+		newBranch.setStreet(streetTxt.getText());
+		newBranch.setPostalCode(zipTxt.getText());
+		newBranch.setNumber(Integer.parseInt(numberTxt.getText()));
+		newBranch.setId(0);
+		
+		list.add(newBranch);
+		
+		countryTxt.clear();
+		stateTxt.clear();
+        cityTxt.clear();
+        streetTxt.clear();
+		zipTxt.clear();
+        numberTxt.clear();
     }
 
 	@FXML
@@ -112,23 +164,7 @@ public class CompanyInfoGraphic implements Initializable {
     	bean.setName(nameCompany.getText());   	
     	bean.setDescription(description.getText());
     	
-    	AddressBean head = new AddressBean();
-    	try {
-    		if(!headquarter.getText().isEmpty() && headquarter.getText() != null) {
-    			head.tokenizerAddress(headquarter.getText());
-    		}
-			
-			for(String i: branchList.getItems()) {
-				if(!i.isEmpty()) {
-					head.tokenizerAddress(i);
-	    		}
-	    	}
-	   
-		} catch (BadAddressException ba) {
-			GraphicHandler.popUpMsg(AlertType.WARNING, ba.getMessage());
-			return;
-		}
-
+    	bean.setBranches(list);
     	try {
 			bean.saveCompanyInfo();
 		} catch (DatabaseFailureException e) {

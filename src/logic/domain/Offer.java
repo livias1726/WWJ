@@ -21,7 +21,7 @@ public class Offer implements Serializable{
 	private Address branch;
 	private Time start;
 	private Time finish;
-	private float baseSalary;
+	private String baseSalary;
 	private LocalDate expiration;
 	private LocalDate upload;
 	private int candidates;
@@ -65,15 +65,15 @@ public class Offer implements Serializable{
 	public void setPosition(Job position) {
 		this.position = position;
 	}
-
-	public float getBaseSalary() {
+	
+	public String getBaseSalary() {
 		return baseSalary;
 	}
 
-	public void setBaseSalary(float baseSalary) {
+	public void setBaseSalary(String baseSalary) {
 		this.baseSalary = baseSalary;
 	}
-	
+
 	public LocalDate getUpload() {
 		return upload;
 	}

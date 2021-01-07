@@ -11,7 +11,6 @@ public class Company implements Serializable{
 	private static final long serialVersionUID = -880952940086847441L;
 	private String name;
 	private String description;
-	private Address headquarter;
 	private List<Address> branches;
 	
 	public Company() {
@@ -38,14 +37,6 @@ public class Company implements Serializable{
 		this.description = description;
 	}
 	
-	public Address getHeadquarter() {
-		return headquarter;
-	}
-
-	public void setHeadquarter(Address headquarter) {
-		this.headquarter = headquarter;
-	}
-
 	public List<Address> getBranches() {
 		return branches;
 	}
@@ -54,8 +45,8 @@ public class Company implements Serializable{
 		this.branches = branches;
 	}
 	
-	public Company getCompanyInfoFromDB(Long id) throws SQLException {
-		return CompanyDAO.selectCompanyInfo(id);
+	public Company getCompanyInfo(Long id) throws SQLException {
+		return CompanyDAO.selectCompany(id);
 	}
 
 	public void saveCompanyInfoOnDB(Long id) throws SQLException {

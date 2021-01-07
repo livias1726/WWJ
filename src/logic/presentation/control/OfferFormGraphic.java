@@ -21,20 +21,25 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import logic.application.SessionFacade;
 import logic.bean.AddressBean;
 import logic.bean.CompanyBean;
 import logic.bean.JobBean;
 import logic.bean.OfferBean;
 import logic.exceptions.DatabaseFailureException;
+import logic.exceptions.IncompleteAccountException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
-import logic.presentation.SharedGraphicElems;
 
-public class OfferFormGraphic extends SharedGraphicElems implements Initializable{
+public class OfferFormGraphic implements Initializable{
+	
+	@FXML
+    private AnchorPane pane;
 	
 	@FXML
     private ComboBox<String> jobCombo;
@@ -59,8 +64,7 @@ public class OfferFormGraphic extends SharedGraphicElems implements Initializabl
 
     @FXML
     private ChoiceBox<String> choiceBranch;
-    private List<Integer> branchId;
-
+   
     @FXML
     private TextField startTime;
 
@@ -77,33 +81,38 @@ public class OfferFormGraphic extends SharedGraphicElems implements Initializabl
     private Button pubBtn;
     
     @FXML
-    private ComboBox<String> currBox;
+    private ChoiceBox<String> currBox;
     
     private ToolBar bar;
+    private List<Integer> branchId;
+    private List<Integer> jobId;
 
-	public OfferFormGraphic(ToolBar bar) {
+	/*public OfferFormGraphic(ToolBar bar) {
 		this.bar = bar;
-	}
+	}*/
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		pane.getChildren().add(bar);
-		
-		List<AddressBean> branches = null;
+		//pane.getChildren().add(bar);
 		try {
-			branches = new CompanyBean().getCompanyBranches();
-			jobCombo.getItems().addAll(new JobBean().getJobNames());
+			for(AddressBean i: new CompanyBean().getCompanyBranches()) {
+				choiceBranch.getItems().add(i.toString());
+				branchId.add(i.getId());
+			}
+			
+			for(JobBean i: new JobBean().getJobs()) {
+				jobCombo.getItems().add(i.getName());
+				jobId.add(i.getId());
+			}
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			goBack();
+		} catch (IncompleteAccountException e) {
+			GraphicHandler.popUpMsg(AlertType.WARNING, e.getMessage());
+			goBack();
 		}
 		
-		for(AddressBean i: branches) {
-			choiceBranch.getItems().add(i.toString());
-			branchId.add(i.getId());
-		}
-
-		ObservableList<String> currency = FXCollections.observableArrayList("$", "£", "€");
+	    ObservableList<String> currency = FXCollections.observableArrayList("$", "£", "€");
 		currBox.setItems(currency);
 		currBox.setValue(currency.get(0));
 	
@@ -137,13 +146,13 @@ public class OfferFormGraphic extends SharedGraphicElems implements Initializabl
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
 		
-		refresh();
+		//refresh();
     }
 	
-	private void refresh() {
+	/*private void refresh() {
 		Stage stage = (Stage)pane.getScene().getWindow();
 		stage.setScene(GraphicHandler.switchScreen(Scenes.PUBLISH_OFFER, new OfferFormGraphic(bar)));
-	}
+	}*/
 
 	@FXML
 	public void addRequirement() {
@@ -165,7 +174,7 @@ public class OfferFormGraphic extends SharedGraphicElems implements Initializabl
     	OfferBean offer = new OfferBean();
     	
     	JobBean job = new JobBean();
-    	job.setName(jobCombo.getValue());
+    	job.setId(jobId.get(jobCombo.getSelectionModel().getSelectedIndex()));
     	offer.setPosition(job);
     	
     	offer.setTaskDescription(descTxt.getText());
@@ -183,7 +192,7 @@ public class OfferFormGraphic extends SharedGraphicElems implements Initializabl
     	offer.setStart(Time.valueOf(startTime.getText()));
     	offer.setFinish(Time.valueOf(finishTime.getText()));
     	
-    	offer.setBaseSalary(Float.parseFloat(salary.getText()));
+    	offer.setBaseSalary(currBox.getValue() + " " + salary.getText());
     	offer.setExpiration(expDate.getValue());
     	
     	try {
@@ -201,5 +210,11 @@ public class OfferFormGraphic extends SharedGraphicElems implements Initializabl
 		Stage stage = (Stage)pane.getScene().getWindow();			
 		stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_REC, null));
     }
-
+	
+	@FXML
+	protected void goBack(){
+		Scenes prev = SessionFacade.getSession().getPrevScene();			
+		Stage stage = (Stage)pane.getScene().getWindow();			
+		stage.setScene(GraphicHandler.switchScreen(prev, null));
+	}
 }

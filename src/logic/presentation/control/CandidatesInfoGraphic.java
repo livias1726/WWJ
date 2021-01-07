@@ -68,7 +68,7 @@ public class CandidatesInfoGraphic implements Initializable {
 			
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
-			closeCandidatesInfo();
+			closeCandidatesSection();
 		}
 		
 		table.setItems((ObservableList<CandidateBean>) list);
@@ -133,7 +133,7 @@ public class CandidatesInfoGraphic implements Initializable {
     }
 	
 	@FXML
-	public void closeCandidatesInfo() {
+	public void closeCandidatesSection() {
 		Stage st = (Stage)candidatesPane.getScene().getWindow();
     	st.close();
     }

@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -20,9 +21,11 @@ import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
-import logic.presentation.SharedGraphicElems;
 
-public class LoginGraphic extends SharedGraphicElems implements Initializable {
+public class LoginGraphic implements Initializable {
+	
+	@FXML
+	private AnchorPane pane;
 	
 	@FXML
 	private TextField email;
@@ -98,6 +101,13 @@ public class LoginGraphic extends SharedGraphicElems implements Initializable {
 	public void displaySignUp(){
 		Stage stage = (Stage)pane.getScene().getWindow();		
 		stage.setScene(GraphicHandler.switchScreen(Scenes.SIGN_UP, null));
+	}
+	
+	@FXML
+	public void goBack(){
+		Scenes prev = SessionFacade.getSession().getPrevScene();			
+		Stage stage = (Stage)pane.getScene().getWindow();			
+		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}
 
 }

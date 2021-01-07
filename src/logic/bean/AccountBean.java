@@ -11,6 +11,7 @@ import logic.application.control.AccountControl;
 import logic.application.control.LoginControl;
 import logic.application.control.SignUpControl;
 import logic.exceptions.DatabaseFailureException;
+import logic.exceptions.DuplicateUserException;
 import logic.exceptions.InvalidFieldException;
 
 public class AccountBean {
@@ -95,7 +96,7 @@ public class AccountBean {
 		LoginControl.getInstance().tryLogin(user.getEmail(), user.getPassword());
 	}
 	
-	public void signUp(String email, String pwd) throws FailedLoginException, DatabaseFailureException, InvalidFieldException {
+	public void signUp(String email, String pwd) throws DatabaseFailureException, InvalidFieldException, DuplicateUserException {
 		user.verifySignUpSyntax(email, pwd);
     	SignUpControl.getInstance().trySignUp(this);
     }

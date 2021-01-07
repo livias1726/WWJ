@@ -80,7 +80,11 @@ public class SearchSeekerGraphic extends SharedGraphicElems implements Initializ
 		//Edit combo boxes: retrieve from DB
 		try {
 			cList = (new CountryBean()).getCountries();
-			jList = (new JobBean()).getJobCategories();	
+			
+			for(JobBean i: new JobBean().getJobs()) {
+				jList.add(i.getCategory());
+			}
+			
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}

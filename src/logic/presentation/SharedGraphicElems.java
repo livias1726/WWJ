@@ -1,6 +1,7 @@
 package logic.presentation;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
@@ -25,7 +26,7 @@ public class SharedGraphicElems {
 	}
 	
 	@FXML
-	public void login() {
+	protected void login() {
 		Stage stage = (Stage)pane.getScene().getWindow();
 		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
 	}
@@ -49,4 +50,9 @@ public class SharedGraphicElems {
 		System.exit(0);
 	}
 
+	protected void refresh(Initializable controller) {
+		Scenes curr = SessionFacade.getSession().getScene();			
+		Stage stage = (Stage)pane.getScene().getWindow();			
+		stage.setScene(GraphicHandler.switchScreen(curr, controller));
+	}
 }

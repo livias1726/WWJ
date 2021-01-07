@@ -33,6 +33,7 @@ public class AddressControl {
 		addr.setPostalCode(bean.getPostalCode());
 		addr.setStreet(bean.getStreet());
 		addr.setNumber(bean.getNumber());
+		addr.setId(bean.getId());
 		
 		return addr;
 	}
@@ -50,7 +51,7 @@ public class AddressControl {
 		bean.setPostalCode(ent.getPostalCode());
 		bean.setStreet(ent.getStreet());
 		bean.setNumber(ent.getNumber());
-		
+		bean.setId(ent.getId());
 		return bean;
 	}
 }
