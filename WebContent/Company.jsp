@@ -59,12 +59,31 @@
 	    		</div>
 	    		<div>
 	    		<input class="favourite_container" type="text" name="company_container" value="" disabled style="background-color:#C6D6D3">	
-	    		<button class="savechange_btn" name="save_changes" style="width:100px; height:50px; top:550px; left:800px; background-color:dodgerblue" onClick="changeCompanyInfo()">Save change</button>
-	    		<input class="companyname" type="text" name="companyname" value="Name" disabled style="background-color:#C6D6D3">	
-	    		<input class="companybranches" type="text" name="companybranches" value="Branches" disabled style="background-color:#C6D6D3">	
-	    		<input class="companydescription" type="text" name="companyndescription" value="Description" disabled style="background-color:#C6D6D3">	
-	    		<input class="companyname" type="text" name="inputName" value="<%=companyBean.getCompanyInfo().getName()%>" style="background-color:white;top:175px;left:50px;">
-	    		<input class="companydescription" type="text" name="inputDescription" value="<%=companyBean.getCompanyInfo().getDescription()%>" style="background-color:white;top:300px;left:280px;">
+	    		<button class="savechange_btn" name="save_changes" style="width:100px; height:50px; top:550px; left:900px; background-color:dodgerblue" onClick="changeCompanyInfo()">Save change</button>
+	    		<input class="companyTitle" type="text" name="companyname" value="Name" disabled style="top:140px; left:-160px;">	
+	    		<input class="companyTxt" type="text" name="inputName" value="<%=companyBean.getCompanyInfo().getName()%>" style="top:180px;left:-416px;">
+	    		<input class="companyTitle" type="text" name="companybranches" value="Branches" disabled style="top:140px; left:-250px;">
+	    		<table border="1" style="table-layout:fixed; width:600px;position:absolute;left:550px;top:185px">
+      						<tr>
+         						<th style="color:black">Country</th>
+         						<th style="color:black">State</th>
+         						<th style="color:black">City</th>
+         						<th style="color:black">Street</th>
+         						<th style="color:black">Number</th>
+         						<th style="color:black">Zip Code</th>
+      						</tr>
+      						<tr>
+      							<td style="height:20px;background-color:white"></td>
+         						<td style="height:20px;background-color:white"></td>
+         						<td style="height:20px;background-color:white"></td>
+         						<td style="height:20px;background-color:white"></td>
+         						<td style="height:20px;background-color:white"></td>
+         						<td style="height:20px;background-color:white"></td>
+      						</tr>
+   				</table>
+	    		<input class="companyTitle" type="text" name="companyndescription" value="Description" disabled style="top:200px; left:40px;">	
+	    		<input class="companyTxt" type="text" name="inputDescription" value="<%=companyBean.getCompanyInfo().getDescription()%>" style="top:300px;left:-215px;width:300px;height:150px;">
+	    		<button class="savechange_btn" name="add" style="width:60px; height:30px; margin-left:1150px;margin-top:-20px; background-color:dodgerblue">Add</button>
 	    		</div>
 	    	</form>
 	    </div>

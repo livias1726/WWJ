@@ -644,48 +644,24 @@ margin-left:700px;
     position:relative
 }
 
-.companyname{
+.companyTitle{
 	position:relative;
     width:250px; 
     height:40px; 
-    top:230px;
-    left:-150px;
     border:0;
     font-size: 15px;
     color:black;
+    background-color:#C6D6D3
 }
 
-.companybranches{
+.companyTxt{
 	position:relative;
     width:250px; 
     height:40px; 
-    top:230px;
-    left:10px;
     border:0;
     font-size: 15px;
     color:black;
-}
-
-.companydescription{
-	position:relative;
-    width:250px; 
-    height:40px; 
-    top:400px;
-    left:-680px;
-    border:0;
-    font-size: 15px;
-    color:black;
-}
-
-.companyheadquarter{
-	position:relative;
-    width:250px; 
-    height:40px; 
-    top:400px;
-    left:320px;
-    border:0;
-    font-size: 15px;
-    color:black;
+    background-color:white
 }
 
 .add_btn{
