@@ -28,7 +28,7 @@
 	
 	<body>
 		<div>
-			<form action="company.jsp" name="company" method="POST">
+			<form action="Company.jsp" name="Company" method="POST">
 				<div class="dropdown" style="float:right;">
 	    			<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
 		     		<div class="dropdown-content" style="right:0;">
@@ -63,7 +63,8 @@
 	    		<input class="companyTitle" type="text" name="companyname" value="Name" disabled style="top:140px; left:-160px;">	
 	    		<input class="companyTxt" type="text" name="inputName" value="<%=companyBean.getCompanyInfo().getName()%>" style="top:180px;left:-416px;">
 	    		<input class="companyTitle" type="text" name="companybranches" value="Branches" disabled style="top:140px; left:-250px;">
-	    		<table border="1" style="table-layout:fixed; width:600px;position:absolute;left:550px;top:185px">
+	    		<table border="1" id='my_table' style="table-layout:fixed; width:600px;position:absolute;left:550px;top:185px">
+	    			<thead>
       						<tr>
          						<th style="color:black">Country</th>
          						<th style="color:black">State</th>
@@ -73,27 +74,49 @@
          						<th style="color:black">Zip Code</th>
       						</tr>
       						<tr>
-      							<td style="height:20px;background-color:white"></td>
-         						<td style="height:20px;background-color:white"></td>
-         						<td style="height:20px;background-color:white"></td>
-         						<td style="height:20px;background-color:white"></td>
-         						<td style="height:20px;background-color:white"></td>
-         						<td style="height:20px;background-color:white"></td>
-      						</tr>
-   				</table>
+      							<td style="background-color:white; height:20px"></td>
+         						<td style="background-color:white"></td>
+         						<td style="background-color:white"></td>
+         						<td style="background-color:white"></td>
+         						<td style="background-color:white"></td>
+         						<td style="background-color:white"></td>
+         					</tr>
+      					</thead>
+      					<tbody>
+      					</tbody>
+      			</table>
 	    		<input class="companyTitle" type="text" name="companyndescription" value="Description" disabled style="top:200px; left:40px;">	
 	    		<input class="companyTxt" type="text" name="inputDescription" value="<%=companyBean.getCompanyInfo().getDescription()%>" style="top:300px;left:-215px;width:300px;height:150px;">
-	    		<button class="savechange_btn" name="add" style="width:60px; height:30px; margin-left:1150px;margin-top:-20px; background-color:dodgerblue">Add</button>
+	    		<input class="savechange_btn" name="add" type="button" value="Add" style="width:60px; height:30px; margin-left:1150px;margin-top:-20px; background-color:dodgerblue" onClick="aggiungiRiga()">
 	    		</div>
 	    	</form>
 	    </div>
 	    <script>function changeCompanyInfo() {
 		   			<%if (request.getParameter("save_changes") != null) {
+		   				List <AddressBean> s = companyBean.getCompanyInfo().getBranches();
+		   				s.toString();
+		   				System.out.println(s);
 				    	companyBean.setName(request.getParameter("inputName"));
 						companyBean.setDescription(request.getParameter("inputDescription"));
-						companyBean.saveCompanyInfo();
 				    	
 		   			}%>
 	   }</script>
+	   <script type='text/javascript'>
+		function aggiungiRiga(){
+   			var table = document.getElementById('my_table');
+   			var tbody = table.getElementsByTagName('tbody')[0];
+			var colonne = table.getElementsByTagName('th').length; 
+			var tr = document.createElement('tr');
+     		for(var i=0; i<colonne; i++){
+				var td = document.createElement('td');
+				var tx = document.createTextNode(prompt("Inserisci testo per cella "+(i+1),""));
+				td.appendChild(tx);
+				tr.appendChild(td);
+			}
+			tbody.appendChild(tr);
+		}
+
+</script>
+	   
 	</body>
 </html>
