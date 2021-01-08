@@ -9,10 +9,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
+import logic.application.Users;
 import logic.bean.ApplicationBean;
 import logic.bean.OfferBean;
 import logic.exceptions.DatabaseFailureException;
@@ -28,7 +30,7 @@ public class OfferDetailsGraphic implements Initializable {
     private Label compLbl;
 
     @FXML
-    private TextArea jobTxt;
+    private TextField jobTxt;
 
     @FXML
     private ListView<String> reqList;
@@ -37,19 +39,19 @@ public class OfferDetailsGraphic implements Initializable {
     private TextArea descArea;
 
     @FXML
-    private TextArea branch;
+    private TextField branch;
 
     @FXML
-    private TextArea startTime;
+    private TextField startTime;
 
     @FXML
-    private TextArea endTime;
+    private TextField endTime;
 
     @FXML
-    private TextArea salary;
+    private TextField salary;
 
     @FXML
-    private TextArea expDate;
+    private TextField expDate;
 
     @FXML
     private Button applyBtn;
@@ -69,7 +71,7 @@ public class OfferDetailsGraphic implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resource) {
-		compLbl.setText(offer.getCompanyName());
+		compLbl.setText(offer.getCompanyName());	
 		jobTxt.setText(offer.getPosition().getName());
 		
 		if(offer.getRequirements() == null || offer.getRequirements().isEmpty()) {
@@ -79,8 +81,7 @@ public class OfferDetailsGraphic implements Initializable {
 				reqList.getItems().add(i);
 			}
 		}
-		
-		
+				
 		descArea.setText(offer.getTaskDescription());
 		branch.setText(offer.getBranch().getStreet() + ", " + offer.getBranch().getNumber() + ", " + 
 					   offer.getBranch().getPostalCode() + ", " + offer.getBranch().getCity() + ", " + 
@@ -96,6 +97,11 @@ public class OfferDetailsGraphic implements Initializable {
 
 		salary.setText(String.valueOf(offer.getBaseSalary()));	
 		expDate.setText(offer.getExpiration().toString());
+		
+		if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER) {
+			applyBtn.setVisible(false);
+			favBtn.setVisible(false);
+		}
 	}
 	
 	@FXML

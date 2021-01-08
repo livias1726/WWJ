@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -59,16 +60,32 @@ public class PublishedOffersGraphic implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		OfferBean bean = new OfferBean();
 		ObservableList <OfferBean> list = null;
 		try {
-			list = bean.getPublishedOffers();
+			list = new OfferBean().getPublishedOffers();
 			
 			numCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-			posCol.setCellValueFactory(new PropertyValueFactory<>("position"));
+			posCol.setCellValueFactory(new PropertyValueFactory<>("jobName"));
 			upCol.setCellValueFactory(new PropertyValueFactory<>("upload"));
 			exCol.setCellValueFactory(new PropertyValueFactory<>("expiration"));
 			candCol.setCellValueFactory(new PropertyValueFactory<>("candidates"));
+		
+			numCol.setCellFactory(col -> new TableCell<OfferBean, Integer>(){
+	            Button btn = new Button();           
+                @Override
+                public void updateItem(Integer id, boolean empty) {
+                    super.updateItem(id, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(btn);
+                        btn.setText(String.valueOf(id));
+                        btn.setPrefWidth(numCol.getWidth());
+                        btn.setOnAction(e -> openOfferDetails(id));
+                    }
+                }
+	        });
+
 			
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
@@ -81,12 +98,6 @@ public class PublishedOffersGraphic implements Initializable {
 		allRadio.selectedProperty().addListener((observable, oldValue, newValue) -> showAll(filteredList));
 		actRadio.selectedProperty().addListener((observable, oldValue, newValue) -> showActive(filteredList));
 		expRadio.selectedProperty().addListener((observable, oldValue, newValue) -> showExpired(filteredList));
-		
-		numCol.setCellFactory(tc -> {
-			TableCell<OfferBean, Integer> cell = new TableCell<>();
-	        cell.setOnMouseClicked(event -> openOfferDetails(cell.getItem()));     
-	        return cell;
-    	});
 	}
 	
     private void openOfferDetails(Integer id) {

@@ -4,10 +4,11 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
+import logic.domain.Address;
+import logic.domain.Country;
 import logic.domain.Job;
 import logic.domain.Offer;
 import logic.exceptions.NoResultFoundException;
@@ -91,7 +92,7 @@ public class OfferDAO {
 		CallableStatement stmt = null;
 		ResultSet res = null;
 		List<Offer> list = new ArrayList<>();
-
+		
 		try {
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.GET_RECRUITERS_OFFERS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -106,9 +107,9 @@ public class OfferDAO {
                 	position.setName(res.getString("name"));
                 	item.setPosition(position);
                 	
-                	item.setUpload(res.getDate("upload").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                	item.setExpiration(res.getDate("expiration").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                	item.setCandidates(res.getInt("id_account"));
+                	item.setUpload(res.getDate("upload").toLocalDate());
+                	item.setExpiration(res.getDate("expiration").toLocalDate());
+                	item.setCandidates(res.getInt("candidates"));
                 	
                 	list.add(item);
                 }while(res.next());
@@ -122,7 +123,7 @@ public class OfferDAO {
 				stmt.close();
 			}
 		}
-        
+		
         return list;
 	}
 
@@ -144,16 +145,27 @@ public class OfferDAO {
             	offer.setPosition(job);
             	
             	offer.setTaskDescription(res.getString("description"));
+            	
+            	Address branch = new Address();
+            	branch.setCountry(new Country(res.getString("country")));
+            	branch.setState(res.getString("state"));
+            	branch.setCity(res.getString("city"));
+            	branch.setPostalCode(res.getString("postal_code"));
+            	branch.setStreet(res.getString("street"));
+            	branch.setNumber(res.getInt("number"));
+            	offer.setBranch(branch);
             	   	
             	offer.setStart(res.getTime("start").toLocalTime());
             	offer.setFinish(res.getTime("finish").toLocalTime());
             	offer.setBaseSalary(res.getString("base_salary"));
-            	offer.setExpiration(res.getDate("expiration").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            	offer.setExpiration(res.getDate("expiration").toLocalDate());
             	
             	List<String> requirements = new ArrayList<>();
             	do {
             		requirements.add(res.getString("requirement"));
             	}while(res.next());
+            	
+            	offer.setRequirements(requirements);
             }
 
             res.close();          

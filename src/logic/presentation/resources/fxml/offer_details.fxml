@@ -6,13 +6,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="1180.0" styleClass="result_box" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.OfferDetailsGraphic">
+<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="1180.0" styleClass="result_box" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="compLbl" layoutX="46.0" layoutY="37.0" text="Company Name">
          <font>
@@ -36,7 +37,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="jobTxt" editable="false" prefHeight="10.0" prefWidth="200.0" />
+                  <TextField fx:id="jobTxt" editable="false" prefHeight="25.0" prefWidth="197.0" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="59.0">
@@ -72,17 +73,21 @@
       </Label>
       <VBox layoutX="622.0" layoutY="153.0" prefHeight="224.0" prefWidth="482.0" spacing="50.0">
          <children>
-            <HBox prefHeight="24.0" prefWidth="519.0" spacing="20.0">
+            <HBox prefHeight="45.0" prefWidth="482.0" spacing="20.0">
                <children>
                   <Label text="Company branch">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <HBox.margin>
-                        <Insets right="30.0" />
+                        <Insets right="30.0" top="8.0" />
                      </HBox.margin>
                   </Label>
-                  <TextArea fx:id="branch" editable="false" prefHeight="38.0" prefWidth="245.0" />
+                  <TextField fx:id="branch" editable="false" prefHeight="25.0" prefWidth="246.0">
+                     <HBox.margin>
+                        <Insets top="8.0" />
+                     </HBox.margin>
+                  </TextField>
                   <Button mnemonicParsing="false" onAction="#openMaps" prefHeight="38.0" prefWidth="38.0" styleClass="maps_btn">
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -100,8 +105,8 @@
                         <Insets right="76.0" />
                      </HBox.margin>
                   </Label>
-                  <TextArea fx:id="startTime" editable="false" prefHeight="38.0" prefWidth="110.0" />
-                  <TextArea fx:id="endTime" editable="false" prefHeight="38.0" prefWidth="110.0" />
+                  <TextField fx:id="startTime" editable="false" prefHeight="25.0" prefWidth="123.0" />
+                  <TextField fx:id="endTime" editable="false" prefHeight="25.0" prefWidth="117.0" />
                </children>
             </HBox>
             <HBox prefHeight="14.0" prefWidth="519.0" spacing="93.0">
@@ -111,7 +116,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="salary" editable="false" prefHeight="200.0" prefWidth="200.0" />
+                  <TextField fx:id="salary" editable="false" prefHeight="25.0" prefWidth="198.0" />
                </children>
             </HBox>
          </children>
@@ -128,7 +133,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextArea fx:id="expDate" editable="false" prefHeight="38.0" prefWidth="202.0" />
+            <TextField fx:id="expDate" editable="false" prefHeight="25.0" prefWidth="199.0" />
          </children>
       </HBox>
       <Button fx:id="applyBtn" layoutX="903.0" layoutY="572.0" mnemonicParsing="false" onAction="#applyToOffer" prefHeight="57.0" prefWidth="178.0" styleClass="spec_btn" text="Apply" textFill="WHITE">

@@ -15,7 +15,7 @@ public class RecruiterAccountGraphic extends AccountGraphic {
 	@FXML
 	public void openNewOffer(){
 		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Scenes.PUBLISH_OFFER, new OfferFormGraphic(barRec)));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.PUBLISH_OFFER, null));
 	}
 	
 	@FXML

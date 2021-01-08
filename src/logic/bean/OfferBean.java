@@ -17,7 +17,10 @@ public class OfferBean {
 
 	private int id;
 	private String companyName;
+	
 	private JobBean position;
+	private String jobName; //used for table views
+	
 	private String taskDescription;
 	private List<String> requirements;
 	private AddressBean branch;
@@ -34,6 +37,17 @@ public class OfferBean {
 
 	public void setPosition(JobBean position) {
 		this.position = position;
+		if(position.getName() != null) {
+			this.jobName = position.getName();
+		}
+	}
+	
+	public String getJobName() {
+		return jobName;
+	}
+
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
 	}
 
 	public List<String> getRequirements() {

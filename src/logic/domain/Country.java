@@ -11,6 +11,14 @@ public class Country implements Serializable{
 	private static final long serialVersionUID = 8047822125312096938L;	
 	private String name;
 	
+	public Country() {
+		/**/
+	}
+	
+	public Country(String name) {
+		this.name = name;
+	}
+
 	public String getName() {
 		return name;
 	}

@@ -21,13 +21,11 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToolBar;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-import logic.application.SessionFacade;
 import logic.bean.AddressBean;
 import logic.bean.CompanyBean;
 import logic.bean.JobBean;
@@ -88,17 +86,11 @@ public class OfferFormGraphic implements Initializable{
     @FXML
     private ChoiceBox<String> currBox;
 
-    private ToolBar toolbar;
     private List<Integer> branchId;
     private List<Integer> jobId;
     
-	public OfferFormGraphic(ToolBar bar) {
-		this.toolbar = bar;
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		pane.getChildren().add(toolbar);
 
 		try {
 			branchId = new ArrayList<>();
@@ -112,13 +104,13 @@ public class OfferFormGraphic implements Initializable{
 				jobCombo.getItems().add(i.getName());
 				jobId.add(i.getId());
 			}
+		}catch (IncompleteAccountException e) {
+			GraphicHandler.popUpMsg(AlertType.WARNING, e.getMessage());
+			goToHome();
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
-			goBack();
-		} catch (IncompleteAccountException e) {
-			GraphicHandler.popUpMsg(AlertType.WARNING, e.getMessage());
-			goBack();
-		}
+			goToHome();
+		} 
 		
 	    ObservableList<String> currency = FXCollections.observableArrayList("$", "£", "€");
 		currBox.setItems(currency);
@@ -164,7 +156,7 @@ public class OfferFormGraphic implements Initializable{
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
-			goBack();
+			goToHome();
 		}
     }
 	
@@ -181,7 +173,7 @@ public class OfferFormGraphic implements Initializable{
     		return;
     	}
     	
-    	goBack();
+    	goToHome();
     }
 
     @FXML
@@ -212,22 +204,18 @@ public class OfferFormGraphic implements Initializable{
     	
     	try {
 			offer.publishJobOffer();
+			GraphicHandler.popUpMsg(AlertType.CONFIRMATION, "Offer correctly published.");
+			goToHome();
 		} catch (InvalidFieldException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
-			goBack();
+			goToHome();
 		}
     }
 
-	public void goToHome() {
-		Stage stage = (Stage)pane.getScene().getWindow();			
+    private void goToHome() {
+    	Stage stage = (Stage)pane.getScene().getWindow();			
 		stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_REC, null));
     }
-	
-	public void goBack(){
-		Scenes prev = SessionFacade.getSession().getPrevScene();			
-		Stage stage = (Stage)pane.getScene().getWindow();			
-		stage.setScene(GraphicHandler.switchScreen(prev, null));
-	}
 }

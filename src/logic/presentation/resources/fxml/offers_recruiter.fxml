@@ -3,7 +3,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -17,7 +16,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <HBox layoutX="91.0" layoutY="40.0" prefHeight="17.0" prefWidth="200.0" spacing="20.0">
+      <HBox layoutX="130.0" layoutY="27.0" prefHeight="17.0" prefWidth="200.0" spacing="20.0">
          <children>
             <RadioButton fx:id="allRadio" mnemonicParsing="false" selected="true" text="All">
                <toggleGroup>
@@ -28,22 +27,14 @@
             <RadioButton fx:id="expRadio" mnemonicParsing="false" text="Expired" toggleGroup="$views" />
          </children>
       </HBox>
-      <ScrollPane layoutX="86.0" layoutY="75.0" prefHeight="463.0" prefWidth="961.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="457.0" prefWidth="958.0">
-               <children>
-                  <TableView fx:id="table" prefHeight="463.0" prefWidth="963.0">
-                     <columns>
-                        <TableColumn fx:id="numCol" prefWidth="75.0" text="Number" />
-                        <TableColumn fx:id="posCol" prefWidth="156.0" text="Position" />
-                        <TableColumn fx:id="upCol" minWidth="0.0" prefWidth="105.0" text="Upload Date" />
-                        <TableColumn fx:id="exCol" prefWidth="113.0" text="Expiration Date" />
-                        <TableColumn fx:id="candCol" prefWidth="75.0" text="Candidates" />
-                     </columns>
-                  </TableView>
-               </children>
-            </AnchorPane>
-        </content>
-      </ScrollPane>
+      <TableView fx:id="table" layoutX="130.0" layoutY="63.0" prefHeight="463.0" prefWidth="876.0">
+         <columns>
+            <TableColumn fx:id="numCol" editable="false" prefWidth="75.0" text="Number" />
+            <TableColumn fx:id="posCol" editable="false" prefWidth="200.0" text="Position" />
+            <TableColumn fx:id="upCol" editable="false" minWidth="0.0" prefWidth="200.0" text="Upload Date" />
+            <TableColumn fx:id="exCol" editable="false" prefWidth="200.0" text="Expiration Date" />
+            <TableColumn fx:id="candCol" editable="false" prefWidth="200.0" text="Candidates" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>
