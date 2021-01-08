@@ -59,27 +59,20 @@
 	    		</div>
 	    		<div>
 	    		<input class="favourite_container" type="text" name="company_container" value="" disabled style="background-color:#C6D6D3">	
-	    		<button class="savechange_btn" style="width:100px; height:50px; top:550px; left:800px; background-color:dodgerblue" onClick="changeInfo()">Save change</button>
+	    		<button class="savechange_btn" name="save_changes" style="width:100px; height:50px; top:550px; left:800px; background-color:dodgerblue" onClick="changeCompanyInfo()">Save change</button>
 	    		<input class="companyname" type="text" name="companyname" value="Name" disabled style="background-color:#C6D6D3">	
 	    		<input class="companybranches" type="text" name="companybranches" value="Branches" disabled style="background-color:#C6D6D3">	
 	    		<input class="companydescription" type="text" name="companyndescription" value="Description" disabled style="background-color:#C6D6D3">	
-	    		<input class="companyheadquarter" type="text" name="companyheadquarter" value="Headquarter" disabled style="background-color:#C6D6D3">
-	    		<input class="companyname" type="text" name="inputName" value="<%=companyBean.getName()%>" style="background-color:white;top:175px;left:-305px;">
-	    		<input class="companybranches" type="text" name="inputBranches"	<ol value="<%=companyBean.getBranches()%>"</ol> style="background-color:white;top:230px;left:-197px;height:150px">
-	    		<input class="companydescription" type="text" name="inputDescription" value="<%=companyBean.getDescription()%>" style="background-color:white;top:350px;left:280px;">
-	    		<input class="companyheadquarter" type="text" name="inputHeadquarter" value="<%=companyBean.getHeadquarter()%>" style="background-color:white;top:350px;left:390px;">
-	    		<button class="add_btn" style="width:40px;height:40px;background-color:lightblue;top:76px;left:400px">Add</button>
+	    		<input class="companyname" type="text" name="inputName" value="<%=companyBean.getCompanyInfo().getName()%>" style="background-color:white;top:175px;left:50px;">
+	    		<input class="companydescription" type="text" name="inputDescription" value="<%=companyBean.getCompanyInfo().getDescription()%>" style="background-color:white;top:300px;left:280px;">
 	    		</div>
 	    	</form>
 	    </div>
-	    <script>function changeInfo() {
+	    <script>function changeCompanyInfo() {
 		   			<%if (request.getParameter("save_changes") != null) {
 				    	companyBean.setName(request.getParameter("inputName"));
-				    	companyBean.setDescription(request.getParameter("inputDescription"));
-				    	companyBean.setHeadquarter(addressBean);
-				    	List<AddressBean> branches = new ArrayList<>();
-				    	companyBean.setBranches(branches);
-				    	companyBean.saveCompanyInfo();
+						companyBean.setDescription(request.getParameter("inputDescription"));
+						companyBean.saveCompanyInfo();
 				    	
 		   			}%>
 	   }</script>
