@@ -19,18 +19,18 @@
 		<link rel="icon" href="icons/search_usr.png">
 	    <link href="css/style.css" rel="stylesheet">
 	
-		<title>WorldWideJob - JobSeekerResearchResult</title>
+		<title>WorldWideJob - jobSeekerResearchResult</title>
 	</head>
 	
 	<body>
 		<div>
-			<form action="JobSeekerResearchResult.jsp" name="researchresultjobseekform" method="POST">
+			<form action="jobSeekerResearchResult.jsp" name="researchresultjobseekform" method="POST">
 				<div class="dropdown" style="float:right;">
 	    			<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
 	    			<div class="dropdown-content" style="right:0;">
 		     			<a href="">Buy Premium Version</a>
 		     			<a class="dropdown" href="">Support</a>
-		     			<a href="http://localhost:8080/WorldWideJob/seeker_research.jsp">Quit</a>
+		     			<a href="http://localhost:8080/WorldWideJob/seekerResearch.jsp">Quit</a>
 		     		</div>
 		     	</div>		
 		        <div class="dropdown" style="float:right;">
@@ -45,7 +45,7 @@
 	    		<div style="float:left">
 	    			<button class="home_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='index.jsp';"></button>
 	    		<div style="float:right;">
-	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='seeker_research.jsp';"></button>
+	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='seekerResearch.jsp';"></button>
 	    		</div>
 	    		</div>
 	    		<div>
@@ -53,7 +53,7 @@
 	    			<input class="place2" name="place2" value="<%=countryBean.getCountries()%>" style="background-color:white">
 	    			<a class="offer" type="submit" href="http://localhost:8080/WorldWideJob/offerDetails.jsp"  style="background-color:#E4F5F2"><%=jobBean.getName()%></a>
 	    		<%}else if((String) jobBean.getName() == "" && countryBean.getName() != null) {%>
-	    			<a class="offer" type="submit" href="http://localhost:8080/WorldWideJob/offerDetails.jsp"  style="background-color:#E4F5F2"><%=jobBean.getJobs()%></a>
+	    			<a class="offer" type="submit" href="http://localhost:8080/WorldWideJob/offerDetails.jsp"  style="background-color:#E4F5F2"><%=jobBean.getJobNames()%></a>
 	    			<input class="place2" name="place2" value="<%=countryBean.getName()%>" style="background-color:white">
 	    		<%}else if(countryBean.getName() != null && jobBean.getName() != null) {%>
 	    			<a class="offer" type="submit" href="http://localhost:8080/WorldWideJob/offerDetails.jsp"  style="background-color:#E4F5F2"><%=jobBean.getName()%></a>

@@ -23,12 +23,12 @@
 		<link rel="icon" href="icons/search_usr.png">
 	    <link href="css/style.css" rel="stylesheet">
 	    
-		<title>WorldWideJob - Company</title>
+		<title>WorldWideJob - company</title>
 	</head>
 	
 	<body>
 		<div>
-			<form action="candidates.jsp" name="candidates" method="POST">
+			<form action="company.jsp" name="company" method="POST">
 				<div class="dropdown" style="float:right;">
 	    			<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
 		     		<div class="dropdown-content" style="right:0;">
@@ -43,7 +43,7 @@
 		        <div class="dropdown" style="float:right;">
 	    			<button class="user_btn" style="background-color:lightblue;margin-right:10px;width:40px;height:40px;margin-top:10px"></button>
 		     		<div class="dropdown-content" style="right:0;">
-		     			<a href="http://localhost:8080/WorldWideJob/recruiter'sProfile.jsp">Account</a>
+		     			<a href="http://localhost:8080/WorldWideJob/recruiterProfile.jsp">Account</a>
 		     			<a href="http://localhost:8080/WorldWideJob/login.jsp">Logout</a>
 		     		</div>
 		     	</div>
@@ -54,7 +54,7 @@
 	    		<div style="float:left">
 	    			<button class="home_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='index.jsp';"></button>
 	    		<div style="float:right;">
-	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='recruiter'sProfile.jsp';"></button>
+	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='recruiterProfile.jsp';"></button>
 	    		</div>
 	    		</div>
 	    		<div>

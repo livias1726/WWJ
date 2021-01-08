@@ -11,18 +11,18 @@
 		
 		<link rel="icon" href="icons/search_usr.png">
 	    <link href="css/style.css" rel="stylesheet">
-		<title>WorldWideJob - Feasibility</title>
+		<title>WorldWideJob - feasibility</title>
 	</head>
 	<body>
 		<div>
-			<form action="Feasibility.jsp" name="feasibility" method="POST">
+			<form action="feasibility.jsp" name="feasibility" method="POST">
 				<div class="dropdown" style="float:right;">
 	    			<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
 		     		<div class="dropdown-content" style="right:0;">
 		     			<a href="">Publish Job Offer</a>
 		     			<a href="">Buy Premium Version</a>
 		     			<a class="dropdown" href="">Support</a>
-		     			<a href="http://localhost:8080/WorldWideJob/entrepreneur_research.jsp">Quit</a>
+		     			<a href="http://localhost:8080/WorldWideJob/entrepreneurResearch.jsp">Quit</a>
 		     		</div>
 		     	</div>
 		     	<div style="float:right;">
@@ -30,7 +30,7 @@
 		        <div class="dropdown" style="float:right;">
 	    			<button class="user_btn" style="background-color:lightblue;margin-right:10px;width:40px;height:40px;margin-top:10px"></button>
 		     		<div class="dropdown-content" style="right:0;">
-		     			<a href="http://localhost:8080/WorldWideJob/entrepreneur'sProfile.jsp">Account</a>
+		     			<a href="http://localhost:8080/WorldWideJob/entrepreneurProfile.jsp">Account</a>
 		     			<a href="http://localhost:8080/WorldWideJob/login.jsp">Logout</a>
 		     		</div>
 		     	</div>
