@@ -108,8 +108,10 @@ public class PublishedOffersGraphic implements Initializable {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
 			
-		Stage stage = (Stage)offersPane.getScene().getWindow();			
-		stage.setScene(GraphicHandler.switchScreen(Scenes.OFFER, new OfferDetailsGraphic(bean)));
+		Stage stage = (Stage)offersPane.getScene().getWindow();		
+		Stage parent = (Stage) stage.getOwner();
+		parent.setScene(GraphicHandler.switchScreen(Scenes.OFFER, new OfferDetailsGraphic(bean)));
+		closeOffersSection();
 	}
 
 	private void showActive(FilteredList<OfferBean> list) {

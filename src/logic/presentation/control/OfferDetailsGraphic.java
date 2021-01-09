@@ -1,5 +1,9 @@
 package logic.presentation.control;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -138,7 +142,23 @@ public class OfferDetailsGraphic implements Initializable {
 
     @FXML
     public void openMaps() {
-    	/**/
+    	String map = offer.getBranch().buildMapAddress();
+    	URL url;
+		try {
+			url = new URL("https://www.google.com/maps/place/" + map + "/");
+			Desktop.getDesktop().browse(url.toURI());
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+		//Via+del+Politecnico,+1,+00100+Roma+RM
     }
     
     @FXML

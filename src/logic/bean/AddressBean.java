@@ -76,4 +76,9 @@ public class AddressBean {
 	public String toString() {
 		return this.countryName + ", " + this.state + ", " + this.city + ", " + this.street + ", " + this.number + ", " + this.postalCode;
 	}
+
+	public String buildMapAddress() {
+		String str = this.street.replace(".", "").replace(" ", "+");
+		return str + ",+" + this.number + "," + this.postalCode.replace(" ", "+") + "+" + this.countryName;
+	}
 }
