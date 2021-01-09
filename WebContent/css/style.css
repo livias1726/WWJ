@@ -76,7 +76,7 @@
 	border-color: #0080FF; 
 	font-size: 15px; 
 	font-family: System; 
-	cursor: hand;
+	cursor: pointer;
 }
 
 .place_btn{
@@ -151,6 +151,7 @@
 	height: 31px;
 	width: 188px;
 	margin-left: 60px;
+	cursor: pointer;
 }
 
 .login_gg{
@@ -161,6 +162,7 @@
 	height: 31px;
 	width: 188px;
 	margin-left: 60px;
+	cursor: pointer;
 }
 
 .su{

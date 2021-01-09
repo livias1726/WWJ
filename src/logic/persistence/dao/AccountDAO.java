@@ -148,5 +148,4 @@ public class AccountDAO {
         
         return notif;
 	}
-	
 }

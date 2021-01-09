@@ -84,10 +84,8 @@ public class LoginGraphic implements Initializable {
 	}
 
 	@FXML
-	public void facebookLogin() {
-		/*Connect to Facebook using the specific API
-		 * and OAuth2 system
-		 */
+	public void facebookLoginClicked() {
+		GraphicHandler.popUpMsg(AlertType.ERROR, "Sorry, this function is not available yet");
 	}
 	
 	@FXML

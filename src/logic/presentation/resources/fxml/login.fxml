@@ -43,7 +43,7 @@
             </Button>
             <VBox prefHeight="93.0" prefWidth="380.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="188.0" styleClass="login_fb">
+                  <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="188.0" styleClass="login_fb" onAction="#facebookLoginClicked">
                      <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" color="#000000ad" />
                      </effect>

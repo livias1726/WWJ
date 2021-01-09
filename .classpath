@@ -36,5 +36,6 @@
 	<classpathentry kind="lib" path="C:/Users/livia/Documents/Università/Corsi/III/PRIMO SEMESTRE/INGEGNERIA DEL SOFTWARE - Falessi/PROGETTO/wwj-project/WWJ.git/trunk/lib/guava-25.0-jre.jar"/>
 	<classpathentry kind="lib" path="C:/Users/livia/Documents/Università/Corsi/III/PRIMO SEMESTRE/INGEGNERIA DEL SOFTWARE - Falessi/PROGETTO/wwj-project/WWJ.git/trunk/lib/okhttp-3.11.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/livia/Documents/Università/Corsi/III/PRIMO SEMESTRE/INGEGNERIA DEL SOFTWARE - Falessi/PROGETTO/wwj-project/WWJ.git/trunk/lib/okio-1.14.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/livia/Documents/Università/Corsi/III/PRIMO SEMESTRE/INGEGNERIA DEL SOFTWARE - Falessi/PROGETTO/wwj-project/WWJ.git/trunk/WebContent/WEB-INF/lib/restfb-3.13.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

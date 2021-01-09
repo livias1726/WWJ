@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="logic.bean.UserBean"
-		import="logic.bean.AccountBean"%>
+		import="logic.bean.AccountBean"
+		import="logic.presentation.control.LoginGraphic"%>
 <!DOCTYPE html>
 
 <jsp:useBean id="userBean" class="logic.bean.UserBean" scope="session"/>
@@ -9,29 +10,30 @@
 <jsp:useBean id="accountBean" class="logic.bean.AccountBean" scope="session"/>
 <jsp:setProperty name="accountBean" property="*"/>
 
-<%Class.forName("com.mysql.jdbc.Driver");%>
+<%Class.forName("com.mysql.cj.jdbc.Driver");%>
 
 <% if (request.getParameter("login") != null) {
-		userBean.setEmail(request.getParameter("email"));
-		userBean.setPassword(request.getParameter("password"));
-		accountBean.setUser(userBean);
-		accountBean.login(); 
-        if("SEEKER".equals(accountBean.getAccount().getType())) {
-        	String redirectURL = "http://localhost:8080/WorldWideJob/seekerProfile.jsp";
-        	response.sendRedirect(redirectURL);
-        	return;
-        }
-        if("RECRUITER".equals(accountBean.getAccount().getType())) {
-        	String redirectURL = "http://localhost:8080/WorldWideJob/recruiterProfile.jsp";
-        	response.sendRedirect(redirectURL);
-        	return;
-        }
-        if("ENTREPRENEUR".equals(accountBean.getAccount().getType())) {
-          	String redirectURL = "http://localhost:8080/WorldWideJob/entrepreneurProfile.jsp";
-        	response.sendRedirect(redirectURL);
-        	return;
-        }
-   }%>
+	userBean.setEmail(request.getParameter("email"));
+	userBean.setPassword(request.getParameter("password"));
+	accountBean.setUser(userBean);
+	accountBean.login(); 
+	
+	if("SEEKER".equals(accountBean.getAccount().getType())) {
+    	String redirectURL = "http://localhost:8080/WorldWideJob/seekerProfile.jsp";
+    	response.sendRedirect(redirectURL);
+    	return;
+    }
+    if("RECRUITER".equals(accountBean.getAccount().getType())) {
+    	String redirectURL = "http://localhost:8080/WorldWideJob/recruiterProfile.jsp";
+    	response.sendRedirect(redirectURL);
+    	return;
+    }
+    if("ENTREPRENEUR".equals(accountBean.getAccount().getType())) {
+      	String redirectURL = "http://localhost:8080/WorldWideJob/entrepreneurProfile.jsp";
+    	response.sendRedirect(redirectURL);
+    	return;
+    }
+ }%>
 
 <html lang="en">
 	<head>
@@ -40,15 +42,16 @@
 		
 		<link rel="icon" href="icons/main_icon.png">
 	    <link href="css/style.css" rel="stylesheet">
-	    
+	    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
 	    <title>WorldWideJob - login</title>
 	</head>
 	<body>
-		<div>
 		    <form action="login.jsp" name="logform" method="POST">
 		    	<div style="margin: 100px 0px 0px 750px">
 				  <button class="login_btns" type="button" onClick="javascript:window.location='signUp.jsp';">Sign Up</button>
-				</div>
+				</div>	
 		    	<fieldset class="login_frame">
     				<legend style="color: #0080FF; font-size: 30px; font-family: System;">LOGIN</legend>
 				        <div>
@@ -67,13 +70,16 @@
 				            <input class="login_btns" type="submit" name="login" value="Sign In" style="margin: 30px 120px">
 				        </div>
 				        <div>
-				            <input class="login_fb" type="submit" name="loginFacebook" value="">
+				        	<button type="button" class="login_fb" id="loginFb"></button>
 				        </div>
 				        <div>
 				            <input class="login_gg" type="submit" name="loginGoogle" value="">
 				        </div>
+				        <div class="alert_msg" id="unavailable" style="display:none;color: red;font-weight: bold;">
+						    Sorry, this function is not available yet.
+					  	</div>
 				  </fieldset>
 		    </form>
-		</div>
 	</body>
+	<script src="js/login.js"></script>
 </html>
