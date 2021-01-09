@@ -60,7 +60,7 @@
 	    		</div>
 	    		<select class="order_select" name="job" style="background-color:white;width:250px;height:30px;margin-right:200px;margin-left:638px;margin-top:90px">
 	    			<option>Job</option>
-	    			<option><%=jobBean.getJobNames()%></option>
+	    			<option><%=jobBean.getJobs()%></option>
 	    		</select> 
 	    		<button class="search_btn" type="submit" name="search" style="width:100px; height:50px; top:300px; background-color: dodgerblue; margin-left:-750px; border-color: black">Search</button>
 	    		</div>

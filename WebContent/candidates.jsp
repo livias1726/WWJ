@@ -17,7 +17,7 @@
 				<div class="dropdown" style="float:right;">
 	    			<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
 		     		<div class="dropdown-content" style="right:0;">
-		     			<a href="">Publish Job Offer</a>
+		     			<a href="http://localhost:8080/WorldWideJob/publish.jsp">Publish Job Offer</a>
 		     			<a href="">Buy Premium Version</a>
 		     			<a class="dropdown" href="">Support</a>
 		     			<a href="">Quit</a>
