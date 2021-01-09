@@ -29,13 +29,12 @@ public class CandidateDAO {
         	
 			res = RoutinesManager.bindParametersAndExec(stmt, id.intValue());
 			
-            if (res.first()){           	
-            	Candidate cand = new Candidate();
-            	cand.setOffer(res.getInt("offer"));
-            	cand.setSeeker(res.getInt("candidate"));
-            	cand.setName(res.getString("first_name") + " " + res.getString("last_name"));
-            	
-            	list.add(cand);
+            if (res.first()){
+            	do {
+            		
+            		Candidate cand = new Candidate(Long.valueOf(res.getInt("candidate")), res.getInt("offer"), res.getString("first_name") + " " + res.getString("last_name"));
+                	list.add(cand);
+            	}while(res.next());           	
             }
             
             res.close();

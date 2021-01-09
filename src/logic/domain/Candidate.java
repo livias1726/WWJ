@@ -12,7 +12,17 @@ public class Candidate implements Serializable{
 	
 	private int offer;
 	private String name;
-	private int seeker;
+	private Long seeker;
+	
+	public Candidate() {
+		/**/
+	}
+	
+	public Candidate(Long id, int offer, String name) {
+		this.offer = offer;
+		this.seeker = id;
+		this.name = name;
+	}
 	
 	public int getOffer() {
 		return offer;
@@ -30,11 +40,11 @@ public class Candidate implements Serializable{
 		this.name = name;
 	}
 
-	public int getSeeker() {
+	public Long getSeeker() {
 		return seeker;
 	}
 
-	public void setSeeker(int seeker) {
+	public void setSeeker(Long seeker) {
 		this.seeker = seeker;
 	}
 

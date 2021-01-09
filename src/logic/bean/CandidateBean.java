@@ -2,6 +2,7 @@ package logic.bean;
 
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import logic.application.control.CheckCandidatesControl;
 import logic.exceptions.DatabaseFailureException;
 
@@ -9,7 +10,7 @@ public class CandidateBean {
 	
 	private int offer;
 	private String name;
-	private int seeker;
+	private Long seeker;
 	
 	public int getOffer() {
 		return offer;
@@ -27,15 +28,15 @@ public class CandidateBean {
 		this.name = name;
 	}
 
-	public int getSeeker() {
+	public Long getSeeker() {
 		return seeker;
 	}
 
-	public void setSeeker(int seeker) {
+	public void setSeeker(Long seeker) {
 		this.seeker = seeker;
 	}
 	
-	public List<CandidateBean> getCandidates() throws DatabaseFailureException {
+	public ObservableList<CandidateBean> getCandidates() throws DatabaseFailureException {
 		return CheckCandidatesControl.getInstance().retrieveCandidates();
 	}
 

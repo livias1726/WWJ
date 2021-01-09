@@ -244,3 +244,7 @@
 .list{
 	-fx-border-color: blue;
 }
+
+.select_all_pane{
+	-fx-background-color: #b1b3bb;
+}

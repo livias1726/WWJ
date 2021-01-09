@@ -1,9 +1,10 @@
 package logic.application.control;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import logic.application.SessionFacade;
 import logic.bean.CandidateBean;
 import logic.domain.Candidate;
@@ -25,7 +26,7 @@ public class CheckCandidatesControl {
         return instance;
     }
 
-	public List<CandidateBean> retrieveCandidates() throws DatabaseFailureException {
+	public ObservableList<CandidateBean> retrieveCandidates() throws DatabaseFailureException {
 		Candidate cand = new Candidate();
 		List<Candidate> list;
 		try {
@@ -34,7 +35,7 @@ public class CheckCandidatesControl {
 			throw new DatabaseFailureException(); 
 		}
 		
-		List<CandidateBean> dest = new ArrayList<>();
+		ObservableList<CandidateBean> dest = FXCollections.observableArrayList();
 		
 		for(Candidate i: list) {
 			CandidateBean bean = new CandidateBean();

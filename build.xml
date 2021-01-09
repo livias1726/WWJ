@@ -19,6 +19,9 @@
         <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.web.jar"/>
         <pathelement location="../../../../../../../../../../../../Program Files/Java/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx-swt.jar"/>
     </path>
+    <path id="JavaFX SDK.libraryclasspath">
+        <pathelement location="../../../../../../../../../../.p2/pool/plugins/org.eclipse.fx.ide.css.jfx8_3.5.0.201907240300.jar"/>
+    </path>
     <path id="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath">
         <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/annotations-api.jar"/>
         <pathelement location="../../../../../../../../../../../../Program Files/Java/apache-tomcat-8.5.60-windows-x64/apache-tomcat-8.5.60/lib/catalina-ant.jar"/>
@@ -53,15 +56,32 @@
     <path id="Maven Dependencies.libraryclasspath"/>
     <path id="WorldWideJob.classpath">
         <path refid="JavaFX.userclasspath"/>
+        <path refid="JavaFX SDK.libraryclasspath"/>
         <pathelement location="target/classes"/>
         <path refid="Apache Tomcat v8.5 [Apache Tomcat v8.5].libraryclasspath"/>
-        <pathelement location="lib/mysql-connector-java-8.0.22.jar"/>
+        <pathelement location="lib/mysql-connector-java-5.1.48.jar"/>
         <path refid="Maven Dependencies.libraryclasspath"/>
+        <pathelement location="lib/byte-buddy-1.8.15.jar"/>
+        <pathelement location="lib/client-combined-3.141.59.jar"/>
+        <pathelement location="lib/client-combined-3.141.59-sources.jar"/>
+        <pathelement location="lib/commons-exec-1.3.jar"/>
+        <pathelement location="lib/guava-25.0-jre.jar"/>
+        <pathelement location="lib/okhttp-3.11.0.jar"/>
+        <pathelement location="lib/okio-1.14.0.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/restfb-3.13.0.jar"/>
     </path>
     <path id="run.Main (1).classpath">
         <path refid="WorldWideJob.classpath"/>
         <path refid="Maven Dependencies.libraryclasspath"/>
-        <pathelement location="lib/mysql-connector-java-8.0.22.jar"/>
+        <pathelement location="lib/mysql-connector-java-5.1.48.jar"/>
+        <pathelement location="lib/byte-buddy-1.8.15.jar"/>
+        <pathelement location="lib/client-combined-3.141.59.jar"/>
+        <pathelement location="lib/client-combined-3.141.59-sources.jar"/>
+        <pathelement location="lib/commons-exec-1.3.jar"/>
+        <pathelement location="lib/guava-25.0-jre.jar"/>
+        <pathelement location="lib/okhttp-3.11.0.jar"/>
+        <pathelement location="lib/okio-1.14.0.jar"/>
+        <pathelement location="WebContent/WEB-INF/lib/restfb-3.13.0.jar"/>
     </path>
     <target name="init">
         <mkdir dir="target/classes"/>

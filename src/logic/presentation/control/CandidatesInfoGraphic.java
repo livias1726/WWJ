@@ -1,15 +1,18 @@
 package logic.presentation.control;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.Initializable; 
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -20,7 +23,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.bean.CandidateBean;
-import logic.bean.OfferBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
@@ -50,6 +52,7 @@ public class CandidatesInfoGraphic implements Initializable {
     
     private ToolBar toolbar;
     private ObservableList<Long> selected = FXCollections.observableArrayList();
+    private List<CheckBox> checkList = new ArrayList<>();
 
 	public CandidatesInfoGraphic(ToolBar toolbar) {
 		this.toolbar = toolbar;
@@ -58,7 +61,7 @@ public class CandidatesInfoGraphic implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		CandidateBean bean = new CandidateBean();
-		List <CandidateBean> list = null;
+		ObservableList<CandidateBean> list = null;
 		try {
 			list = bean.getCandidates();
 			
@@ -71,56 +74,82 @@ public class CandidatesInfoGraphic implements Initializable {
 			closeCandidatesSection();
 		}
 		
-		table.setItems((ObservableList<CandidateBean>) list);
-		
-		delBtn.disableProperty().bind(Bindings.size(selected).isEqualTo(0));
+		table.setItems(list);
+
+		delBtn.disableProperty().bind(Bindings.isEmpty(selected));
+	
+		CheckBox selectAll = new CheckBox();
+		delCol.setGraphic(selectAll);
+		selectAll.setOnAction(event -> selectAllBoxes(event));
 		
 		delCol.setCellFactory(tc -> {
-			CheckBoxTableCell<CandidateBean, Boolean> cell = new CheckBoxTableCell<>();
-	        cell.selectedProperty().addListener((obv, oldValue, newValue) -> {
-	        	if(Boolean.TRUE.equals(newValue)) {
+			CheckBox btn = new CheckBox();      
+			CheckBoxTableCell<CandidateBean, Boolean> cell = new CheckBoxTableCell<CandidateBean, Boolean>() {
+            	@Override
+                public void updateItem(Boolean checked, boolean empty) {
+                    super.updateItem(checked, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(btn);
+                    }
+                }
+            }; 
+			
+            btn.addEventFilter(ActionEvent.ACTION, event -> {
+            	if(btn.isSelected()) {
 	        		selected.add(idCol.getCellData(cell.getIndex()));
 	        	}else {
-	        		if(selected.contains(idCol.getCellData(cell.getIndex()))) {
-	        			int index = selected.indexOf(idCol.getCellData(cell.getIndex()));
-	        			selected.remove(index);
-	        		}
+	        		int index = selected.indexOf(idCol.getCellData(cell.getIndex()));
+        			selected.remove(index);
 	        	}
-	        });
+            });
+      
+            checkList.add(btn);
 	        return cell;
     	});
 
-		offerCol.setCellFactory(tc -> {
-			TableCell<CandidateBean, Integer> cell = new TableCell<>();
-	        cell.setOnMouseClicked(event -> openOfferDetails(cell.getItem()));     
-	        return cell;
-    	});
-		
-		candCol.setCellFactory(tc -> {
-			TableCell<CandidateBean, String> cell = new TableCell<>();
-	        cell.setOnMouseClicked(event -> openSeekerProfile(idCol.getCellData(cell.getIndex())));     
-	        return cell;
-    	});
+		candCol.setCellFactory(col -> {		
+            Button btn = new Button();      
+            TableCell<CandidateBean, String> cell = new TableCell<CandidateBean, String>() {
+            	@Override
+                public void updateItem(String name, boolean empty) {
+                    super.updateItem(name, empty);
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        setGraphic(btn);
+                        btn.setText(name);
+                        btn.setPrefWidth(candCol.getWidth());
+                    }
+                }
+            }; 
+            
+            btn.setOnAction(e -> openSeekerProfile(idCol.getCellData(cell.getIndex())));
+            return cell;
+        });
 	}
 	
-	private void openSeekerProfile(Long id) {
-		Stage stage = (Stage)candidatesPane.getScene().getWindow();			
-		stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_SEEK, new SeekerAccountGraphic(toolbar, id)));
-	}
-
-	private void openOfferDetails(Integer id) {
-		OfferBean bean = new OfferBean();
-		try {
-			bean = bean.getOffer(id);
-		} catch (DatabaseFailureException e) {
-			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+	private void selectAllBoxes(ActionEvent event) {
+		if(((CheckBox) event.getSource()).isSelected()) {
+			for(CheckBox box: checkList) {
+				box.setSelected(true);
+			}			
+		}else {
+			for(CheckBox box: checkList) {
+				box.setSelected(false);
+			}	
 		}
-			
-		Stage stage = (Stage)candidatesPane.getScene().getWindow();			
-		stage.setScene(GraphicHandler.switchScreen(Scenes.OFFER, new OfferDetailsGraphic(bean)));
+		
 	}
 
-	
+	private void openSeekerProfile(Long id) {
+		Stage stage = (Stage)candidatesPane.getScene().getWindow();		
+		Stage parent = (Stage) stage.getOwner();
+		parent.setScene(GraphicHandler.switchScreen(Scenes.ACC_SEEK, new SeekerAccountGraphic(toolbar, id)));
+		closeCandidatesSection();		
+	}
+
 	@FXML
 	public void deleteSelected() {
 		CandidateBean bean = new CandidateBean();
