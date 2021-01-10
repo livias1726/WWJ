@@ -75,12 +75,11 @@ public class CandidatesInfoGraphic implements Initializable {
 		}
 		
 		table.setItems(list);
-
-		delBtn.disableProperty().bind(Bindings.isEmpty(selected));
-	
+		
 		CheckBox selectAll = new CheckBox();
 		delCol.setGraphic(selectAll);
-		selectAll.setOnAction(event -> selectAllBoxes(event));
+		selectAll.setOnAction(this::selectAllBoxes);
+		delBtn.disableProperty().bind(Bindings.isEmpty(selected).and(selectAll.selectedProperty().not()));
 		
 		delCol.setCellFactory(tc -> {
 			CheckBox btn = new CheckBox();      
@@ -104,7 +103,7 @@ public class CandidatesInfoGraphic implements Initializable {
         			selected.remove(index);
 	        	}
             });
-      
+            
             checkList.add(btn);
 	        return cell;
     	});
@@ -132,15 +131,19 @@ public class CandidatesInfoGraphic implements Initializable {
 	
 	private void selectAllBoxes(ActionEvent event) {
 		if(((CheckBox) event.getSource()).isSelected()) {
-			for(CheckBox box: checkList) {
-				box.setSelected(true);
-			}			
+			for(CheckBox i: checkList) {
+				i.setSelected(true);
+			}
+			selected.clear();
+			for(CandidateBean i: table.getItems()) {
+				selected.add(i.getSeeker());
+			}
 		}else {
-			for(CheckBox box: checkList) {
-				box.setSelected(false);
-			}	
+			for(CheckBox i: checkList) {
+				i.setSelected(false);
+			}
+			selected.clear();
 		}
-		
 	}
 
 	private void openSeekerProfile(Long id) {

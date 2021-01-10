@@ -31,6 +31,9 @@ public class SeekerAccountGraphic extends AccountGraphic{
 	
 	@FXML
     private HBox privateHBox;
+	
+	@FXML
+    private Button homeBtn;
 
 	@FXML
     private Button changePicBtn;
@@ -56,6 +59,10 @@ public class SeekerAccountGraphic extends AccountGraphic{
 			changePicBtn.setVisible(false);
 			
 			cvBtn.setOnAction(event -> openCVPublic());
+			homeBtn.setOnAction(event -> {
+				Stage stage = (Stage)pane.getScene().getWindow();			
+				stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_REC, null));
+			});
 		}		
 	}
 	

@@ -29,13 +29,13 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/livia/Documents/Università/Corsi/III/PRIMO SEMESTRE/INGEGNERIA DEL SOFTWARE - Falessi/PROGETTO/wwj-project/WWJ.git/trunk/lib/byte-buddy-1.8.15.jar"/>
-	<classpathentry kind="lib" path="C:/Users/livia/Documents/Università/Corsi/III/PRIMO SEMESTRE/INGEGNERIA DEL SOFTWARE - Falessi/PROGETTO/wwj-project/WWJ.git/trunk/lib/client-combined-3.141.59.jar"/>
-	<classpathentry kind="lib" path="C:/Users/livia/Documents/Università/Corsi/III/PRIMO SEMESTRE/INGEGNERIA DEL SOFTWARE - Falessi/PROGETTO/wwj-project/WWJ.git/trunk/lib/client-combined-3.141.59-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/livia/Documents/Università/Corsi/III/PRIMO SEMESTRE/INGEGNERIA DEL SOFTWARE - Falessi/PROGETTO/wwj-project/WWJ.git/trunk/lib/commons-exec-1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/livia/Documents/Università/Corsi/III/PRIMO SEMESTRE/INGEGNERIA DEL SOFTWARE - Falessi/PROGETTO/wwj-project/WWJ.git/trunk/lib/guava-25.0-jre.jar"/>
-	<classpathentry kind="lib" path="C:/Users/livia/Documents/Università/Corsi/III/PRIMO SEMESTRE/INGEGNERIA DEL SOFTWARE - Falessi/PROGETTO/wwj-project/WWJ.git/trunk/lib/okhttp-3.11.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/livia/Documents/Università/Corsi/III/PRIMO SEMESTRE/INGEGNERIA DEL SOFTWARE - Falessi/PROGETTO/wwj-project/WWJ.git/trunk/lib/okio-1.14.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/livia/Documents/Università/Corsi/III/PRIMO SEMESTRE/INGEGNERIA DEL SOFTWARE - Falessi/PROGETTO/wwj-project/WWJ.git/trunk/WebContent/WEB-INF/lib/restfb-3.13.0.jar"/>
+	<classpathentry kind="lib" path="lib/byte-buddy-1.8.15.jar"/>
+	<classpathentry kind="lib" path="lib/client-combined-3.141.59.jar"/>
+	<classpathentry kind="lib" path="lib/client-combined-3.141.59-sources.jar"/>
+	<classpathentry kind="lib" path="lib/commons-exec-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/guava-25.0-jre.jar"/>
+	<classpathentry kind="lib" path="lib/okhttp-3.11.0.jar"/>
+	<classpathentry kind="lib" path="lib/okio-1.14.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/restfb-3.13.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -24,7 +24,7 @@
             <HBox prefHeight="50.0" prefWidth="158.0">
                <children>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="main_icon" />
-                  <Button mnemonicParsing="false" onAction="#openSearchPage" prefHeight="30.0" prefWidth="30.0" styleClass="home_btn">
+                  <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#openSearchPage" prefHeight="30.0" prefWidth="30.0" styleClass="home_btn">
                      <HBox.margin>
                         <Insets left="10.0" top="10.0" />
                      </HBox.margin>

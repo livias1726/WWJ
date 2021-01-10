@@ -57,12 +57,12 @@ public class CandidateDAO {
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.DELETE_CANDIDATES, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);	
         	
-        	for(Long i: selected) {
-        		RoutinesManager.bindParametersAndExec(stmt, selected.get(i.intValue()).intValue());
+        	for(int i=0; i<selected.size(); i++) {
+        		RoutinesManager.bindParametersAndExec(stmt, selected.get(i).intValue());
         	}
 			
         } catch (SQLException e) {
-        	throw new SQLException("An error occured while trying to delete candidates."); 
+        	throw new SQLException("An error occured while trying to delete candidates.");
 		} finally {
 			if(stmt != null) {
 				stmt.close();

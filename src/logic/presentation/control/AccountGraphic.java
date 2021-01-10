@@ -91,15 +91,16 @@ public class AccountGraphic implements Initializable {
 	
 	@FXML
 	protected void openPersonalInfo() {
+		Stage popup;
+		
 		if(SessionFacade.getSession().getID().equals(accountID)) {
-			Stage popup = GraphicHandler.openSection(pane, Sections.PERSONAL_INFO, new PersonalInfoGraphic(accountID));
-			popup.centerOnScreen();
-			popup.show();
+			popup = GraphicHandler.openSection(pane, Sections.PERSONAL_INFO, new PersonalInfoGraphic());			
 		} else {
-			Stage popup = GraphicHandler.openSection(pane, Sections.PERSONAL_INFO, new PersonalInfoGraphic());
-			popup.centerOnScreen();
-			popup.show();
+			popup = GraphicHandler.openSection(pane, Sections.PERSONAL_INFO, new PersonalInfoGraphic(accountID));
 		}
+		
+		popup.centerOnScreen();
+		popup.show();
 	}
 			
 	@FXML
