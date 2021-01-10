@@ -176,7 +176,7 @@ public class OfferDAO {
 				stmt.close();
 			}
 		}
-        
+
         return offer;
 	}
 
@@ -214,14 +214,23 @@ public class OfferDAO {
         
         do {
         	Offer offer = new Offer();
+        	offer.setId(res.getInt("offer"));
         	offer.setCompanyName(res.getString("company"));
         	
         	Job position = new Job();
-        	position.setName(res.getString("position"));
+        	position.setName(res.getString("name"));
         	position.setCategory(res.getString("category"));
         	offer.setPosition(position);
         	
-        	offer.setTaskDescription(res.getString("description"));
+        	Country country = new Country(res.getString("country"));
+        	Address branch = new Address();
+        	branch.setCountry(country);
+        	branch.setState(res.getString("state"));
+        	branch.setCity(res.getString("city"));
+        	offer.setBranch(branch);
+        	
+        	offer.setUpload(res.getDate("upload").toLocalDate());
+        	offer.setExpiration(res.getDate("expiration").toLocalDate());
         	
         	list.add(offer);
         }while(res.next());

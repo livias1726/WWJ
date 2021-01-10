@@ -22,7 +22,7 @@ public class Main extends Application {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
 		
-		stage.show();	
+		stage.show();
 	}
 	
 	private void initStage(Stage stage, Scene scene) {

@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 import logic.bean.OfferBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Scenes;
+import logic.presentation.Sections;
 
 public class PublishedOffersGraphic implements Initializable {
 	
@@ -108,9 +108,9 @@ public class PublishedOffersGraphic implements Initializable {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
 			
-		Stage stage = (Stage)offersPane.getScene().getWindow();		
-		Stage parent = (Stage) stage.getOwner();
-		parent.setScene(GraphicHandler.switchScreen(Scenes.OFFER, new OfferDetailsGraphic(bean)));
+		Stage popup = GraphicHandler.openSection(offersPane, Sections.OFFER, new OfferDetailsGraphic(bean));
+		popup.centerOnScreen();
+		popup.show();
 		closeOffersSection();
 	}
 

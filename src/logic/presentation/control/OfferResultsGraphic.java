@@ -9,14 +9,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.ToolBar;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
@@ -26,22 +25,10 @@ import logic.bean.OfferBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Scenes;
+import logic.presentation.Sections;
+import logic.presentation.ToolBarGraphic;
 
-public class OfferResultsGraphic implements Initializable {
-	
-	private CountryBean searchedCountry;
-	private JobBean searchedJob;
-	private List<OfferBean> offers;
-	private List<OfferBean> results;	
-	private List<String> cList;
-    private List<String> jList;
-    private List<CheckBox> filters = new ArrayList<>();
-	private ObservableList<String> items = FXCollections.observableArrayList("Upload date", "Expiration date");
-	private ToolBar toolBar;
-	
-	@FXML
-	private AnchorPane pane;
+public class OfferResultsGraphic extends ToolBarGraphic implements Initializable {
 	
 	@FXML 
 	private Label searchIDLbl;
@@ -57,58 +44,82 @@ public class OfferResultsGraphic implements Initializable {
 	
 	@FXML
     private Label filterLab;
+    
+    private CountryBean searchedCountry;
+	private JobBean searchedJob;
+	private ObservableList<OfferBean> offers;	
+	private List<String> cList;
+    private List<String> jList;
+    private List<CheckBox> filters = new ArrayList<>();
+	private ObservableList<String> items = FXCollections.observableArrayList("Upload date", "Expiration date");
 	
-	public OfferResultsGraphic(ToolBar t, CountryBean c, List<String> list) {
-		this.toolBar = t;
+	public OfferResultsGraphic(CountryBean c, List<String> list) {
 		this.searchedCountry = c;
 		this.jList = list;
 	}
 	
-	public OfferResultsGraphic(ToolBar t, JobBean j, List<String> list) {
-		this.toolBar = t;
+	public OfferResultsGraphic(JobBean j, List<String> list) {
 		this.searchedJob = j;
 		this.cList = list;
 	}
 
-	public OfferResultsGraphic(ToolBar t, CountryBean c, JobBean j) {
-		this.toolBar = t;
+	public OfferResultsGraphic(CountryBean c, JobBean j) {
 		this.searchedCountry = c;
 		this.searchedJob = j;
 	}
 	
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
-		//Set toolbar
-		pane.getChildren().add(toolBar);
+		//Edit toolbar
+		if(SessionFacade.getSession().getID() == null) {
+			premiumBtn.setVisible(false);
+			outBtn.setVisible(false);
+			notifyBtn.setVisible(false);
+		}else {
+			inBtn.setVisible(false);
+		}
 		
-		OfferBean offer = new OfferBean();		
+		List<CheckBox> group = new ArrayList<>();
+		List<OfferBean> filteredList;
+
 		try {
 			if(searchedJob == null) {
-				offers = offer.getOffers(searchedCountry);	
 				searchIDLbl.setText(searchedCountry.getName());
+				searchIDLbl.setAlignment(Pos.CENTER);
+				//Retrieve offers by Country
+				offers = new OfferBean().getOffers(searchedCountry);
+				filteredList = new ArrayList<>();
 				
 				filterLab.setText("Categories");
 				for(String i: jList) {
 					CheckBox item = new CheckBox(i);
 					filterBox.getChildren().add(item);
-					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterJob(offers, item, newValue));
+					group.add(item);
+					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterJob(filteredList, group));
 					filters.add(item);
 				}
 				
-			} else if(searchedCountry == null) {	
-				offers = offer.getOffers(searchedJob);
-				searchIDLbl.setText(searchedJob.getName());		
+			} else if(searchedCountry == null) {
+				searchIDLbl.setText(searchedJob.getCategory());	
+				searchIDLbl.setAlignment(Pos.CENTER);
+				
+				//Retrieve offers by Job
+				offers = new OfferBean().getOffers(searchedJob);
+				filteredList = new ArrayList<>();
 				
 				filterLab.setText("Countries");	
 				for(String i: cList) {
 					CheckBox item = new CheckBox(i);
 					filterBox.getChildren().add(item);
-					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterCountry(offers, item, newValue));
+					group.add(item);
+					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterCountry(filteredList, group));
 					filters.add(item);
 				}
 			} else {
-				offers = offer.getOffers(searchedCountry, searchedJob);
-				searchIDLbl.setText(searchedJob.getName() + "in" + searchedCountry.getName());
+				//Retrieve offers by Country and Job
+				offers = new OfferBean().getOffers(searchedCountry, searchedJob);
+				searchIDLbl.setText(searchedJob.getCategory() + " in " + searchedCountry.getName());
+				searchIDLbl.setAlignment(Pos.CENTER);
 				
 				filterBox.setVisible(false);
 			}
@@ -120,59 +131,54 @@ public class OfferResultsGraphic implements Initializable {
 			goBack();
 		}
 		
-		results = new ArrayList<>();
-		results.addAll(offers);
-		
 		//Add listener to filters choice box
-		order.getSelectionModel().selectedIndexProperty().addListener((obv, oldValue, newValue) -> orderResults(results, newValue));		
+		order.getSelectionModel().selectedIndexProperty().addListener((obv, oldValue, newValue) -> orderResults(offers, newValue));		
 		order.setItems(items);
 		order.setValue(items.get(0));
 		
-		initResults(results);
+		initResults(offers);
 	}
 	
-	private void filterCountry(List<OfferBean> list, CheckBox selected, Boolean newValue) {
-		if(Boolean.TRUE.equals(newValue)) {
-			if(list.containsAll(results)) {
-				results.clear();
-			}
-			
-			for(OfferBean i: list) {
-				if(i.getBranch().getCountry().getName().equals(selected.getText())) {
-					results.add(i);
-				}
-			}
-		} else {
-			for(OfferBean i: results) {
-				if(i.getBranch().getCountry().getName().equals(selected.getText())) {
-					results.remove(i);
-				}
-			}
+	private void filterCountry(List<OfferBean> list, List<CheckBox> selected) {
+		list.clear();
+		int count = 0;
+		for(CheckBox i: selected) {
+	    	if(i.isSelected()) {
+	    		count++;
+	    		for(OfferBean o: offers) {
+	    			if(o.getBranch().getCountryName().equals(i.getText())) {
+	    				list.add(o);
+	    			}
+	    		}
+	    	}
+	    }	
+		
+		if(count == 0) {
+			list.addAll(offers);
 		}
 		
-		initResults(results);
+		initResults(list);
 	}
 
-	private void filterJob(List<OfferBean> list, CheckBox selected, Boolean newValue) {
-		if(Boolean.TRUE.equals(newValue)) {
-			if(list.containsAll(results)) {
-				results.clear();
-			}
-			
-			for(OfferBean i: list) {
-				if(i.getPosition().getCategory().equals(selected.getText())) {
-					results.add(i);
-				}
-			}
-		} else {
-			for(OfferBean i: results) {
-				if(i.getPosition().getCategory().equals(selected.getText())) {
-					results.remove(i);
-				}
-			}
+	private void filterJob(List<OfferBean> list, List<CheckBox> selected) {
+		list.clear();
+		int count = 0;
+		for(CheckBox i: selected) {
+	    	if(i.isSelected()) {
+	    		count++;
+	    		for(OfferBean o: offers) {
+	    			if(o.getPosition().getCategory().equals(i.getText())) {
+	    				list.add(o);
+	    			}
+	    		}
+	    	}
+	    }	
+		
+		if(count == 0) {
+			list.addAll(offers);
 		}
 		
-		initResults(results);
+		initResults(list);
 	}
 
 	private void orderResults(List <OfferBean> list, Number filter) {
@@ -183,33 +189,44 @@ public class OfferResultsGraphic implements Initializable {
         		return o1.getExpiration().compareTo(o2.getExpiration());
         	}    
 	    });
+		
+		initResults(list);
 	}
 	
 	private void initResults(List<OfferBean> list) {
-		
+		resultsBox.getChildren().clear();
 		for(OfferBean i: list) {
+			
 			Button res = new Button();
 			res.setPrefHeight(70);
 			res.setPrefWidth(resultsBox.getPrefWidth() - (resultsBox.getSpacing())*2);
+
+			if(i.getBranch().getState() == null) {
+				res.setText("'" + i.getCompanyName() + "'" + " - " + i.getBranch().getCountryName() + ", " + i.getBranch().getCity() + " (Exp: " + i.getExpiration() + ")" + "\n" + i.getPosition().getName());
+			}else {
+				res.setText("'" + i.getCompanyName() + "'" + " - " + i.getBranch().getCountryName() + ", " + i.getBranch().getState() + ", " + i.getBranch().getCity() + " (Exp: " + i.getExpiration() + ")" + "\n" + i.getPosition().getName());
+			}
+
+			res.setOnAction(event -> openOfferDetails(i.getId()));
 			
-			Label title = new Label(i.getCompanyName() + " - " + i.getBranch().getState());
-			TextArea brief = new TextArea(i.getTaskDescription());
-			res.setText(title + "\n" + brief);	
-			
-			res.setOnAction(event -> {		
-				Stage stage = (Stage)pane.getScene().getWindow();
-				stage.setScene(GraphicHandler.switchScreen(Scenes.OFFER, new OfferDetailsGraphic(i)));
-			});
-			
+			res.setStyle("-fx-font-size: 15px;");
+			res.setCursor(Cursor.HAND);
 			
 			resultsBox.getChildren().add(res);
 		}
 	}
 	
-	@FXML
-	public void goBack(){
-		Scenes prev = SessionFacade.getSession().getPrevScene();			
-		Stage stage = (Stage)pane.getScene().getWindow();			
-		stage.setScene(GraphicHandler.switchScreen(prev, null));
+	private void openOfferDetails(Integer id) {
+		OfferBean bean = new OfferBean();
+	
+		try {
+			bean = bean.getOffer(id);
+		} catch (DatabaseFailureException e) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+		}
+			
+		Stage popup = GraphicHandler.openSection(pane, Sections.OFFER, new OfferDetailsGraphic(bean));
+		popup.centerOnScreen();
+		popup.show();
 	}
 }

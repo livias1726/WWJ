@@ -72,6 +72,8 @@ public class GraphicHandler {
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "favourites_offer.fxml"));
 			case STATISTICS: 
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "statistics.fxml"));
+			case OFFER: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "offer_details.fxml"));
 			default:
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "main.fxml"));
 		}

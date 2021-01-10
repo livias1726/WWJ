@@ -138,15 +138,15 @@ public class OfferBean {
 		this.candidates = candidates;
 	}
 
-	public List<OfferBean> getOffers(CountryBean country, JobBean job) throws DatabaseFailureException, NoResultFoundException{
+	public ObservableList<OfferBean> getOffers(CountryBean country, JobBean job) throws DatabaseFailureException, NoResultFoundException{
 		return ViewOfferControl.getInstance().retrieveOffers(country, job);
 	}
 	
-	public List<OfferBean> getOffers(CountryBean country) throws DatabaseFailureException, NoResultFoundException{
+	public ObservableList<OfferBean> getOffers(CountryBean country) throws DatabaseFailureException, NoResultFoundException{
 		return ViewOfferControl.getInstance().retrieveOffersByCountry(country);
 	}
 	
-	public List<OfferBean> getOffers(JobBean job) throws DatabaseFailureException, NoResultFoundException{
+	public ObservableList<OfferBean> getOffers(JobBean job) throws DatabaseFailureException, NoResultFoundException{
 		return ViewOfferControl.getInstance().retrieveOffersByJob(job);
 	}
 

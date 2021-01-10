@@ -4,6 +4,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import logic.bean.AddressBean;
 import logic.bean.CountryBean;
 import logic.bean.JobBean;
 import logic.bean.OfferBean;
@@ -27,11 +30,11 @@ public class ViewOfferControl extends ViewResultsControl{
         return instance;
     }
        
-    public List<OfferBean> retrieveOffersByJob(JobBean bean) throws DatabaseFailureException, NoResultFoundException {
+    public ObservableList<OfferBean> retrieveOffersByJob(JobBean bean) throws DatabaseFailureException, NoResultFoundException {
     	Offer offer = new Offer();
     	List<Offer> list = null;
 		try {
-			list = offer.getOffersByPosition(bean.getName());
+			list = offer.getOffersByPosition(bean.getCategory());
 		} catch (NoResultFoundException e) {
 			throw new NoResultFoundException();
 		} catch (SQLException se) {
@@ -41,7 +44,7 @@ public class ViewOfferControl extends ViewResultsControl{
     	return modelToBean(list);
     }
     
-    public List<OfferBean> retrieveOffersByCountry(CountryBean bean) throws DatabaseFailureException, NoResultFoundException {
+    public ObservableList<OfferBean> retrieveOffersByCountry(CountryBean bean) throws DatabaseFailureException, NoResultFoundException {
     	Offer offer = new Offer();
     	List<Offer> list = null;
 		try {
@@ -55,11 +58,11 @@ public class ViewOfferControl extends ViewResultsControl{
     	return modelToBean(list);
     }
     
-    public List<OfferBean> retrieveOffers(CountryBean country, JobBean job) throws DatabaseFailureException, NoResultFoundException{
+    public ObservableList<OfferBean> retrieveOffers(CountryBean country, JobBean job) throws DatabaseFailureException, NoResultFoundException{
     	Offer offer = new Offer();
     	List<Offer> list = null;
 		try {
-			list = offer.getOffers(country.getName(), job.getName());
+			list = offer.getOffers(country.getName(), job.getCategory());
 		} catch (NoResultFoundException e) {
 			throw new NoResultFoundException();
 		} catch (SQLException se) {
@@ -69,17 +72,28 @@ public class ViewOfferControl extends ViewResultsControl{
     	return modelToBean(list);
     }
     
-    private List<OfferBean> modelToBean(List<Offer> src) {
-    	List<OfferBean> dest = new ArrayList<>();
+    private ObservableList<OfferBean> modelToBean(List<Offer> src) {
+    	ObservableList<OfferBean> dest = FXCollections.observableArrayList();
     	for(Offer i: src) {
-    		OfferBean offerBean = new OfferBean();  		
+    		OfferBean offerBean = new OfferBean();  
+    		offerBean.setId(i.getId());
     		offerBean.setCompanyName(i.getCompanyName());
-    		offerBean.setTaskDescription(i.getTaskDescription());
 
     		JobBean job = new JobBean();
     		job.setName(i.getPosition().getName());
     		job.setCategory(i.getPosition().getCategory());  		
     		offerBean.setPosition(job);
+    		
+    		AddressBean branch = new AddressBean();
+    		CountryBean country = new CountryBean();
+    		country.setName(i.getBranch().getCountry().getName());
+    		branch.setCountry(country);
+    		branch.setState(i.getBranch().getState());
+    		branch.setCity(i.getBranch().getCity());
+    		offerBean.setBranch(branch);
+    		
+    		offerBean.setUpload(i.getUpload());
+    		offerBean.setExpiration(i.getExpiration());
     		
     		dest.add(offerBean);
     	}
@@ -88,9 +102,9 @@ public class ViewOfferControl extends ViewResultsControl{
     }
 
 	public OfferBean retrieveOfferById(Integer id) throws DatabaseFailureException {
-		Offer offer = new Offer();
+		Offer offer;
 		try {
-			offer = offer.getOffer(id);
+			offer = new Offer().getOffer(id);
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();
 		}
