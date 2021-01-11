@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
-import logic.bean.BusinessInCountryBean;
+import logic.presentation.bean.BusinessInCountryBean;
 
 public class FeasibilityGraphic implements Initializable {
 

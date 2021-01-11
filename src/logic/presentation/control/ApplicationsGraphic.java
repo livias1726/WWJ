@@ -19,12 +19,13 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import logic.bean.ApplicationBean;
-import logic.bean.CandidateBean;
-import logic.bean.OfferBean;
+import logic.application.control.ViewOfferControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
+import logic.presentation.bean.ApplicationBean;
+import logic.presentation.bean.CandidateBean;
+import logic.presentation.bean.OfferBean;
 
 public class ApplicationsGraphic implements Initializable {
 
@@ -106,13 +107,13 @@ public class ApplicationsGraphic implements Initializable {
 	private void openOfferDetails(Integer id) {
 		OfferBean bean = new OfferBean();
 		try {
-			bean = bean.getOffer(id);
+			bean = ViewOfferControl.getInstance().retrieveOfferById(id);
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
 			
 		Stage stage = (Stage)applicationPane.getScene().getWindow();			
-		stage.setScene(GraphicHandler.switchScreen(Scenes.OFFER, new OfferDetailsGraphic(bean)));
+		stage.setScene(GraphicHandler.switchScreen(Scenes.OFFER, new OfferDetailsGraphic(bean, id)));
 	}
 
     @FXML

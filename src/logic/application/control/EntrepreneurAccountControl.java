@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import logic.application.SessionFacade;
-import logic.bean.BusinessInCountryBean;
-import logic.bean.CountryBean;
 import logic.domain.BusinessInCountry;
 import logic.exceptions.DatabaseFailureException;
+import logic.presentation.bean.BusinessInCountryBean;
+import logic.presentation.bean.CountryBean;
 
 public class EntrepreneurAccountControl{
 	

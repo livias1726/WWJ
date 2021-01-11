@@ -1,13 +1,13 @@
  <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <%@ page import="logic.bean.BusinessBean"
+ <%@ page import="logic.presentation.bean.BusinessBean"
 		import="logic.bean.CountryBean"%>
 <!DOCTYPE html>
 
-<jsp:useBean id="countryBean" scope="session" class="logic.bean.CountryBean"/>
+<jsp:useBean id="countryBean" scope="session" class="logic.presentation.bean.CountryBean"/>
 <jsp:setProperty name="countryBean" property="*"/>
 
-<jsp:useBean id="businessBean" scope="session" class="logic.bean.BusinessBean"/>
+<jsp:useBean id="businessBean" scope="session" class="logic.presentation.bean.BusinessBean"/>
 <jsp:setProperty name="businessBean" property="*"/>
 
 <%Class.forName("com.mysql.jdbc.Driver");%>

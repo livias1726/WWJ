@@ -16,12 +16,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
-import logic.bean.BusinessBean;
-import logic.bean.BusinessInCountryBean;
-import logic.bean.CountryBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
+import logic.presentation.bean.BusinessBean;
+import logic.presentation.bean.BusinessInCountryBean;
+import logic.presentation.bean.CountryBean;
 
 public class SearchEntrepreneurGraphic implements Initializable {
 	

@@ -1,9 +1,9 @@
 package logic.application.control;
 
-import logic.bean.AddressBean;
-import logic.bean.CountryBean;
 import logic.domain.Address;
 import logic.domain.Country;
+import logic.presentation.bean.AddressBean;
+import logic.presentation.bean.CountryBean;
 
 public class AddressControl {
 	

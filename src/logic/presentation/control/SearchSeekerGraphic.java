@@ -7,20 +7,19 @@ import java.util.ResourceBundle;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-import logic.application.SessionFacade;
-import logic.bean.CountryBean;
-import logic.bean.JobBean;
+import logic.application.control.JobControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
 import logic.presentation.ToolBarGraphic;
+import logic.presentation.bean.CountryBean;
+import logic.presentation.bean.JobBean;
 
-public class SearchSeekerGraphic extends ToolBarGraphic implements Initializable {
+public class SearchSeekerGraphic extends ToolBarGraphic{
 	
     @FXML
     private ComboBox<String> placeSearch;
@@ -36,23 +35,16 @@ public class SearchSeekerGraphic extends ToolBarGraphic implements Initializable
     
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
+		super.initialize(url, resource);
 		//Edit search btn
 		searchBtn.disableProperty().bind(Bindings.not(jobSearch.valueProperty().isNotNull().or(placeSearch.valueProperty().isNotNull())));
-		//Edit toolbar
-		if(SessionFacade.getSession().getID() == null) {
-			premiumBtn.setVisible(false);
-			outBtn.setVisible(false);
-			notifyBtn.setVisible(false);
-		}else {
-			inBtn.setVisible(false);
-		}
 		
 		//Edit combo boxes: retrieve from DB
 		try {
 			cList = (new CountryBean()).getCountries();
 			
 			jList = new ArrayList<>();
-			for(JobBean i: new JobBean().getJobs()) {
+			for(JobBean i: JobControl.getInstance().retrieveJobs()) {
 				jList.add(i.getCategory());
 			}
 

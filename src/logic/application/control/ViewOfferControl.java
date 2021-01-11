@@ -6,13 +6,13 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import logic.bean.AddressBean;
-import logic.bean.CountryBean;
-import logic.bean.JobBean;
-import logic.bean.OfferBean;
 import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
+import logic.presentation.bean.AddressBean;
+import logic.presentation.bean.CountryBean;
+import logic.presentation.bean.JobBean;
+import logic.presentation.bean.OfferBean;
 
 public class ViewOfferControl extends ViewResultsControl{
 	

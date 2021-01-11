@@ -9,14 +9,14 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import logic.application.SessionFacade;
-import logic.bean.AddressBean;
-import logic.bean.CompanyBean;
-import logic.bean.JobBean;
-import logic.bean.OfferBean;
 import logic.domain.Address;
 import logic.domain.Company;
 import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
+import logic.presentation.bean.AddressBean;
+import logic.presentation.bean.CompanyBean;
+import logic.presentation.bean.JobBean;
+import logic.presentation.bean.OfferBean;
 
 public class RecruiterAccountControl {
 	

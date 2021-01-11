@@ -4,19 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ToolBar;
 import javafx.stage.Stage;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Scenes;
 import logic.presentation.Sections;
 
 public class RecruiterAccountGraphic extends AccountGraphic {
 	
 	@FXML
 	private ToolBar barRec;
-	
-	@FXML
-	public void openNewOffer(){
-		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Scenes.PUBLISH_OFFER, null));
-	}
 	
 	@FXML
 	public void openCompanyInfo() {	
@@ -35,9 +28,4 @@ public class RecruiterAccountGraphic extends AccountGraphic {
 		Stage popup = GraphicHandler.openSection(pane, Sections.CANDIDATES, new CandidatesInfoGraphic(barRec));
 		popup.show();
 	}
-	
-	@FXML
-	public void goToHome() {
-		/*Nop*/
-    }
 }

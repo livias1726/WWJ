@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,11 +19,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
 import logic.application.Users;
-import logic.bean.ApplicationBean;
-import logic.bean.OfferBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Scenes;
+import logic.presentation.bean.ApplicationBean;
+import logic.presentation.bean.OfferBean;
 
 public class OfferDetailsGraphic implements Initializable {
 
@@ -66,10 +66,12 @@ public class OfferDetailsGraphic implements Initializable {
     private Button favBtn;
 
 	private OfferBean offer;
+	private Integer offerID;
 	private static String empty = "Not provided";
 	
-	public OfferDetailsGraphic(OfferBean o) {
+	public OfferDetailsGraphic(OfferBean o, Integer id) {
 		this.offer = o;
+		this.offerID = id;
 	}
 	
 	@Override
@@ -101,45 +103,72 @@ public class OfferDetailsGraphic implements Initializable {
 		salary.setText(String.valueOf(offer.getBaseSalary()));	
 		expDate.setText(offer.getExpiration().toString());
 		
+		initBtns();		
+	}
+	
+	private void initBtns() {
 		if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER) {
 			applyBtn.setVisible(false);
 			favBtn.setVisible(false);
+		}else {
+			try {
+				ObservableList <ApplicationBean> list = new ApplicationBean().getApplications();
+				for(ApplicationBean i: list) {
+					if(i.getId() == offerID) {
+						applyBtn.setDisable(true);
+						favBtn.setDisable(true);
+					}
+				}
+			} catch (DatabaseFailureException e) {
+				GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+				goBack();
+			}
 		}
 	}
 	
 	@FXML
     public void applyToOffer() {
-		ApplicationBean bean = new ApplicationBean();
-		bean.setId(offer.getId());
-		try {
-			bean.addToApplications();
-		} catch (DatabaseFailureException e) {
-			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
-			goBack();
+		if(checkLogin()) {
+			ApplicationBean bean = new ApplicationBean();
+			bean.setId(offerID);
+			try {
+				bean.addToApplications();
+			} catch (DatabaseFailureException e) {
+				GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+			}
 		}
     }
 	
 	@FXML
     public void manageFavourite() {
-		if(SessionFacade.getSession().getID() == null) {
-    		Stage stage = (Stage)pane.getScene().getWindow();
-    		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
-    	}
-		
-		try {
-			if(favBtn.getStyle().equals("star_button_nset")) {
-				offer.addToFavourites();
-				favBtn.setStyle("star_button_set");
-			}else {
-				offer.removeFromFavourites();
-				favBtn.setStyle("star_button_nset");	
+		if(checkLogin()) {
+			try {
+				if(favBtn.getStyle().equals("star_button_nset")) {
+					offer.addToFavourites();
+					favBtn.setStyle("star_button_set");
+				}else {
+					offer.removeFromFavourites();
+					favBtn.setStyle("star_button_nset");	
+				}
+			} catch (DatabaseFailureException e) {
+				/*Don't change the settings*/
 			}
-		} catch (DatabaseFailureException e) {
-			/*Don't change the settings*/
 		}
     }
 
-    @FXML
+    private boolean checkLogin() {
+    	boolean res = false;
+    	if(SessionFacade.getSession().getID() == null) {
+    		GraphicHandler.popUpMsg(AlertType.WARNING, "You need to be logged to perform this operation. Please, log in or create an account!");
+    		res = false;
+    	}else {
+    		res = true;
+    	}
+    	
+    	return res;
+	}
+
+	@FXML
     public void openMaps() {
     	String map = offer.getBranch().buildMapAddress();
     	URL url;

@@ -20,7 +20,7 @@ public class UserDAO {
 		CallableStatement stmt = null;
 		ResultSet res = null;
 		User user = null;
-
+		
 		try {
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.GET_USER, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -43,7 +43,7 @@ public class UserDAO {
 				stmt.close();
 			}
 		}
-        
+		
         return user;
 	}
 	

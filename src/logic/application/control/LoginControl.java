@@ -8,6 +8,7 @@ import logic.application.SessionFacade;
 import logic.domain.Account;
 import logic.domain.User;
 import logic.exceptions.DatabaseFailureException;
+import logic.presentation.bean.AccountBean;
 
 /**Singleton*/
 public class LoginControl {
@@ -26,9 +27,9 @@ public class LoginControl {
         return instance;
     }
 
-    public void tryLogin(String email, String password) throws FailedLoginException, DatabaseFailureException{
+    public void tryLogin(AccountBean bean) throws FailedLoginException, DatabaseFailureException{
         	
-    	User user = new User(email, password);
+    	User user = new User(bean.getUser().getEmail(), bean.getUser().getPassword());
     	Account account = new Account();
     	account.setUser(user);
     	

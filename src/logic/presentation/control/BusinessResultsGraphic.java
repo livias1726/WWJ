@@ -19,12 +19,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
-import logic.bean.BusinessInCountryBean;
-import logic.bean.CountryBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
+import logic.presentation.bean.BusinessInCountryBean;
+import logic.presentation.bean.CountryBean;
 
 public class BusinessResultsGraphic implements Initializable {
 	

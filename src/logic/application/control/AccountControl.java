@@ -6,11 +6,11 @@ import java.util.List;
 
 import logic.application.SessionFacade;
 import logic.application.Users;
-import logic.bean.AccountBean;
-import logic.bean.UserBean;
 import logic.domain.Account;
 import logic.domain.User;
 import logic.exceptions.DatabaseFailureException;
+import logic.presentation.bean.AccountBean;
+import logic.presentation.bean.UserBean;
 
 public class AccountControl {
 	
@@ -67,22 +67,23 @@ public class AccountControl {
     
     public UserBean retrievePersonalInfo(Long id) throws DatabaseFailureException {
     	
-    	User user = new User();
+    	User user;
 		try {
-			user = user.getPersonalInfoFromDB(id);
+			user = new User().getPersonalInfoFromDB(id);
+			
+			UserBean bean = new UserBean();
+	    	bean.setEmail(user.getEmail());
+	    	bean.setPassword(user.getPwd());
+	    	bean.setFirstName(user.getFirstName());
+	    	bean.setLastName(user.getLastName());
+	    	bean.setCity(user.getCity());
+	    	bean.setBirth(user.getBirth());
+	    	
+	    	return bean;
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();
 		}
-    	
-		UserBean bean = new UserBean();
-    	bean.setEmail(user.getEmail());
-    	bean.setPassword(user.getPwd());
-    	bean.setFirstName(user.getFirstName());
-    	bean.setLastName(user.getLastName());
-    	bean.setCity(user.getCity());
-    	bean.setBirth(user.getBirth());
-    	
-    	return bean;
+    
 	}
     
     public void updateAccountPic(File img) {

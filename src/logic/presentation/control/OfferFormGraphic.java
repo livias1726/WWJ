@@ -11,8 +11,6 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -22,24 +20,21 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldListCell;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Alert.AlertType;
-import javafx.stage.Stage;
-import logic.bean.AddressBean;
-import logic.bean.CompanyBean;
-import logic.bean.JobBean;
-import logic.bean.OfferBean;
+import javafx.scene.control.Button;
+import logic.application.control.JobControl;
+import logic.application.control.PublishOfferControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.IncompleteAccountException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Scenes;
+import logic.presentation.ToolBarGraphic;
+import logic.presentation.bean.AddressBean;
+import logic.presentation.bean.JobBean;
+import logic.presentation.bean.OfferBean;
 
-public class OfferFormGraphic implements Initializable{
-	
-	@FXML
-    private AnchorPane pane;
+public class OfferFormGraphic extends ToolBarGraphic{
 	
 	@FXML
     private ComboBox<String> jobCombo;
@@ -79,9 +74,9 @@ public class OfferFormGraphic implements Initializable{
 
     @FXML
     private DatePicker expDate;
-
+    
     @FXML
-    private Button pubBtn;
+    private Button pubOff;
     
     @FXML
     private ChoiceBox<String> currBox;
@@ -94,16 +89,17 @@ public class OfferFormGraphic implements Initializable{
 
 		try {
 			branchId = new ArrayList<>();
-			for(AddressBean i: new CompanyBean().getCompanyBranches()) {
+			for(AddressBean i: PublishOfferControl.getInstance().retrieveCompanyInfo()) {
 				choiceBranch.getItems().add(i.toString());
 				branchId.add(i.getId());
 			}
 			
 			jobId = new ArrayList<>();
-			for(JobBean i: new JobBean().getJobs()) {
+			for(JobBean i: JobControl.getInstance().retrieveJobs()) {
 				jobCombo.getItems().add(i.getName());
 				jobId.add(i.getId());
 			}
+			
 		}catch (IncompleteAccountException e) {
 			GraphicHandler.popUpMsg(AlertType.WARNING, e.getMessage());
 			goToHome();
@@ -140,7 +136,8 @@ public class OfferFormGraphic implements Initializable{
 		bean.setCategory(jobCatTxt.getText());
 		
 		try {
-			bean.saveJob();
+			bean.verifyFields(bean.getName(), bean.getCategory());
+			JobControl.getInstance().saveNewJob(bean);
 			
 			jobNameTxt.clear();
 			jobCatTxt.clear();
@@ -148,7 +145,7 @@ public class OfferFormGraphic implements Initializable{
 			
 			jobCombo.getItems().clear();
 			jobId.clear();
-			for(JobBean i: new JobBean().getJobs()) {
+			for(JobBean i: JobControl.getInstance().retrieveJobs()) {
 				jobCombo.getItems().add(i.getName());
 				jobId.add(i.getId());
 			}
@@ -203,7 +200,10 @@ public class OfferFormGraphic implements Initializable{
     	offer.setExpiration(expDate.getValue());
     	
     	try {
-			offer.publishJobOffer();
+    		offer.verifyFieldsValidity(offer.getStart(), offer.getFinish(), offer.getExpiration());
+    		
+    		PublishOfferControl.getInstance().publishNewOffer(offer);
+    		
 			GraphicHandler.popUpMsg(AlertType.CONFIRMATION, "Offer correctly published.");
 			goToHome();
 		} catch (InvalidFieldException e) {
@@ -212,10 +212,5 @@ public class OfferFormGraphic implements Initializable{
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			goToHome();
 		}
-    }
-
-    private void goToHome() {
-    	Stage stage = (Stage)pane.getScene().getWindow();			
-		stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_REC, null));
     }
 }

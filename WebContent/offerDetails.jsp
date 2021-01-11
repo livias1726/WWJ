@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="logic.bean.JobBean"
+<%@ page import="logic.presentation.bean.JobBean"
 		import="logic.bean.CountryBean"
 		import="logic.bean.OfferBean"%>
     
 <!DOCTYPE html>
 
-<jsp:useBean id="countryBean" class="logic.bean.CountryBean" scope="session"/>
+<jsp:useBean id="countryBean" class="logic.presentation.bean.CountryBean" scope="session"/>
 <jsp:setProperty name="countryBean" property="*"/>
 
-<jsp:useBean id="jobBean" class="logic.bean.JobBean" scope="session"/>
+<jsp:useBean id="jobBean" class="logic.presentation.bean.JobBean" scope="session"/>
 <jsp:setProperty name="jobBean" property="*"/>
 
-<jsp:useBean id="offerBean" class="logic.bean.OfferBean" scope="session"/>
+<jsp:useBean id="offerBean" class="logic.presentation.bean.OfferBean" scope="session"/>
 <jsp:setProperty name="offerBean" property="*"/>
 
 <%Class.forName("com.mysql.jdbc.Driver");%>

@@ -1,4 +1,4 @@
-package logic.bean;
+package logic.presentation.bean;
 
 public class AddressBean {
 

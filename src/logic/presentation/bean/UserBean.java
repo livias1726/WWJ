@@ -1,11 +1,9 @@
-package logic.bean;
+package logic.presentation.bean;
 
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import logic.application.control.AccountControl;
-import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
 
 public class UserBean {
@@ -112,12 +110,4 @@ public class UserBean {
     		throw new InvalidFieldException("Passwords do not match");
     	}
     }
-   
-	public UserBean getPersonalInfo(Long id) throws DatabaseFailureException {
-		return AccountControl.getInstance().retrievePersonalInfo(id);
-	}
-
-	public void savePersonalInfo() throws DatabaseFailureException {
-		AccountControl.getInstance().changePersonalInfo(this);
-	}
 }

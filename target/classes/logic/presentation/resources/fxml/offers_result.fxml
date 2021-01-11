@@ -132,7 +132,7 @@
                   <MenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="user_btn">
                      <items>
                         <MenuItem fx:id="outBtn" mnemonicParsing="false" onAction="#logout" text="Logout" />
-                        <MenuItem fx:id="inBtn" mnemonicParsing="false" text="Login" />
+                        <MenuItem fx:id="inBtn" mnemonicParsing="false" onAction="#login" text="Login" />
                      </items>
                      <cursor>
                         <Cursor fx:constant="HAND" />

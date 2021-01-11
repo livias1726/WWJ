@@ -4,9 +4,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import logic.bean.JobBean;
 import logic.domain.Job;
 import logic.exceptions.DatabaseFailureException;
+import logic.presentation.bean.JobBean;
 
 public class JobControl {
 

@@ -18,10 +18,12 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import logic.bean.OfferBean;
+import logic.application.control.RecruiterAccountControl;
+import logic.application.control.ViewOfferControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Sections;
+import logic.presentation.bean.OfferBean;
 
 public class PublishedOffersGraphic implements Initializable {
 	
@@ -62,7 +64,7 @@ public class PublishedOffersGraphic implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		ObservableList <OfferBean> list = null;
 		try {
-			list = new OfferBean().getPublishedOffers();
+			list = RecruiterAccountControl.getInstance().retrievePublishedOffers();
 			
 			numCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 			posCol.setCellValueFactory(new PropertyValueFactory<>("jobName"));
@@ -86,29 +88,28 @@ public class PublishedOffersGraphic implements Initializable {
                 }
 	        });
 
+			FilteredList<OfferBean> filteredList = new FilteredList<>(list, p -> true);
+			table.itemsProperty().set(filteredList);
+			
+			allRadio.selectedProperty().addListener((observable, oldValue, newValue) -> showAll(filteredList));
+			actRadio.selectedProperty().addListener((observable, oldValue, newValue) -> showActive(filteredList));
+			expRadio.selectedProperty().addListener((observable, oldValue, newValue) -> showExpired(filteredList));
 			
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			closeOffersSection();
 		}
-		
-		FilteredList<OfferBean> filteredList = new FilteredList<>(list, p -> true);
-		table.itemsProperty().set(filteredList);
-		
-		allRadio.selectedProperty().addListener((observable, oldValue, newValue) -> showAll(filteredList));
-		actRadio.selectedProperty().addListener((observable, oldValue, newValue) -> showActive(filteredList));
-		expRadio.selectedProperty().addListener((observable, oldValue, newValue) -> showExpired(filteredList));
 	}
 	
     private void openOfferDetails(Integer id) {
 		OfferBean bean = new OfferBean();
 		try {
-			bean = bean.getOffer(id);
+			bean = ViewOfferControl.getInstance().retrieveOfferById(id);
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
 			
-		Stage popup = GraphicHandler.openSection(offersPane, Sections.OFFER, new OfferDetailsGraphic(bean));
+		Stage popup = GraphicHandler.openSection(offersPane, Sections.OFFER, new OfferDetailsGraphic(bean, id));
 		popup.centerOnScreen();
 		popup.show();
 		closeOffersSection();

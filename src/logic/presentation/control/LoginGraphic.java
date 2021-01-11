@@ -15,12 +15,13 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
 import logic.application.Users;
-import logic.bean.AccountBean;
-import logic.bean.UserBean;
+import logic.application.control.LoginControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
+import logic.presentation.bean.AccountBean;
+import logic.presentation.bean.UserBean;
 
 public class LoginGraphic implements Initializable {
 	
@@ -35,7 +36,7 @@ public class LoginGraphic implements Initializable {
 	
 	@FXML
 	private Button backBtn;
-
+	
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
 		/*Default behavior*/
@@ -57,7 +58,7 @@ public class LoginGraphic implements Initializable {
 		account.setUser(credentials);
 		
 		try {
-			account.login();
+			LoginControl.getInstance().tryLogin(account);
 		} catch (FailedLoginException fe) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, fe.getMessage());
 			refresh();
@@ -65,8 +66,7 @@ public class LoginGraphic implements Initializable {
 			GraphicHandler.popUpMsg(AlertType.ERROR, de.getMessage());
 		}
 		
-		Stage stage = (Stage)pane.getScene().getWindow();
-	
+		Stage stage = (Stage)pane.getScene().getWindow();	
 		if(SessionFacade.getSession().getCurrUserType() == Users.SEEKER) {
 			stage.setScene(GraphicHandler.switchScreen(Scenes.ACC_SEEK, new SeekerAccountGraphic(SessionFacade.getSession().getID())));
 			

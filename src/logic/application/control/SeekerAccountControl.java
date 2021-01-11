@@ -8,13 +8,13 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import logic.application.SessionFacade;
-import logic.bean.ApplicationBean;
-import logic.bean.CVBean;
-import logic.bean.JobBean;
 import logic.domain.Application;
 import logic.domain.CV;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
+import logic.presentation.bean.ApplicationBean;
+import logic.presentation.bean.CVBean;
+import logic.presentation.bean.JobBean;
 
 public class SeekerAccountControl {
 

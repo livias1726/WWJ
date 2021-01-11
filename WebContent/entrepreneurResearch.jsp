@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 
-<jsp:useBean id="businessBean" class="logic.bean.BusinessBean" scope="session"/>
+<jsp:useBean id="businessBean" class="logic.presentation.bean.BusinessBean" scope="session"/>
 <jsp:setProperty name="businessBean" property="*"/>
 
-<jsp:useBean id="countryBean" class="logic.bean.CountryBean" scope="session"/>
+<jsp:useBean id="countryBean" class="logic.presentation.bean.CountryBean" scope="session"/>
 <jsp:setProperty name="countryBean" property="*"/>
 
 <%Class.forName("com.mysql.jdbc.Driver");%>

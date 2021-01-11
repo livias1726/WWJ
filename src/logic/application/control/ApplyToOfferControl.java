@@ -3,9 +3,9 @@ package logic.application.control;
 import java.sql.SQLException;
 
 import logic.application.SessionFacade;
-import logic.bean.ApplicationBean;
 import logic.domain.Application;
 import logic.exceptions.DatabaseFailureException;
+import logic.presentation.bean.ApplicationBean;
 
 public class ApplyToOfferControl {
 	

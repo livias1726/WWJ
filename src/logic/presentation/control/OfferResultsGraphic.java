@@ -19,14 +19,15 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
-import logic.bean.CountryBean;
-import logic.bean.JobBean;
-import logic.bean.OfferBean;
+import logic.application.control.ViewOfferControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Sections;
 import logic.presentation.ToolBarGraphic;
+import logic.presentation.bean.CountryBean;
+import logic.presentation.bean.JobBean;
+import logic.presentation.bean.OfferBean;
 
 public class OfferResultsGraphic extends ToolBarGraphic implements Initializable {
 	
@@ -220,12 +221,12 @@ public class OfferResultsGraphic extends ToolBarGraphic implements Initializable
 		OfferBean bean = new OfferBean();
 	
 		try {
-			bean = bean.getOffer(id);
+			bean = ViewOfferControl.getInstance().retrieveOfferById(id);
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
 			
-		Stage popup = GraphicHandler.openSection(pane, Sections.OFFER, new OfferDetailsGraphic(bean));
+		Stage popup = GraphicHandler.openSection(pane, Sections.OFFER, new OfferDetailsGraphic(bean, id));
 		popup.centerOnScreen();
 		popup.show();
 	}

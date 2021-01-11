@@ -4,7 +4,6 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +38,8 @@ public class ApplicationDAO {
                 	position.setName(res.getString("position"));
                 	item.setPosition(position);
                 	
-                	item.setApplication(res.getDate("application").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                	item.setExpiration(res.getDate("expiration").toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                	item.setApplication(res.getDate("application").toLocalDate());
+                	item.setExpiration(res.getDate("expiration").toLocalDate());
                 	
                 	list.add(item);
                 }while(res.next());

@@ -17,12 +17,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 import logic.application.SessionFacade;
-import logic.bean.CVBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
 import logic.presentation.Sections;
+import logic.presentation.bean.CVBean;
 
 public class SeekerAccountGraphic extends AccountGraphic{
 

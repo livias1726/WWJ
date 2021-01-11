@@ -22,10 +22,11 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import logic.bean.CandidateBean;
+import logic.application.control.CheckCandidatesControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
+import logic.presentation.bean.CandidateBean;
 
 public class CandidatesInfoGraphic implements Initializable {
 	
@@ -60,10 +61,9 @@ public class CandidatesInfoGraphic implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		CandidateBean bean = new CandidateBean();
 		ObservableList<CandidateBean> list = null;
 		try {
-			list = bean.getCandidates();
+			list = CheckCandidatesControl.getInstance().retrieveCandidates();
 			
 			offerCol.setCellValueFactory(new PropertyValueFactory<>("offer"));
 			candCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -155,9 +155,8 @@ public class CandidatesInfoGraphic implements Initializable {
 
 	@FXML
 	public void deleteSelected() {
-		CandidateBean bean = new CandidateBean();
 		try {
-			bean.deleteSelectedCandidates((List<Long>)selected);
+			CheckCandidatesControl.getInstance().removeCandidates((List<Long>)selected);
 			initialize(null, null);
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());

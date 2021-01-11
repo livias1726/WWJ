@@ -14,10 +14,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import logic.bean.OfferBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
+import logic.presentation.bean.OfferBean;
 
 public class FavouriteOffersGraphic implements Initializable {
 
@@ -54,7 +54,7 @@ public class FavouriteOffersGraphic implements Initializable {
 			
 			off.setOnAction(event -> {
 					Stage stage = (Stage)favPane.getScene().getWindow();
-					stage.setScene(GraphicHandler.switchScreen(Scenes.OFFER, new OfferDetailsGraphic(i)));
+					stage.setScene(GraphicHandler.switchScreen(Scenes.OFFER, new OfferDetailsGraphic(i, 0)));
 				}
 			);
 		

@@ -4,12 +4,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import logic.bean.BusinessInCountryBean;
-import logic.bean.CountryBean;
 import logic.domain.Business;
 import logic.domain.BusinessInCountry;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
+import logic.presentation.bean.BusinessInCountryBean;
+import logic.presentation.bean.CountryBean;
 
 public class ViewBusinessControl extends ViewResultsControl{
 	

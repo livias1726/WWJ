@@ -19,11 +19,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import logic.bean.AddressBean;
-import logic.bean.CompanyBean;
-import logic.bean.CountryBean;
+import logic.application.control.RecruiterAccountControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
+import logic.presentation.bean.AddressBean;
+import logic.presentation.bean.CompanyBean;
+import logic.presentation.bean.CountryBean;
 
 public class CompanyInfoGraphic implements Initializable {
 
@@ -96,12 +97,7 @@ public class CompanyInfoGraphic implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		CompanyBean company = null;
 		try {
-			company = new CompanyBean().getCompanyInfo();
-		} catch (DatabaseFailureException e) {
-			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
-		}
-		
-		if(company != null) {
+			company = RecruiterAccountControl.getInstance().retrieveCompanyInfo();
 			nameCompany.setText(company.getName());
 	    	description.setText(company.getDescription());
     	
@@ -116,6 +112,8 @@ public class CompanyInfoGraphic implements Initializable {
 			idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 			
 			branchTable.setItems(list);
+		} catch (DatabaseFailureException e) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
 		
 		saveCompanyBtn.visibleProperty().bind(changeCompanyBtn.visibleProperty().not());	
@@ -166,7 +164,7 @@ public class CompanyInfoGraphic implements Initializable {
     	
     	bean.setBranches(list);
     	try {
-			bean.saveCompanyInfo();
+			RecruiterAccountControl.getInstance().changeCompanyInfo(bean);
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			closeCompanyInfo();

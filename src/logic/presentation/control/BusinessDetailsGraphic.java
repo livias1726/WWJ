@@ -13,11 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
-import logic.bean.BusinessInCountryBean;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
 import logic.presentation.Sections;
+import logic.presentation.bean.BusinessInCountryBean;
 
 public class BusinessDetailsGraphic implements Initializable {
 	

@@ -3,6 +3,8 @@ package logic.presentation.control;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.security.auth.login.FailedLoginException;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
@@ -14,13 +16,15 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
-import logic.bean.AccountBean;
-import logic.bean.UserBean;
+import logic.application.control.LoginControl;
+import logic.application.control.SignUpControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.DuplicateUserException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
+import logic.presentation.bean.AccountBean;
+import logic.presentation.bean.UserBean;
 
 public class SignUpGraphic implements Initializable {
 
@@ -81,6 +85,7 @@ public class SignUpGraphic implements Initializable {
 			credentials.setPassword(pwd.getText());
 			credentials.setFirstName(firstName.getText());
 			credentials.setLastName(lastName.getText());
+			credentials.verifySignUpSyntax(confEmail.getText(), confPwd.getText());
 			
 			AccountBean account = new AccountBean();
 			account.setUser(credentials);
@@ -99,8 +104,9 @@ public class SignUpGraphic implements Initializable {
 					account.setType(null);			
 			}
 			
-			account.signUp(confEmail.getText(), confPwd.getText());
-
+			SignUpControl.getInstance().trySignUp(account);
+			LoginControl.getInstance().tryLogin(account);
+			
 			Stage stage = (Stage)pane.getScene().getWindow();		
 			switch(account.getType()) {
 				case "SEEKER":
@@ -117,7 +123,7 @@ public class SignUpGraphic implements Initializable {
 			
 		} catch (DuplicateUserException | InvalidFieldException e) {
 			GraphicHandler.popUpMsg(AlertType.WARNING, e.getMessage());
-		} catch (DatabaseFailureException e) {
+		} catch (FailedLoginException | DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
 	}

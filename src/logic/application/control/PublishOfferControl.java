@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import logic.application.SessionFacade;
-import logic.bean.AddressBean;
-import logic.bean.OfferBean;
 import logic.domain.Address;
 import logic.domain.Company;
 import logic.domain.Job;
 import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.IncompleteAccountException;
+import logic.presentation.bean.AddressBean;
+import logic.presentation.bean.OfferBean;
 
 public class PublishOfferControl {
 	

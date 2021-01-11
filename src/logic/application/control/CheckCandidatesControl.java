@@ -6,9 +6,9 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import logic.application.SessionFacade;
-import logic.bean.CandidateBean;
 import logic.domain.Candidate;
 import logic.exceptions.DatabaseFailureException;
+import logic.presentation.bean.CandidateBean;
 
 public class CheckCandidatesControl {
 	

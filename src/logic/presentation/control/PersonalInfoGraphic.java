@@ -18,10 +18,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
-import logic.bean.UserBean;
+import logic.application.control.AccountControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
+import logic.presentation.bean.UserBean;
 
 public class PersonalInfoGraphic implements Initializable {
 
@@ -69,14 +70,22 @@ public class PersonalInfoGraphic implements Initializable {
     
     public PersonalInfoGraphic() {
 		this.id = SessionFacade.getSession().getID();
+		
 	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle res) {
     	UserBean user;
 		try {
-			user = new UserBean().getPersonalInfo(id);
-			initInfo(user);		    	
+			user = AccountControl.getInstance().retrievePersonalInfo(id);
+			
+			nameField.setText(user.getFirstName());
+	    	lastNameField.setText(user.getLastName());
+	    	emailField.setText(user.getEmail());
+	    	pwdField.setText(user.getPassword());
+	    	city.setText(user.getCity());
+	    	birth.setValue(user.getBirth());
+			
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			closePersonalInfo();
@@ -90,15 +99,6 @@ public class PersonalInfoGraphic implements Initializable {
 	    	initBindings();
 		}
 	}
-    
-    private void initInfo(UserBean user) {
-    	nameField.setText(user.getFirstName());
-    	lastNameField.setText(user.getLastName());
-    	emailField.setText(user.getEmail());
-    	pwdField.setText(user.getPassword());
-    	city.setText(user.getCity());
-    	birth.setValue(user.getBirth());
-    }
     
     private void initPasswordVisibility() {
     	TextField unmasked = new TextField();
@@ -155,7 +155,7 @@ public class PersonalInfoGraphic implements Initializable {
     	bean.setBirth(birth.getValue());
     
     	try {
-			bean.savePersonalInfo();
+			AccountControl.getInstance().changePersonalInfo(bean);
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			closePersonalInfo();

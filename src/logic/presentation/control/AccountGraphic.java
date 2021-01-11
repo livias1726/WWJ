@@ -6,42 +6,31 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
-import logic.bean.AccountBean;
+import logic.application.control.AccountControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Scenes;
 import logic.presentation.Sections;
+import logic.presentation.ToolBarGraphic;
+import logic.presentation.bean.AccountBean;
 
-public class AccountGraphic implements Initializable {
-	
-	@FXML
-	protected AnchorPane pane;
+public class AccountGraphic extends ToolBarGraphic{
 	
 	@FXML
 	protected Pane picFrame;
 	
-	@FXML
-	protected MenuButton notifyBtn;
-	
-	@FXML
-	protected MenuItem premiumBtn;
-		
 	@FXML 
 	protected ImageView profilePic;
 	
@@ -52,43 +41,47 @@ public class AccountGraphic implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
-		AccountBean account = null;
+		AccountBean account;
 		try {
 			if(accountID == 0) {
-				account = new AccountBean().getAccount();
+				account = AccountControl.getInstance().retrieveAccount();
+				accountID = account.getId();
 			}else {
-				account = new AccountBean().getAccount(accountID);
-			}			
-		} catch (DatabaseFailureException e1) {
-			GraphicHandler.popUpMsg(AlertType.ERROR, e1.getMessage());
-			goBack();
-		}
-		
-		if(account != null) {
+				account = AccountControl.getInstance().retrieveAccount(accountID);
+			}	
+			
 			if(account.isPremium()) {
 				premiumBtn.setVisible(false);
 			}
 			
 			nameLbl.setText(account.getUser().getFirstName() + " " + account.getUser().getLastName());	
 			
-			List<String> notifications;
-			try {
-				notifications = account.getNotification();
-				for(String i: notifications) {
-					MenuItem item = new MenuItem(i);
-					notifyBtn.getItems().add(item);
-				}
-			} catch (DatabaseFailureException e) {
-				GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
-				goBack();
-			}		
+			initNotifBtn();
 			
-			if(!notifyBtn.getItems().isEmpty()) {
-				notifyBtn.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.rgb(15, 49, 141), 10, 0, 0, 0));
-			}
+		} catch (DatabaseFailureException e1) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, e1.getMessage());
+			goBack();
 		}
 	}
 	
+	private void initNotifBtn() {
+		List<String> notifications;
+		try {
+			notifications = AccountControl.getInstance().retrieveNotifications();
+			for(String i: notifications) {
+				MenuItem item = new MenuItem(i);
+				notifyBtn.getItems().add(item);
+			}
+		} catch (DatabaseFailureException e) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+			goBack();
+		}		
+		
+		if(!notifyBtn.getItems().isEmpty()) {
+			notifyBtn.setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.rgb(15, 49, 141), 10, 0, 0, 0));
+		}
+	}
+
 	@FXML
 	protected void openPersonalInfo() {
 		Stage popup;
@@ -117,41 +110,7 @@ public class AccountGraphic implements Initializable {
 		    profilePic.fitHeightProperty().bind(picFrame.heightProperty());
 		    profilePic.fitWidthProperty().bind(picFrame.widthProperty());
 		    
-		    AccountBean bean = new AccountBean();
-		    bean.updatePic(newPic);
+		    AccountControl.getInstance().updateAccountPic(newPic);
 		}
-	}
-	
-	@FXML
-	protected void openOnlineDoc(){
-		/*
-		 * Launch an html page with documentation
-		 */
-	}
-	
-	@FXML
-	protected void buyPremium(){
-		/*
-		 * Redirect to payment check out
-		 */
-	}
-	
-	@FXML
-	protected void logout(){
-		SessionFacade.getSession().setID(null);
-		Stage stage = (Stage)pane.getScene().getWindow();
-		stage.setScene(GraphicHandler.switchScreen(Scenes.MAIN, null));
-	}
-	
-	@FXML
-	protected void goBack(){
-		Scenes prev = SessionFacade.getSession().getPrevScene();			
-		Stage stage = (Stage)pane.getScene().getWindow();			
-		stage.setScene(GraphicHandler.switchScreen(prev, null));
-	}
-	
-	@FXML
-	protected void closeApp() {
-		System.exit(0);
 	}
 }

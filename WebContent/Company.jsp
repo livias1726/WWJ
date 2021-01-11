@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="logic.bean.CompanyBean"
+<%@ page import="logic.presentation.bean.CompanyBean"
 		import="logic.bean.AddressBean"
 		import="java.util.List"
 		import="java.util.ArrayList"
@@ -8,13 +8,13 @@
 
 <!DOCTYPE html>
 
-<jsp:useBean id="companyBean" class="logic.bean.CompanyBean" scope="session"/>
+<jsp:useBean id="companyBean" class="logic.presentation.bean.CompanyBean" scope="session"/>
 <jsp:setProperty name="companyBean" property="*"/>
 
-<jsp:useBean id="addressBean" class="logic.bean.AddressBean" scope="session"/>
+<jsp:useBean id="addressBean" class="logic.presentation.bean.AddressBean" scope="session"/>
 <jsp:setProperty name="addressBean" property="*"/>
 
-<jsp:useBean id="accountBean" class="logic.bean.AccountBean" scope="session"/>
+<jsp:useBean id="accountBean" class="logic.presentation.bean.AccountBean" scope="session"/>
 <jsp:setProperty name="accountBean" property="*"/>
 
 <%Class.forName("com.mysql.jdbc.Driver");%>

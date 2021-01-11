@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="logic.bean.OfferBean"%>
+<%@ page import="logic.presentation.bean.OfferBean"%>
     
 <!DOCTYPE html>
 
-<jsp:useBean id="offerBean" scope="session" class="logic.bean.OfferBean"/>
+<jsp:useBean id="offerBean" scope="session" class="logic.presentation.bean.OfferBean"/>
 <jsp:setProperty name="offerBean" property="*"/>
 
 <%Class.forName("com.mysql.jdbc.Driver");%>

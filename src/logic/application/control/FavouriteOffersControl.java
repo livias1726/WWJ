@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import logic.application.SessionFacade;
-import logic.bean.JobBean;
-import logic.bean.OfferBean;
 import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
+import logic.presentation.bean.JobBean;
+import logic.presentation.bean.OfferBean;
 
 public class FavouriteOffersControl {
 
