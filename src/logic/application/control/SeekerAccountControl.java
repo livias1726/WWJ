@@ -83,7 +83,7 @@ public class SeekerAccountControl {
 
 	public void updateCV(File curr) throws DatabaseFailureException {
 		try {
-			new CV().saveCV(curr, SessionFacade.getSession().getID().toString());
+			new CV().saveCV(curr, SessionFacade.getSession().getID());
 		} catch (SQLException | IOException e) {
 			throw new DatabaseFailureException(); 
 		}

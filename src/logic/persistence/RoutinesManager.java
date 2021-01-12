@@ -1,5 +1,6 @@
 package logic.persistence;
 
+import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,6 +26,13 @@ public class RoutinesManager {
 				
 		return executeStmt(stmt);
 	}
+	
+	public static ResultSet bindParametersAndExec(CallableStatement stmt, int id, Blob blob) throws SQLException {
+		stmt.setInt(1, id);
+		stmt.setBlob(2, blob);
+		
+		return executeStmt(stmt);
+	}
 
 	public static ResultSet executeStmt(CallableStatement stmt) throws SQLException {
 		if(stmt.execute()) {
@@ -33,4 +41,5 @@ public class RoutinesManager {
 			return null;
 		}	
 	}
+
 }

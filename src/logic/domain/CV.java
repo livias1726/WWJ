@@ -26,7 +26,7 @@ public class CV implements Serializable {
 		return CvDAO.selectCVInfo(accountID);
 	}
 
-	public void saveCV(File cv, String id) throws IOException, SQLException {
+	public void saveCV(File cv, Long id) throws IOException, SQLException {
 		CvDAO.updateCVInfo(cv, id);
 	}
 
