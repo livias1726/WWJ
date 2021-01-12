@@ -10,7 +10,6 @@ public class AccountBean {
 	protected UserBean user;
 	protected String type;
 	protected File pic;
-
 	protected boolean premium = false;
 	protected long id;
 

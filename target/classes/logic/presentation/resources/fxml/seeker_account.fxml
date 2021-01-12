@@ -96,15 +96,11 @@
                   </HBox>
                </children>
             </VBox>
-            <Pane layoutX="56.0" layoutY="104.0" prefHeight="181.0" prefWidth="219.0" styleClass="profile_pic" AnchorPane.leftAnchor="55.0">
-               <children>
-                  <ImageView fx:id="profilePic" fitHeight="178.0" fitWidth="209.0" layoutX="5.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" styleClass="profile_pic">
-                     <image>
-                        <Image url="@../icons/profile_pic.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Pane>
+            <ImageView fx:id="profilePic" fitHeight="186.0" fitWidth="219.0" layoutX="56.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true" styleClass="profile_pic">
+               <image>
+                  <Image url="@../icons/profile_pic.png" />
+               </image>
+            </ImageView>
             <Button fx:id="changePicBtn" layoutX="56.0" layoutY="295.0" mnemonicParsing="false" onAction="#picSelect" prefHeight="15.0" prefWidth="219.0" styleClass="profile_btn" text="Change profile picture" />
             <Label fx:id="nameLbl" layoutX="309.0" layoutY="129.0" prefHeight="30.0" prefWidth="121.0" text="FName LName" textAlignment="CENTER">
                <font>

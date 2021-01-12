@@ -1,5 +1,10 @@
 package logic.persistence.dao;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.security.auth.login.FailedLoginException;
+import javax.sql.rowset.serial.SerialBlob;
 
 import logic.application.Users;
 import logic.domain.Account;
@@ -22,7 +28,7 @@ public class AccountDAO {
 		/**/
 	}
 	
-	public static Account selectAccount(long id) throws SQLException {
+	public static Account selectAccount(long id) throws SQLException, IOException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
 		Account account = null;
@@ -46,6 +52,16 @@ public class AccountDAO {
                 
                 account = new Account(user, type, idA);
                 account.setPremium(premium);
+
+                Blob blob = res.getBlob("pic");
+                if(blob != null) {
+                	byte [] array = blob.getBytes(1, (int)blob.length());
+        		    File file = new File("pic.jpg");
+        		    try(FileOutputStream out = new FileOutputStream(file)){
+        		    	out.write(array);
+        			    account.setPic(file);
+        		    }
+                }
             }
 
             res.close();
@@ -147,5 +163,26 @@ public class AccountDAO {
 		}
         
         return notif;
+	}
+
+	public static void updatePic(File img, Long id) throws IOException, SQLException {
+		CallableStatement stmt = null;
+
+		try {
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.UPDATE_PIC);
+
+        	byte[] fileContent = Files.readAllBytes(img.toPath());
+        	Blob blob = new SerialBlob(fileContent);
+        	
+        	RoutinesManager.bindParametersAndExec(stmt, id.intValue(), blob);
+        	
+        } catch (SQLException e) {
+        	throw new SQLException("An error occured while trying to update the profile pic."); 
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
 	}
 }

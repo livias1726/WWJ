@@ -1,6 +1,7 @@
 package logic.domain;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,6 +25,14 @@ public class Account implements Serializable{
 		/*Default constructor*/
 	}
 	
+	public File getPic() {
+		return pic;
+	}
+
+	public void setPic(File pic) {
+		this.pic = pic;
+	}
+
 	public Account(User u, Users t, long id) {
 		this.user = u;
 		this.type = t;
@@ -66,12 +75,16 @@ public class Account implements Serializable{
 		return AccountDAO.selectNotifications(id);
 	}
 
-	public Account getAccountFromDB(long id) throws SQLException {
+	public Account getAccountFromDB(long id) throws SQLException, IOException {
 		return AccountDAO.selectAccount(id);
 	}
 
 	public boolean createAccountOnDB() throws SQLException{
 		String typeStr = Users.usersToString(this.getType());
 		return AccountDAO.createAccount(this.user.getEmail(), this.user.getPwd(), this.user.getFirstName(), this.user.getLastName(), typeStr);
+	}
+
+	public void savePic(File img, Long id) throws IOException, SQLException {
+		AccountDAO.updatePic(img, id);
 	}
 }

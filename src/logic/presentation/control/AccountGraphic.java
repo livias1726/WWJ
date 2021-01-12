@@ -13,7 +13,6 @@ import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -27,9 +26,6 @@ import logic.presentation.ToolBarGraphic;
 import logic.presentation.bean.AccountBean;
 
 public class AccountGraphic extends ToolBarGraphic{
-	
-	@FXML
-	protected Pane picFrame;
 	
 	@FXML 
 	protected ImageView profilePic;
@@ -54,6 +50,12 @@ public class AccountGraphic extends ToolBarGraphic{
 			
 			if(account.isPremium()) {
 				premiumBtn.setVisible(false);
+			}
+			
+			if(account.getPic() != null) {
+				profilePic.getImage().cancel();
+				Image image = new Image(account.getPic().toURI().toString());
+			    profilePic.setImage(image);
 			}
 			
 			nameLbl.setText(account.getUser().getFirstName() + " " + account.getUser().getLastName());	
@@ -107,12 +109,19 @@ public class AccountGraphic extends ToolBarGraphic{
 		File newPic = fileChooser.showOpenDialog(stage);
 		
 		if (newPic != null) {
-			Image image = new Image(newPic.toURI().toString());
-		    profilePic.setImage(image);
-		    profilePic.fitHeightProperty().bind(picFrame.heightProperty());
-		    profilePic.fitWidthProperty().bind(picFrame.widthProperty());
+			profilePic.getImage().cancel();
+			Image image = new Image(newPic.toURI().toString());		   
+			profilePic.setImage(image);
 		    
-		    AccountControl.getInstance().updateAccountPic(newPic);
+		    AccountBean bean = new AccountBean();
+		    bean.setPic(newPic);
+		    
+		    try {
+				AccountControl.getInstance().updateAccountPic(bean);
+			} catch (DatabaseFailureException e) {
+				GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+				goBack();
+			}
 		}
 	}
 }

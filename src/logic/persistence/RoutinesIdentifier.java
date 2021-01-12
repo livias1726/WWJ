@@ -42,4 +42,5 @@ public class RoutinesIdentifier {
 	public static final String GET_COMPANY_BRANCHES = "call wwj_db.retrieve_company_branches(?)";
 	public static final String INSERT_JOB = "call wwj_db.insert_job(?, ?)";
 	public static final String INSERT_REQUIREMENT = "call wwj_db.insert_requirement(?, ?)";
+	public static final String UPDATE_PIC = "call wwj_db.update_profile_pic(?, ?)";
 }

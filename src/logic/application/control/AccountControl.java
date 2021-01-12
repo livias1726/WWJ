@@ -1,6 +1,6 @@
 package logic.application.control;
 
-import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class AccountControl {
     	Account account = new Account();
     	try {
 			account = account.getAccountFromDB(SessionFacade.getSession().getID());
-		} catch (SQLException e) {
+		} catch (SQLException | IOException e) {
 			throw new DatabaseFailureException();
 		}  
     	
@@ -43,7 +43,7 @@ public class AccountControl {
     	Account account = new Account();
     	try {
 			account = account.getAccountFromDB(accountID);
-		} catch (SQLException e) {
+		} catch (SQLException | IOException e) {
 			throw new DatabaseFailureException();
 		}  
     	
@@ -60,6 +60,7 @@ public class AccountControl {
     	bean.setUser(user);
     	bean.setType(Users.usersToString(account.getType()));	
     	bean.setPremium(account.isPremium());
+    	bean.setPic(account.getPic());
     	bean.setId(account.getID());
   	
     	return bean;
@@ -86,8 +87,12 @@ public class AccountControl {
     
 	}
     
-    public void updateAccountPic(File img) {
-    	/*Update image field for the account*/
+    public void updateAccountPic(AccountBean account) throws DatabaseFailureException {
+    	try {
+			new Account().savePic(account.getPic(), SessionFacade.getSession().getID());
+		} catch (SQLException | IOException e) {
+			throw new DatabaseFailureException(); 
+		}
     }
 
 	public List<String> retrieveNotifications() throws DatabaseFailureException {
