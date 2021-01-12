@@ -47,6 +47,10 @@ public class ToolBarGraphic implements Initializable{
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
+    	if(SessionFacade.getSession().getCurrUserType() != Users.RECRUITER) {
+			pubBtn.setVisible(false);
+		}
+    	
     	if(SessionFacade.getSession().getID() == null) {
 			premiumBtn.setVisible(false);
 			outBtn.setVisible(false);
@@ -54,9 +58,6 @@ public class ToolBarGraphic implements Initializable{
 			profBtn.setVisible(false);
 		}else {
 			inBtn.setVisible(false);
-			if(SessionFacade.getSession().getCurrUserType() != Users.RECRUITER) {
-				pubBtn.setVisible(false);
-			}
 		}
     }
 

@@ -21,7 +21,6 @@ public class MainGraphic extends ToolBarGraphic implements Initializable {
 	@FXML
     private Hyperlink buyAdLink;
 
-
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
 		/**/

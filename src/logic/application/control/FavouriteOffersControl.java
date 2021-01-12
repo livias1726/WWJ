@@ -7,6 +7,8 @@ import java.util.List;
 import logic.application.SessionFacade;
 import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
+import logic.presentation.bean.AddressBean;
+import logic.presentation.bean.CountryBean;
 import logic.presentation.bean.JobBean;
 import logic.presentation.bean.OfferBean;
 
@@ -37,14 +39,25 @@ public class FavouriteOffersControl {
     	
 		List<OfferBean> dest = new ArrayList<>();
     	for(Offer i: list) {
-    		OfferBean offerBean = new OfferBean();  		
+    		OfferBean offerBean = new OfferBean();  
+    		offerBean.setId(i.getId());
     		offerBean.setCompanyName(i.getCompanyName());
-    		offerBean.setTaskDescription(i.getTaskDescription());
 
     		JobBean job = new JobBean();
     		job.setName(i.getPosition().getName());
     		job.setCategory(i.getPosition().getCategory());  		
     		offerBean.setPosition(job);
+    		
+    		AddressBean branch = new AddressBean();
+    		CountryBean country = new CountryBean();
+    		country.setName(i.getBranch().getCountry().getName());
+    		branch.setCountry(country);
+    		branch.setState(i.getBranch().getState());
+    		branch.setCity(i.getBranch().getCity());
+    		offerBean.setBranch(branch);
+    		
+    		offerBean.setUpload(i.getUpload());
+    		offerBean.setExpiration(i.getExpiration());
     		
     		dest.add(offerBean);
     	}

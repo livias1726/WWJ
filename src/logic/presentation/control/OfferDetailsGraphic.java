@@ -6,7 +6,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -19,6 +18,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
 import logic.application.Users;
+import logic.application.control.ApplyToOfferControl;
+import logic.application.control.FavouriteOffersControl;
+import logic.application.control.SeekerAccountControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.bean.ApplicationBean;
@@ -67,6 +69,7 @@ public class OfferDetailsGraphic implements Initializable {
 
 	private OfferBean offer;
 	private Integer offerID;
+	private boolean fav = false;
 	private static String empty = "Not provided";
 	
 	public OfferDetailsGraphic(OfferBean o, Integer id) {
@@ -78,7 +81,7 @@ public class OfferDetailsGraphic implements Initializable {
 	public void initialize(URL location, ResourceBundle resource) {
 		compLbl.setText(offer.getCompanyName());	
 		jobTxt.setText(offer.getPosition().getName());
-		
+
 		if(offer.getRequirements() == null || offer.getRequirements().isEmpty()) {
 			reqList.getItems().add(empty);
 		}else {
@@ -86,7 +89,7 @@ public class OfferDetailsGraphic implements Initializable {
 				reqList.getItems().add(i);
 			}
 		}
-				
+			
 		descArea.setText(offer.getTaskDescription());
 		branch.setText(offer.getBranch().getStreet() + ", " + offer.getBranch().getNumber() + ", " + 
 					   offer.getBranch().getPostalCode() + ", " + offer.getBranch().getCity() + ", " + 
@@ -99,30 +102,38 @@ public class OfferDetailsGraphic implements Initializable {
 			startTime.setText(offer.getStart().toString());
 			endTime.setText(offer.getFinish().toString());
 		}
-
+		
 		salary.setText(String.valueOf(offer.getBaseSalary()));	
 		expDate.setText(offer.getExpiration().toString());
-		
-		initBtns();		
-	}
-	
-	private void initBtns() {
+
 		if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER) {
 			applyBtn.setVisible(false);
 			favBtn.setVisible(false);
 		}else {
-			try {
-				ObservableList <ApplicationBean> list = new ApplicationBean().getApplications();
-				for(ApplicationBean i: list) {
+			initBtns();
+		}
+	}
+	
+	private void initBtns() {
+		try {
+			if(SessionFacade.getSession().getID() != null) {
+				for(ApplicationBean i: SeekerAccountControl.getInstance().retrieveApplications()) {
 					if(i.getId() == offerID) {
 						applyBtn.setDisable(true);
 						favBtn.setDisable(true);
 					}
 				}
-			} catch (DatabaseFailureException e) {
-				GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
-				goBack();
-			}
+				
+				for(OfferBean i: FavouriteOffersControl.getInstance().retrieveFavourites()) {
+					if(i.getId() == offerID) {
+						favBtn.getStyleClass().add("star_button_set");
+						fav = true;
+					}
+				}
+			}			
+		} catch (DatabaseFailureException e) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+			goBack();
 		}
 	}
 	
@@ -132,10 +143,12 @@ public class OfferDetailsGraphic implements Initializable {
 			ApplicationBean bean = new ApplicationBean();
 			bean.setId(offerID);
 			try {
-				bean.addToApplications();
+				ApplyToOfferControl.getInstance().apply(bean); 
 			} catch (DatabaseFailureException e) {
 				GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			}
+			
+			goBack();
 		}
     }
 	
@@ -143,12 +156,15 @@ public class OfferDetailsGraphic implements Initializable {
     public void manageFavourite() {
 		if(checkLogin()) {
 			try {
-				if(favBtn.getStyle().equals("star_button_nset")) {
-					offer.addToFavourites();
-					favBtn.setStyle("star_button_set");
+				if(fav) {
+					FavouriteOffersControl.getInstance().removeFavourites(offerID);
+					favBtn.getStyleClass().clear();
+					favBtn.getStyleClass().add("star_button_nset");	
+					fav = false;
 				}else {
-					offer.removeFromFavourites();
-					favBtn.setStyle("star_button_nset");	
+					FavouriteOffersControl.getInstance().addNewFavourite(offerID);
+					favBtn.getStyleClass().clear();
+					favBtn.getStyleClass().add("star_button_set");
 				}
 			} catch (DatabaseFailureException e) {
 				/*Don't change the settings*/

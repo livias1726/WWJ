@@ -16,12 +16,10 @@ public class Main extends Application {
 			
 		Scene scene = GraphicHandler.switchScreen(Scenes.MAIN, null);
 		try {
-			initStage(stage, scene);
-			
+			initStage(stage, scene);			
 		} catch (Exception e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
-		}
-		
+		}		
 		stage.show();
 	}
 	
@@ -33,5 +31,4 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch();
 	}
-
 }

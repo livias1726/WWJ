@@ -52,7 +52,8 @@ public class CandidatesInfoGraphic implements Initializable {
     private Button delBtn;
     
     private ToolBar toolbar;
-    private ObservableList<Long> selected = FXCollections.observableArrayList();
+    private ObservableList<Long> selectedCand = FXCollections.observableArrayList();
+    private ObservableList<Integer> selectedOff = FXCollections.observableArrayList();
     private List<CheckBox> checkList = new ArrayList<>();
 
 	public CandidatesInfoGraphic(ToolBar toolbar) {
@@ -79,7 +80,7 @@ public class CandidatesInfoGraphic implements Initializable {
 		CheckBox selectAll = new CheckBox();
 		delCol.setGraphic(selectAll);
 		selectAll.setOnAction(this::selectAllBoxes);
-		delBtn.disableProperty().bind(Bindings.isEmpty(selected).and(selectAll.selectedProperty().not()));
+		delBtn.disableProperty().bind(Bindings.isEmpty(selectedCand).and(selectAll.selectedProperty().not()));
 		
 		delCol.setCellFactory(tc -> {
 			CheckBox btn = new CheckBox();      
@@ -97,10 +98,12 @@ public class CandidatesInfoGraphic implements Initializable {
 			
             btn.addEventFilter(ActionEvent.ACTION, event -> {
             	if(btn.isSelected()) {
-	        		selected.add(idCol.getCellData(cell.getIndex()));
+	        		selectedCand.add(idCol.getCellData(cell.getIndex()));
+	        		selectedOff.add(offerCol.getCellData(cell.getIndex()));
 	        	}else {
-	        		int index = selected.indexOf(idCol.getCellData(cell.getIndex()));
-        			selected.remove(index);
+	        		int index = selectedCand.indexOf(idCol.getCellData(cell.getIndex()));
+        			selectedCand.remove(index);
+        			selectedOff.remove(index);
 	        	}
             });
             
@@ -134,15 +137,19 @@ public class CandidatesInfoGraphic implements Initializable {
 			for(CheckBox i: checkList) {
 				i.setSelected(true);
 			}
-			selected.clear();
+			selectedCand.clear();
+			selectedOff.clear();
+			
 			for(CandidateBean i: table.getItems()) {
-				selected.add(i.getSeeker());
+				selectedCand.add(i.getSeeker());
+				selectedOff.add(i.getOffer());
 			}
 		}else {
 			for(CheckBox i: checkList) {
 				i.setSelected(false);
 			}
-			selected.clear();
+			selectedCand.clear();
+			selectedOff.clear();
 		}
 	}
 
@@ -156,7 +163,7 @@ public class CandidatesInfoGraphic implements Initializable {
 	@FXML
 	public void deleteSelected() {
 		try {
-			CheckCandidatesControl.getInstance().removeCandidates((List<Long>)selected);
+			CheckCandidatesControl.getInstance().removeCandidates((List<Long>)selectedCand, (List<Integer>)selectedOff);
 			initialize(null, null);
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());

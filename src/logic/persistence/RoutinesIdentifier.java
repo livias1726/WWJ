@@ -29,8 +29,7 @@ public class RoutinesIdentifier {
 	public static final String GET_BUSINESS_BY_NAME = "call wwj_db.retrieve_business_by_name(?)";
 	public static final String GET_FAVOURITE_BUSINESSES = "call wwj_db.retrieve_favourite_businesses(?)";
 	public static final String GET_APPLICATIONS = "call wwj_db.retrieve_applications(?)";
-	public static final String DELETE_CANDIDATES = "call wwj_db.delete_candidate(?)";
-	public static final String DELETE_APPLICATIONS = "call wwj_db.delete_application(?)";
+	public static final String DELETE_APPLICATION = "call wwj_db.delete_application(?, ?)";
 	public static final String GET_CV = "call wwj_db.retrieve_curriculum(?)";
 	public static final String UPDATE_CV = "call wwj_db.update_curriculum(?, ?)";
 	public static final String GET_FAVOURITE_OFFERS = "call wwj_db.retrieve_favourite_offers(?)";

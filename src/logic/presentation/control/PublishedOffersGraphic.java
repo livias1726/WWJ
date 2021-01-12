@@ -102,17 +102,17 @@ public class PublishedOffersGraphic implements Initializable {
 	}
 	
     private void openOfferDetails(Integer id) {
-		OfferBean bean = new OfferBean();
 		try {
-			bean = ViewOfferControl.getInstance().retrieveOfferById(id);
+			OfferBean bean = ViewOfferControl.getInstance().retrieveOfferById(id);
+			
+			Stage popup = GraphicHandler.openSection(offersPane, Sections.OFFER, new OfferDetailsGraphic(bean, id));
+			popup.centerOnScreen();
+			popup.show();
+					
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+			closeOffersSection();
 		}
-			
-		Stage popup = GraphicHandler.openSection(offersPane, Sections.OFFER, new OfferDetailsGraphic(bean, id));
-		popup.centerOnScreen();
-		popup.show();
-		closeOffersSection();
 	}
 
 	private void showActive(FilteredList<OfferBean> list) {

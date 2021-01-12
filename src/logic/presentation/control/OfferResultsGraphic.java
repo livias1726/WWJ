@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
@@ -29,7 +28,7 @@ import logic.presentation.bean.CountryBean;
 import logic.presentation.bean.JobBean;
 import logic.presentation.bean.OfferBean;
 
-public class OfferResultsGraphic extends ToolBarGraphic implements Initializable {
+public class OfferResultsGraphic extends ToolBarGraphic{
 	
 	@FXML 
 	private Label searchIDLbl;
@@ -88,7 +87,9 @@ public class OfferResultsGraphic extends ToolBarGraphic implements Initializable
 				searchIDLbl.setText(searchedCountry.getName());
 				searchIDLbl.setAlignment(Pos.CENTER);
 				//Retrieve offers by Country
-				offers = new OfferBean().getOffers(searchedCountry);
+				
+				offers = ViewOfferControl.getInstance().retrieveOffersByCountry(searchedCountry);
+				
 				filteredList = new ArrayList<>();
 				
 				filterLab.setText("Categories");
@@ -105,7 +106,8 @@ public class OfferResultsGraphic extends ToolBarGraphic implements Initializable
 				searchIDLbl.setAlignment(Pos.CENTER);
 				
 				//Retrieve offers by Job
-				offers = new OfferBean().getOffers(searchedJob);
+				offers = ViewOfferControl.getInstance().retrieveOffersByJob(searchedJob);
+				
 				filteredList = new ArrayList<>();
 				
 				filterLab.setText("Countries");	
@@ -118,7 +120,8 @@ public class OfferResultsGraphic extends ToolBarGraphic implements Initializable
 				}
 			} else {
 				//Retrieve offers by Country and Job
-				offers = new OfferBean().getOffers(searchedCountry, searchedJob);
+				offers = ViewOfferControl.getInstance().retrieveOffers(searchedCountry, searchedJob);
+				
 				searchIDLbl.setText(searchedJob.getCategory() + " in " + searchedCountry.getName());
 				searchIDLbl.setAlignment(Pos.CENTER);
 				
@@ -218,16 +221,14 @@ public class OfferResultsGraphic extends ToolBarGraphic implements Initializable
 	}
 	
 	private void openOfferDetails(Integer id) {
-		OfferBean bean = new OfferBean();
-	
 		try {
-			bean = ViewOfferControl.getInstance().retrieveOfferById(id);
+			OfferBean bean = ViewOfferControl.getInstance().retrieveOfferById(id);
+			
+			Stage popup = GraphicHandler.openSection(pane, Sections.OFFER, new OfferDetailsGraphic(bean, id));
+			popup.centerOnScreen();
+			popup.show();
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
-			
-		Stage popup = GraphicHandler.openSection(pane, Sections.OFFER, new OfferDetailsGraphic(bean, id));
-		popup.centerOnScreen();
-		popup.show();
 	}
 }

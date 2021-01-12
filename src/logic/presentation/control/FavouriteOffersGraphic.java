@@ -8,15 +8,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import logic.application.control.FavouriteOffersControl;
+import logic.application.control.ViewOfferControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Scenes;
+import logic.presentation.Sections;
 import logic.presentation.bean.OfferBean;
 
 public class FavouriteOffersGraphic implements Initializable {
@@ -35,10 +38,8 @@ public class FavouriteOffersGraphic implements Initializable {
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
-    	OfferBean res = new OfferBean();
- 
 		try {
-			offers = res.getFavouriteOffers();
+			offers = FavouriteOffersControl.getInstance().retrieveFavourites();
 			order.getSelectionModel().selectedIndexProperty().addListener((obv, oldValue, newValue) -> orderResults(offers, newValue));		
 			order.setItems(items);
 			order.setValue(items.get(0));
@@ -51,18 +52,36 @@ public class FavouriteOffersGraphic implements Initializable {
 			Button off = new Button();
 			off.setPrefHeight(70);
 			off.setPrefWidth(favBox.getPrefWidth() - (favBox.getSpacing())*2);
+
+			if(i.getBranch().getState() == null) {
+				off.setText("'" + i.getCompanyName() + "'" + " - " + i.getBranch().getCountryName() + ", " + i.getBranch().getCity() + " (Exp: " + i.getExpiration() + ")" + "\n" + i.getPosition().getName());
+			}else {
+				off.setText("'" + i.getCompanyName() + "'" + " - " + i.getBranch().getCountryName() + ", " + i.getBranch().getState() + ", " + i.getBranch().getCity() + " (Exp: " + i.getExpiration() + ")" + "\n" + i.getPosition().getName());
+			}
+
+			off.setOnAction(event -> openOfferDetails(i.getId()));
 			
-			off.setOnAction(event -> {
-					Stage stage = (Stage)favPane.getScene().getWindow();
-					stage.setScene(GraphicHandler.switchScreen(Scenes.OFFER, new OfferDetailsGraphic(i, 0)));
-				}
-			);
-		
+			off.setStyle("-fx-font-size: 15px;");
+			off.setCursor(Cursor.HAND);
+			
 			favBox.getChildren().add(off);
 		}	
 	}
 	
-    private void orderResults(List <OfferBean> list, Number filter) {
+    private void openOfferDetails(Integer id) {
+		try {
+			OfferBean bean = ViewOfferControl.getInstance().retrieveOfferById(id);
+			
+			Stage popup = GraphicHandler.openSection(favPane, Sections.OFFER, new OfferDetailsGraphic(bean, id));
+			popup.centerOnScreen();
+			popup.show();
+			
+		} catch (DatabaseFailureException e) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+		}
+	}
+
+	private void orderResults(List <OfferBean> list, Number filter) {
 		list.sort((OfferBean o1, OfferBean o2) -> {
 			if(filter.intValue() == 0) {
         		return o1.getUpload().compareTo(o2.getUpload());

@@ -4,12 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import javafx.collections.ObservableList;
-import logic.application.control.FavouriteOffersControl;
-import logic.application.control.ViewOfferControl;
-import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
-import logic.exceptions.NoResultFoundException;
 
 public class OfferBean {
 
@@ -134,30 +129,6 @@ public class OfferBean {
 
 	public void setCandidates(int candidates) {
 		this.candidates = candidates;
-	}
-
-	public ObservableList<OfferBean> getOffers(CountryBean country, JobBean job) throws DatabaseFailureException, NoResultFoundException{
-		return ViewOfferControl.getInstance().retrieveOffers(country, job);
-	}
-	
-	public ObservableList<OfferBean> getOffers(CountryBean country) throws DatabaseFailureException, NoResultFoundException{
-		return ViewOfferControl.getInstance().retrieveOffersByCountry(country);
-	}
-	
-	public ObservableList<OfferBean> getOffers(JobBean job) throws DatabaseFailureException, NoResultFoundException{
-		return ViewOfferControl.getInstance().retrieveOffersByJob(job);
-	}
-
-	public List<OfferBean> getFavouriteOffers() throws DatabaseFailureException {
-		return FavouriteOffersControl.getInstance().retrieveFavourites();
-	}
-
-	public void addToFavourites() throws DatabaseFailureException {
-		FavouriteOffersControl.getInstance().addNewFavourite(this.id);
-	}
-
-	public void removeFromFavourites() throws DatabaseFailureException {
-		FavouriteOffersControl.getInstance().removeFavourites(this.id);
 	}
 	
 	public void verifyFieldsValidity(LocalTime start, LocalTime finish, LocalDate expiration) throws InvalidFieldException {

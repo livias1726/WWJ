@@ -31,8 +31,8 @@ public class Application extends Offer{
 		return ApplicationDAO.selectSeekersApplications(id);
 	}
 
-	public void removeApplicatinosFromDB(List<Integer> selected) throws SQLException {
-		ApplicationDAO.deleteSeekersApplications(selected);
+	public void removeApplicatinosFromDB(Long id, List<Integer> selected) throws SQLException {
+		ApplicationDAO.deleteSeekersApplications(id, selected);
 	}
 
 	public void addApplication(Long id) throws SQLException {

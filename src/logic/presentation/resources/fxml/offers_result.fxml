@@ -93,14 +93,11 @@
          </children>
       </VBox>
       <ToolBar prefHeight="60.0" prefWidth="1180.0" styleClass="toolbar">
-         <effect>
-            <DropShadow blurType="ONE_PASS_BOX" color="#0f318d" />
-         </effect>
          <items>
             <HBox prefHeight="50.0" prefWidth="158.0">
                <children>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="main_icon" />
-                  <Button fx:id="homeBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="home_btn">
+                  <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#goToHome" prefHeight="30.0" prefWidth="30.0" styleClass="home_btn">
                      <HBox.margin>
                         <Insets left="10.0" top="10.0" />
                      </HBox.margin>
@@ -131,6 +128,7 @@
                   </MenuButton>
                   <MenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="user_btn">
                      <items>
+                        <MenuItem fx:id="profBtn" mnemonicParsing="false" onAction="#goToProfile" text="Profile" />
                         <MenuItem fx:id="outBtn" mnemonicParsing="false" onAction="#logout" text="Logout" />
                         <MenuItem fx:id="inBtn" mnemonicParsing="false" onAction="#login" text="Login" />
                      </items>
@@ -143,6 +141,7 @@
                   </MenuButton>
                   <MenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="menu_btn" textFill="#00000001">
                      <items>
+                        <MenuItem fx:id="pubBtn" mnemonicParsing="false" onAction="#openNewOffer" text="Publish an offer" />
                         <MenuItem fx:id="premiumBtn" mnemonicParsing="false" onAction="#buyPremium" text="Buy premium version" />
                         <MenuItem mnemonicParsing="false" onAction="#openOnlineDoc" text="Support" />
                         <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Quit" />
@@ -157,6 +156,9 @@
                </children>
             </HBox>
          </items>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" color="#0f318d" />
+         </effect>
       </ToolBar>
    </children>
 </AnchorPane>

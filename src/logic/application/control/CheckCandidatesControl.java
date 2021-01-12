@@ -50,10 +50,10 @@ public class CheckCandidatesControl {
 		return dest;
 	}
 
-	public void removeCandidates(List<Long> selected) throws DatabaseFailureException {
+	public void removeCandidates(List<Long> candidates, List<Integer> offers) throws DatabaseFailureException {
 		Candidate cand = new Candidate();
 		try {
-			cand.removeCandidatesFromDB(selected);
+			cand.removeCandidatesFromDB(candidates, offers);
 		} catch (SQLException e) {
 			throw new DatabaseFailureException(); 
 		}

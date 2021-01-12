@@ -12,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import logic.application.control.JobControl;
+import logic.application.control.ViewResultsControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
@@ -41,7 +42,7 @@ public class SearchSeekerGraphic extends ToolBarGraphic{
 		
 		//Edit combo boxes: retrieve from DB
 		try {
-			cList = (new CountryBean()).getCountries();
+			cList = ViewResultsControl.getInstance().retrieveCountries();
 			
 			jList = new ArrayList<>();
 			for(JobBean i: JobControl.getInstance().retrieveJobs()) {

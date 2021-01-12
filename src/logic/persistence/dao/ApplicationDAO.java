@@ -53,21 +53,21 @@ public class ApplicationDAO {
 				stmt.close();
 			}
 		}
-        
+		
         return list;
 	}
 
-	public static void deleteSeekersApplications(List<Integer> id) throws SQLException {
+	public static void deleteSeekersApplications(Long id, List<Integer> selected) throws SQLException {
 		CallableStatement stmt = null;
 		
 		try{
 			Connection conn = ConnectionManager.getConnection();
-        	stmt = conn.prepareCall(RoutinesIdentifier.DELETE_APPLICATIONS);	
+        	stmt = conn.prepareCall(RoutinesIdentifier.DELETE_APPLICATION);	
         	
-        	for(Integer i: id) {
-        		RoutinesManager.bindParametersAndExec(stmt, id.get(i));
+        	for(int i=0; i<selected.size(); i++) {
+        		RoutinesManager.bindParametersAndExec(stmt, id.intValue(), selected.get(i));
         	}
-			
+        	
         } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to delete applications."); 
 		} finally {

@@ -41,6 +41,8 @@ public class AccountGraphic extends ToolBarGraphic{
 
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
+		super.initialize(url, resource);
+		
 		AccountBean account;
 		try {
 			if(accountID == 0) {

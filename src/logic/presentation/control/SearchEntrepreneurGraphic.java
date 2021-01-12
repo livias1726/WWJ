@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
+import logic.application.control.ViewResultsControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
@@ -84,7 +85,7 @@ public class SearchEntrepreneurGraphic implements Initializable {
 		//Edit combo boxes: retrieve from DB
 		
 		try {
-			cList = (new CountryBean()).getCountries();
+			cList = ViewResultsControl.getInstance().retrieveCountries();
 			bList = (new BusinessBean()).getBusinesses();	
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());

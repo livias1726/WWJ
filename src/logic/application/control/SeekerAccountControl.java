@@ -61,7 +61,7 @@ public class SeekerAccountControl {
 	public void removeApplications(List<Integer> selected) throws DatabaseFailureException {
 		Application app = new Application();
 		try {
-			app.removeApplicatinosFromDB(selected);
+			app.removeApplicatinosFromDB(SessionFacade.getSession().getID(), selected);
 		} catch (SQLException e) {
 			throw new DatabaseFailureException(); 
 		}
