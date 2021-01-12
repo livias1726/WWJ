@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="logic.presentation.bean.UserBean"
-		import="logic.bean.AccountBean"
-		import="logic.presentation.control.LoginGraphic"%>
+		import="logic.presentation.bean.AccountBean"
+		import="logic.application.control.AccountControl"
+		import="logic.application.control.LoginControl"%>
 <!DOCTYPE html>
 
 <jsp:useBean id="userBean" class="logic.presentation.bean.UserBean" scope="session"/>
@@ -16,19 +17,19 @@
 	userBean.setEmail(request.getParameter("email"));
 	userBean.setPassword(request.getParameter("password"));
 	accountBean.setUser(userBean);
-	accountBean.login(); 
+	LoginControl.getInstance().tryLogin(accountBean); 
 	
-	if("SEEKER".equals(accountBean.getAccount().getType())) {
+	if("SEEKER".equals(AccountControl.getInstance().retrieveAccount().getType())) {
     	String redirectURL = "http://localhost:8080/WorldWideJob/seekerProfile.jsp";
     	response.sendRedirect(redirectURL);
     	return;
     }
-    if("RECRUITER".equals(accountBean.getAccount().getType())) {
+    if("RECRUITER".equals(AccountControl.getInstance().retrieveAccount().getType())) {
     	String redirectURL = "http://localhost:8080/WorldWideJob/recruiterProfile.jsp";
     	response.sendRedirect(redirectURL);
     	return;
     }
-    if("ENTREPRENEUR".equals(accountBean.getAccount().getType())) {
+    if("ENTREPRENEUR".equals(AccountControl.getInstance().retrieveAccount().getType())) {
       	String redirectURL = "http://localhost:8080/WorldWideJob/entrepreneurProfile.jsp";
     	response.sendRedirect(redirectURL);
     	return;

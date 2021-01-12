@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="logic.presentation.bean.UserBean"
-			import="logic.bean.AccountBean"%>
+			import="logic.presentation.bean.AccountBean"
+			import="logic.application.control.AccountControl"%>
 
 <!DOCTYPE html>
 
@@ -61,7 +62,7 @@
 	    		<div class="profile_pic" >
 	    		
 	    		<div>
-	    			<input type="text" id="Lnamefname" name="LnameFname" disabled value="<%=accountBean.getAccount().getUser().getFirstName()%><%=""%> <%=accountBean.getAccount().getUser().getLastName()%>" style="margin-left:290px;margin-top:20px;text-align:center;text-style:bold"><br>
+	    			<input type="text" id="Lnamefname" name="LnameFname" disabled value="<%=AccountControl.getInstance().retrieveAccount().getUser().getFirstName()%><%=""%> <%=AccountControl.getInstance().retrieveAccount().getUser().getLastName()%>" style="margin-left:290px;margin-top:20px;text-align:center;text-style:bold"><br>
 	    			<label for="email" style="margin-top:5px;margin-left:330px">Recruiter</label>
 	    		</div>
 	    		<input class="change_pic" disabled value="Change profile picture:" style="text-align:center;background-color:white; border:0;width:250px;height:20px;margin-top:180px;margin-left:-5px"><br>
@@ -84,7 +85,7 @@
 	    		</div>
 	    		<div id="container">
 				<ul id="griglia">
-				<li><button class="company_btn" type="button" style="width:200px;height:160px;background-color:lightblue" onClick="javascript:window.location='company.jsp';">Company</button></li>
+				<li><button class="company_btn" type="button" style="width:200px;height:160px;background-color:lightblue" onClick="javascript:window.location='Company.jsp';">Company</button></li>
 				<li><button class="id_btn" type="button" style="width:200px;height:160px;background-color:lightblue" onClick="javascript:window.location='personalInfo.jsp';">Personal Info</button></li>
 				<li><button class="offers_btn" type="button" style="width:200px;height:160px;background-color:lightblue" onClick="javascript:window.location='offersRecruiter.jsp';">Job Offers</button></li>
 				<li><button class="candidate_btn" type="button" style="width:200px;height:160px;background-color:lightblue" onClick="javascript:window.location='candidates.jsp';">Candidates</button></li>

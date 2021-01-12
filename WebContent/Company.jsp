@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="logic.presentation.bean.CompanyBean"
-		import="logic.bean.AddressBean"
+		import="logic.presentation.bean.AddressBean"
 		import="java.util.List"
 		import="java.util.ArrayList"
-		import="logic.bean.AccountBean"%>
+		import="java.util.Arrays"
+		import="logic.presentation.bean.AccountBean"
+		import="logic.application.control.RecruiterAccountControl"
+		import="logic.application.control.AccountControl"%>
 
 <!DOCTYPE html>
 
@@ -63,16 +66,16 @@
 	    		</div>
 	    		<div>
 	    		<input class="favourite_container" type="text" name="company_container" value="" disabled style="background-color:#C6D6D3">	
-	    		<button class="savechange_btn" type="submit" name="save_changes" style="width:100px; height:50px; top:550px; left:900px; background-color:dodgerblue">Save change</button>
+	    		<button class="savechange_btn" type="submit" name="save_changes" style="width:100px; height:50px; top:550px; left:900px; background-color:dodgerblue" onClick="saveCompanyInfo()">Save change</button>
 	    		<input class="companyTitle" type="text" name="companyname" value="Name" disabled style="top:140px; left:-160px;">	
-	    		<input class="companyTxt" type="text" name="inputName" value="<%=companyBean.getCompanyInfo().getName()%>" style="top:180px;left:-416px;">
+	    		<input class="companyTxt" type="text" name="inputName" value="<%=RecruiterAccountControl.getInstance().retrieveCompanyInfo().getName()%>" style="top:180px;left:-416px;">
 	    		<input class="companyTitle" type="text" name="companybranches" value="Branches" disabled style="top:140px; left:-250px;">
 	    		<%Object o;
 	    			Integer count = 1;
 	    			String str = "";
-		   				List <AddressBean> s = companyBean.getCompanyInfo().getBranches();
+		   				List <AddressBean> s = RecruiterAccountControl.getInstance().retrieveCompanyInfo().getBranches();
 		   				for(Integer i=0;i<s.size();i++){
-		   					if(i+1 == accountBean.getAccount().getId()){
+		   					if(i+1 == AccountControl.getInstance().retrieveAccount().getId()){
 		   						o=s.get(i);
 		   						for(Integer j=0;j<o.toString().length();j++){
 				   					if(o.toString().charAt(j) != ','){
@@ -131,12 +134,12 @@
          					</tr>
          					<%if(request.getParameter("add") != null){%>
          						<tr>
-      								<td contenteditable= "true" style="background-color:white; height:20px"></td>
-         							<td contenteditable= "true" style="background-color:white"></td>
-         							<td contenteditable= "true" style="background-color:white"></td>
-         							<td contenteditable= "true" style="background-color:white"></td>
-         							<td contenteditable= "true" style="background-color:white"></td>
-         							<td contenteditable= "true" style="background-color:white"></td>
+      								<td contenteditable= "true" id="country_modified" style="background-color:white; height:20px"></td>
+         							<td contenteditable= "true" id="state_modified" style="background-color:white"></td>
+         							<td contenteditable= "true" id="city_modified" style="background-color:white"></td>
+         							<td contenteditable= "true" id="postalCode_modified" style="background-color:white"></td>
+         							<td contenteditable= "true" id="street_modified" style="background-color:white"></td>
+         							<td contenteditable= "true" id="number_modified" style="background-color:white"></td>
          						</tr>
          					<%}%>
       					</thead>
@@ -144,11 +147,27 @@
       					</tbody>
       			</table>
 	    		<input class="companyTitle" type="text" name="companyndescription" value="Description" disabled style="top:200px; left:40px;">
-	    		<input class="companyTxt" type="text" name="inputDescription" value="<%=companyBean.getCompanyInfo().getDescription()%>" style="top:300px;left:-215px;width:300px;height:150px;">
-	    		<button class="savechange_btn" name="add" type="submit" value="Add" style="width:60px; height:30px; margin-left:1150px;margin-top:-20px; background-color:dodgerblue">Add</button>
+	    		<input class="companyTxt" type="text" name="inputDescription" value="<%=RecruiterAccountControl.getInstance().retrieveCompanyInfo().getDescription()%>" style="top:300px;left:-215px;width:300px;height:150px;">
+	    		<button class="savechange_btn" name="add" type="submit" value="Add" style="width:60px; height:30px; margin-left:1150px;margin-top:-20px; background-color:dodgerblue" onClick="saveNewRow('my_table')">Add</button>
 	    		</div>
-	    		<input type="hidden" id="hiddenField" name="variabile"/>
+	    		<input type="hidden" id="hiddenField" name="variabile" value=""/>
 	    	</form>
 	    </div>
+	    <script>function saveNewRow(id_table){
+	    			var address = new Array();
+	    			var table = document.getElementById(id_table);
+					var celle = table.getElementsByTagName('th');
+					for(var i=0; i<2;i++){
+						if(i == 2){
+							for(var j=0; j<celle.length; j++){
+								var aggiungi = address.push(celle[j].innerHTML);
+							}
+						}
+						
+					}
+					document.getElementById("hiddenField").value = address;
+
+	    			
+	    }</script>
 	</body>
 </html>
