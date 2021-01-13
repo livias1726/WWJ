@@ -70,7 +70,7 @@
 	    		<div>
 	    		<input class="favourite_container" type="text" name="company_container" value="" disabled style="background-color:#C6D6D3">	
 	    		<input class="companyTitle" type="text" name="companyname" value="Name" disabled style="top:140px; left:-160px;">	
-	    		<input class="companyTxt" type="text" name="inputName" value="<%=RecruiterAccountControl.getInstance().retrieveCompanyInfo().getName()%>" style="top:180px;left:-416px;">
+	    		
 	    		<input class="companyTitle" type="text" name="companybranches" value="Branches" disabled style="top:140px; left:-250px;">
 	    		<%Object o;
 	    			Integer count = 1;
@@ -138,7 +138,7 @@
       					</tbody>
       			</table>
 	    		<input class="companyTitle" type="text" name="companyndescription" value="Description" disabled style="top:200px; left:40px;">
-	    		<input class="companyTxt" type="text" name="inputDescription" value="<%=RecruiterAccountControl.getInstance().retrieveCompanyInfo().getDescription()%>" style="top:300px;left:-215px;width:300px;height:150px;">
+	    		
 	    		<script>function addRow(id){
 	    					var tbody = document.getElementById(id).getElementsByTagName("TBODY")[0];
 	    					var row = document.createElement("TR");
@@ -166,7 +166,9 @@
 	    		<a href="javascript:addRow('my_table')" style="width:60px; height:30px; margin-left:1150px;margin-top:-20px; background-color:dodgerblue">Add</a>
 	    		</div>
 	    		<form action="Company.jsp" name="Company" method="POST">
-	   <script>function saveNewRow(id_table){
+	    		<input class="companyTxt" type="text" name="inputName" value="<%=RecruiterAccountControl.getInstance().retrieveCompanyInfo().getName()%>" style="top:180px;left:-416px;">
+	    		<input class="companyTxt" type="text" name="inputDescription" value="<%=RecruiterAccountControl.getInstance().retrieveCompanyInfo().getDescription()%>" style="top:300px;left:-215px;width:300px;height:150px;">
+	    		<script>function saveNewRow(id_table){
 		   var address = new Array();
 			var table = document.getElementById(id_table);
 			var celle = table.getElementsByTagName('td');
@@ -186,31 +188,26 @@
 						string1 += nuova1.charAt(i);
 					}else if(p == 1){
 						request.setAttribute("country_mod", string1);
-						System.out.println(request.getAttribute("country_mod").toString());
 						p++;
 						string1 = "";
 						continue;
 					}else if(p == 2){
 						request.setAttribute("state_mod", string1);
-						System.out.println(request.getAttribute("state_mod").toString());
 						p++;
 						string1 = "";
 						continue;
 					}else if(p == 3){
 						request.setAttribute("city_mod", string1);
-						System.out.println(request.getAttribute("city_mod").toString());
 						p++;
 						string1 = "";
 						continue;
 					}else if(p == 4){
 						request.setAttribute("postalCode_mod", string1);
-						System.out.println(request.getAttribute("postalCode_mod").toString());
 						p++;
 						string1 = "";
 						continue;
 					}else if(p == 5){
 						request.setAttribute("street_mod", string1);
-						System.out.println(request.getAttribute("street_mod").toString());
 						p++;
 						string1 = "";
 						continue;
@@ -233,10 +230,10 @@
 				companyBean.setBranches(branches);
 				RecruiterAccountControl.getInstance().changeCompanyInfo(companyBean);
 				
-				
 			}%>
 
 	    }</script>
+	  
 	    <input type="hidden" id="hiddenField" name="variabile"/>
 	    <button class="savechange_btn" type="submit" name="save_changes" value="save" style="width:100px; height:50px; top:550px; left:900px; background-color:dodgerblue" onClick="saveNewRow('my_table')">Save changes</button>
 	    </form>
