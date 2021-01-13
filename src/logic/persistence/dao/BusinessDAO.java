@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import logic.domain.Business;
 import logic.domain.BusinessInCountry;
 import logic.domain.Country;
 import logic.exceptions.NoResultFoundException;
@@ -20,10 +21,10 @@ public class BusinessDAO {
 		/**/
 	}
 
-	public static List<String> selectBusinesses() throws SQLException {
+	public static List<Business> selectBusinesses() throws SQLException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
-		List<String> list = null;
+		List<Business> list = null;
 
 		try {
 			Connection conn = ConnectionManager.getConnection();
@@ -33,7 +34,9 @@ public class BusinessDAO {
 			if(res.first()) {
 				list = new ArrayList<>();
 				do {
-					list.add(res.getString("category"));
+					Business bus = new Business(res.getString("name"), res.getString("category"));
+					bus.setId(res.getInt("id"));
+					list.add(bus);
 				}while(res.next());
 			}
         } catch (SQLException e) {
@@ -93,20 +96,20 @@ public class BusinessDAO {
         return list;
 	}
 
-	public static List<BusinessInCountry> selectBusinessByName(String business) throws SQLException, NoResultFoundException {
+	public static List<BusinessInCountry> selectBusinessByCategory(String business) throws SQLException, NoResultFoundException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
 		List<BusinessInCountry> list = new ArrayList<>();
 
 		try {
 			Connection conn = ConnectionManager.getConnection();
-        	stmt = conn.prepareCall(RoutinesIdentifier.GET_BUSINESS_BY_NAME, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        	stmt = conn.prepareCall(RoutinesIdentifier.GET_BUSINESS_BY_CATEGORY, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			res = RoutinesManager.bindParametersAndExec(stmt, business);
 			
 			processResearch(res, list);
 			
         } catch (SQLException e) {
-        	throw new SQLException("An error occured while trying to retrieve list of businesses by name."); 
+        	throw new SQLException("An error occured while trying to retrieve list of businesses."); 
 		} finally {
 			if(stmt != null) {
 				stmt.close();
@@ -114,6 +117,29 @@ public class BusinessDAO {
 		}
         
         return list;
+	}
+	
+	private static void processResearch(ResultSet res, List<BusinessInCountry> list) throws NoResultFoundException, SQLException {
+		if(!res.first()) {
+			throw new NoResultFoundException();
+		}
+
+		res.first();
+		do {
+			BusinessInCountry business = new BusinessInCountry();
+			business.setId(res.getInt("id"));
+			business.setName(res.getString("name"));
+			business.setCategory(res.getString("category"));
+			
+			Country country = new Country();
+			country.setName(res.getString("country"));
+			business.setCountry(country);
+			
+			business.setAverageEarnings(res.getFloat("average_earnings"));
+			business.setAverageManagementCost(res.getFloat("average_costs"));
+			
+			list.add(business);
+		}while(res.next());
 	}
 	
 	public static List<BusinessInCountry> selectFavourites(String id) throws SQLException {
@@ -139,30 +165,6 @@ public class BusinessDAO {
 		}
         
         return list;
-	}
-
-	private static void processResearch(ResultSet res, List<BusinessInCountry> list) throws NoResultFoundException, SQLException {
-		if(!res.first()) {
-			throw new NoResultFoundException();
-		}
-
-		res.first();
-		do {
-			BusinessInCountry business = new BusinessInCountry();
-			business.setId(res.getInt("id"));
-			business.setName(res.getString("name"));
-			business.setCategory(res.getString("category"));
-			
-			Country country = new Country();
-			country.setName(res.getString("country"));
-			business.setCountry(country);
-			
-			business.setDescription(res.getString("description"));
-			business.setAverageEarnings(res.getFloat("average_earnings"));
-			business.setAverageManagementCost(res.getFloat("average_costs"));
-			
-			list.add(business);
-		}while(res.next());
 	}
 
 	public static void insertIntoFavourite(int idFav, long idEnt) throws SQLException {

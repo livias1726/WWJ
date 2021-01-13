@@ -1,10 +1,5 @@
 package logic.presentation.bean;
 
-import java.util.List;
-
-import logic.application.control.ViewBusinessControl;
-import logic.exceptions.DatabaseFailureException;
-
 public class BusinessBean {
 	
 	protected int id;
@@ -33,10 +28,5 @@ public class BusinessBean {
 
 	public void setCategory(String category) {
 		this.category = category;
-	}
-
-
-	public List<String> getBusinesses() throws DatabaseFailureException{
-		return ViewBusinessControl.getInstance().retrieveBusinesses();
 	}
 }

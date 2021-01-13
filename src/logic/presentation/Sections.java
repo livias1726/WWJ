@@ -11,5 +11,6 @@ public enum Sections {
 	FAV_OFFERS, 
 	STATISTICS, 
 	FEASIBILITY, 
-	OFFER;
+	OFFER,
+	BUSINESS;
 }

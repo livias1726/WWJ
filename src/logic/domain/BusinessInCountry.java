@@ -44,8 +44,8 @@ public class BusinessInCountry extends Business {
 		this.country = country;
 	}
 	
-	public List<BusinessInCountry> getBusinessesByName(String business) throws SQLException, NoResultFoundException{
-		return BusinessDAO.selectBusinessByName(business);
+	public List<BusinessInCountry> getBusinessesByCategory(String business) throws SQLException, NoResultFoundException{
+		return BusinessDAO.selectBusinessByCategory(business);
 	}
 	
 	public List<BusinessInCountry> getBusinessesByPlace(String country) throws SQLException, NoResultFoundException{

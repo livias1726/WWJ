@@ -8,6 +8,7 @@ import logic.domain.Business;
 import logic.domain.BusinessInCountry;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
+import logic.presentation.bean.BusinessBean;
 import logic.presentation.bean.BusinessInCountryBean;
 import logic.presentation.bean.CountryBean;
 
@@ -27,20 +28,30 @@ public class ViewBusinessControl extends ViewResultsControl{
         return instance;
     }
     
-    public List<String> retrieveBusinesses() throws DatabaseFailureException{
+    public List<BusinessBean> retrieveBusinesses() throws DatabaseFailureException{
 		Business business = new Business();
+		List<BusinessBean> bus = new ArrayList<>();
     	try {
-			return business.getAvailableBusinesses();
+    		for(Business i: business.getAvailableBusinesses()) {
+    			BusinessBean bean = new BusinessBean();
+				bean.setId(i.getId());
+				bean.setName(i.getName());
+				bean.setCategory(i.getCategory());
+				
+				bus.add(bean);
+    		}
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();
 		}
+    	
+    	return bus;
     }
     
-    public List<BusinessInCountryBean> retrieveBusinessesByName(BusinessInCountryBean bean) throws NoResultFoundException, DatabaseFailureException {
+    public List<BusinessInCountryBean> retrieveBusinessesByCategory(BusinessInCountryBean bean) throws NoResultFoundException, DatabaseFailureException {
     	BusinessInCountry business = new BusinessInCountry();
     	List<BusinessInCountry> list;
 		try {
-			list = business.getBusinessesByName(bean.getName());
+			list = business.getBusinessesByCategory(bean.getCategory());
 		} catch (NoResultFoundException e) {
 			throw new NoResultFoundException();
 		} catch (SQLException se) {
@@ -51,10 +62,10 @@ public class ViewBusinessControl extends ViewResultsControl{
     }
     
     public List<BusinessInCountryBean> retrieveBusinessesByCountry(CountryBean bean) throws NoResultFoundException, DatabaseFailureException {
-    	BusinessInCountry offer = new BusinessInCountry();
+    	BusinessInCountry business = new BusinessInCountry();
     	List<BusinessInCountry> list;
 		try {
-			list = offer.getBusinessesByPlace(bean.getName());
+			list = business.getBusinessesByPlace(bean.getName());
 		} catch (NoResultFoundException e) {
 			throw new NoResultFoundException();
 		} catch (SQLException se) {
@@ -68,7 +79,7 @@ public class ViewBusinessControl extends ViewResultsControl{
     	BusinessInCountry offer = new BusinessInCountry();
     	List<BusinessInCountry> list;
 		try {
-			list = offer.getBusinessesInCountry(country.getName(), bus.getName());
+			list = offer.getBusinessesInCountry(country.getName(), bus.getCategory());
 		} catch (NoResultFoundException e) {
 			throw new NoResultFoundException();
 		} catch (SQLException se) {
@@ -85,16 +96,23 @@ public class ViewBusinessControl extends ViewResultsControl{
     		
     		bean.setId(i.getId());
     		bean.setName(i.getName());
-    		bean.setDescription(i.getDescription());
     		bean.setCategory(i.getCategory());
     		
     		CountryBean country = new CountryBean();
     		country.setName(i.getCountry().getName());
     		bean.setCountry(country);
     		
+    		bean.setAverageEarnings(i.getAverageEarnings());
+    		bean.setAverageManagementCost(i.getAverageManagementCost());
+    		
     		dest.add(bean);
     	}
     	
     	return dest;
+	}
+
+	public BusinessInCountryBean retrieveBusinessById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

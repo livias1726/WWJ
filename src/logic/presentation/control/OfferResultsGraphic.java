@@ -17,7 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import logic.application.SessionFacade;
 import logic.application.control.ViewOfferControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
@@ -70,14 +69,7 @@ public class OfferResultsGraphic extends ToolBarGraphic{
 	
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
-		//Edit toolbar
-		if(SessionFacade.getSession().getID() == null) {
-			premiumBtn.setVisible(false);
-			outBtn.setVisible(false);
-			notifyBtn.setVisible(false);
-		}else {
-			inBtn.setVisible(false);
-		}
+		super.initialize(url, resource);
 		
 		List<CheckBox> group = new ArrayList<>();
 		List<OfferBean> filteredList;
@@ -86,8 +78,8 @@ public class OfferResultsGraphic extends ToolBarGraphic{
 			if(searchedJob == null) {
 				searchIDLbl.setText(searchedCountry.getName());
 				searchIDLbl.setAlignment(Pos.CENTER);
-				//Retrieve offers by Country
 				
+				//Retrieve offers by Country			
 				offers = ViewOfferControl.getInstance().retrieveOffersByCountry(searchedCountry);
 				
 				filteredList = new ArrayList<>();

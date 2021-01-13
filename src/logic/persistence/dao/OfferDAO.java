@@ -108,7 +108,7 @@ public class OfferDAO {
                 	item.setPosition(position);
                 	
                 	item.setUpload(res.getDate("upload").toLocalDate());
-                	item.setExpiration(res.getDate("expiration").toLocalDate());
+                	item.setExpiration(res.getDate("exp").toLocalDate());
                 	item.setCandidates(res.getInt("candidates"));
                 	
                 	list.add(item);

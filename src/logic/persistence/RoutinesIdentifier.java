@@ -25,8 +25,8 @@ public class RoutinesIdentifier {
 	public static final String GET_JOBS = "call wwj_db.retrieve_jobs()";
 	public static final String GET_BUSINESSES = "call wwj_db.retrieve_businesses()";
 	public static final String GET_BUSINESS_IN_COUNTRY = "call wwj_db.retrieve_business_in_country(?, ?)";
-	public static final String GET_BUSINESS_BY_COUNTRY = "call wwj_db.retrieve_business_by_country(?)";
-	public static final String GET_BUSINESS_BY_NAME = "call wwj_db.retrieve_business_by_name(?)";
+	public static final String GET_BUSINESS_BY_COUNTRY = "call wwj_db.retrieve_businesses_by_country(?)";
+	public static final String GET_BUSINESS_BY_CATEGORY = "call wwj_db.retrieve_businesses_by_category(?)";
 	public static final String GET_FAVOURITE_BUSINESSES = "call wwj_db.retrieve_favourite_businesses(?)";
 	public static final String GET_APPLICATIONS = "call wwj_db.retrieve_applications(?)";
 	public static final String DELETE_APPLICATION = "call wwj_db.delete_application(?, ?)";

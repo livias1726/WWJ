@@ -1,34 +1,28 @@
 package logic.presentation.control;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ToolBar;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-import logic.application.SessionFacade;
+import logic.application.control.ViewBusinessControl;
 import logic.application.control.ViewResultsControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
+import logic.presentation.ToolBarGraphic;
 import logic.presentation.bean.BusinessBean;
 import logic.presentation.bean.BusinessInCountryBean;
 import logic.presentation.bean.CountryBean;
 
-public class SearchEntrepreneurGraphic implements Initializable {
-	
-	@FXML
-	private AnchorPane pane;
-	
+public class SearchEntrepreneurGraphic extends ToolBarGraphic {
+
     @FXML
     private ComboBox<String> placeSearch;
 
@@ -37,59 +31,29 @@ public class SearchEntrepreneurGraphic implements Initializable {
 
     @FXML
     private Button searchBtn;
-
-    @FXML
-    private Button homeBtn;
-
-    @FXML
-    private Button backBtn;
-
-    @FXML
-    private MenuButton notifyBtn;
-
-    @FXML
-    private MenuButton userBtn;
-
-    @FXML
-    private MenuItem outBtn;
-
-    @FXML
-    private MenuItem inBtn;
-
-    @FXML
-    private MenuButton menuBtn;
-
-    @FXML
-    private MenuItem premiumBtn;
-    
-    @FXML
-    private ToolBar toolBar;
     
     private List<String> cList;
     private List<String> bList;
     
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
+		super.initialize(url, resource);
 		//Edit search btn
 		searchBtn.disableProperty().bind(Bindings.not(businessSearch.valueProperty().isNotNull().or(placeSearch.valueProperty().isNotNull())));
 		
-		//Edit toolbar
-		if(SessionFacade.getSession().getID() == null) {
-			premiumBtn.setVisible(false);
-			outBtn.setVisible(false);
-			notifyBtn.setVisible(false);
-		}else {
-			inBtn.setVisible(false);
-		}
-		
-		//Edit combo boxes: retrieve from DB
-		
+		//Edit combo boxes: retrieve from DB	
 		try {
 			cList = ViewResultsControl.getInstance().retrieveCountries();
-			bList = (new BusinessBean()).getBusinesses();	
+			
+			bList = new ArrayList<>();
+			for(BusinessBean i: ViewBusinessControl.getInstance().retrieveBusinesses()) {
+				bList.add(i.getCategory());
+			}
+			
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
+		
 		placeSearch.getItems().addAll(cList);
 		businessSearch.getItems().addAll(bList);
 	}
@@ -98,27 +62,27 @@ public class SearchEntrepreneurGraphic implements Initializable {
 	public void search() {
 		Stage stage = (Stage)pane.getScene().getWindow();
 		BusinessResultsGraphic controller;
-		
+
 		if (placeSearch.getValue() != null && !placeSearch.getValue().equals("")) {
 			CountryBean country = new CountryBean();
 			country.setName(placeSearch.getValue());
-			
+
 			if (businessSearch.getValue() != null && !businessSearch.getValue().equals("")) {
 				BusinessInCountryBean bus = new BusinessInCountryBean();
-				bus.setName(businessSearch.getValue());
+				bus.setCategory(businessSearch.getValue());
 				
-				controller = new BusinessResultsGraphic(toolBar, country, bus);			
+				controller = new BusinessResultsGraphic(country, bus);			
 			}else {
-				controller = new BusinessResultsGraphic(toolBar, country, bList);
+				controller = new BusinessResultsGraphic(country, bList);
 			}
-			
+
 		}else {
 			BusinessInCountryBean bus = new BusinessInCountryBean();
-			bus.setName(businessSearch.getValue());
-			
-			controller = new BusinessResultsGraphic(toolBar, bus, cList);	
+			bus.setCategory(businessSearch.getValue());
+
+			controller = new BusinessResultsGraphic(bus, cList);	
 		}
-		
+
 		stage.setScene(GraphicHandler.switchScreen(Scenes.BUSINESSES, controller));
 	}
 }

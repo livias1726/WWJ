@@ -8,40 +8,27 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ToolBar;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import logic.application.SessionFacade;
+import logic.application.control.ViewBusinessControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Scenes;
+import logic.presentation.Sections;
+import logic.presentation.ToolBarGraphic;
 import logic.presentation.bean.BusinessInCountryBean;
 import logic.presentation.bean.CountryBean;
 
-public class BusinessResultsGraphic implements Initializable {
-	
-	private CountryBean searchedCountry;
-	private BusinessInCountryBean searchedBusiness;
-	private List<BusinessInCountryBean> businesses;
-	private List<BusinessInCountryBean> results;	
-	private List<String> cList;
-    private List<String> bList;
-    private ObservableList<String> items = FXCollections.observableArrayList("Earnings", "Management cost");
-    private List<CheckBox> filters = new ArrayList<>();
-    
-	private ToolBar toolBar;
-	
-	@FXML
-	private AnchorPane pane;
-	
+
+public class BusinessResultsGraphic extends ToolBarGraphic{
+	 
 	@FXML 
 	private Label searchIDLbl;
 	
@@ -57,60 +44,75 @@ public class BusinessResultsGraphic implements Initializable {
 	@FXML
 	private VBox resultsBox;
 	
-	public BusinessResultsGraphic(ToolBar t, CountryBean c, List<String> list) {
-		this.toolBar = t;
+	private CountryBean searchedCountry;
+	private BusinessInCountryBean searchedBusiness;
+	private List<BusinessInCountryBean> businesses;	
+	private List<String> cList;
+    private List<String> bList;
+    private ObservableList<String> items = FXCollections.observableArrayList("Earnings", "Management cost");
+    private List<CheckBox> filters = new ArrayList<>();
+	
+	public BusinessResultsGraphic(CountryBean c, List<String> list) {
 		this.searchedCountry = c;
 		this.bList = list;
 	}
 	
-	public BusinessResultsGraphic(ToolBar t, BusinessInCountryBean b, List<String> list) {
-		this.toolBar = t;
+	public BusinessResultsGraphic(BusinessInCountryBean b, List<String> list) {
 		this.searchedBusiness = b;
 		this.cList = list;
 	}
 
-	public BusinessResultsGraphic(ToolBar t, CountryBean c, BusinessInCountryBean b) {
-		this.toolBar = t;
+	public BusinessResultsGraphic(CountryBean c, BusinessInCountryBean b) {
 		this.searchedCountry = c;
 		this.searchedBusiness = b;
 	}
 	
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
-		//Set toolbar
-		pane.getChildren().add(toolBar);
-		
+		super.initialize(url, resource);
+
 		//Get results
-		BusinessInCountryBean res = new BusinessInCountryBean();
-		
+		List<CheckBox> group = new ArrayList<>();
+		List<BusinessInCountryBean> filteredList;
 		try {
 			if(searchedBusiness == null) {
-				businesses = res.getBusinesses(searchedCountry);
 				searchIDLbl.setText(searchedCountry.getName());
+				searchIDLbl.setAlignment(Pos.CENTER);
+
+				businesses = ViewBusinessControl.getInstance().retrieveBusinessesByCountry(searchedCountry);
 				
+				filteredList = new ArrayList<>();
+
 				filterLab.setText("Categories");
 				for(String i: bList) {
 					CheckBox item = new CheckBox(i);
 					filterBox.getChildren().add(item);
-					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterBusiness(businesses, item, newValue));
+					group.add(item);
+					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterBusiness(filteredList, group));
 					filters.add(item);
 				}
-				
+
 			} else if(searchedCountry == null) {
-				businesses = res.getBusinesses(searchedBusiness);
-				searchIDLbl.setText(searchedBusiness.getName());
+				searchIDLbl.setText(searchedBusiness.getCategory());	
+				searchIDLbl.setAlignment(Pos.CENTER);
+				
+				businesses = ViewBusinessControl.getInstance().retrieveBusinessesByCategory(searchedBusiness);
+				
+				filteredList = new ArrayList<>();
 				
 				filterLab.setText("Countries");	
 				for(String i: cList) {
 					CheckBox item = new CheckBox(i);
 					filterBox.getChildren().add(item);
-					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterCountry(businesses, item, newValue));
+					group.add(item);
+					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterCountry(filteredList, group));
 					filters.add(item);
 				}
 				
 			} else {
-				businesses = res.getBusinesses(searchedCountry, searchedBusiness);
-				searchIDLbl.setText(searchedBusiness.getName() + "in" + searchedCountry.getName());
+				businesses = ViewBusinessControl.getInstance().retrieveBusinesses(searchedCountry, searchedBusiness);
+				searchIDLbl.setText(searchedBusiness.getCategory() + " in " + searchedCountry.getName());
+				searchIDLbl.setAlignment(Pos.CENTER);
 				
 				filterBox.setVisible(false);
 			}
@@ -120,80 +122,84 @@ public class BusinessResultsGraphic implements Initializable {
 		} catch (DatabaseFailureException de) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, de.getMessage());
 			goBack();
-		}	
-		
-		results = new ArrayList<>();
-		results.addAll(businesses);
+		}
 		
 		//Add listener to filters choice box
-		order.getSelectionModel().selectedIndexProperty().addListener((obv, oldValue, newValue) -> orderResults(results, newValue));		
+		order.getSelectionModel().selectedIndexProperty().addListener((obv, oldValue, newValue) -> orderResults(businesses, newValue));		
 		order.setItems(items);
 		order.setValue(items.get(0));
 		
 		initResults(businesses);
 	}
 	
-	private void filterCountry(List<BusinessInCountryBean> list, CheckBox item, Boolean newValue) {
-		if(Boolean.TRUE.equals(newValue)) {
-			if(list.containsAll(results)) {
-				results.clear();
-			}
-			
-			for(BusinessInCountryBean i: list) {
-				if(i.getCountry().getName().equals(item.getText())) {
-					results.add(i);
-				}
-			}
-		} else {
-			for(BusinessInCountryBean i: results) {
-				if(i.getCountry().getName().equals(item.getText())) {
-					results.remove(i);
-				}
-			}
+	private void filterCountry(List<BusinessInCountryBean> list, List<CheckBox> selected) {
+		list.clear();
+		int count = 0;
+		for(CheckBox i: selected) {
+	    	if(i.isSelected()) {
+	    		count++;
+	    		for(BusinessInCountryBean o: businesses) {
+	    			if(o.getCountry().getName().equals(i.getText())) {
+	    				list.add(o);
+	    			}
+	    		}
+	    	}
+	    }	
+		
+		if(count == 0) {
+			list.addAll(businesses);
 		}
 		
-		initResults(results);
+		initResults(list);
 	}
 
-	private void filterBusiness(List<BusinessInCountryBean> list, CheckBox item, Boolean newValue) {
-		if(Boolean.TRUE.equals(newValue)) {
-			if(list.containsAll(results)) {
-				results.clear();
-			}
-			
-			for(BusinessInCountryBean i: list) {
-				if(i.getCategory().equals(item.getText())) {
-					results.add(i);
-				}
-			}
-		} else {
-			for(BusinessInCountryBean i: results) {
-				if(i.getCategory().equals(item.getText())) {
-					results.remove(i);
-				}
-			}
+	private void filterBusiness(List<BusinessInCountryBean> list, List<CheckBox> selected) {
+		list.clear();
+		int count = 0;
+		for(CheckBox i: selected) {
+	    	if(i.isSelected()) {
+	    		count++;
+	    		for(BusinessInCountryBean o: businesses) {
+	    			if(o.getCategory().equals(i.getText())) {
+	    				list.add(o);
+	    			}
+	    		}
+	    	}
+	    }	
+		
+		if(count == 0) {
+			list.addAll(businesses);
 		}
 		
-		initResults(results);
+		initResults(list);
 	}
 
 	private void initResults(List <BusinessInCountryBean> list) {
-		
-		for(BusinessInCountryBean i: list) {
+		resultsBox.getChildren().clear();
+		for(BusinessInCountryBean i: list) {			
 			Button res = new Button();
 			res.setPrefHeight(70);
 			res.setPrefWidth(resultsBox.getPrefWidth() - (resultsBox.getSpacing())*2);
+
+			res.setText(i.getName() + " - " + i.getCountry().getName());
+
+			res.setOnAction(event -> openBusinessDetails(i.getId()));
 			
-			res.setOnAction(event -> {
-					Stage stage = (Stage)pane.getScene().getWindow();
-					stage.setScene(GraphicHandler.switchScreen(Scenes.BUSINESS, new BusinessDetailsGraphic(i)));
-				}
-			);
-		
+			res.setStyle("-fx-font-size: 15px;");
+			res.setCursor(Cursor.HAND);
+			
 			resultsBox.getChildren().add(res);
 		}
 	}
 	
+	private void openBusinessDetails(Integer id) {
+		BusinessInCountryBean bean = ViewBusinessControl.getInstance().retrieveBusinessById(id);
+		
+		Stage popup = GraphicHandler.openSection(pane, Sections.BUSINESS, new BusinessDetailsGraphic(bean));
+		popup.centerOnScreen();
+		popup.show();
+	}
+
 	public void orderResults(List <BusinessInCountryBean> list, Number filter) {
 		list.sort((BusinessInCountryBean b1, BusinessInCountryBean b2) -> {
 			if(filter.intValue() == 0) {
@@ -202,12 +208,5 @@ public class BusinessResultsGraphic implements Initializable {
         		return b1.getAverageManagementCost().compareTo(b2.getAverageManagementCost());
         	}    
 	    });
-	}
-	
-	@FXML
-	public void goBack(){
-		Scenes prev = SessionFacade.getSession().getPrevScene();			
-		Stage stage = (Stage)pane.getScene().getWindow();			
-		stage.setScene(GraphicHandler.switchScreen(prev, null));
 	}
 }

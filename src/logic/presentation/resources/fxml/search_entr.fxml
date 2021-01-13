@@ -12,14 +12,81 @@
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1180.0" styleClass="se" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="logic.presentation.control.SearchEntrepreneurGraphic">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1180.0" styleClass="se" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logic.presentation.control.SearchEntrepreneurGraphic">
    <children>
+      <ToolBar prefHeight="60.0" prefWidth="1180.0" styleClass="toolbar">
+         <items>
+            <HBox prefHeight="50.0" prefWidth="158.0">
+               <children>
+                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="main_icon" />
+                  <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#goToHome" prefHeight="30.0" prefWidth="30.0" styleClass="home_btn">
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="back_btn">
+                     <HBox.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+            <Pane prefHeight="50.0" prefWidth="755.0" />
+            <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="243.0" spacing="20.0">
+               <children>
+                  <MenuButton fx:id="notifyBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="notify_btn">
+                     <HBox.margin>
+                        <Insets left="10.0" top="10.0" />
+                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </MenuButton>
+                  <MenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="user_btn">
+                     <items>
+                        <MenuItem fx:id="profBtn" mnemonicParsing="false" onAction="#goToProfile" text="Profile" />
+                        <MenuItem fx:id="outBtn" mnemonicParsing="false" onAction="#logout" text="Logout" />
+                        <MenuItem fx:id="inBtn" mnemonicParsing="false" onAction="#login" text="Login" />
+                     </items>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </MenuButton>
+                  <MenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="menu_btn" textFill="#00000001">
+                     <items>
+                        <MenuItem fx:id="pubBtn" mnemonicParsing="false" onAction="#openNewOffer" text="Publish an offer" />
+                        <MenuItem fx:id="premiumBtn" mnemonicParsing="false" onAction="#buyPremium" text="Buy premium version" />
+                        <MenuItem mnemonicParsing="false" onAction="#openOnlineDoc" text="Support" />
+                        <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Quit" />
+                     </items>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </MenuButton>
+               </children>
+            </HBox>
+         </items>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" color="#0f318d" />
+         </effect>
+      </ToolBar>
    	  <VBox alignment="CENTER" layoutX="233.0" layoutY="147.0" prefHeight="497.0" prefWidth="714.0" spacing="50.0">
 	   	 <children>
 	   	 	<Label alignment="CENTER" prefHeight="76.0" prefWidth="261.0" text="Become your own boss" textAlignment="CENTER" textFill="WHITE">
@@ -54,62 +121,5 @@
 	         <Insets bottom="250.0" top="80.0" />
 	      </padding>
 	</VBox>
-      <ToolBar prefHeight="60.0" prefWidth="1180.0" styleClass="toolbar" BorderPane.alignment="CENTER">
-        <items>
-            <HBox prefHeight="50.0" prefWidth="158.0">
-               <children>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="main_icon" />
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="home_btn">
-                     <HBox.margin>
-                        <Insets left="10.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="back_btn">
-                     <HBox.margin>
-                        <Insets left="20.0" top="10.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
-            <Pane prefHeight="50.0" prefWidth="755.0" />
-            <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="243.0" spacing="20.0">
-               <children>
-                  <MenuButton fx:id="notifyBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="notify_btn">
-                     <HBox.margin>
-                        <Insets left="10.0" top="10.0" />
-                     </HBox.margin>
-                  </MenuButton>
-                  <MenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="user_btn">
-                     <items>
-                        <MenuItem fx:id="inBtn" mnemonicParsing="false" onAction="#login" text="Login" />
-                        <MenuItem fx:id="outBtn" mnemonicParsing="false" onAction="#logout" text="Logout" visible="false" />
-                     </items>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets top="10.0" />
-                     </HBox.margin>
-                  </MenuButton>
-                  <MenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" styleClass="menu_btn" textFill="#00000001">
-                     <items>
-                        <MenuItem fx:id="premiumBtn" mnemonicParsing="false" onAction="#buyPremium" text="Buy premium version" />
-                        <MenuItem mnemonicParsing="false" onAction="#openOnlineDoc" text="Support" />
-                        <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Quit" />
-                     </items>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets right="10.0" top="10.0" />
-                     </HBox.margin>
-                  </MenuButton>
-               </children>
-            </HBox>
-        </items>
-         <effect>
-            <DropShadow blurType="ONE_PASS_BOX" color="#0f318d" />
-         </effect>
-      </ToolBar>
    </children>
 </AnchorPane>

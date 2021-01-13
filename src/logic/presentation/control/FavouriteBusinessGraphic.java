@@ -8,7 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
@@ -16,7 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
-import logic.presentation.Scenes;
 import logic.presentation.bean.BusinessInCountryBean;
 
 public class FavouriteBusinessGraphic implements Initializable {
@@ -46,20 +44,7 @@ public class FavouriteBusinessGraphic implements Initializable {
 			GraphicHandler.popUpMsg(AlertType.ERROR, de.getMessage());
 			closePlanSection();
 		}	
-		
-		for(BusinessInCountryBean i: businesses) {
-			Button bus = new Button();
-			bus.setPrefHeight(70);
-			bus.setPrefWidth(favBox.getPrefWidth() - (favBox.getSpacing())*2);
-			
-			bus.setOnAction(event -> {
-					Stage stage = (Stage)plansPane.getScene().getWindow();
-					stage.setScene(GraphicHandler.switchScreen(Scenes.BUSINESS, new BusinessDetailsGraphic(i)));
-				}
-			);
-		
-			favBox.getChildren().add(bus);
-		}	
+	
 	}
 	
     public void orderResults(List <BusinessInCountryBean> list, Number filter) {

@@ -3,15 +3,14 @@ package logic.presentation.bean;
 import java.util.List;
 
 import logic.application.control.EntrepreneurAccountControl;
-import logic.application.control.ViewBusinessControl;
 import logic.exceptions.DatabaseFailureException;
-import logic.exceptions.NoResultFoundException;
 
 public class BusinessInCountryBean extends BusinessBean{
 
 	private Float averageManagementCost;
 	private Float averageEarnings;
 	private String description;
+	private int rank;
 	private CountryBean country;
 	
 	public Float getAverageManagementCost() {
@@ -37,6 +36,14 @@ public class BusinessInCountryBean extends BusinessBean{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
 
 	public CountryBean getCountry() {
 		return country;
@@ -44,18 +51,6 @@ public class BusinessInCountryBean extends BusinessBean{
 
 	public void setCountry(CountryBean country) {
 		this.country = country;
-	}
-
-	public List<BusinessInCountryBean> getBusinesses(CountryBean country, BusinessInCountryBean bus) throws NoResultFoundException, DatabaseFailureException{
-		return ViewBusinessControl.getInstance().retrieveBusinesses(country, bus);
-	}
-	
-	public List<BusinessInCountryBean> getBusinesses(CountryBean country) throws NoResultFoundException, DatabaseFailureException{
-		return ViewBusinessControl.getInstance().retrieveBusinessesByCountry(country);
-	}
-	
-	public List<BusinessInCountryBean> getBusinesses(BusinessInCountryBean bus) throws NoResultFoundException, DatabaseFailureException{
-		return ViewBusinessControl.getInstance().retrieveBusinessesByName(bus);
 	}
 
 	public List<BusinessInCountryBean> getFavouriteBusinesses() throws DatabaseFailureException {

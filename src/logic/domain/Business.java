@@ -10,6 +10,15 @@ public class Business {
 	protected int id;
 	protected String category;
 	protected String name;
+	
+	public Business() {
+		/**/
+	}
+	
+	public Business(String name, String category) {
+		this.name = name;
+		this.category = category;				
+	}
 
 	public int getId() {
 		return id;
@@ -18,7 +27,6 @@ public class Business {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	
 	public String getCategory() {
 		return category;
@@ -36,7 +44,7 @@ public class Business {
 		this.name = name;
 	}
 	
-	public List<String> getAvailableBusinesses() throws SQLException{
+	public List<Business> getAvailableBusinesses() throws SQLException{
 		return BusinessDAO.selectBusinesses();
 	}
 }

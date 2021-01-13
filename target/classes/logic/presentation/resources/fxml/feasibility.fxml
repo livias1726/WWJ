@@ -3,9 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,411 +12,226 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="588.0" prefWidth="1136.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
-  <content>
-      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1134.0" prefWidth="1133.0" styleClass="result_box">
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="1180.0" styleClass="result_box" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="36.0" layoutY="56.0" text="Business Name - Feasibility">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Label>
+      <Button fx:id="backBtn" layoutX="1102.0" layoutY="41.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="close_btn">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="738.0" layoutY="204.0" text="Business taxes*" textFill="#000000b5">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <VBox layoutX="774.0" layoutY="248.0" prefHeight="207.0" prefWidth="260.0" spacing="20.0">
          <children>
-            <Label layoutX="36.0" layoutY="56.0" text="Business Name - Feasibility">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <effect>
-                  <InnerShadow />
-               </effect>
-            </Label>
-            <Button fx:id="backBtn" layoutX="1077.0" layoutY="20.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="close_btn">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <HBox layoutX="531.0" layoutY="56.0" prefHeight="54.0" prefWidth="521.0" spacing="30.0">
+            <HBox prefHeight="25.0" prefWidth="281.0" spacing="20.0">
                <children>
-                  <Label prefHeight="20.0" prefWidth="88.0" text="Insert budget">
+                  <Label text="Income tax">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                      <HBox.margin>
-                        <Insets top="12.0" />
+                        <Insets />
                      </HBox.margin>
+                  </Label>
+                  <TextField editable="false" />
+               </children>
+            </HBox>
+            <HBox prefHeight="25.0" prefWidth="351.0" spacing="20.0">
+               <children>
+                  <Label text="Corporate tax">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <TextField editable="false" />
+               </children>
+            </HBox>
+            <HBox prefHeight="15.0" prefWidth="351.0" spacing="20.0">
+               <children>
+                  <Label text="Capital gains">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <TextField editable="false" />
+               </children>
+            </HBox>
+            <HBox prefHeight="0.0" prefWidth="276.0" spacing="20.0">
+               <children>
+                  <Label text="Sales tax">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <TextField editable="false" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Label text="Property tax">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <TextField prefHeight="30.0" prefWidth="197.0">
-                           <HBox.margin>
-                              <Insets top="10.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <ComboBox prefHeight="30.0" prefWidth="30.0" styleClass="dollar">
-                           <HBox.margin>
-                              <Insets top="10.0" />
-                           </HBox.margin>
-                        </ComboBox>
-                     </children>
-                  </HBox>
-                  <Button disable="true" layoutX="360.0" layoutY="10.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="178.0" styleClass="spec_btn" text="Recalculate" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <effect>
-                        <InnerShadow color="#062ca8" />
-                     </effect>
-                  </Button>
+                  <TextField editable="false" />
                </children>
             </HBox>
-            <Label layoutX="738.0" layoutY="121.0" text="Business taxes*" textFill="#000000b5">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <VBox layoutX="774.0" layoutY="159.0" prefHeight="207.0" prefWidth="260.0" spacing="20.0">
+         </children>
+      </VBox>
+      <Label layoutX="738.0" layoutY="470.0" prefHeight="17.0" prefWidth="166.0" text="*All taxes are based on a year" textFill="#000000b5" />
+      <Label layoutX="36.0" layoutY="121.0" text="Basic living expense" textFill="#000000b5">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <VBox layoutX="68.0" layoutY="159.0" prefHeight="89.0" prefWidth="566.0">
+         <children>
+            <HBox prefHeight="28.0" prefWidth="624.0">
                <children>
-                  <HBox prefHeight="25.0" prefWidth="281.0" spacing="20.0">
-                     <children>
-                        <Label text="Income tax">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <TextField editable="false" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="25.0" prefWidth="351.0" spacing="20.0">
-                     <children>
-                        <Label text="Corporate tax">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <TextField editable="false" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="15.0" prefWidth="351.0" spacing="20.0">
-                     <children>
-                        <Label text="Capital gains">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <TextField editable="false" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="0.0" prefWidth="276.0" spacing="20.0">
-                     <children>
-                        <Label text="Sales tax">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <TextField editable="false" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="26.0" prefWidth="200.0" spacing="20.0">
-                     <children>
-                        <Label text="Property tax">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <TextField editable="false" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <Label layoutX="738.0" layoutY="393.0" prefHeight="17.0" prefWidth="166.0" text="*All taxes are based on a year" textFill="#000000b5" />
-            <Label layoutX="36.0" layoutY="121.0" text="Basic living expense" textFill="#000000b5">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <VBox layoutX="68.0" layoutY="159.0" prefHeight="551.0" prefWidth="670.0" spacing="10.0">
-               <children>
-                  <Label text="Groceries (per kg)">
+                  <Label prefHeight="25.0" prefWidth="188.0" text="Total Living Expenses in ">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <VBox prefHeight="142.0" prefWidth="489.0" spacing="10.0">
-                     <children>
-                        <HBox prefHeight="30.0" prefWidth="489.0" spacing="20.0">
-                           <children>
-                              <Label text="Fruit">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField editable="false" />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="33.0" prefWidth="489.0" spacing="20.0">
-                           <children>
-                              <Label text="Vegetables">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField editable="false" />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="26.0" prefWidth="489.0" spacing="20.0">
-                           <children>
-                              <Label text="Products of animal origin">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField editable="false" />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="20.0" prefWidth="489.0" spacing="20.0">
-                           <children>
-                              <Label text="Cereal products">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField editable="false" />
-                           </children>
-                        </HBox>
-                     </children>
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                  </VBox>
-                  <Label text="Apartment (per square meter)">
+                  <Label text="ExampleCity">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <VBox prefHeight="67.0" prefWidth="489.0" spacing="10.0">
-                     <children>
-                        <HBox prefHeight="24.0" prefWidth="489.0" spacing="20.0">
-                           <children>
-                              <Label text="Buy apartment in city centre">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField editable="false" />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="22.0" prefWidth="489.0" spacing="20.0">
-                           <children>
-                              <Label text="Buy apartment  outside the centre">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField editable="false" />
-                           </children>
-                        </HBox>
-                     </children>
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                  </VBox>
-                  <Label text="Public transport">
+                  <Label prefHeight="25.0" prefWidth="277.0" text=" - 1 person, per year (without rent)">
                      <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font size="16.0" />
                      </font>
                   </Label>
-                  <VBox prefHeight="73.0" prefWidth="489.0" spacing="10.0">
-                     <children>
-                        <HBox prefHeight="21.0" prefWidth="489.0" spacing="20.0">
-                           <children>
-                              <Label text="One-way ticket (local transport)">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="23.0" prefWidth="489.0" spacing="20.0">
-                           <children>
-                              <Label text="Monthly pass (regular price)">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField />
-                           </children>
-                        </HBox>
-                     </children>
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                  </VBox>
-                  <Label text="Utilities (per month)">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <VBox prefHeight="89.0" prefWidth="489.0" spacing="10.0">
-                     <children>
-                        <HBox prefHeight="23.0" prefWidth="489.0" spacing="20.0">
-                           <children>
-                              <Label text="Basic (Electricity, Heating, Cooling, Water, Garbage) for a medium Apartment">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="22.0" prefWidth="489.0" spacing="20.0">
-                           <children>
-                              <Label text="1 min. of Prepaid Mobile Tariff Local (No Discounts or Plans)">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="25.0" prefWidth="469.0" spacing="20.0">
-                           <children>
-                              <Label text="Internet (60 Mbps or More, Unlimited Data, Cable/ADSL)">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <TextField />
-                           </children>
-                        </HBox>
-                     </children>
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
-                  </VBox>
                </children>
-            </VBox>
-            <Label layoutX="738.0" layoutY="442.0" text="Business average management costs*" textFill="#000000b5">
+            </HBox>
+            <TextField prefHeight="25.0" prefWidth="576.0" />
+         </children>
+      </VBox>
+      <Label layoutX="36.0" layoutY="235.0" text="Business average management costs*" textFill="#000000b5">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <VBox layoutX="68.0" layoutY="275.0" prefHeight="131.0" prefWidth="324.0" spacing="20.0">
+         <children>
+            <HBox prefHeight="25.0" prefWidth="281.0" spacing="20.0">
+               <children>
+                  <Label text="Start*">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <TextField editable="false" prefHeight="25.0" prefWidth="173.0" />
+               </children>
+            </HBox>
+            <Label text="*(Furniture, supplies, insurance...)">
                <font>
-                  <Font size="18.0" />
+                  <Font size="14.0" />
                </font>
             </Label>
-            <VBox layoutX="774.0" layoutY="484.0" prefHeight="207.0" prefWidth="324.0" spacing="20.0">
+            <HBox prefHeight="26.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <HBox prefHeight="25.0" prefWidth="281.0" spacing="20.0">
-                     <children>
-                        <Label text="Payroll (per employee)">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <TextField editable="false" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="25.0" prefWidth="351.0" spacing="20.0">
-                     <children>
-                        <Label text="Insurance">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <TextField editable="false" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="15.0" prefWidth="351.0" spacing="20.0">
-                     <children>
-                        <Label text="Furniture">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <TextField editable="false" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="0.0" prefWidth="276.0" spacing="20.0">
-                     <children>
-                        <Label text="Supplies">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </Label>
-                        <TextField editable="false" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="26.0" prefWidth="200.0" spacing="20.0">
-                     <children>
-                        <Label text="Maintenance">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <TextField editable="false" />
-                     </children>
-                  </HBox>
+                  <Label text="Maintenance">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField editable="false" prefHeight="25.0" prefWidth="180.0" />
                </children>
-            </VBox>
-            <Label layoutX="738.0" layoutY="702.0" text="*Other specific expenses are not included" textFill="#000000b5" />
-            <VBox layoutX="327.0" layoutY="756.0" prefHeight="200.0" prefWidth="479.0" spacing="30.0">
+            </HBox>
+         </children>
+      </VBox>
+      <Label layoutX="36.0" layoutY="406.0" text="*Other specific expenses are not included" textFill="#000000b5" />
+      <VBox layoutX="68.0" layoutY="457.0" prefHeight="200.0" prefWidth="479.0" spacing="30.0">
+         <children>
+            <HBox prefHeight="41.0" prefWidth="479.0" spacing="30.0">
                <children>
-                  <HBox prefHeight="41.0" prefWidth="479.0" spacing="30.0">
-                     <children>
-                        <Label text="Average expenses">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <TextField editable="false" prefHeight="40.0" prefWidth="220.0" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="40.0" prefWidth="479.0" spacing="35.0">
-                     <children>
-                        <Label text="Average earnings">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <TextField editable="false" prefHeight="40.0" prefWidth="220.0" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="41.0" prefWidth="479.0" spacing="140.0">
-                     <children>
-                        <Label text="Budget">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <TextField editable="false" prefHeight="40.0" prefWidth="220.0" />
-                     </children>
-                  </HBox>
+                  <Label text="Average expenses">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField editable="false" prefHeight="40.0" prefWidth="220.0" />
                </children>
-            </VBox>
-            <Label layoutX="534.0" layoutY="968.0" text="Result">
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="479.0" spacing="35.0">
+               <children>
+                  <Label text="Average earnings">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField editable="false" prefHeight="40.0" prefWidth="220.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="41.0" prefWidth="479.0" spacing="140.0">
+               <children>
+                  <Label text="Budget">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField editable="false" prefHeight="40.0" prefWidth="220.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Button layoutX="1022.0" layoutY="584.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="110.0" styleClass="spec_btn" text="Save results" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <InnerShadow color="#062ca8" />
+         </effect>
+      </Button>
+      <HBox layoutX="523.0" layoutY="64.0" prefHeight="54.0" prefWidth="521.0" spacing="30.0">
+         <children>
+            <Label prefHeight="20.0" prefWidth="88.0" text="Insert budget">
+               <HBox.margin>
+                  <Insets top="12.0" />
+               </HBox.margin>
                <font>
-                  <Font name="System Bold" size="24.0" />
+                  <Font size="14.0" />
                </font>
             </Label>
-            <Button layoutX="973.0" layoutY="1038.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="110.0" styleClass="spec_btn" text="Save results" textFill="WHITE">
+            <HBox prefHeight="54.0" prefWidth="195.0">
+               <children>
+                  <TextField fx:id="budget" prefHeight="25.0" prefWidth="277.0" />
+                  <ChoiceBox fx:id="currBox" prefHeight="25.0" prefWidth="45.0" />
+               </children>
+               <HBox.margin>
+                  <Insets top="12.0" />
+               </HBox.margin>
+            </HBox>
+            <Button fx:id="feasBtn" disable="true" layoutX="360.0" layoutY="10.0" mnemonicParsing="false" onAction="#calculateFeasibility" prefHeight="54.0" prefWidth="178.0" styleClass="spec_btn" text="Recalculate" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -428,8 +242,17 @@
                   <InnerShadow color="#062ca8" />
                </effect>
             </Button>
-            <TextField layoutX="459.0" layoutY="1018.0" prefHeight="40.0" prefWidth="220.0" />
          </children>
-      </AnchorPane>
-  </content>
-</ScrollPane>
+      </HBox>
+      <VBox layoutX="572.0" layoutY="566.0" prefHeight="70.0" prefWidth="220.0">
+         <children>
+            <Label text="Result">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <TextField prefHeight="40.0" prefWidth="220.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
