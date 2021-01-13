@@ -53,6 +53,7 @@ public class BusinessDetailsGraphic implements Initializable {
 	public void initialize(URL location, ResourceBundle resource) {
 		busLbl.setText(business.getName());
 		feasBtn.disableProperty().bind(budget.textProperty().isEmpty());
+		
 		descArea.setText(business.getDescription());
 		
 		ObservableList<String> currency = FXCollections.observableArrayList("$", "£", "€");

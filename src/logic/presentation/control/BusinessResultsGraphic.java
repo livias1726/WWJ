@@ -183,7 +183,7 @@ public class BusinessResultsGraphic extends ToolBarGraphic{
 
 			res.setText(i.getName() + " - " + i.getCountry().getName());
 
-			res.setOnAction(event -> openBusinessDetails(i.getId()));
+			res.setOnAction(event -> openBusinessDetails(i));
 			
 			res.setStyle("-fx-font-size: 15px;");
 			res.setCursor(Cursor.HAND);
@@ -192,9 +192,7 @@ public class BusinessResultsGraphic extends ToolBarGraphic{
 		}
 	}
 	
-	private void openBusinessDetails(Integer id) {
-		BusinessInCountryBean bean = ViewBusinessControl.getInstance().retrieveBusinessById(id);
-		
+	private void openBusinessDetails(BusinessInCountryBean bean) {
 		Stage popup = GraphicHandler.openSection(pane, Sections.BUSINESS, new BusinessDetailsGraphic(bean));
 		popup.centerOnScreen();
 		popup.show();

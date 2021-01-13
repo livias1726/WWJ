@@ -38,22 +38,23 @@ public class SearchEntrepreneurGraphic extends ToolBarGraphic {
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
 		super.initialize(url, resource);
+	
 		//Edit search btn
 		searchBtn.disableProperty().bind(Bindings.not(businessSearch.valueProperty().isNotNull().or(placeSearch.valueProperty().isNotNull())));
-		
+
 		//Edit combo boxes: retrieve from DB	
 		try {
 			cList = ViewResultsControl.getInstance().retrieveCountries();
-			
+		
 			bList = new ArrayList<>();
 			for(BusinessBean i: ViewBusinessControl.getInstance().retrieveBusinesses()) {
 				bList.add(i.getCategory());
 			}
-			
+
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
-		
+
 		placeSearch.getItems().addAll(cList);
 		businessSearch.getItems().addAll(bList);
 	}

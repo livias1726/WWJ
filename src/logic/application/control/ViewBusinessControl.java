@@ -97,6 +97,7 @@ public class ViewBusinessControl extends ViewResultsControl{
     		bean.setId(i.getId());
     		bean.setName(i.getName());
     		bean.setCategory(i.getCategory());
+    		bean.setDescription(i.getDescription());
     		
     		CountryBean country = new CountryBean();
     		country.setName(i.getCountry().getName());
@@ -109,10 +110,5 @@ public class ViewBusinessControl extends ViewResultsControl{
     	}
     	
     	return dest;
-	}
-
-	public BusinessInCountryBean retrieveBusinessById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

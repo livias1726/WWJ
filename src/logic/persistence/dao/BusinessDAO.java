@@ -130,6 +130,7 @@ public class BusinessDAO {
 			business.setId(res.getInt("id"));
 			business.setName(res.getString("name"));
 			business.setCategory(res.getString("category"));
+			business.setDescription(res.getString("description"));
 			
 			Country country = new Country();
 			country.setName(res.getString("country"));
