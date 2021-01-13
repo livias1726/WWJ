@@ -52,7 +52,7 @@ public class FavouriteBusinessGraphic implements Initializable {
 			if(filter.intValue() == 0) {
         		return b1.getAverageEarnings().compareTo(b2.getAverageEarnings());
         	}else {
-        		return b1.getAverageManagementCost().compareTo(b2.getAverageManagementCost());
+        		return b1.getAverageCost().compareTo(b2.getAverageCost());
         	}    
 	    });
 	}

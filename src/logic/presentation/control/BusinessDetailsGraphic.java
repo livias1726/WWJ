@@ -74,8 +74,8 @@ public class BusinessDetailsGraphic implements Initializable {
     public void viewStatistics() {
     	if(checkLogin()) {
     		Stage popup = GraphicHandler.openSection(pane, Sections.STATISTICS, new StatisticsGraphic(business));
-    		popup.centerOnScreen();
-    		popup.show();
+			popup.centerOnScreen();
+			popup.show();
     	} 	
     }
     

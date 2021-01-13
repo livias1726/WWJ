@@ -41,13 +41,14 @@ public class AccountGraphic extends ToolBarGraphic{
 		
 		AccountBean account;
 		try {
+			
 			if(accountID == 0) {
 				account = AccountControl.getInstance().retrieveAccount();
 				accountID = account.getId();
 			}else {
 				account = AccountControl.getInstance().retrieveAccount(accountID);
 			}	
-			
+		
 			if(account.isPremium()) {
 				premiumBtn.setVisible(false);
 			}
@@ -61,7 +62,7 @@ public class AccountGraphic extends ToolBarGraphic{
 			nameLbl.setText(account.getUser().getFirstName() + " " + account.getUser().getLastName());	
 			
 			initNotifBtn();
-			
+
 		} catch (DatabaseFailureException e1) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e1.getMessage());
 			goBack();

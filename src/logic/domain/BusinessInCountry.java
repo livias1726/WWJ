@@ -7,17 +7,35 @@ import logic.exceptions.NoResultFoundException;
 import logic.persistence.dao.BusinessDAO;
 
 public class BusinessInCountry extends Business {
-	private Float averageManagementCost;
+	private Float averageCost;
 	private Float averageEarnings;
 	private String description;
+	private List<Float> popularity;
+	private List<Integer> competitors;
 	private Country country;
 	
-	public Float getAverageManagementCost() {
-		return averageManagementCost;
+	public Float getAverageCost() {
+		return averageCost;
 	}
 
-	public void setAverageManagementCost(Float averageManagementCost) {
-		this.averageManagementCost = averageManagementCost;
+	public void setAverageCost(Float averageCost) {
+		this.averageCost = averageCost;
+	}
+
+	public List<Float> getPopularity() {
+		return popularity;
+	}
+
+	public void setPopularity(List<Float> popularity) {
+		this.popularity = popularity;
+	}
+
+	public List<Integer> getCompetitors() {
+		return competitors;
+	}
+
+	public void setCompetitors(List<Integer> competitors) {
+		this.competitors = competitors;
 	}
 
 	public Float getAverageEarnings() {
@@ -66,5 +84,9 @@ public class BusinessInCountry extends Business {
 
 	public void deleteFavourite(Long id) throws SQLException {
 		BusinessDAO.deleteFromFavourite(this.id, id);
+	}
+
+	public void getBusinessStatistics() throws SQLException {
+		BusinessDAO.selectBusinessStatistics(this);
 	}
 }

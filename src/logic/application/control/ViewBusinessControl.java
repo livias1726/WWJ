@@ -104,7 +104,7 @@ public class ViewBusinessControl extends ViewResultsControl{
     		bean.setCountry(country);
     		
     		bean.setAverageEarnings(i.getAverageEarnings());
-    		bean.setAverageManagementCost(i.getAverageManagementCost());
+    		bean.setAverageCost(i.getAverageCost());
     		
     		dest.add(bean);
     	}

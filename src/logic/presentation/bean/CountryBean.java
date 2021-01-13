@@ -3,6 +3,7 @@ package logic.presentation.bean;
 public class CountryBean {
 	
 	private String name;
+	private String currency;
 		
 	public String getName() {
 		return name;
@@ -10,5 +11,13 @@ public class CountryBean {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 }

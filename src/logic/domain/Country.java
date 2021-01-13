@@ -10,7 +10,8 @@ public class Country implements Serializable{
 
 	private static final long serialVersionUID = 8047822125312096938L;	
 	private String name;
-	
+	private String currency;
+
 	public Country() {
 		/**/
 	}
@@ -26,6 +27,15 @@ public class Country implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
 
 	public List<String> getAvailableCountries() throws SQLException{
 		return CountryDAO.selectCountries();

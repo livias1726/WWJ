@@ -15,17 +15,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="591.0" prefWidth="1132.0" styleClass="result_box" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="1180.0" styleClass="result_box" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="36.0" layoutY="56.0" text="Business Name - Statistics">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-         <effect>
-            <InnerShadow />
-         </effect>
-      </Label>
-      <HBox layoutX="36.0" layoutY="123.0" prefHeight="208.0" prefWidth="572.0">
+      <HBox layoutX="36.0" layoutY="136.0" prefHeight="208.0" prefWidth="572.0">
          <children>
             <Label prefHeight="20.0" prefWidth="168.0" text="Popularity over the years">
                <font>
@@ -35,17 +27,17 @@
                   <Insets right="30.0" />
                </HBox.margin>
             </Label>
-            <LineChart prefHeight="208.0" prefWidth="399.0">
+            <LineChart fx:id="popularityGraph" prefHeight="208.0" prefWidth="399.0">
               <xAxis>
-                <CategoryAxis side="BOTTOM" />
+                <CategoryAxis label="Years" side="BOTTOM" />
               </xAxis>
               <yAxis>
-                <NumberAxis side="LEFT" />
+                <NumberAxis label="Percentage" side="LEFT" />
               </yAxis>
             </LineChart>
          </children>
       </HBox>
-      <HBox layoutX="36.0" layoutY="340.0" prefHeight="200.0" prefWidth="572.0">
+      <HBox layoutX="36.0" layoutY="399.0" prefHeight="200.0" prefWidth="572.0">
          <children>
             <Label prefHeight="20.0" prefWidth="236.0" text="Average earnings and costs">
                <font>
@@ -55,7 +47,7 @@
                   <Insets />
                </HBox.margin>
             </Label>
-            <StackedBarChart prefHeight="200.0" prefWidth="435.0">
+            <StackedBarChart fx:id="averageGraph" prefHeight="200.0" prefWidth="435.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -65,24 +57,24 @@
             </StackedBarChart>
          </children>
       </HBox>
-      <Button fx:id="backBtn" layoutX="1077.0" layoutY="20.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="close_btn">
+      <Button layoutX="1119.0" layoutY="20.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="close_btn">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <HBox layoutX="623.0" layoutY="240.0" prefHeight="200.0" prefWidth="495.0">
+      <HBox layoutX="624.0" layoutY="299.0" prefHeight="200.0" prefWidth="495.0">
          <children>
             <Label text="Competitors">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <LineChart prefHeight="208.0" prefWidth="399.0">
+            <LineChart fx:id="compGraph" prefHeight="208.0" prefWidth="399.0">
               <xAxis>
-                <CategoryAxis side="BOTTOM" />
+                <CategoryAxis label="Years" side="BOTTOM" />
               </xAxis>
               <yAxis>
-                <NumberAxis side="LEFT" />
+                <NumberAxis label="Competitors" side="LEFT" />
               </yAxis>
             </LineChart>
          </children>
@@ -117,6 +109,23 @@
                   <InnerShadow color="#062ca8" />
                </effect>
             </Button>
+         </children>
+      </HBox>
+      <HBox layoutX="36.0" layoutY="35.0" prefHeight="30.0" prefWidth="478.0">
+         <children>
+            <Label fx:id="busName" text="Business Name">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Label>
+            <Label text=" - Statistics">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
          </children>
       </HBox>
    </children>

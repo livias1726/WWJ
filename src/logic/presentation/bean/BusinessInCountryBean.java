@@ -7,18 +7,35 @@ import logic.exceptions.DatabaseFailureException;
 
 public class BusinessInCountryBean extends BusinessBean{
 
-	private Float averageManagementCost;
+	private Float averageCost;
 	private Float averageEarnings;
+	private List<Float> popularity;
+	private List<Integer> competitors;
 	private String description;
-	private int rank;
 	private CountryBean country;
 	
-	public Float getAverageManagementCost() {
-		return averageManagementCost;
+	public Float getAverageCost() {
+		return averageCost;
 	}
 
-	public void setAverageManagementCost(Float averageManagementCost) {
-		this.averageManagementCost = averageManagementCost;
+	public void setAverageCost(Float averageCost) {
+		this.averageCost = averageCost;
+	}
+
+	public List<Float> getPopularity() {
+		return popularity;
+	}
+
+	public void setPopularity(List<Float> popularity) {
+		this.popularity = popularity;
+	}
+
+	public List<Integer> getCompetitors() {
+		return competitors;
+	}
+
+	public void setCompetitors(List<Integer> competitors) {
+		this.competitors = competitors;
 	}
 
 	public Float getAverageEarnings() {
@@ -35,14 +52,6 @@ public class BusinessInCountryBean extends BusinessBean{
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	
-	public int getRank() {
-		return rank;
-	}
-
-	public void setRank(int rank) {
-		this.rank = rank;
 	}
 
 	public CountryBean getCountry() {

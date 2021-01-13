@@ -137,7 +137,7 @@ public class BusinessDAO {
 			business.setCountry(country);
 			
 			business.setAverageEarnings(res.getFloat("average_earnings"));
-			business.setAverageManagementCost(res.getFloat("average_costs"));
+			business.setAverageCost(res.getFloat("average_costs"));
 			
 			list.add(business);
 		}while(res.next());
@@ -195,6 +195,40 @@ public class BusinessDAO {
 			
         } catch (SQLException e) {
         	throw new SQLException("An error occured while trying to delete a business from the favourite ones."); 
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
+	}
+
+	public static void selectBusinessStatistics(BusinessInCountry business) throws SQLException {
+		CallableStatement stmt = null;
+		ResultSet res = null;
+
+		try {
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.GET_STATISTICS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        	res = RoutinesManager.bindParametersAndExec(stmt, String.valueOf(business.getId()), business.getCountry().getName());
+
+			if(res.first()) {
+				business.setAverageEarnings(res.getFloat("average_earnings"));
+				business.setAverageCost(res.getFloat("average_costs"));
+				
+				List<Float> pop = new ArrayList<>();
+				List<Integer> comp = new ArrayList<>();
+				do {
+					pop.add(res.getFloat("percentage"));
+					comp.add(res.getInt("num_competitors"));
+				}while(res.next());
+				
+				business.setPopularity(pop);
+				business.setCompetitors(comp);
+			}
+
+			res.close();
+        } catch (SQLException e) {
+        	throw new SQLException("An error occured while trying to retrieve the statistics."); 
 		} finally {
 			if(stmt != null) {
 				stmt.close();

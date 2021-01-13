@@ -134,4 +134,11 @@ public class SignUpGraphic implements Initializable {
 		stage.setScene(GraphicHandler.switchScreen(Scenes.LOGIN, null));
 	}
 	
+	@FXML
+	public void goBack(){
+		Scenes prev = SessionFacade.getSession().getPrevScene();			
+		Stage stage = (Stage)pane.getScene().getWindow();			
+		stage.setScene(GraphicHandler.switchScreen(prev, null));
+	}
+	
 }
