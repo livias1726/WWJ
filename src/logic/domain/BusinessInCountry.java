@@ -7,11 +7,14 @@ import logic.exceptions.NoResultFoundException;
 import logic.persistence.dao.BusinessDAO;
 
 public class BusinessInCountry extends Business {
+	
 	private Float averageCost;
 	private Float averageEarnings;
 	private String description;
 	private List<Float> popularity;
 	private List<Integer> competitors;
+	private List<Float> taxes;
+	private Float startExpense;
 	private Country country;
 	
 	public Float getAverageCost() {
@@ -62,6 +65,22 @@ public class BusinessInCountry extends Business {
 		this.country = country;
 	}
 	
+	public Float getStartExpense() {
+		return startExpense;
+	}
+
+	public void setStartExpense(Float startExpense) {
+		this.startExpense = startExpense;
+	}
+	
+	public List<Float> getTaxes() {
+		return taxes;
+	}
+
+	public void setTaxes(List<Float> taxes) {
+		this.taxes = taxes;
+	}
+	
 	public List<BusinessInCountry> getBusinessesByCategory(String business) throws SQLException, NoResultFoundException{
 		return BusinessDAO.selectBusinessByCategory(business);
 	}
@@ -88,5 +107,9 @@ public class BusinessInCountry extends Business {
 
 	public void getBusinessStatistics() throws SQLException {
 		BusinessDAO.selectBusinessStatistics(this);
+	}
+
+	public void getBusinessFeasibility() throws SQLException {
+		BusinessDAO.selectBusinessFeasibility(this);
 	}
 }

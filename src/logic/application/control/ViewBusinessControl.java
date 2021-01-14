@@ -101,6 +101,7 @@ public class ViewBusinessControl extends ViewResultsControl{
     		
     		CountryBean country = new CountryBean();
     		country.setName(i.getCountry().getName());
+    		country.setCurrency(i.getCountry().getCurrency());
     		bean.setCountry(country);
     		
     		bean.setAverageEarnings(i.getAverageEarnings());

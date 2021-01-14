@@ -11,7 +11,9 @@ public class BusinessInCountryBean extends BusinessBean{
 	private Float averageEarnings;
 	private List<Float> popularity;
 	private List<Integer> competitors;
+	private List<Float> taxes;
 	private String description;
+	private Float startExpense;
 	private CountryBean country;
 	
 	public Float getAverageCost() {
@@ -61,6 +63,14 @@ public class BusinessInCountryBean extends BusinessBean{
 	public void setCountry(CountryBean country) {
 		this.country = country;
 	}
+	
+	public Float getStartExpense() {
+		return startExpense;
+	}
+
+	public void setStartExpense(Float startExpense) {
+		this.startExpense = startExpense;
+	}
 
 	public List<BusinessInCountryBean> getFavouriteBusinesses() throws DatabaseFailureException {
 		return EntrepreneurAccountControl.getInstance().retrieveFavourites();
@@ -72,5 +82,13 @@ public class BusinessInCountryBean extends BusinessBean{
 
 	public void removeFromFavourites() throws DatabaseFailureException {
 		EntrepreneurAccountControl.getInstance().removeFavourites(id);
+	}
+
+	public List<Float> getTaxes() {
+		return taxes;
+	}
+
+	public void setTaxes(List<Float> taxes) {
+		this.taxes = taxes;
 	}
 }

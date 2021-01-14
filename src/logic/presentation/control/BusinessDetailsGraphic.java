@@ -64,7 +64,7 @@ public class BusinessDetailsGraphic implements Initializable {
 	@FXML
 	public void calculateFeasibility() {
 		if(checkLogin()) {
-			Stage popup = GraphicHandler.openSection(pane, Sections.FEASIBILITY, new FeasibilityGraphic(business, budget.getText()));
+			Stage popup = GraphicHandler.openSection(pane, Sections.FEASIBILITY, new FeasibilityGraphic(business, budget.getText(), currBox.getValue()));
 			popup.centerOnScreen();
 			popup.show();
 		}    	

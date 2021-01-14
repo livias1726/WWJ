@@ -76,6 +76,8 @@ public class GraphicHandler {
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "business_details.fxml"));
 			case STATISTICS: 
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "statistics.fxml"));
+			case FEASIBILITY: 
+				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "feasibility.fxml"));
 			default:
 				return new FXMLLoader(GraphicHandler.class.getResource(PATH + "main.fxml"));
 		}

@@ -11,6 +11,8 @@ public class Country implements Serializable{
 	private static final long serialVersionUID = 8047822125312096938L;	
 	private String name;
 	private String currency;
+	private Float livingExpense;
+	private String exampleCity;
 
 	public Country() {
 		/**/
@@ -36,6 +38,21 @@ public class Country implements Serializable{
 		this.currency = currency;
 	}
 
+	public Float getLivingExpense() {
+		return livingExpense;
+	}
+
+	public void setLivingExpense(Float livingExpense) {
+		this.livingExpense = livingExpense;
+	}
+
+	public String getExampleCity() {
+		return exampleCity;
+	}
+
+	public void setExampleCity(String exampleCity) {
+		this.exampleCity = exampleCity;
+	}
 
 	public List<String> getAvailableCountries() throws SQLException{
 		return CountryDAO.selectCountries();

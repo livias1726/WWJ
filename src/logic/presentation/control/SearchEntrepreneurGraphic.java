@@ -45,7 +45,7 @@ public class SearchEntrepreneurGraphic extends ToolBarGraphic {
 		//Edit combo boxes: retrieve from DB	
 		try {
 			cList = ViewResultsControl.getInstance().retrieveCountries();
-		
+	
 			bList = new ArrayList<>();
 			for(BusinessBean i: ViewBusinessControl.getInstance().retrieveBusinesses()) {
 				bList.add(i.getCategory());

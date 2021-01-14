@@ -44,4 +44,5 @@ public class RoutinesIdentifier {
 	public static final String INSERT_REQUIREMENT = "call wwj_db.insert_requirement(?, ?)";
 	public static final String UPDATE_PIC = "call wwj_db.update_profile_pic(?, ?)";
 	public static final String GET_STATISTICS = "call wwj_db.retrieve_statistics(?, ?)";
+	public static final String GET_FEASIBILITY = "call wwj_db.retrieve_feasibility(?, ?)";
 }

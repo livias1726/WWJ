@@ -12,17 +12,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="1180.0" styleClass="result_box" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="680.0" prefWidth="1180.0" styleClass="result_box" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="36.0" layoutY="56.0" text="Business Name - Feasibility">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-         <effect>
-            <InnerShadow />
-         </effect>
-      </Label>
       <Button fx:id="backBtn" layoutX="1102.0" layoutY="41.0" mnemonicParsing="false" onAction="#goBack" prefHeight="30.0" prefWidth="30.0" styleClass="close_btn">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -45,7 +36,7 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <TextField editable="false" />
+                  <TextField fx:id="income" editable="false" />
                </children>
             </HBox>
             <HBox prefHeight="25.0" prefWidth="351.0" spacing="20.0">
@@ -58,7 +49,7 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <TextField editable="false" />
+                  <TextField fx:id="corporate" editable="false" />
                </children>
             </HBox>
             <HBox prefHeight="15.0" prefWidth="351.0" spacing="20.0">
@@ -71,7 +62,7 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <TextField editable="false" />
+                  <TextField fx:id="capGains" editable="false" />
                </children>
             </HBox>
             <HBox prefHeight="0.0" prefWidth="276.0" spacing="20.0">
@@ -84,7 +75,7 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <TextField editable="false" />
+                  <TextField fx:id="sales" editable="false" />
                </children>
             </HBox>
             <HBox prefHeight="26.0" prefWidth="200.0" spacing="20.0">
@@ -94,7 +85,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField editable="false" />
+                  <TextField fx:id="property" editable="false" />
                </children>
             </HBox>
          </children>
@@ -114,7 +105,7 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label text="ExampleCity">
+                  <Label fx:id="exampCity" text="ExampleCity">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -126,7 +117,7 @@
                   </Label>
                </children>
             </HBox>
-            <TextField prefHeight="25.0" prefWidth="576.0" />
+            <TextField fx:id="livingTxt" prefHeight="25.0" prefWidth="576.0" />
          </children>
       </VBox>
       <Label layoutX="36.0" layoutY="235.0" text="Business average management costs*" textFill="#000000b5">
@@ -146,7 +137,7 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <TextField editable="false" prefHeight="25.0" prefWidth="173.0" />
+                  <TextField fx:id="startTxt" editable="false" prefHeight="25.0" prefWidth="173.0" />
                </children>
             </HBox>
             <Label text="*(Furniture, supplies, insurance...)">
@@ -161,47 +152,47 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField editable="false" prefHeight="25.0" prefWidth="180.0" />
+                  <TextField fx:id="maintTxt" editable="false" prefHeight="25.0" prefWidth="180.0" />
                </children>
             </HBox>
          </children>
       </VBox>
       <Label layoutX="36.0" layoutY="406.0" text="*Other specific expenses are not included" textFill="#000000b5" />
-      <VBox layoutX="68.0" layoutY="457.0" prefHeight="200.0" prefWidth="479.0" spacing="30.0">
+      <VBox layoutX="36.0" layoutY="446.0" prefHeight="185.0" prefWidth="467.0" spacing="30.0">
          <children>
-            <HBox prefHeight="41.0" prefWidth="479.0" spacing="30.0">
-               <children>
-                  <Label text="Average expenses">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <TextField editable="false" prefHeight="40.0" prefWidth="220.0" />
-               </children>
-            </HBox>
-            <HBox prefHeight="40.0" prefWidth="479.0" spacing="35.0">
-               <children>
-                  <Label text="Average earnings">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <TextField editable="false" prefHeight="40.0" prefWidth="220.0" />
-               </children>
-            </HBox>
-            <HBox prefHeight="41.0" prefWidth="479.0" spacing="140.0">
+            <HBox prefHeight="43.0" prefWidth="467.0" spacing="50.0">
                <children>
                   <Label text="Budget">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField editable="false" prefHeight="40.0" prefWidth="220.0" />
+                  <TextField fx:id="budTxt" editable="false" prefHeight="40.0" prefWidth="220.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="39.0" prefWidth="467.0" spacing="50.0">
+               <children>
+                  <Label text="Average earnings">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="earnTxt" editable="false" prefHeight="40.0" prefWidth="220.0" />
+               </children>
+            </HBox>
+            <HBox prefHeight="43.0" prefWidth="467.0" spacing="50.0">
+               <children>
+                  <Label text="Result">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="resTxt" prefHeight="40.0" prefWidth="220.0" />
                </children>
             </HBox>
          </children>
       </VBox>
-      <Button layoutX="1022.0" layoutY="584.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="110.0" styleClass="spec_btn" text="Save results" textFill="WHITE">
+      <Button fx:id="saveBtn" layoutX="1022.0" layoutY="584.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="110.0" styleClass="spec_btn" text="Save results" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -244,15 +235,23 @@
             </Button>
          </children>
       </HBox>
-      <VBox layoutX="572.0" layoutY="566.0" prefHeight="70.0" prefWidth="220.0">
+      <HBox layoutX="36.0" layoutY="47.0" prefHeight="35.0" prefWidth="476.0">
          <children>
-            <Label text="Result">
+            <Label fx:id="busNameTxt" text="Business Name">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Label>
+            <Label text=" - Feasibility">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <TextField prefHeight="40.0" prefWidth="220.0" />
          </children>
-      </VBox>
+      </HBox>
+      <VBox layoutX="601.0" layoutY="549.0" prefHeight="70.0" prefWidth="220.0" />
    </children>
 </AnchorPane>

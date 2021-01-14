@@ -134,6 +134,7 @@ public class BusinessDAO {
 			
 			Country country = new Country();
 			country.setName(res.getString("country"));
+			country.setCurrency(res.getString("currency"));
 			business.setCountry(country);
 			
 			business.setAverageEarnings(res.getFloat("average_earnings"));
@@ -224,6 +225,39 @@ public class BusinessDAO {
 				
 				business.setPopularity(pop);
 				business.setCompetitors(comp);
+			}
+
+			res.close();
+        } catch (SQLException e) {
+        	throw new SQLException("An error occured while trying to retrieve the statistics."); 
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
+	}
+
+	public static void selectBusinessFeasibility(BusinessInCountry business) throws SQLException {
+		CallableStatement stmt = null;
+		ResultSet res = null;
+
+		try {
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.GET_FEASIBILITY, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        	res = RoutinesManager.bindParametersAndExec(stmt, String.valueOf(business.getId()), business.getCountry().getName());
+
+        	List<Float> taxes = new ArrayList<>();
+			if(res.first()) {
+				business.getCountry().setLivingExpense(res.getFloat("expense"));
+				business.getCountry().setExampleCity(res.getString("example_city"));
+				business.setStartExpense(res.getFloat("start"));
+				taxes.add(res.getFloat("income"));
+				taxes.add(res.getFloat("corporate"));
+				taxes.add(res.getFloat("capital_gains"));
+				taxes.add(res.getFloat("sales"));
+				taxes.add(res.getFloat("property"));
+				
+				business.setTaxes(taxes);
 			}
 
 			res.close();
