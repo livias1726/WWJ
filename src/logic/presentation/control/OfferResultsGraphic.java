@@ -72,7 +72,6 @@ public class OfferResultsGraphic extends ToolBarGraphic{
 		super.initialize(url, resource);
 		
 		List<CheckBox> group = new ArrayList<>();
-		List<OfferBean> filteredList;
 
 		try {
 			if(searchedJob == null) {
@@ -82,14 +81,12 @@ public class OfferResultsGraphic extends ToolBarGraphic{
 				//Retrieve offers by Country			
 				offers = ViewOfferControl.getInstance().retrieveOffersByCountry(searchedCountry);
 				
-				filteredList = new ArrayList<>();
-				
 				filterLab.setText("Categories");
 				for(String i: jList) {
 					CheckBox item = new CheckBox(i);
 					filterBox.getChildren().add(item);
 					group.add(item);
-					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterJob(filteredList, group));
+					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterJob(new ArrayList<>(), group));
 					filters.add(item);
 				}
 				
@@ -100,14 +97,12 @@ public class OfferResultsGraphic extends ToolBarGraphic{
 				//Retrieve offers by Job
 				offers = ViewOfferControl.getInstance().retrieveOffersByJob(searchedJob);
 				
-				filteredList = new ArrayList<>();
-				
 				filterLab.setText("Countries");	
 				for(String i: cList) {
 					CheckBox item = new CheckBox(i);
 					filterBox.getChildren().add(item);
 					group.add(item);
-					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterCountry(filteredList, group));
+					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterCountry(new ArrayList<>(), group));
 					filters.add(item);
 				}
 			} else {

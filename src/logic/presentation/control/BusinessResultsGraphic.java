@@ -73,22 +73,19 @@ public class BusinessResultsGraphic extends ToolBarGraphic{
 
 		//Get results
 		List<CheckBox> group = new ArrayList<>();
-		List<BusinessInCountryBean> filteredList;
 		try {
 			if(searchedBusiness == null) {
 				searchIDLbl.setText(searchedCountry.getName());
 				searchIDLbl.setAlignment(Pos.CENTER);
 
 				businesses = ViewBusinessControl.getInstance().retrieveBusinessesByCountry(searchedCountry);
-				
-				filteredList = new ArrayList<>();
 
 				filterLab.setText("Categories");
 				for(String i: bList) {
 					CheckBox item = new CheckBox(i);
 					filterBox.getChildren().add(item);
 					group.add(item);
-					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterBusiness(filteredList, group));
+					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterBusiness(new ArrayList<>(), group));
 					filters.add(item);
 				}
 
@@ -98,14 +95,12 @@ public class BusinessResultsGraphic extends ToolBarGraphic{
 				
 				businesses = ViewBusinessControl.getInstance().retrieveBusinessesByCategory(searchedBusiness);
 				
-				filteredList = new ArrayList<>();
-				
 				filterLab.setText("Countries");	
 				for(String i: cList) {
 					CheckBox item = new CheckBox(i);
 					filterBox.getChildren().add(item);
 					group.add(item);
-					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterCountry(filteredList, group));
+					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterCountry(new ArrayList<>(), group));
 					filters.add(item);
 				}
 				
