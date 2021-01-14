@@ -65,9 +65,6 @@ public class FeasibilityGraphic implements Initializable {
     private TextField resTxt;
 
     @FXML
-    private Button saveBtn;
-
-    @FXML
     private TextField budget;
 
     @FXML
@@ -102,6 +99,7 @@ public class FeasibilityGraphic implements Initializable {
 		
 		try {
 			result = FeasibilityControl.getInstance().retrieveBusinessFeasibility(business, insertedBudget);
+			
 			exampCity.setText(business.getCountry().getExampleCity());
 			
 			income.setText(business.getTaxes().get(0) + " %");
@@ -111,6 +109,7 @@ public class FeasibilityGraphic implements Initializable {
 			property.setText(business.getTaxes().get(4) + " %");
 			
 			initFields();
+			
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			goBack();
@@ -146,7 +145,7 @@ public class FeasibilityGraphic implements Initializable {
 		result = FeasibilityControl.getInstance().calculateResult(Float.valueOf(insertedBudget), business);
 		initFields();
     }
-
+	
     @FXML
     public void goBack() {
     	Stage st = (Stage)pane.getScene().getWindow();

@@ -119,6 +119,31 @@ public class BusinessDAO {
         return list;
 	}
 	
+	public static List<BusinessInCountry> selectFavourites(Long id) throws SQLException {
+		CallableStatement stmt = null;
+		ResultSet res = null;
+		List<BusinessInCountry> list = new ArrayList<>();
+
+		try {
+			Connection conn = ConnectionManager.getConnection();
+        	stmt = conn.prepareCall(RoutinesIdentifier.GET_FAVOURITE_BUSINESSES, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			res = RoutinesManager.bindParametersAndExec(stmt, id.intValue());
+			
+			processResearch(res, list);
+			
+        } catch (SQLException e) {
+        	throw new SQLException("An error occured while trying to retrieve favourite businesses."); 
+		} catch (NoResultFoundException e) {
+			/*No op*/
+		} finally {
+			if(stmt != null) {
+				stmt.close();
+			}
+		}
+        
+        return list;
+	}
+	
 	private static void processResearch(ResultSet res, List<BusinessInCountry> list) throws NoResultFoundException, SQLException {
 		if(!res.first()) {
 			throw new NoResultFoundException();
@@ -144,31 +169,6 @@ public class BusinessDAO {
 		}while(res.next());
 	}
 	
-	public static List<BusinessInCountry> selectFavourites(String id) throws SQLException {
-		CallableStatement stmt = null;
-		ResultSet res = null;
-		List<BusinessInCountry> list = new ArrayList<>();
-
-		try {
-			Connection conn = ConnectionManager.getConnection();
-        	stmt = conn.prepareCall(RoutinesIdentifier.GET_FAVOURITE_BUSINESSES, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			res = RoutinesManager.bindParametersAndExec(stmt, id);
-			
-			processResearch(res, list);
-			
-        } catch (SQLException e) {
-        	throw new SQLException("An error occured while trying to retrieve favourite businesses."); 
-		} catch (NoResultFoundException e) {
-			/*No op*/
-		} finally {
-			if(stmt != null) {
-				stmt.close();
-			}
-		}
-        
-        return list;
-	}
-
 	public static void insertIntoFavourite(int idFav, long idEnt) throws SQLException {
 		CallableStatement stmt = null;
 		
@@ -188,7 +188,7 @@ public class BusinessDAO {
 
 	public static void deleteFromFavourite(int idFav, long idEnt) throws SQLException {
 		CallableStatement stmt = null;
-		
+
 		try{
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.DELETE_FAVOURITE_BUSINESS);	

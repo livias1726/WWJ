@@ -16,6 +16,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
+import logic.application.control.EntrepreneurAccountControl;
+import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Sections;
 import logic.presentation.bean.BusinessInCountryBean;
@@ -43,7 +45,11 @@ public class BusinessDetailsGraphic implements Initializable {
     @FXML
     private Button statBtn;
     
+    @FXML
+    private Button favBtn;
+    
     private BusinessInCountryBean business;
+    private boolean fav = false;
 	
 	public BusinessDetailsGraphic(BusinessInCountryBean b) {
 		this.business = b;
@@ -59,7 +65,39 @@ public class BusinessDetailsGraphic implements Initializable {
 		ObservableList<String> currency = FXCollections.observableArrayList("$", "£", "€");
 		currBox.setItems(currency);
 		currBox.setValue(currency.get(0));
+		
+		try {
+			for(BusinessInCountryBean i: EntrepreneurAccountControl.getInstance().retrieveFavourites()) {
+				if(i.getId() == business.getId()) {
+					favBtn.getStyleClass().add("star_button_set");
+					fav = true;
+				}
+			}
+		} catch (DatabaseFailureException e) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
+			goBack();
+		}
 	}
+	
+	@FXML
+    public void manageFavourite() {
+		if(checkLogin()) {
+			try {
+				if(fav) {
+					EntrepreneurAccountControl.getInstance().removeFavourite(business.getId());
+					favBtn.getStyleClass().clear();
+					favBtn.getStyleClass().add("star_button_nset");	
+					fav = false;
+				}else {
+					EntrepreneurAccountControl.getInstance().addNewFavourite(business.getId());
+					favBtn.getStyleClass().clear();
+					favBtn.getStyleClass().add("star_button_set");
+				}
+			} catch (DatabaseFailureException e) {
+				/*Don't change the settings*/
+			}
+		}
+    }
 	
 	@FXML
 	public void calculateFeasibility() {

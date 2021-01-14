@@ -39,13 +39,18 @@ public class EntrepreneurAccountControl{
     	for(BusinessInCountry i: list) {
     		BusinessInCountryBean bean = new BusinessInCountryBean();  		
     		
+    		bean.setId(i.getId());
     		bean.setName(i.getName());
-    		bean.setDescription(i.getDescription());
     		bean.setCategory(i.getCategory());
+    		bean.setDescription(i.getDescription());
     		
     		CountryBean country = new CountryBean();
     		country.setName(i.getCountry().getName());
+    		country.setCurrency(i.getCountry().getCurrency());
     		bean.setCountry(country);
+    		
+    		bean.setAverageEarnings(i.getAverageEarnings());
+    		bean.setAverageCost(i.getAverageCost());
     		
     		dest.add(bean);
     	}
@@ -63,9 +68,10 @@ public class EntrepreneurAccountControl{
 		}
 	}
 
-	public void removeFavourites(int id) throws DatabaseFailureException {
+	public void removeFavourite(int id) throws DatabaseFailureException {
 		BusinessInCountry fav = new BusinessInCountry();
 		fav.setId(id);
+
 		try {
 			fav.deleteFavourite(SessionFacade.getSession().getID());
 		} catch (SQLException e) {

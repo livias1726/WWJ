@@ -94,7 +94,7 @@ public class BusinessInCountry extends Business {
 	}
 
 	public List<BusinessInCountry> getFavourites(Long id) throws SQLException {
-		return BusinessDAO.selectFavourites(id.toString());
+		return BusinessDAO.selectFavourites(id);
 	}
 
 	public void addFavourite(Long id) throws SQLException {

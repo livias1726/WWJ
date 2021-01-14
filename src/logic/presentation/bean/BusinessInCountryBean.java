@@ -2,9 +2,6 @@ package logic.presentation.bean;
 
 import java.util.List;
 
-import logic.application.control.EntrepreneurAccountControl;
-import logic.exceptions.DatabaseFailureException;
-
 public class BusinessInCountryBean extends BusinessBean{
 
 	private Float averageCost;
@@ -71,19 +68,7 @@ public class BusinessInCountryBean extends BusinessBean{
 	public void setStartExpense(Float startExpense) {
 		this.startExpense = startExpense;
 	}
-
-	public List<BusinessInCountryBean> getFavouriteBusinesses() throws DatabaseFailureException {
-		return EntrepreneurAccountControl.getInstance().retrieveFavourites();
-	}
-
-	public void addToFavourites() throws DatabaseFailureException {
-		EntrepreneurAccountControl.getInstance().addNewFavourite(id);
-	}
-
-	public void removeFromFavourites() throws DatabaseFailureException {
-		EntrepreneurAccountControl.getInstance().removeFavourites(id);
-	}
-
+	
 	public List<Float> getTaxes() {
 		return taxes;
 	}

@@ -8,13 +8,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import logic.application.control.EntrepreneurAccountControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
+import logic.presentation.Sections;
 import logic.presentation.bean.BusinessInCountryBean;
 
 public class FavouriteBusinessGraphic implements Initializable {
@@ -33,10 +37,9 @@ public class FavouriteBusinessGraphic implements Initializable {
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
-    	BusinessInCountryBean res = new BusinessInCountryBean();
- 
 		try {
-			businesses = res.getFavouriteBusinesses();
+			businesses = EntrepreneurAccountControl.getInstance().retrieveFavourites();
+			
 			order.getSelectionModel().selectedIndexProperty().addListener((obv, oldValue, newValue) -> orderResults(businesses, newValue));		
 			order.setItems(items);
 			order.setValue(items.get(0));
@@ -44,8 +47,20 @@ public class FavouriteBusinessGraphic implements Initializable {
 			GraphicHandler.popUpMsg(AlertType.ERROR, de.getMessage());
 			closePlanSection();
 		}	
+    
+	    for(BusinessInCountryBean i: businesses) {
+			Button bus = new Button();
+			bus.setPrefHeight(70);
+			bus.setPrefWidth(favBox.getPrefWidth() - (favBox.getSpacing())*2);
 	
-	}
+			bus.setText(i.getName() + " - " + i.getCountry().getName());
+			bus.setOnAction(event -> openFeasibilityReport(i));
+			bus.setStyle("-fx-font-size: 15px;");
+			bus.setCursor(Cursor.HAND);
+			
+			favBox.getChildren().add(bus);
+		}
+    }
 	
     public void orderResults(List <BusinessInCountryBean> list, Number filter) {
 		list.sort((BusinessInCountryBean b1, BusinessInCountryBean b2) -> {
@@ -55,6 +70,12 @@ public class FavouriteBusinessGraphic implements Initializable {
         		return b1.getAverageCost().compareTo(b2.getAverageCost());
         	}    
 	    });
+	}
+
+	private void openFeasibilityReport(BusinessInCountryBean i) {
+		Stage popup = GraphicHandler.openSection(plansPane, Sections.BUSINESS, new BusinessDetailsGraphic(i));
+		popup.centerOnScreen();
+		popup.show();
 	}
 
 	@FXML
