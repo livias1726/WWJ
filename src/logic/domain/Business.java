@@ -7,41 +7,41 @@ import logic.persistence.dao.BusinessDAO;
 
 public class Business {
 
-	protected int id;
-	protected String category;
-	protected String name;
+	protected int busId;
+	protected String busCat;
+	protected String busName;
 	
 	public Business() {
 		/**/
 	}
 	
 	public Business(String name, String category) {
-		this.name = name;
-		this.category = category;				
+		this.busName = name;
+		this.busCat = category;				
 	}
 
 	public int getId() {
-		return id;
+		return busId;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.busId = id;
 	}
 	
 	public String getCategory() {
-		return category;
+		return busCat;
 	}
 
 	public void setCategory(String category) {
-		this.category = category;
+		this.busCat = category;
 	}
 
 	public String getName() {
-		return name;
+		return busName;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.busName = name;
 	}
 	
 	public List<Business> getAvailableBusinesses() throws SQLException{

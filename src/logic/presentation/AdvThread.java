@@ -1,5 +1,6 @@
 package logic.presentation;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 import javafx.application.Platform;
@@ -12,7 +13,7 @@ import logic.application.SessionFacade;
 
 public class AdvThread extends Thread { 
 	
-	private Random rand = new Random();
+	private Random rand = new SecureRandom();
 	
 	@Override
 	public void run(){		

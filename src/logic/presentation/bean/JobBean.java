@@ -4,32 +4,32 @@ import logic.exceptions.InvalidFieldException;
 
 public class JobBean {
 
-	private int id;
-	private String name;
-	private String category;
+	private int idJob;
+	private String nameJob;
+	private String catJob;
 	
 	public int getId() {
-		return id;
+		return idJob;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.idJob = id;
 	}
 
 	public String getName() {
-		return name;
+		return nameJob;
 	}
 	
 	public void setName(String name) {
-		this.name = name;
+		this.nameJob = name;
 	}
 	
 	public String getCategory() {
-		return category;
+		return catJob;
 	}
 	
 	public void setCategory(String category) {
-		this.category = category;
+		this.catJob = category;
 	}
 	
 	public boolean checkFieldValidity(String str) {

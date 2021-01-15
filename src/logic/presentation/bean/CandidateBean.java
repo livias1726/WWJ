@@ -2,31 +2,31 @@ package logic.presentation.bean;
 
 public class CandidateBean {
 	
-	private int offer;
-	private String name;
-	private Long seeker;
+	private int idOffCand;
+	private String nameCand;
+	private Long idCand;
 	
 	public int getOffer() {
-		return offer;
+		return idOffCand;
 	}
 
 	public void setOffer(int offer) {
-		this.offer = offer;
+		this.idOffCand = offer;
 	}
 
 	public String getName() {
-		return name;
+		return nameCand;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.nameCand = name;
 	}
 
 	public Long getSeeker() {
-		return seeker;
+		return idCand;
 	}
 
 	public void setSeeker(Long seeker) {
-		this.seeker = seeker;
+		this.idCand = seeker;
 	}
 }

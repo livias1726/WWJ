@@ -5,50 +5,50 @@ public class AddressBean {
 	private int id;
 	private CountryBean country;
 	private String countryName; //used for tableview in company info section
-	private String state;
-	private String city;
-	private String postalCode;
-	private String street;
-	private int number;
+	private String stateBean;
+	private String cityBean;
+	private String pcBean;
+	private String streetBean;
+	private int numBean;
 
 	public String getCity() {
-		return city;
+		return cityBean;
 	}
 
 	public void setCity(String city) {
-		this.city = city;
+		this.cityBean = city;
 	}
 
 	public String getPostalCode() {
-		return postalCode;
+		return pcBean;
 	}
 
 	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
+		this.pcBean = postalCode;
 	}
 
 	public String getStreet() {
-		return street;
+		return streetBean;
 	}
 
 	public void setStreet(String street) {
-		this.street = street;
+		this.streetBean = street;
 	}
 
 	public int getNumber() {
-		return number;
+		return numBean;
 	}
 
 	public void setNumber(int number) {
-		this.number = number;
+		this.numBean = number;
 	}
 
 	public String getState() {
-		return state;
+		return stateBean;
 	}
 	
 	public void setState(String name) {
-		this.state = name;
+		this.stateBean = name;
 	}
 	
 	public CountryBean getCountry() {
@@ -74,11 +74,11 @@ public class AddressBean {
 	
 	@Override
 	public String toString() {
-		return this.countryName + ", " + this.state + ", " + this.city + ", " + this.street + ", " + this.number + ", " + this.postalCode;
+		return this.countryName + ", " + this.stateBean + ", " + this.cityBean + ", " + this.streetBean + ", " + this.numBean + ", " + this.pcBean;
 	}
 
 	public String buildMapAddress() {
-		String str = this.street.replace(".", "").replace(" ", "+");
-		return str + ",+" + this.number + "," + this.postalCode.replace(" ", "+") + "+" + this.countryName;
+		String str = this.streetBean.replace(".", "").replace(" ", "+");
+		return str + ",+" + this.numBean + "," + this.pcBean.replace(" ", "+") + "+" + this.countryName;
 	}
 }

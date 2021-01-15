@@ -2,31 +2,31 @@ package logic.presentation.bean;
 
 public class BusinessBean {
 	
-	protected int id;
-	protected String category;
-	protected String name;
+	protected int idBus;
+	protected String catBus;
+	protected String nameBus;
 		
 	public int getId() {
-		return id;
+		return idBus;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.idBus = id;
 	}
 
 	public String getName() {
-		return name;
+		return nameBus;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.nameBus = name;
 	}
 	
 	public String getCategory() {
-		return category;
+		return catBus;
 	}
 
 	public void setCategory(String category) {
-		this.category = category;
+		this.catBus = category;
 	}
 }

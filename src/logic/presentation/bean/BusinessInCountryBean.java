@@ -4,53 +4,53 @@ import java.util.List;
 
 public class BusinessInCountryBean extends BusinessBean{
 
-	private Float averageCost;
-	private Float averageEarnings;
-	private List<Float> popularity;
-	private List<Integer> competitors;
+	private Float averageCostBean;
+	private Float averageEarningsBean;
+	private List<Float> pop;
+	private List<Integer> comp;
 	private List<Float> taxes;
-	private String description;
+	private String descBusBean;
 	private Float startExpense;
 	private CountryBean country;
 	
 	public Float getAverageCost() {
-		return averageCost;
+		return averageCostBean;
 	}
 
 	public void setAverageCost(Float averageCost) {
-		this.averageCost = averageCost;
+		this.averageCostBean = averageCost;
 	}
 
 	public List<Float> getPopularity() {
-		return popularity;
+		return pop;
 	}
 
 	public void setPopularity(List<Float> popularity) {
-		this.popularity = popularity;
+		this.pop = popularity;
 	}
 
 	public List<Integer> getCompetitors() {
-		return competitors;
+		return comp;
 	}
 
 	public void setCompetitors(List<Integer> competitors) {
-		this.competitors = competitors;
+		this.comp = competitors;
 	}
 
 	public Float getAverageEarnings() {
-		return averageEarnings;
+		return averageEarningsBean;
 	}
 
 	public void setAverageEarnings(Float averageEarnings) {
-		this.averageEarnings = averageEarnings;
+		this.averageEarningsBean = averageEarnings;
 	}
 
 	public String getDescription() {
-		return description;
+		return descBusBean;
 	}
 
 	public void setDescription(String description) {
-		this.description = description;
+		this.descBusBean = description;
 	}
 
 	public CountryBean getCountry() {

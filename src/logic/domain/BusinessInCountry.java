@@ -98,11 +98,11 @@ public class BusinessInCountry extends Business {
 	}
 
 	public void addFavourite(Long id) throws SQLException {
-		BusinessDAO.insertIntoFavourite(this.id, id);
+		BusinessDAO.insertIntoFavourite(this.busId, id);
 	}
 
 	public void deleteFavourite(Long id) throws SQLException {
-		BusinessDAO.deleteFromFavourite(this.id, id);
+		BusinessDAO.deleteFromFavourite(this.busId, id);
 	}
 
 	public void getBusinessStatistics() throws SQLException {
