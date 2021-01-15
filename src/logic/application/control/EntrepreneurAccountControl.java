@@ -1,14 +1,12 @@
 package logic.application.control;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import logic.application.SessionFacade;
 import logic.domain.BusinessInCountry;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.BusinessInCountryBean;
-import logic.presentation.bean.CountryBean;
 
 public class EntrepreneurAccountControl{
 	
@@ -27,53 +25,25 @@ public class EntrepreneurAccountControl{
     }
 
 	public List<BusinessInCountryBean> retrieveFavourites() throws DatabaseFailureException {
-		BusinessInCountry business = new BusinessInCountry();
-    	List<BusinessInCountry> list;
 		try {
-			list = business.getFavourites(SessionFacade.getSession().getID());
+			List<BusinessInCountry> list = BusinessFactory.getInstance().createBusiness().getFavourites(SessionFacade.getSession().getID());
+			return BusinessFactory.getInstance().extractBusinessInCountryBeanList(list);
 		} catch (SQLException se) {
 			throw new DatabaseFailureException();
 		}
-    	
-		List<BusinessInCountryBean> dest = new ArrayList<>();
-    	for(BusinessInCountry i: list) {
-    		BusinessInCountryBean bean = new BusinessInCountryBean();  		
-    		
-    		bean.setId(i.getId());
-    		bean.setName(i.getName());
-    		bean.setCategory(i.getCategory());
-    		bean.setDescription(i.getDescription());
-    		
-    		CountryBean country = new CountryBean();
-    		country.setName(i.getCountry().getName());
-    		country.setCurrency(i.getCountry().getCurrency());
-    		bean.setCountry(country);
-    		
-    		bean.setAverageEarnings(i.getAverageEarnings());
-    		bean.setAverageCost(i.getAverageCost());
-    		
-    		dest.add(bean);
-    	}
-    	
-    	return dest;
 	}
 
 	public void addNewFavourite(int id) throws DatabaseFailureException {
-		BusinessInCountry fav = new BusinessInCountry();
-		fav.setId(id);
 		try {
-			fav.addFavourite(SessionFacade.getSession().getID());
+			BusinessFactory.getInstance().createBusiness(id).addFavourite(SessionFacade.getSession().getID());
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();
 		}
 	}
 
 	public void removeFavourite(int id) throws DatabaseFailureException {
-		BusinessInCountry fav = new BusinessInCountry();
-		fav.setId(id);
-
 		try {
-			fav.deleteFavourite(SessionFacade.getSession().getID());
+			BusinessFactory.getInstance().createBusiness(id).deleteFavourite(SessionFacade.getSession().getID());
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();
 		}

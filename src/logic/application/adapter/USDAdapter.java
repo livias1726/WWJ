@@ -5,17 +5,17 @@ package logic.application.adapter;
  */
 public class USDAdapter implements Currency {
 
-	private String currency;
+	private String usCurr;
 	
 	public USDAdapter(String currency) {
-		this.currency = currency;
+		this.usCurr = currency;
 	}
 
 	@Override
 	public Float value(Float val) {
 		Float res;
 
-		switch(currency) {
+		switch(usCurr) {
 			case "C$":
 				res = (float) (val*0.79);
 				break;

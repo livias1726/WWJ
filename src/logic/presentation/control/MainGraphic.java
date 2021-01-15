@@ -1,5 +1,8 @@
 package logic.presentation.control;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -7,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import logic.presentation.AdvThread;
 import logic.presentation.GraphicHandler;
@@ -45,6 +49,11 @@ public class MainGraphic extends ToolBarGraphic implements Initializable {
 	
 	@FXML
 	public void openAdMarketplace() {
-		/**/
+		File htmlFile = new File("src/logic/presentation/resources/html/admarket.html");
+		try {
+			Desktop.getDesktop().browse(htmlFile.toURI());
+		} catch (IOException e) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, "Cannot connect to the market page. Retry later.");
+		}
     }
 }

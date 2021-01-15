@@ -17,6 +17,14 @@ public class BusinessInCountry extends Business {
 	private Float startExpense;
 	private Country country;
 	
+	public BusinessInCountry() {
+		/**/
+	}
+	
+	public BusinessInCountry(int id) {
+		this.busId = id;
+	}
+
 	public Float getAverageCost() {
 		return averageCost;
 	}

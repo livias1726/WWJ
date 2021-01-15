@@ -19,7 +19,7 @@ public class AdvThread extends Thread {
 	public void run(){		
 		try {		
 			while(!SessionFacade.getSession().isPremium()) {
-				Thread.sleep(30000);
+				Thread.sleep(300000);
 				Platform.runLater(() -> {
 					Stage stage = new Stage();
 					
