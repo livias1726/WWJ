@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.stage.Stage;
+import logic.presentation.AdvThread;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
 import logic.presentation.ToolBarGraphic;
@@ -23,7 +24,9 @@ public class MainGraphic extends ToolBarGraphic implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
-		/**/
+		AdvThread advThread = new AdvThread();
+		advThread.setDaemon(true);
+		advThread.start();
 	}
 	
 	@FXML

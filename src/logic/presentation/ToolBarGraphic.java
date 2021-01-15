@@ -116,7 +116,8 @@ public class ToolBarGraphic implements Initializable{
 		try {
 			Desktop.getDesktop().browse(htmlFile.toURI());
 		} catch (IOException e) {
-			e.printStackTrace();
+			GraphicHandler.popUpMsg(AlertType.ERROR, "Cannot connect to the support page. Send us an email to 'wwj@support.com'.");
+			goBack();
 		}
 	}
 	

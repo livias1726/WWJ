@@ -160,9 +160,4 @@ public class GraphicHandler {
 		alert.setContentText(content);
 		return alert.showAndWait();
 	}
-	
-	public static void popUpAdv() {
-		/*Method to implement pop up advertisement when changing screen*/
-	}
-	
 }
