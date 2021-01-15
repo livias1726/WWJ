@@ -2,9 +2,9 @@ package logic.application.control;
 
 import java.sql.SQLException;
 
-import logic.application.control.adapter.EuroAdapter;
-import logic.application.control.adapter.PoundAdapter;
-import logic.application.control.adapter.USDAdapter;
+import logic.application.adapter.EuroAdapter;
+import logic.application.adapter.PoundAdapter;
+import logic.application.adapter.USDAdapter;
 import logic.domain.BusinessInCountry;
 import logic.domain.Country;
 import logic.exceptions.DatabaseFailureException;

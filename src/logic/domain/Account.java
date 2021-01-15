@@ -25,14 +25,6 @@ public class Account implements Serializable{
 		/*Default constructor*/
 	}
 	
-	public File getPic() {
-		return pic;
-	}
-
-	public void setPic(File pic) {
-		this.pic = pic;
-	}
-
 	public Account(User u, Users t, long id) {
 		this.user = u;
 		this.type = t;
@@ -65,6 +57,14 @@ public class Account implements Serializable{
 	
 	public void setPremium(boolean val) {
 		this.premium = val;
+	}
+	
+	public File getPic() {
+		return pic;
+	}
+
+	public void setPic(File pic) {
+		this.pic = pic;
 	}
 	
 	public Account tryLoginToDB() throws FailedLoginException, SQLException {

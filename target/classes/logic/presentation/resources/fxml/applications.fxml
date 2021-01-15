@@ -28,7 +28,7 @@
       </Button>
       <TableView fx:id="appTab" layoutX="91.0" layoutY="73.0" prefHeight="414.0" prefWidth="973.0">
          <columns>
-            <TableColumn fx:id="delCol" editable="false" prefWidth="75.0" sortable="false" />
+            <TableColumn fx:id="deleteCol" editable="false" prefWidth="75.0" sortable="false" />
             <TableColumn fx:id="offerCol" editable="false" prefWidth="104.0" text="Offer" />
             <TableColumn fx:id="posCol" editable="false" prefWidth="241.0" sortable="false" text="Position" />
             <TableColumn fx:id="appDateCol" editable="false" minWidth="0.0" prefWidth="277.0" text="Application Date" />

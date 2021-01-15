@@ -52,7 +52,7 @@ public class ApplicationsGraphic implements Initializable {
     private TableColumn<ApplicationBean, LocalDate> expDateCol;
     
     @FXML
-    private TableColumn<CandidateBean, Boolean> delCol;
+    private TableColumn<CandidateBean, Boolean> deleteCol;
     
     @FXML
     private Button delBtn;
@@ -79,12 +79,12 @@ public class ApplicationsGraphic implements Initializable {
 		appTab.setItems(list);
 		
 		CheckBox selectAll = new CheckBox();
-		delCol.setGraphic(selectAll);
+		deleteCol.setGraphic(selectAll);
 		selectAll.setOnAction(this::selectAllBoxes);
 		delBtn.disableProperty().bind(Bindings.isEmpty(selected).and(selectAll.selectedProperty().not()));
 		
-		delCol.setCellFactory(tc -> {
-			CheckBox btn = new CheckBox();      
+		deleteCol.setCellFactory(tc -> {
+			CheckBox check = new CheckBox();      
 			CheckBoxTableCell<CandidateBean, Boolean> cell = new CheckBoxTableCell<CandidateBean, Boolean>() {
             	@Override
                 public void updateItem(Boolean checked, boolean empty) {
@@ -92,13 +92,13 @@ public class ApplicationsGraphic implements Initializable {
                     if (empty) {
                         setGraphic(null);
                     } else {
-                        setGraphic(btn);
+                        setGraphic(check);
                     }
                 }
             }; 
 			
-            btn.addEventFilter(ActionEvent.ACTION, event -> {
-            	if(btn.isSelected()) {
+            check.addEventFilter(ActionEvent.ACTION, event -> {
+            	if(check.isSelected()) {
 	        		selected.add(offerCol.getCellData(cell.getIndex()));
 	        	}else {
 	        		int index = selected.indexOf(offerCol.getCellData(cell.getIndex()));
@@ -106,7 +106,7 @@ public class ApplicationsGraphic implements Initializable {
 	        	}
             });
             
-            checkList.add(btn);
+            checkList.add(check);
 	        return cell;
     	});
 		

@@ -39,10 +39,8 @@ public class AccountDAO {
         	
 			res = RoutinesManager.bindParametersAndExec(stmt, (int)id);
 			
-            if (res.first()){           	
-            	long idA = res.getInt("id");
-     
-                User user = new User();
+            if (res.first()){
+            	User user = new User();
                 user.setFirstName(res.getString("first_name"));
                 user.setLastName(res.getString("last_name"));
                 
@@ -50,7 +48,7 @@ public class AccountDAO {
                 
                 boolean premium = res.getBoolean("premium");
                 
-                account = new Account(user, type, idA);
+                account = new Account(user, type, res.getInt("id"));
                 account.setPremium(premium);
 
                 Blob blob = res.getBlob("pic");

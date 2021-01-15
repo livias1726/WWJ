@@ -1,4 +1,4 @@
-package logic.application.control.adapter;
+package logic.application.adapter;
 
 public interface Currency {
 	

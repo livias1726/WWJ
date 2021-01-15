@@ -1,4 +1,4 @@
-package logic.application.control.adapter;
+package logic.application.adapter;
 
 /**
  * Class for the conversion from a certain currency to euros
