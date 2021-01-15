@@ -34,6 +34,7 @@ public class AccountGraphic extends ToolBarGraphic{
 	protected Label nameLbl;
 		
 	protected Long accountID = (long) 0; 
+	protected boolean viewed = false;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {

@@ -166,7 +166,7 @@ public class ToolBarGraphic implements Initializable{
 		try {
 			ConnectionManager.closeConnection();
 		} catch (SQLException e) {
-			//Log exception
+			/**/
 		}
 		System.exit(0);
 	}

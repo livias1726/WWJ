@@ -90,9 +90,7 @@ public class LoginGraphic implements Initializable {
 	
 	@FXML
 	public void googleLogin() {
-		/*Connect to Google using the specific API
-		 * and OAuth2 system
-		 */
+		GraphicHandler.popUpMsg(AlertType.ERROR, "Sorry, this function is not available yet");
 	}
 	
 	@FXML
