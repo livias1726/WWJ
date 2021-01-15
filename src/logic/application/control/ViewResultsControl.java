@@ -22,8 +22,7 @@ public class ViewResultsControl {
         return instance;
     }
     
-    public List<String> retrieveCountries() throws DatabaseFailureException{  	
-   
+    public List<String> retrieveCountries() throws DatabaseFailureException{  	   
     	try {
 			return new Country().getAvailableCountries();
 		} catch (SQLException e) {

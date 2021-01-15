@@ -26,6 +26,14 @@ public class Offer implements Serializable{
 	private LocalDate upload;
 	private int candidates;
 	
+	public Offer() {
+		/**/
+	}
+	
+	public Offer(int id) {
+		this.id = id;
+	}
+
 	public String getCompanyName() {
 		return companyName;
 	}

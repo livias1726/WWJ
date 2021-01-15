@@ -15,7 +15,6 @@ import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.AddressBean;
 import logic.presentation.bean.CompanyBean;
-import logic.presentation.bean.JobBean;
 import logic.presentation.bean.OfferBean;
 
 public class RecruiterAccountControl {
@@ -61,33 +60,17 @@ public class RecruiterAccountControl {
 	}
 
 	public ObservableList<OfferBean> retrievePublishedOffers() throws DatabaseFailureException {
-		List<Offer> list = null;
-		Offer offer = new Offer();
-		
 		try {
-			list = offer.getOffersByRecruiter(SessionFacade.getSession().getID());
+			List<Offer> list = OfferFactory.getInstance().createOffer().getOffersByRecruiter(SessionFacade.getSession().getID());
+			ObservableList<OfferBean> dest = FXCollections.observableArrayList();
+			for(OfferBean i: OfferFactory.getInstance().extractPublishOfferBeanList(list)) {
+				dest.add(i);
+			}
+			return dest;
 		} catch (SQLException e) {
 			Logger.getLogger(RecruiterAccountControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException();
 		}
-		
-		ObservableList<OfferBean> dest = FXCollections.observableArrayList();
-		for(Offer i: list) {
-			OfferBean bean = new OfferBean();		
-			bean.setId(i.getId());
-			
-			JobBean jobBean = new JobBean();
-			jobBean.setName(i.getPosition().getName());
-			bean.setPosition(jobBean);
-			
-			bean.setUpload(i.getUpload());
-			bean.setExpiration(i.getExpiration());
-			bean.setCandidates(i.getCandidates());
-			
-			dest.add(bean);
-		}
-		
-		return dest;
 	}
 
 	public void changeCompanyInfo(CompanyBean bean) throws DatabaseFailureException {

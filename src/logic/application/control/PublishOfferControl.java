@@ -7,8 +7,6 @@ import java.util.List;
 import logic.application.SessionFacade;
 import logic.domain.Address;
 import logic.domain.Company;
-import logic.domain.Job;
-import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.IncompleteAccountException;
 import logic.presentation.bean.AddressBean;
@@ -51,32 +49,8 @@ public class PublishOfferControl {
 	}
 
 	public void publishNewOffer(OfferBean bean) throws DatabaseFailureException{
-
-		Offer offer = new Offer();
-		
-    	Job job = new Job();
-    	job.setId(bean.getPosition().getId());
-    	offer.setPosition(job);
-    	
-    	offer.setTaskDescription(bean.getTaskDescription());
-    	
-    	Address branch = new Address();
-    	branch.setId(bean.getBranch().getId());
-    	offer.setBranch(branch);
-    	
-    	offer.setStart(bean.getStart());
-    	offer.setFinish(bean.getFinish());
-    	offer.setBaseSalary(bean.getBaseSalary());
-    	offer.setExpiration(bean.getExpiration());
-    	
-    	List<String> requirements = new ArrayList<>();
-    	for(String i: bean.getRequirements()) {
-    		requirements.add(i);
-    	}		
-		offer.setRequirements(requirements);
-		
 		try {
-			offer.publish(SessionFacade.getSession().getID());
+			OfferFactory.getInstance().extractOffer(bean).publish(SessionFacade.getSession().getID());
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();
 		}
