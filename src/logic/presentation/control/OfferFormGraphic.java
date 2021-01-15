@@ -86,7 +86,7 @@ public class OfferFormGraphic extends ToolBarGraphic{
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		super.initialize(location, resources);
 		try {
 			branchId = new ArrayList<>();
 			for(AddressBean i: PublishOfferControl.getInstance().retrieveCompanyInfo()) {

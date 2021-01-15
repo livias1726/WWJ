@@ -38,6 +38,7 @@ public class LoginControl {
 			
 			SessionFacade.getSession().setID(account.getID());
     		SessionFacade.getSession().setCurrUserType(account.getType());
+    		SessionFacade.getSession().setPremium(account.isPremium());
 		
 		} catch (SQLException se) {
 			throw new DatabaseFailureException();

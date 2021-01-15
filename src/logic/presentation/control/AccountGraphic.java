@@ -47,10 +47,6 @@ public class AccountGraphic extends ToolBarGraphic{
 				accountID = account.getId();
 			}else {
 				account = AccountControl.getInstance().retrieveAccount(accountID);
-			}	
-		
-			if(account.isPremium()) {
-				premiumBtn.setVisible(false);
 			}
 			
 			if(account.getPic() != null) {

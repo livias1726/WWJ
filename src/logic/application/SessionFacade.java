@@ -12,6 +12,7 @@ public class SessionFacade {
 
 	private Users currUserType;
 	private Long accountID;
+	private boolean premium;
 	private Scenes curr;
 	private List<Scenes> prev;
 	private int counter = -1;
@@ -64,5 +65,13 @@ public class SessionFacade {
 
 	public void setID(Long accountID) {
 		this.accountID = accountID;
+	}
+
+	public boolean isPremium() {
+		return premium;
+	}
+
+	public void setPremium(boolean premium) {
+		this.premium = premium;
 	}
 }

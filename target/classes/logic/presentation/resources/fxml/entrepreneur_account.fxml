@@ -134,6 +134,7 @@
                      <items>
                         <MenuItem fx:id="pubBtn" mnemonicParsing="false" onAction="#openNewOffer" text="Publish an offer" />
                         <MenuItem fx:id="premiumBtn" mnemonicParsing="false" onAction="#buyPremium" text="Buy premium version" />
+                        <MenuItem fx:id="cancPremium" mnemonicParsing="false" onAction="#cancelSubscription" text="Cancel subscription to premium" />
                         <MenuItem mnemonicParsing="false" onAction="#openOnlineDoc" text="Support" />
                         <MenuItem mnemonicParsing="false" onAction="#closeApp" text="Quit" />
                      </items>

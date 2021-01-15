@@ -1,5 +1,8 @@
 package logic.presentation;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -9,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
@@ -43,6 +47,9 @@ public class ToolBarGraphic implements Initializable{
     protected MenuItem profBtn;
     
     @FXML
+	protected MenuItem cancPremium;
+    
+    @FXML
     protected MenuItem pubBtn;
     
     @Override
@@ -56,8 +63,16 @@ public class ToolBarGraphic implements Initializable{
 			outBtn.setVisible(false);
 			notifyBtn.setVisible(false);
 			profBtn.setVisible(false);
+			cancPremium.setVisible(false);
 		}else {
 			inBtn.setVisible(false);
+			if(SessionFacade.getSession().isPremium()) {
+				premiumBtn.setVisible(false);
+				cancPremium.setVisible(true);
+			}else {
+				premiumBtn.setVisible(true);
+				cancPremium.setVisible(false);
+			}
 		}
     }
 
@@ -97,17 +112,33 @@ public class ToolBarGraphic implements Initializable{
 	
 	@FXML
 	protected void openOnlineDoc(){
-		/*
-		 * Launch an html page with documentation
-		 */
+		File htmlFile = new File("src/logic/presentation/resources/html/support.html");
+		try {
+			Desktop.getDesktop().browse(htmlFile.toURI());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML
 	protected void buyPremium(){
-		/*
-		 * Redirect to payment check out
-		 */
+		File htmlFile = new File("src/logic/presentation/resources/html/pricing.html");
+		try {
+			GraphicHandler.popUpMsg(AlertType.INFORMATION, "Remember to use the same email address with which you "
+														 + "subscribed to this application or to provide it in the comment section. "
+														 + "For any problem send us an email from the support page.");
+			Desktop.getDesktop().browse(htmlFile.toURI());
+		} catch (IOException e) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, "Cannot connect to the pricing page. Retry later.");
+			goBack();
+		}
 	}
+	
+	@FXML
+    void cancelSubscription() {
+		GraphicHandler.popUpMsg(AlertType.INFORMATION, "If you want to cancel the subscription to the premium account send us an email!.");
+		openOnlineDoc();
+    }
 	
 	@FXML
     protected void openNewOffer() {
