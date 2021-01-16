@@ -23,7 +23,6 @@ import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import logic.application.control.JobControl;
 import logic.application.control.PublishOfferControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.IncompleteAccountException;
@@ -95,7 +94,7 @@ public class OfferFormGraphic extends ToolBarGraphic{
 			}
 			
 			jobId = new ArrayList<>();
-			for(JobBean i: JobControl.getInstance().retrieveJobs()) {
+			for(JobBean i: PublishOfferControl.getInstance().retrieveJobs()) {
 				jobCombo.getItems().add(i.getName());
 				jobId.add(i.getId());
 			}
@@ -137,7 +136,7 @@ public class OfferFormGraphic extends ToolBarGraphic{
 		
 		try {
 			bean.verifyFields(bean.getName(), bean.getCategory());
-			JobControl.getInstance().saveNewJob(bean);
+			PublishOfferControl.getInstance().saveNewJob(bean);
 			
 			jobNameTxt.clear();
 			jobCatTxt.clear();
@@ -145,7 +144,7 @@ public class OfferFormGraphic extends ToolBarGraphic{
 			
 			jobCombo.getItems().clear();
 			jobId.clear();
-			for(JobBean i: JobControl.getInstance().retrieveJobs()) {
+			for(JobBean i: PublishOfferControl.getInstance().retrieveJobs()) {
 				jobCombo.getItems().add(i.getName());
 				jobId.add(i.getId());
 			}

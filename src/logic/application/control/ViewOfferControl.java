@@ -5,12 +5,14 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import logic.domain.Job;
 import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
 import logic.presentation.bean.CountryBean;
 import logic.presentation.bean.JobBean;
 import logic.presentation.bean.OfferBean;
+import logic.service.JobFactory;
 import logic.service.OfferFactory;
 
 public class ViewOfferControl extends ViewResultsControl{
@@ -28,7 +30,16 @@ public class ViewOfferControl extends ViewResultsControl{
 
         return instance;
     }
-       
+      
+    public List<JobBean> retrieveJobs() throws DatabaseFailureException {
+    	try {
+    		List<Job> list = JobFactory.getInstance().createJob().getAvailableJobs();
+    		return JobFactory.getInstance().extractToBean(list);
+		} catch (SQLException e) {
+			throw new DatabaseFailureException();
+		}
+	}
+    
     public ObservableList<OfferBean> retrieveOffersByJob(JobBean bean) throws DatabaseFailureException, NoResultFoundException {
 		try {
 			List<Offer> list = OfferFactory.getInstance().createOffer().getOffersByPosition(bean.getCategory());

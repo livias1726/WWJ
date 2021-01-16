@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-import logic.application.control.JobControl;
+import logic.application.control.ViewOfferControl;
 import logic.application.control.ViewResultsControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
@@ -45,7 +45,7 @@ public class SearchSeekerGraphic extends ToolBarGraphic{
 			cList = ViewResultsControl.getInstance().retrieveCountries();
 			
 			jList = new ArrayList<>();
-			for(JobBean i: JobControl.getInstance().retrieveJobs()) {
+			for(JobBean i: ViewOfferControl.getInstance().retrieveJobs()) {
 				jList.add(i.getCategory());
 			}
 

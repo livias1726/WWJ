@@ -7,11 +7,14 @@ import java.util.List;
 import logic.application.SessionFacade;
 import logic.domain.Address;
 import logic.domain.Company;
+import logic.domain.Job;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.IncompleteAccountException;
 import logic.presentation.bean.AddressBean;
+import logic.presentation.bean.JobBean;
 import logic.presentation.bean.OfferBean;
 import logic.service.AddressFactory;
+import logic.service.JobFactory;
 import logic.service.OfferFactory;
 
 public class PublishOfferControl {
@@ -48,6 +51,26 @@ public class PublishOfferControl {
 		}
 
 		return bean;
+	}
+	
+	public List<JobBean> retrieveJobs() throws DatabaseFailureException {
+    	try {
+    		List<Job> list = JobFactory.getInstance().createJob().getAvailableJobs();
+    		return JobFactory.getInstance().extractToBean(list);
+		} catch (SQLException e) {
+			throw new DatabaseFailureException();
+		}
+	}
+	    
+    public void saveNewJob(JobBean bean) throws DatabaseFailureException {
+		Job job = JobFactory.getInstance().createJob();
+		job.setName(bean.getName());
+		job.setCategory(bean.getCategory());
+		try {
+			job.addJobToDB();
+		} catch (SQLException e) {
+			throw new DatabaseFailureException();
+		}
 	}
 
 	public void publishNewOffer(OfferBean bean) throws DatabaseFailureException{
