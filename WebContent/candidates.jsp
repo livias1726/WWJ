@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="logic.application.control.CheckCandidatesControl" %>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -20,7 +22,7 @@
 		     			<a href="http://localhost:8080/WorldWideJob/publish.jsp">Publish Job Offer</a>
 		     			<a href="">Buy Premium Version</a>
 		     			<a class="dropdown" href="">Support</a>
-		     			<a href="">Quit</a>
+		     			<a href="http://localhost:8080/WorldWideJob/index.jsp">Quit</a>
 		     		</div>
 		     	</div>
 		     	<div style="float:right;">
@@ -28,8 +30,8 @@
 		        <div class="dropdown" style="float:right;">
 	    			<button class="user_btn" style="background-color:lightblue;margin-right:10px;width:40px;height:40px;margin-top:10px"></button>
 		     		<div class="dropdown-content" style="right:0;">
-		     			<a href="">Account</a>
-		     			<a href="">Logout</a>
+		     			<a href="http://localhost:8080/WorldWideJob/recruiterProfile.jsp">Account</a>
+		     			<a href="http://localhost:8080/WorldWideJob/login.jsp">Logout</a>
 		     		</div>
 		     	</div>
 		     	</div>
@@ -37,26 +39,57 @@
 	    			<img alt="" class="image" src="icons/main_icon.png" width=70px height=70px>
 	    		</div>
 	    		<div style="float:left">
-	    			<button class="home_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px;"></button>
+	    			<button class="home_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px;" onClick="javascript:window.location='recruiterProfile.jsp';"></button>
 	    		<div style="float:right;">
-	    			<button class="arrow_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px"></button>
+	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='recruiterProfile.jsp';"></button>
 	    		</div>
 	    		</div>
 	    		<div>
 	    		<input class="favourite_container" type="text" name="candidates_container" value="" disabled style="background-color:#C6D6D3">
 	    		<input class="favourite_title" type="text" name="candidates_title" value="Candidates" disabled style="background-color:#C6D6D3">
-	    		<fieldset style="background-color:#C6D6D3;position:absolute;width:150px;height:30px;left:20px;top:170px;border:0">
-	    		<input type="checkbox" name="select_all" style="">Select all<br>
-	    		</fieldset>
-	    		<input class="candidate_row_title" type="text" name="candidate_row_title" value="" disabled style="background-color:#56A6F0; border:0;">
-	    		<input class="candidate_row_title" type="text" name="candidatename_row_title" value="CANDIDATE NAME" disabled style="background-color:#56A6F0; width:10%; left:350px;border:0;">
-	    		<input class="candidate_row_title" type="text" name="offernumber_row_title" value="OFFER NUMBER" disabled style="background-color:#56A6F0; width:10%; left:800px;border:0;">
-	    		<input class="candidate_row" type="text" name="candidate_row" value="" disabled style="background-color:white;border:0;">
-	    		<input class="candidate_row" type="text" name="candidatename_row" value="" disabled style="background-color:white; width:30%; left:250px;border:0;">
-	    		<input class="candidate_row" type="text" name="offernumber_row" value="" disabled style="background-color:white;width:30%; left:700px; border:0;">
-	    		<input class="candidate_row" type="checkbox" name="candidate_checkbox" style="left:-500px"><br>
-	    		<button class="delete_btn" style="width:100px; height:50px; top:500px; left:400px; background-color:dodgerblue">Delete</button>
+	    	
+	    		<table contenteditable= "true" border="0" id='my_table' style="table-layout:fixed; width:800px;position:absolute;left:270px;top:200px;background-color:white">
+	    			<thead>
+      						<tr>
+         						<th style="height:30px; color:black; background-color:dodgerblue">Offer</th>
+         						<th style="height:30px; color:black; background-color:dodgerblue">Candidate</th>
+      						</tr>
+      						<tr>
+      							<td style="height:20px"></td>
+         						<td><%=CheckCandidatesControl.getInstance().retrieveCandidates()%></td>
+   							</tr>
+   							<tr>
+      							<td style="height:20px"></td>
+         						<td></td>
+   							</tr>
+   							<tr>
+      							<td style="height:20px"></td>
+         						<td></td>
+   							</tr>
+      					</thead>
+      					<tbody>
+      					</tbody>
+      			</table>
+	    		
+	    		<input class="candidate_row" type="checkbox" name="check1" style="height:20px; left:-320px; top:230px"><br>
+	    		<input class="candidate_row" type="checkbox" name="check2" style="height:20px; left:-320px; top:255px"><br>    
+	    		<input class="candidate_row" type="checkbox" name="check3" style="height:20px; left:-320px; top:280px"><br>
+	    		<input class="candidate_row" type="checkbox" name="checkall" style="height:20px; left:-320px; top:160px" onClick="Check();">
+	    		<input class="candidate_row" type="text" disabled name="selectAll" value="Select all" style="border:0; height:20px; width:60px; left:270px; top:160px">
+	    		
+	    		<script>
+					function Check(){
+						if (document.candidates.checkall.checked){
+							document.candidates.check1.checked=1;
+							document.candidates.check2.checked=1;
+							document.candidates.check3.checked=1;
+						}
+					}
+				</script>
+				
+	    		<button class="delete_btn" style="width:100px; height:50px; top:400px; left:550px; background-color:dodgerblue">Delete</button>
 	    		</div>
+	    		
 	    	</form>
 	    </div>	
 	</body>	
