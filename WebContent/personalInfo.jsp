@@ -11,7 +11,9 @@
 <jsp:useBean id="accountBean" class="logic.presentation.bean.AccountBean" scope="session"/>
 <jsp:setProperty name="accountBean" property="*"/>
 
-<%Class.forName("com.mysql.jdbc.Driver");%>
+<%
+	Class.forName("com.mysql.jdbc.Driver");
+%>
 
 <html lang="en">
 <head>
@@ -44,11 +46,11 @@
 	    		<div class="scheletro_offer_det">
 	    			<div style="margin-top: 40px">
 				    	<label for="firstName" style="color:black;font-size:20px;margin-left:15px">First Name</label>
-				        <input type="text" id="firstName" name="firstName" value="<%=AccountControl.getInstance().retrieveAccount().getUser().getFirstName()%>" style="margin-left: 40px;height:15px">
+				        <input type="text" id="firstName" name="firstName" value="<%=ManageAccountControl.getInstance().retrieveAccount().getUser().getFirstName()%>" style="margin-left: 40px;height:15px">
 				    </div>
 				    <div style="margin-top: 40px">
 				    	<label for="birthDate" style="color:black;font-size:20px;margin-left:15px">Birth Date</label>
-				        <input type="text" id="birthDate" name="birthDate" value="<%=AccountControl.getInstance().retrieveAccount().getUser().getBirth()%>" style="margin-left: 42px;height:15px">
+				        <input type="text" id="birthDate" name="birthDate" value="<%=ManageAccountControl.getInstance().retrieveAccount().getUser().getBirth()%>" style="margin-left: 42px;height:15px">
 				    </div>
 				    <div style="margin-top: 40px">
 				    	<label for="eMail" style="color:black;font-size:20px;margin-left:15px">Email</label>
@@ -56,11 +58,11 @@
 				    </div>
 				    <div style="margin-top: -140px;float:right">
 				    	<label for="lastName" style="color:black;font-size:20px;margin-right:40px">Last Name</label>
-				        <input type="text" id="lastName" name="lastName" value="<%=AccountControl.getInstance().retrieveAccount().getUser().getLastName()%>" style="margin-right:100px;height:15px">
+				        <input type="text" id="lastName" name="lastName" value="<%=ManageAccountControl.getInstance().retrieveAccount().getUser().getLastName()%>" style="margin-right:100px;height:15px">
 				    </div>
 				    <div style="margin-top: -75px;float:right">
 				    	<label for="city" style="color:black;font-size:20px;margin-right:40px">City</label>
-				        <input type="text" id="city" name="city" value="<%=AccountControl.getInstance().retrieveAccount().getUser().getCity()%>" style="margin-right:100px;height:15px">
+				        <input type="text" id="city" name="city" value="<%=ManageAccountControl.getInstance().retrieveAccount().getUser().getCity()%>" style="margin-right:100px;height:15px">
 				    </div>
 				    <div style="margin-top: -10px;float:right">
 				    	<label for="password" style="color:black;font-size:20px;margin-right:40px">Password</label>
@@ -90,7 +92,7 @@
 						userBean.setFirstName(request.getParameter("firstName"));
 						userBean.setLastName(request.getParameter("lastName"));
 						userBean.setCity(request.getParameter("city"));
-						AccountControl.getInstance().changePersonalInfo(userBean);
+						ManageAccountControl.getInstance().changePersonalInfo(userBean);
 				    	
 		   			}%>
 	   }</script>

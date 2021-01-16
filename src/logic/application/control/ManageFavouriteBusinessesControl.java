@@ -7,24 +7,25 @@ import logic.application.SessionFacade;
 import logic.domain.BusinessInCountry;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.BusinessInCountryBean;
+import logic.service.BusinessFactory;
 
-public class EntrepreneurAccountControl{
-	
-	private static EntrepreneurAccountControl instance = null;
+public class ManageFavouriteBusinessesControl {
 
-    private EntrepreneurAccountControl() {
-    	/*Default constructor*/
+	private static ManageFavouriteBusinessesControl instance = null;
+
+    private ManageFavouriteBusinessesControl() {
+    	/*Singleton*/
     }
 
-    public static EntrepreneurAccountControl getInstance() {
+    public static ManageFavouriteBusinessesControl getInstance() {
         if(instance == null) {
-        	instance = new EntrepreneurAccountControl();
+        	instance = new ManageFavouriteBusinessesControl();
         }
 
         return instance;
     }
-
-	public List<BusinessInCountryBean> retrieveFavourites() throws DatabaseFailureException {
+    
+    public List<BusinessInCountryBean> retrieveFavourites() throws DatabaseFailureException {
 		try {
 			List<BusinessInCountry> list = BusinessFactory.getInstance().createBusiness().getFavourites(SessionFacade.getSession().getID());
 			return BusinessFactory.getInstance().extractBusinessInCountryBeanList(list);

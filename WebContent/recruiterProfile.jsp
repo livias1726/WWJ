@@ -12,7 +12,9 @@
 <jsp:useBean id="accountBean" class="logic.presentation.bean.AccountBean" scope="session"/>
 <jsp:setProperty name="accountBean" property="*"/>
 
-<%Class.forName("com.mysql.jdbc.Driver");%>
+<%
+	Class.forName("com.mysql.jdbc.Driver");
+%>
 
 <html lang="en">
 	<head>
@@ -62,7 +64,7 @@
 	    		<div class="profile_pic" >
 	    		
 	    		<div>
-	    			<input type="text" id="Lnamefname" name="LnameFname" disabled value="<%=AccountControl.getInstance().retrieveAccount().getUser().getFirstName()%><%=""%> <%=AccountControl.getInstance().retrieveAccount().getUser().getLastName()%>" style="margin-left:290px;margin-top:20px;text-align:center;text-style:bold"><br>
+	    			<input type="text" id="Lnamefname" name="LnameFname" disabled value="<%=ManageAccountControl.getInstance().retrieveAccount().getUser().getFirstName()%><%=""%> <%=ManageAccountControl.getInstance().retrieveAccount().getUser().getLastName()%>" style="margin-left:290px;margin-top:20px;text-align:center;text-style:bold"><br>
 	    			<label for="email" style="margin-top:5px;margin-left:330px">Recruiter</label>
 	    		</div>
 	    		<input class="change_pic" disabled value="Change profile picture:" style="text-align:center;background-color:white; border:0;width:250px;height:20px;margin-top:180px;margin-left:-5px"><br>

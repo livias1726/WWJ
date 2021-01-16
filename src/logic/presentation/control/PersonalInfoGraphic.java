@@ -18,7 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
-import logic.application.control.AccountControl;
+import logic.application.control.ManageAccountControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
@@ -77,7 +77,7 @@ public class PersonalInfoGraphic implements Initializable {
 	public void initialize(URL url, ResourceBundle res) {
     	UserBean user;
 		try {
-			user = AccountControl.getInstance().retrievePersonalInfo(id);
+			user = ManageAccountControl.getInstance().retrievePersonalInfo(id);
 			
 			nameField.setText(user.getFirstName());
 	    	lastNameField.setText(user.getLastName());
@@ -155,7 +155,7 @@ public class PersonalInfoGraphic implements Initializable {
     	bean.setBirth(birth.getValue());
     
     	try {
-			AccountControl.getInstance().changePersonalInfo(bean);
+			ManageAccountControl.getInstance().changePersonalInfo(bean);
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			closePersonalInfo();

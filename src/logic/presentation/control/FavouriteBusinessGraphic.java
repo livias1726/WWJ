@@ -15,7 +15,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import logic.application.control.EntrepreneurAccountControl;
+import logic.application.control.ManageFavouriteBusinessesControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Sections;
@@ -38,7 +38,7 @@ public class FavouriteBusinessGraphic implements Initializable {
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
-			businesses = EntrepreneurAccountControl.getInstance().retrieveFavourites();
+			businesses = ManageFavouriteBusinessesControl.getInstance().retrieveFavourites();
 			
 			order.getSelectionModel().selectedIndexProperty().addListener((obv, oldValue, newValue) -> orderResults(businesses, newValue));		
 			order.setItems(items);

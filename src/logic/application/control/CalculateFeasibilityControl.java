@@ -11,17 +11,17 @@ import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.bean.BusinessInCountryBean;
 
-public class FeasibilityControl {
+public class CalculateFeasibilityControl {
 	
-	private static FeasibilityControl instance = null;
+	private static CalculateFeasibilityControl instance = null;
 
-    private FeasibilityControl() {
+    private CalculateFeasibilityControl() {
     	/*Singleton*/
     }
 
-    public static FeasibilityControl getInstance() {
+    public static CalculateFeasibilityControl getInstance() {
         if(instance == null) {
-        	instance = new FeasibilityControl();
+        	instance = new CalculateFeasibilityControl();
         }
 
         return instance;

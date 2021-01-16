@@ -1,4 +1,4 @@
-package logic.application.control;
+package logic.service;
 
 import java.util.ArrayList;
 import java.util.List;

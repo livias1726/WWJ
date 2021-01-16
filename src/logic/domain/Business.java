@@ -15,9 +15,8 @@ public class Business {
 		/**/
 	}
 	
-	public Business(String name, String category) {
-		this.busName = name;
-		this.busCat = category;				
+	public Business(int id) {
+		this.busId = id;			
 	}
 
 	public int getId() {

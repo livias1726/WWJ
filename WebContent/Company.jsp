@@ -24,7 +24,9 @@
 <jsp:useBean id="countryBean" class="logic.presentation.bean.CountryBean" scope="session"/>
 <jsp:setProperty name="countryBean" property="*"/>
 
-<%Class.forName("com.mysql.jdbc.Driver");%>
+<%
+	Class.forName("com.mysql.jdbc.Driver");
+%>
 
 <html lang="en">
 	<head>
@@ -72,49 +74,50 @@
 	    		<input class="companyTitle" type="text" name="companyname" value="Name" disabled style="top:140px; left:-160px;">	
 	    		
 	    		<input class="companyTitle" type="text" name="companybranches" value="Branches" disabled style="top:140px; left:-250px;">
-	    		<%Object o;
-	    			Integer count = 1;
-	    			String str = "";
-		   				List <AddressBean> s = RecruiterAccountControl.getInstance().retrieveCompanyInfo().getBranches();
-		   				for(Integer i=0;i<s.size();i++){
-		   					if(i+1 == AccountControl.getInstance().retrieveAccount().getId()){
-		   						o=s.get(i);
-		   						String nuova = o.toString().concat(",");
-		   						for(Integer j=0;j<nuova.length();j++){
-				   					if(nuova.charAt(j) != ','){
-				   						str += nuova.charAt(j);
-				   					}else if(count == 1){
-				   						request.setAttribute("country", str);
-				   						count++;
-				   						str = "";
-				   						continue;
-				   					}else if(count == 2){
-				   						request.setAttribute("state", str);
-				   						count++;
-				   						str="";
-				   						continue;
-				   					}else if(count==3){
-				   						request.setAttribute("city", str);
-				   						count++;
-				   						str="";
-				   						continue;
-				   					}else if(count==4){
-				   						request.setAttribute("postalCode", str);
-				   						count++;
-				   						str="";
-				   						continue;
-				   					}else if(count==5){
-				   						request.setAttribute("street", str);
-				   						count++;
-				   						str="";
-				   						continue;
-				   					}else{
-				   						request.setAttribute("number", str);
-				   					}
-		   						}
-			   				}
-		   				}
-		   				%>
+	    		<%
+	    			Object o;
+	    			    			Integer count = 1;
+	    			    			String str = "";
+	    				   				List <AddressBean> s = RecruiterAccountControl.getInstance().retrieveCompanyInfo().getBranches();
+	    				   				for(Integer i=0;i<s.size();i++){
+	    				   					if(i+1 == ManageAccountControl.getInstance().retrieveAccount().getId()){
+	    				   						o=s.get(i);
+	    				   						String nuova = o.toString().concat(",");
+	    				   						for(Integer j=0;j<nuova.length();j++){
+	    				   					if(nuova.charAt(j) != ','){
+	    				   						str += nuova.charAt(j);
+	    				   					}else if(count == 1){
+	    				   						request.setAttribute("country", str);
+	    				   						count++;
+	    				   						str = "";
+	    				   						continue;
+	    				   					}else if(count == 2){
+	    				   						request.setAttribute("state", str);
+	    				   						count++;
+	    				   						str="";
+	    				   						continue;
+	    				   					}else if(count==3){
+	    				   						request.setAttribute("city", str);
+	    				   						count++;
+	    				   						str="";
+	    				   						continue;
+	    				   					}else if(count==4){
+	    				   						request.setAttribute("postalCode", str);
+	    				   						count++;
+	    				   						str="";
+	    				   						continue;
+	    				   					}else if(count==5){
+	    				   						request.setAttribute("street", str);
+	    				   						count++;
+	    				   						str="";
+	    				   						continue;
+	    				   					}else{
+	    				   						request.setAttribute("number", str);
+	    				   					}
+	    				   						}
+	    			   				}
+	    				   				}
+	    		%>
 		   		
 	    		<table contenteditable= "true" border="1" id='my_table' style="table-layout:fixed; width:600px;position:absolute;left:550px;top:185px; background-color:white">
 	    			<thead>

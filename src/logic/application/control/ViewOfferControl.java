@@ -11,6 +11,7 @@ import logic.exceptions.NoResultFoundException;
 import logic.presentation.bean.CountryBean;
 import logic.presentation.bean.JobBean;
 import logic.presentation.bean.OfferBean;
+import logic.service.OfferFactory;
 
 public class ViewOfferControl extends ViewResultsControl{
 	

@@ -10,6 +10,7 @@ import logic.exceptions.NoResultFoundException;
 import logic.presentation.bean.BusinessBean;
 import logic.presentation.bean.BusinessInCountryBean;
 import logic.presentation.bean.CountryBean;
+import logic.service.BusinessFactory;
 
 public class ViewBusinessControl extends ViewResultsControl{
 	

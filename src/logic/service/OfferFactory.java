@@ -1,4 +1,4 @@
-package logic.application.control;
+package logic.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +96,7 @@ public class OfferFactory {
     	bean.setPosition(job);
     	
     	bean.setTaskDescription(offer.getTaskDescription());
-    	bean.setBranch(AddressControl.getInstance().extractAddressBean(offer.getBranch()));	
+    	bean.setBranch(AddressFactory.getInstance().extractAddressBean(offer.getBranch()));	
     	bean.setStart(offer.getStart());
     	bean.setFinish(offer.getFinish());
     	bean.setBaseSalary(offer.getBaseSalary());

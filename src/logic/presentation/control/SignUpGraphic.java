@@ -19,7 +19,7 @@ import logic.application.SessionFacade;
 import logic.application.control.LoginControl;
 import logic.application.control.SignUpControl;
 import logic.exceptions.DatabaseFailureException;
-import logic.exceptions.DuplicateUserException;
+import logic.exceptions.DuplicatedUserException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
@@ -121,7 +121,7 @@ public class SignUpGraphic implements Initializable {
 				default:
 			}
 			
-		} catch (DuplicateUserException | InvalidFieldException e) {
+		} catch (DuplicatedUserException | InvalidFieldException e) {
 			GraphicHandler.popUpMsg(AlertType.WARNING, e.getMessage());
 		} catch (FailedLoginException | DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());

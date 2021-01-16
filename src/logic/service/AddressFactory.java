@@ -1,24 +1,28 @@
-package logic.application.control;
+package logic.service;
 
 import logic.domain.Address;
 import logic.domain.Country;
 import logic.presentation.bean.AddressBean;
 import logic.presentation.bean.CountryBean;
 
-public class AddressControl {
+public class AddressFactory {
 	
-	private static AddressControl instance = null;
+	private static AddressFactory instance = null;
 
-    private AddressControl() {
+    private AddressFactory() {
     	/*Default constructor*/
     }
 
-    public static AddressControl getInstance() {
+    public static AddressFactory getInstance() {
         if(instance == null) {
-        	instance = new AddressControl();
+        	instance = new AddressFactory();
         }
 
         return instance;
+    }
+    
+    public Address createAddress() {
+    	return new Address();
     }
     
     public Address extractAddress(AddressBean bean) {

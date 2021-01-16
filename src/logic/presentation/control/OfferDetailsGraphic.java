@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 import logic.application.SessionFacade;
 import logic.application.Users;
 import logic.application.control.ApplyToOfferControl;
-import logic.application.control.FavouriteOffersControl;
+import logic.application.control.ManageFavouriteOffersControl;
 import logic.application.control.SeekerAccountControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
@@ -124,7 +124,7 @@ public class OfferDetailsGraphic implements Initializable {
 					}
 				}
 				
-				for(OfferBean i: FavouriteOffersControl.getInstance().retrieveFavourites()) {
+				for(OfferBean i: ManageFavouriteOffersControl.getInstance().retrieveFavourites()) {
 					if(i.getId() == offerID) {
 						favBtn.getStyleClass().add("star_button_set");
 						fav = true;
@@ -157,12 +157,12 @@ public class OfferDetailsGraphic implements Initializable {
 		if(checkLogin()) {
 			try {
 				if(fav) {
-					FavouriteOffersControl.getInstance().removeFavourites(offerID);
+					ManageFavouriteOffersControl.getInstance().removeFavourites(offerID);
 					favBtn.getStyleClass().clear();
 					favBtn.getStyleClass().add("star_button_nset");	
 					fav = false;
 				}else {
-					FavouriteOffersControl.getInstance().addNewFavourite(offerID);
+					ManageFavouriteOffersControl.getInstance().addNewFavourite(offerID);
 					favBtn.getStyleClass().clear();
 					favBtn.getStyleClass().add("star_button_set");
 				}

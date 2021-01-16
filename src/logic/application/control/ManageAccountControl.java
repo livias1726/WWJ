@@ -5,69 +5,48 @@ import java.sql.SQLException;
 import java.util.List;
 
 import logic.application.SessionFacade;
-import logic.application.Users;
 import logic.domain.Account;
 import logic.domain.User;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.AccountBean;
 import logic.presentation.bean.UserBean;
+import logic.service.AccountFactory;
 
-public class AccountControl {
+public class ManageAccountControl {
 	
-	private static AccountControl instance = null;
+	private static ManageAccountControl instance = null;
 
-    private AccountControl() {
+    private ManageAccountControl() {
     	/*Singleton*/
     }
 
-    public static AccountControl getInstance() {
+    public static ManageAccountControl getInstance() {
         if(instance == null) {
-        	instance = new AccountControl();
+        	instance = new ManageAccountControl();
         }
 
         return instance;
     }
 
     public AccountBean retrieveAccount() throws DatabaseFailureException{
-    	Account account = new Account();
     	try {
-			account = account.getAccountFromDB(SessionFacade.getSession().getID());
+			Account account = AccountFactory.getInstance().createAccount().getAccountFromDB(SessionFacade.getSession().getID());
+			return AccountFactory.getInstance().extractAccountBean(account);
 		} catch (SQLException | IOException e) {
 			throw new DatabaseFailureException();
-		}  
-    	
-    	return modelToBean(account);
+		} 
     }
     
     public AccountBean retrieveAccount(Long accountID) throws DatabaseFailureException {
-    	Account account = new Account();
     	try {
-			account = account.getAccountFromDB(accountID);
+			Account account = AccountFactory.getInstance().createAccount().getAccountFromDB(accountID);
+			return AccountFactory.getInstance().extractAccountBean(account);
 		} catch (SQLException | IOException e) {
 			throw new DatabaseFailureException();
 		}  
-    	
-    	return modelToBean(account);
 	}	
     
-    private AccountBean modelToBean(Account account) {
-    	AccountBean bean = new AccountBean();
-    	UserBean user = new UserBean();
-    	
-    	user.setFirstName(account.getUser().getFirstName());
-    	user.setLastName(account.getUser().getLastName());
-    	
-    	bean.setUser(user);
-    	bean.setType(Users.usersToString(account.getType()));	
-    	bean.setPremium(account.isPremium());
-    	bean.setPic(account.getPic());
-    	bean.setId(account.getID());
-  	
-    	return bean;
-    }
-    
-    public UserBean retrievePersonalInfo(Long id) throws DatabaseFailureException {
-    	
+    public UserBean retrievePersonalInfo(Long id) throws DatabaseFailureException {    	
     	User user;
 		try {
 			user = new User().getPersonalInfoFromDB(id);
@@ -89,16 +68,15 @@ public class AccountControl {
     
     public void updateAccountPic(AccountBean account) throws DatabaseFailureException {
     	try {
-			new Account().savePic(account.getPic(), SessionFacade.getSession().getID());
+    		AccountFactory.getInstance().createAccount().savePic(account.getPic(), SessionFacade.getSession().getID());
 		} catch (SQLException | IOException e) {
 			throw new DatabaseFailureException(); 
 		}
     }
 
 	public List<String> retrieveNotifications() throws DatabaseFailureException {
-		Account account = new Account();
 		try {
-			return account.getNotificationsFromDB(SessionFacade.getSession().getID());
+			return AccountFactory.getInstance().createAccount().getNotificationsFromDB(SessionFacade.getSession().getID());
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();
 		}

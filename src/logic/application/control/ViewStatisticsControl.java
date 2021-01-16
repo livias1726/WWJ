@@ -7,17 +7,17 @@ import logic.domain.Country;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.BusinessInCountryBean;
 
-public class StatisticsControl {
+public class ViewStatisticsControl {
 
-	private static StatisticsControl instance = null;
+	private static ViewStatisticsControl instance = null;
 
-    private StatisticsControl() {
+    private ViewStatisticsControl() {
     	/*Default constructor*/
     }
 
-    public static StatisticsControl getInstance() {
+    public static ViewStatisticsControl getInstance() {
         if(instance == null) {
-        	instance = new StatisticsControl();
+        	instance = new ViewStatisticsControl();
         }
 
         return instance;

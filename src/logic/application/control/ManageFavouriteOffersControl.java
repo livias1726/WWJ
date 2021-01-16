@@ -7,18 +7,19 @@ import logic.application.SessionFacade;
 import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.OfferBean;
+import logic.service.OfferFactory;
 
-public class FavouriteOffersControl {
+public class ManageFavouriteOffersControl {
 
-	private static FavouriteOffersControl instance = null;
+	private static ManageFavouriteOffersControl instance = null;
 
-    private FavouriteOffersControl() {
+    private ManageFavouriteOffersControl() {
     	/*Singleton*/
     }
 
-    public static FavouriteOffersControl getInstance() {
+    public static ManageFavouriteOffersControl getInstance() {
         if(instance == null) {
-        	instance = new FavouriteOffersControl();
+        	instance = new ManageFavouriteOffersControl();
         }
 
         return instance;

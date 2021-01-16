@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import logic.application.control.FeasibilityControl;
+import logic.application.control.CalculateFeasibilityControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
@@ -98,7 +98,7 @@ public class FeasibilityGraphic implements Initializable {
 		currBox.setValue(currency.get(0));
 		
 		try {
-			result = FeasibilityControl.getInstance().retrieveBusinessFeasibility(business, insertedBudget);
+			result = CalculateFeasibilityControl.getInstance().retrieveBusinessFeasibility(business, insertedBudget);
 			
 			exampCity.setText(business.getCountry().getExampleCity());
 			
@@ -118,11 +118,11 @@ public class FeasibilityGraphic implements Initializable {
 	
 	private void initFields() {
 		try {
-			livingTxt.setText(insertedCurrency + " " + FeasibilityControl.getInstance().convertValue(business.getCountry().getLivingExpense(), insertedCurrency, business.getCountry().getCurrency()));
-			startTxt.setText(insertedCurrency + " " + FeasibilityControl.getInstance().convertValue(business.getStartExpense(), insertedCurrency, business.getCountry().getCurrency()));
-			maintTxt.setText(insertedCurrency + " " + FeasibilityControl.getInstance().convertValue(business.getAverageCost(), insertedCurrency, business.getCountry().getCurrency()));			
-			earnTxt.setText(insertedCurrency + " " + FeasibilityControl.getInstance().convertValue(business.getAverageEarnings(), insertedCurrency, business.getCountry().getCurrency()));	
-			Float newRes = FeasibilityControl.getInstance().convertValue(result, insertedCurrency, business.getCountry().getCurrency());
+			livingTxt.setText(insertedCurrency + " " + CalculateFeasibilityControl.getInstance().convertValue(business.getCountry().getLivingExpense(), insertedCurrency, business.getCountry().getCurrency()));
+			startTxt.setText(insertedCurrency + " " + CalculateFeasibilityControl.getInstance().convertValue(business.getStartExpense(), insertedCurrency, business.getCountry().getCurrency()));
+			maintTxt.setText(insertedCurrency + " " + CalculateFeasibilityControl.getInstance().convertValue(business.getAverageCost(), insertedCurrency, business.getCountry().getCurrency()));			
+			earnTxt.setText(insertedCurrency + " " + CalculateFeasibilityControl.getInstance().convertValue(business.getAverageEarnings(), insertedCurrency, business.getCountry().getCurrency()));	
+			Float newRes = CalculateFeasibilityControl.getInstance().convertValue(result, insertedCurrency, business.getCountry().getCurrency());
 			resTxt.setText(insertedCurrency + " " + newRes);
 		} catch (InvalidFieldException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
@@ -142,7 +142,7 @@ public class FeasibilityGraphic implements Initializable {
     public void calculateFeasibility() {
 		insertedCurrency = currBox.getValue();
 		insertedBudget = budget.getText();
-		result = FeasibilityControl.getInstance().calculateResult(Float.valueOf(insertedBudget), business);
+		result = CalculateFeasibilityControl.getInstance().calculateResult(Float.valueOf(insertedBudget), business);
 		initFields();
     }
 	

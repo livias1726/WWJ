@@ -6,7 +6,7 @@ import logic.application.Users;
 import logic.domain.Account;
 import logic.domain.User;
 import logic.exceptions.DatabaseFailureException;
-import logic.exceptions.DuplicateUserException;
+import logic.exceptions.DuplicatedUserException;
 import logic.presentation.bean.AccountBean;
 
 public class SignUpControl {
@@ -25,7 +25,7 @@ public class SignUpControl {
         return instance;
     }
     
-    public void trySignUp(AccountBean bean) throws DatabaseFailureException, DuplicateUserException {   
+    public void trySignUp(AccountBean bean) throws DatabaseFailureException, DuplicatedUserException {   
     	User user = new User(bean.getUser().getEmail(), bean.getUser().getPassword(), bean.getUser().getFirstName(), bean.getUser().getLastName());
     	Account account = new Account();
     	account.setUser(user);
@@ -34,7 +34,7 @@ public class SignUpControl {
     		account.createAccountOnDB();
 		} catch (SQLException e) {
 			if(e.getSQLState() != null && e.getSQLState().equals("45000")) {
-				throw new DuplicateUserException();
+				throw new DuplicatedUserException();
 			}else {
 				throw new DatabaseFailureException();
 			}			

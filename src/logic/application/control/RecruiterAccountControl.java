@@ -16,6 +16,8 @@ import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.AddressBean;
 import logic.presentation.bean.CompanyBean;
 import logic.presentation.bean.OfferBean;
+import logic.service.AddressFactory;
+import logic.service.OfferFactory;
 
 public class RecruiterAccountControl {
 	
@@ -49,7 +51,7 @@ public class RecruiterAccountControl {
 			
 			List<AddressBean> branches = new ArrayList<>();
 			for(Address i: company.getBranches()) {
-				branches.add(AddressControl.getInstance().extractAddressBean(i));
+				branches.add(AddressFactory.getInstance().extractAddressBean(i));
 			}
 			bean.setBranches(branches);
 			
@@ -79,7 +81,7 @@ public class RecruiterAccountControl {
     
     	List<Address> branches = new ArrayList<>();
     	for(AddressBean i: bean.getBranches()) {
-			branches.add(AddressControl.getInstance().extractAddress(i));
+			branches.add(AddressFactory.getInstance().extractAddress(i));
     	} 	
     	company.setBranches(branches);
     	

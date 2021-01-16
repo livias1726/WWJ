@@ -16,7 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
-import logic.application.control.EntrepreneurAccountControl;
+import logic.application.control.ManageFavouriteBusinessesControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Sections;
@@ -67,7 +67,7 @@ public class BusinessDetailsGraphic implements Initializable {
 		currBox.setValue(currency.get(0));
 		
 		try {
-			for(BusinessInCountryBean i: EntrepreneurAccountControl.getInstance().retrieveFavourites()) {
+			for(BusinessInCountryBean i: ManageFavouriteBusinessesControl.getInstance().retrieveFavourites()) {
 				if(i.getId() == business.getId()) {
 					favBtn.getStyleClass().add("star_button_set");
 					fav = true;
@@ -84,12 +84,12 @@ public class BusinessDetailsGraphic implements Initializable {
 		if(checkLogin()) {
 			try {
 				if(fav) {
-					EntrepreneurAccountControl.getInstance().removeFavourite(business.getId());
+					ManageFavouriteBusinessesControl.getInstance().removeFavourite(business.getId());
 					favBtn.getStyleClass().clear();
 					favBtn.getStyleClass().add("star_button_nset");	
 					fav = false;
 				}else {
-					EntrepreneurAccountControl.getInstance().addNewFavourite(business.getId());
+					ManageFavouriteBusinessesControl.getInstance().addNewFavourite(business.getId());
 					favBtn.getStyleClass().clear();
 					favBtn.getStyleClass().add("star_button_set");
 				}

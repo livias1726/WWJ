@@ -14,6 +14,7 @@ import logic.exceptions.NoResultFoundException;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
+import logic.service.BusinessFactory;
 
 public class BusinessDAO {
 	
@@ -34,8 +35,9 @@ public class BusinessDAO {
 			if(res.first()) {
 				list = new ArrayList<>();
 				do {
-					Business bus = new Business(res.getString("name"), res.getString("category"));
-					bus.setId(res.getInt("id"));
+					Business bus = new Business(res.getInt("id"));
+					bus.setName(res.getString("name"));
+					bus.setCategory(res.getString("category"));
 					list.add(bus);
 				}while(res.next());
 			}
@@ -151,7 +153,7 @@ public class BusinessDAO {
 
 		res.first();
 		do {
-			BusinessInCountry business = new BusinessInCountry();
+			BusinessInCountry business = BusinessFactory.getInstance().createBusiness();
 			business.setId(res.getInt("id"));
 			business.setName(res.getString("name"));
 			business.setCategory(res.getString("category"));

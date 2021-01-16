@@ -15,7 +15,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import logic.application.control.FavouriteOffersControl;
+import logic.application.control.ManageFavouriteOffersControl;
 import logic.application.control.ViewOfferControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
@@ -39,7 +39,7 @@ public class FavouriteOffersGraphic implements Initializable {
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
-			offers = FavouriteOffersControl.getInstance().retrieveFavourites();
+			offers = ManageFavouriteOffersControl.getInstance().retrieveFavourites();
 			order.getSelectionModel().selectedIndexProperty().addListener((obv, oldValue, newValue) -> orderResults(offers, newValue));		
 			order.setItems(items);
 			order.setValue(items.get(0));

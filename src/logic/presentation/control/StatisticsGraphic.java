@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import logic.application.control.StatisticsControl;
+import logic.application.control.ViewStatisticsControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Sections;
@@ -65,7 +65,7 @@ public class StatisticsGraphic implements Initializable {
 		currBox.setValue(currency.get(0));
 
 		try {
-			StatisticsControl.getInstance().retrieveBusinessStatistics(business);
+			ViewStatisticsControl.getInstance().retrieveBusinessStatistics(business);
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			goBack();

@@ -18,7 +18,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
-import logic.application.control.AccountControl;
+import logic.application.control.ManageAccountControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Sections;
@@ -44,10 +44,10 @@ public class AccountGraphic extends ToolBarGraphic{
 		try {
 			
 			if(accountID == 0) {
-				account = AccountControl.getInstance().retrieveAccount();
+				account = ManageAccountControl.getInstance().retrieveAccount();
 				accountID = account.getId();
 			}else {
-				account = AccountControl.getInstance().retrieveAccount(accountID);
+				account = ManageAccountControl.getInstance().retrieveAccount(accountID);
 			}
 			
 			if(account.getPic() != null) {
@@ -69,7 +69,7 @@ public class AccountGraphic extends ToolBarGraphic{
 	private void initNotifBtn() {
 		List<String> notifications;
 		try {
-			notifications = AccountControl.getInstance().retrieveNotifications();
+			notifications = ManageAccountControl.getInstance().retrieveNotifications();
 			for(String i: notifications) {
 				MenuItem item = new MenuItem(i);
 				notifyBtn.getItems().add(item);
@@ -115,7 +115,7 @@ public class AccountGraphic extends ToolBarGraphic{
 		    bean.setPic(newPic);
 		    
 		    try {
-				AccountControl.getInstance().updateAccountPic(bean);
+				ManageAccountControl.getInstance().updateAccountPic(bean);
 			} catch (DatabaseFailureException e) {
 				GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 				goBack();

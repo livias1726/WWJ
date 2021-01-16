@@ -11,6 +11,8 @@ import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.IncompleteAccountException;
 import logic.presentation.bean.AddressBean;
 import logic.presentation.bean.OfferBean;
+import logic.service.AddressFactory;
+import logic.service.OfferFactory;
 
 public class PublishOfferControl {
 	
@@ -39,7 +41,7 @@ public class PublishOfferControl {
 			}
 			
 			for(Address i: comp.getBranches()) {
-				bean.add(AddressControl.getInstance().extractAddressBean(i));
+				bean.add(AddressFactory.getInstance().extractAddressBean(i));
 			}		
 		} catch (SQLException e) {
 			throw new DatabaseFailureException();

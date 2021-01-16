@@ -15,6 +15,7 @@ import logic.exceptions.NoResultFoundException;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
+import logic.service.OfferFactory;
 
 public class OfferDAO {
 
@@ -100,7 +101,7 @@ public class OfferDAO {
 			
             if (res.first()){           	
             	do {
-                	Offer item = new Offer();
+                	Offer item = OfferFactory.getInstance().createOffer();
                 	item.setId(res.getInt("id"));
                 	
                 	Job position = new Job();
@@ -130,7 +131,7 @@ public class OfferDAO {
 	public static Offer selectOffer(int id) throws SQLException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
-		Offer offer = new Offer();
+		Offer offer = OfferFactory.getInstance().createOffer();
 
 		try {
 			Connection conn = ConnectionManager.getConnection();
@@ -213,7 +214,7 @@ public class OfferDAO {
         res.first();
         
         do {
-        	Offer offer = new Offer();
+        	Offer offer = OfferFactory.getInstance().createOffer();
         	offer.setId(res.getInt("offer"));
         	offer.setCompanyName(res.getString("company"));
         	

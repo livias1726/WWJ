@@ -11,30 +11,34 @@
 <jsp:useBean id="accountBean" class="logic.presentation.bean.AccountBean" scope="session"/>
 <jsp:setProperty name="accountBean" property="*"/>
 
-<%Class.forName("com.mysql.cj.jdbc.Driver");%>
+<%
+	Class.forName("com.mysql.cj.jdbc.Driver");
+%>
 
-<% if (request.getParameter("login") != null) {
+<%
+	if (request.getParameter("login") != null) {
 	userBean.setEmail(request.getParameter("email"));
 	userBean.setPassword(request.getParameter("password"));
 	accountBean.setUser(userBean);
 	LoginControl.getInstance().tryLogin(accountBean); 
 	
-	if("SEEKER".equals(AccountControl.getInstance().retrieveAccount().getType())) {
+	if("SEEKER".equals(ManageAccountControl.getInstance().retrieveAccount().getType())) {
     	String redirectURL = "http://localhost:8080/WorldWideJob/seekerProfile.jsp";
     	response.sendRedirect(redirectURL);
     	return;
     }
-    if("RECRUITER".equals(AccountControl.getInstance().retrieveAccount().getType())) {
+    if("RECRUITER".equals(ManageAccountControl.getInstance().retrieveAccount().getType())) {
     	String redirectURL = "http://localhost:8080/WorldWideJob/recruiterProfile.jsp";
     	response.sendRedirect(redirectURL);
     	return;
     }
-    if("ENTREPRENEUR".equals(AccountControl.getInstance().retrieveAccount().getType())) {
+    if("ENTREPRENEUR".equals(ManageAccountControl.getInstance().retrieveAccount().getType())) {
       	String redirectURL = "http://localhost:8080/WorldWideJob/entrepreneurProfile.jsp";
     	response.sendRedirect(redirectURL);
     	return;
     }
- }%>
+ }
+%>
 
 <html lang="en">
 	<head>
