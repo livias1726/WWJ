@@ -51,6 +51,10 @@ public class Account implements Serializable{
 		return id;
 	}
 	
+	public void setID(int id) {
+		this.id = id;
+	}
+	
 	public boolean isPremium(){
 		return premium;
 	}
@@ -68,7 +72,7 @@ public class Account implements Serializable{
 	}
 	
 	public Account tryLoginToDB() throws FailedLoginException, SQLException {
-		return AccountDAO.executeLogin(user.getEmail(), user.getPwd());
+		return AccountDAO.executeLogin(this);
 	}
 
 	public List<String> getNotificationsFromDB(long id) throws SQLException {

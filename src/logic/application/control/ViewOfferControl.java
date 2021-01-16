@@ -2,6 +2,8 @@ package logic.application.control;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,6 +38,7 @@ public class ViewOfferControl extends ViewResultsControl{
     		List<Job> list = JobFactory.getInstance().createJob().getAvailableJobs();
     		return JobFactory.getInstance().extractToBean(list);
 		} catch (SQLException e) {
+			Logger.getLogger(ViewOfferControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException();
 		}
 	}
@@ -47,6 +50,7 @@ public class ViewOfferControl extends ViewResultsControl{
 		} catch (NoResultFoundException e) {
 			throw new NoResultFoundException();
 		} catch (SQLException se) {
+			Logger.getLogger(ViewOfferControl.class.getName()).log(Level.SEVERE, null, se);
 			throw new DatabaseFailureException();
 		}
     }
@@ -58,6 +62,7 @@ public class ViewOfferControl extends ViewResultsControl{
 		} catch (NoResultFoundException e) {
 			throw new NoResultFoundException();
 		} catch (SQLException se) {
+			Logger.getLogger(ViewOfferControl.class.getName()).log(Level.SEVERE, null, se);
 			throw new DatabaseFailureException();
 		}
     }
@@ -69,6 +74,7 @@ public class ViewOfferControl extends ViewResultsControl{
 		} catch (NoResultFoundException e) {
 			throw new NoResultFoundException();
 		} catch (SQLException se) {
+			Logger.getLogger(ViewOfferControl.class.getName()).log(Level.SEVERE, null, se);
 			throw new DatabaseFailureException();
 		}
     }
@@ -86,6 +92,7 @@ public class ViewOfferControl extends ViewResultsControl{
 			Offer offer = OfferFactory.getInstance().createOffer().getOffer(id);
 			return OfferFactory.getInstance().extractOfferBean(offer);
 		} catch (SQLException e) {
+			Logger.getLogger(ViewOfferControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException();
 		}
 	}

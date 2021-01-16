@@ -2,6 +2,8 @@ package logic.application.control;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import logic.domain.Business;
 import logic.domain.BusinessInCountry;
@@ -33,6 +35,7 @@ public class ViewBusinessControl extends ViewResultsControl{
     		List<Business> list = BusinessFactory.getInstance().createBusiness().getAvailableBusinesses();
     		return BusinessFactory.getInstance().extractBusinessBeanList(list);
 		} catch (SQLException e) {
+			Logger.getLogger(ViewBusinessControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException();
 		}
     }
@@ -44,6 +47,7 @@ public class ViewBusinessControl extends ViewResultsControl{
 		} catch (NoResultFoundException e) {
 			throw new NoResultFoundException();
 		} catch (SQLException se) {
+			Logger.getLogger(ViewBusinessControl.class.getName()).log(Level.SEVERE, null, se);
 			throw new DatabaseFailureException();
 		}
     }
@@ -55,6 +59,7 @@ public class ViewBusinessControl extends ViewResultsControl{
 		} catch (NoResultFoundException e) {
 			throw new NoResultFoundException();
 		} catch (SQLException se) {
+			Logger.getLogger(ViewBusinessControl.class.getName()).log(Level.SEVERE, null, se);
 			throw new DatabaseFailureException();
 		}
     }
@@ -66,6 +71,7 @@ public class ViewBusinessControl extends ViewResultsControl{
 		} catch (NoResultFoundException e) {
 			throw new NoResultFoundException();
 		} catch (SQLException se) {
+			Logger.getLogger(ViewBusinessControl.class.getName()).log(Level.SEVERE, null, se);
 			throw new DatabaseFailureException();
 		}
     }

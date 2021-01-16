@@ -75,29 +75,25 @@ public class AccountDAO {
         return account;
 	}
 
-	public static Account executeLogin(String email, String password) throws FailedLoginException, SQLException {
+	public static Account executeLogin(Account account) throws FailedLoginException, SQLException {
     	CallableStatement stmt = null;
 		ResultSet res = null;
-		Account account = null;
         
         try {
         	Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.LOGIN, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			res = RoutinesManager.bindParametersAndExec(stmt, email, password);
+			res = RoutinesManager.bindParametersAndExec(stmt, account.getUser().getEmail(), account.getUser().getPwd());
 			
             if (!res.first()){           	
             	throw new FailedLoginException("Login failed");
             }
             
             res.first();
-            
-            long id = res.getInt("id");
-            User user = new User(email, password, res.getString("first_name"), res.getString("last_name"));
-            Users type = Users.stringToUsers(res.getString("role"));
-            boolean premium = res.getBoolean("premium");
-            
-            account = new Account(user, type, id);
-            account.setPremium(premium);
+            account.getUser().setFirstName(res.getString("first_name"));
+            account.getUser().setLastName(res.getString("last_name"));
+            account.setType(Users.stringToUsers(res.getString("role")));
+            account.setID(res.getInt("id"));
+            account.setPremium(res.getBoolean("premium"));
             
             res.close();
            

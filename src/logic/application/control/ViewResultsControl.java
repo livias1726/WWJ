@@ -2,9 +2,11 @@ package logic.application.control;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import logic.domain.Country;
 import logic.exceptions.DatabaseFailureException;
+import logic.service.CountryFactory;
 
 public class ViewResultsControl {
 	
@@ -24,8 +26,9 @@ public class ViewResultsControl {
     
     public List<String> retrieveCountries() throws DatabaseFailureException{  	   
     	try {
-			return new Country().getAvailableCountries();
+			return CountryFactory.getInstance().createCountry().getAvailableCountries();
 		} catch (SQLException e) {
+			Logger.getLogger(ViewResultsControl.class.getName()).log(Level.SEVERE, "SQLException thrown", e);
 			throw new DatabaseFailureException();
 		}
     }

@@ -2,6 +2,8 @@ package logic.application.control;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +34,7 @@ public class CheckCandidatesControl {
 		try {
 			list = cand.getCandidatesFromDB(SessionFacade.getSession().getID());
 		} catch (SQLException e) {
+			Logger.getLogger(CheckCandidatesControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException(); 
 		}
 		
@@ -55,6 +58,7 @@ public class CheckCandidatesControl {
 		try {
 			cand.removeCandidatesFromDB(candidates, offers);
 		} catch (SQLException e) {
+			Logger.getLogger(CheckCandidatesControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException(); 
 		}
 	}

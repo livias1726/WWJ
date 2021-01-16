@@ -1,6 +1,8 @@
 package logic.application.control;
 
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import logic.application.adapter.EuroAdapter;
 import logic.application.adapter.PoundAdapter;
@@ -10,6 +12,8 @@ import logic.domain.Country;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.bean.BusinessInCountryBean;
+import logic.service.BusinessFactory;
+import logic.service.CountryFactory;
 
 public class CalculateFeasibilityControl {
 	
@@ -28,10 +32,8 @@ public class CalculateFeasibilityControl {
     }
 
 	public Float retrieveBusinessFeasibility(BusinessInCountryBean business, String budget) throws DatabaseFailureException{
-
-		BusinessInCountry bus = new BusinessInCountry();
-		bus.setId(business.getId());
-		Country country = new Country();
+		BusinessInCountry bus = BusinessFactory.getInstance().createBusiness(business.getId());
+		Country country = CountryFactory.getInstance().createCountry();
 		country.setName(business.getCountry().getName());
 		bus.setCountry(country);
 
@@ -46,6 +48,7 @@ public class CalculateFeasibilityControl {
 			return calculateResult(Float.valueOf(budget), business);
 
 		} catch (SQLException e) {
+			Logger.getLogger(CalculateFeasibilityControl.class.getName()).log(Level.SEVERE, "SQLException thrown", e);
 			throw new DatabaseFailureException();
 		}
 	}
