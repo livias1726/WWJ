@@ -1,8 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="logic.application.control.CheckCandidatesControl" %>
+<%@ page import="logic.application.control.CheckCandidatesControl"
+ 	import="logic.presentation.bean.CandidateBean"
+ 	import="java.util.List"
+ 	import="java.util.ArrayList"%>
 
 <!DOCTYPE html>
+
+<jsp:useBean id="candidateBean" class="logic.presentation.bean.CandidateBean" scope="session"/>
+<jsp:setProperty name="candidateBean" property="*"/>
+
+<%
+	Class.forName("com.mysql.jdbc.Driver");
+%>
 
 <html lang="en">
 	<head>
@@ -47,7 +57,7 @@
 	    		<div>
 	    		<input class="favourite_container" type="text" name="candidates_container" value="" disabled style="background-color:#C6D6D3">
 	    		<input class="favourite_title" type="text" name="candidates_title" value="Candidates" disabled style="background-color:#C6D6D3">
-	    	
+	    		
 	    		<table contenteditable= "true" border="0" id='my_table' style="table-layout:fixed; width:800px;position:absolute;left:270px;top:200px;background-color:white">
 	    			<thead>
       						<tr>
@@ -70,7 +80,6 @@
       					<tbody>
       					</tbody>
       			</table>
-	    		
 	    		<input class="candidate_row" type="checkbox" name="check1" style="height:20px; left:-320px; top:230px"><br>
 	    		<input class="candidate_row" type="checkbox" name="check2" style="height:20px; left:-320px; top:255px"><br>    
 	    		<input class="candidate_row" type="checkbox" name="check3" style="height:20px; left:-320px; top:280px"><br>
@@ -87,10 +96,26 @@
 					}
 				</script>
 				
-	    		<button class="delete_btn" style="width:100px; height:50px; top:400px; left:550px; background-color:dodgerblue">Delete</button>
+	    		<button class="delete_btn" name="deleteCand" style="width:100px; height:50px; top:400px; left:550px; background-color:dodgerblue" onClick="deleteCandidates()">Delete</button>
+	    		
 	    		</div>
 	    		
 	    	</form>
-	    </div>	
+	    </div>
+	    <script> function deleteCandidates(){
+	    	<%if(request.getParameter("deleteCand") != null){
+	    		System.out.println(CheckCandidatesControl.getInstance().retrieveCandidates());
+	    		if(request.getParameter("check1") != null || request.getParameter("check2") != null || request.getParameter("check3") != null){
+	    			List<Long> listCandidates = new ArrayList<> ();
+	    			listCandidates.add(candidateBean.getSeeker());
+	    			List<Integer> listOffers = new ArrayList<> ();
+	    			listOffers.add(candidateBean.getOffer());
+	    			CheckCandidatesControl.getInstance().removeCandidates(listCandidates, listOffers);
+	    			
+	    		}
+	    	}%>
+	    }
+	    
+	    </script>	
 	</body>	
 </html>

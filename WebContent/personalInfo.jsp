@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="logic.presentation.bean.UserBean"
 			import="logic.presentation.bean.AccountBean"
-			import="logic.application.control.AccountControl"%>
+			import="logic.application.control.ManageAccountControl"%>
 <!DOCTYPE html>
 
 <jsp:useBean id="userBean" class="logic.presentation.bean.UserBean" scope="session"/>

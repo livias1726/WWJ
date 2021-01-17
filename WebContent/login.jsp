@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="logic.presentation.bean.UserBean"
 		import="logic.presentation.bean.AccountBean"
-		import="logic.application.control.AccountControl"
+		import="logic.application.control.ManageAccountControl"
 		import="logic.application.control.LoginControl"%>
 <!DOCTYPE html>
 

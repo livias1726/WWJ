@@ -7,7 +7,7 @@
 		import="java.util.Arrays"
 		import="logic.presentation.bean.AccountBean"
 		import="logic.application.control.RecruiterAccountControl"
-		import="logic.application.control.AccountControl"
+		import="logic.application.control.ManageAccountControl"
 		import="logic.presentation.bean.CountryBean"%>
 
 <!DOCTYPE html>
