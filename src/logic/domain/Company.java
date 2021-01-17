@@ -46,7 +46,7 @@ public class Company implements Serializable{
 	}
 	
 	public Company getCompanyInfo(Long id) throws SQLException {
-		return CompanyDAO.selectCompany(id);
+		return CompanyDAO.selectCompany(this, id);
 	}
 
 	public void saveCompanyInfoOnDB(Long id) throws SQLException {

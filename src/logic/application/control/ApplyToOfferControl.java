@@ -1,11 +1,16 @@
 package logic.application.control;
 
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import logic.application.SessionFacade;
 import logic.domain.Application;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.ApplicationBean;
+import logic.service.AbstractFactory;
+import logic.service.Factory;
+import logic.service.Types;
 
 public class ApplyToOfferControl {
 	
@@ -24,10 +29,13 @@ public class ApplyToOfferControl {
     }
 
 	public void apply(ApplicationBean bean) throws DatabaseFailureException {
-		Application appl = new Application(bean.getId());
+		AbstractFactory factory = Factory.getInstance().getObject(Types.APPLICATION);
+		Application appl = (Application)factory.createObject();
+		appl.setId(bean.getId());
 		try {
 			appl.addApplication(SessionFacade.getSession().getID());
 		} catch (SQLException e) {
+			Logger.getLogger(ApplyToOfferControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException();
 		}
 	}

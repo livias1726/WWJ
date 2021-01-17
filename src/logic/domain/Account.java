@@ -79,8 +79,8 @@ public class Account implements Serializable{
 		return AccountDAO.selectNotifications(id);
 	}
 
-	public Account getAccountFromDB(long id) throws SQLException, IOException {
-		return AccountDAO.selectAccount(id);
+	public Account getAccountFromDB() throws SQLException, IOException {
+		return AccountDAO.selectAccount(this);
 	}
 
 	public boolean createAccountOnDB() throws SQLException{

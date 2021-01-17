@@ -16,10 +16,9 @@ public class UserDAO {
 		/**/
 	}
 
-	public static User selectPersonalInfo(long id) throws SQLException {
+	public static User selectPersonalInfo(User user, long id) throws SQLException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
-		User user = null;
 		
 		try {
 			Connection conn = ConnectionManager.getConnection();
@@ -27,7 +26,10 @@ public class UserDAO {
 			res = RoutinesManager.bindParametersAndExec(stmt, (int)id);
 			
             if (res.first()){           	
-            	user = new User(res.getString("email"), res.getString("pwd"), res.getString("first_name"), res.getString("last_name"));
+            	user.setEmail(res.getString("email"));
+            	user.setPwd(res.getString("pwd"));
+            	user.setFirstName(res.getString("first_name"));
+            	user.setLastName(res.getString("last_name"));
             	user.setCity(res.getString("city"));
 
             	if(res.getDate("birth") != null) {

@@ -21,6 +21,9 @@ import logic.domain.User;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
+import logic.service.AbstractFactory;
+import logic.service.Factory;
+import logic.service.Types;
 
 public class AccountDAO {
 	
@@ -28,28 +31,25 @@ public class AccountDAO {
 		/**/
 	}
 	
-	public static Account selectAccount(long id) throws SQLException, IOException {
+	public static Account selectAccount(Account account) throws SQLException, IOException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
-		Account account = null;
 		
 		try{
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.GET_ACCOUNT, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
         	
-			res = RoutinesManager.bindParametersAndExec(stmt, (int)id);
+			res = RoutinesManager.bindParametersAndExec(stmt, (int)account.getID());
 			
             if (res.first()){
-            	User user = new User();
+            	AbstractFactory factory = Factory.getInstance().getObject(Types.USER);
+        		User user = (User)factory.createObject();
                 user.setFirstName(res.getString("first_name"));
                 user.setLastName(res.getString("last_name"));
-                
-                Users type = Users.stringToUsers(res.getString("role"));
-                
-                boolean premium = res.getBoolean("premium");
-                
-                account = new Account(user, type, res.getInt("id"));
-                account.setPremium(premium);
+
+                account.setUser(user);
+                account.setType(Users.stringToUsers(res.getString("role")));
+                account.setPremium(res.getBoolean("premium"));
 
                 Blob blob = res.getBlob("pic");
                 if(blob != null) {

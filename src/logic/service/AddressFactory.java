@@ -1,27 +1,17 @@
 package logic.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import logic.domain.Address;
 import logic.domain.Country;
 import logic.presentation.bean.AddressBean;
 import logic.presentation.bean.CountryBean;
 
-public class AddressFactory {
-	
-	private static AddressFactory instance = null;
-
-    private AddressFactory() {
-    	/*Default constructor*/
-    }
-
-    public static AddressFactory getInstance() {
-        if(instance == null) {
-        	instance = new AddressFactory();
-        }
-
-        return instance;
-    }
+public class AddressFactory implements AbstractFactory{
     
-    public Address createAddress() {
+	@Override
+    public Address createObject() {
     	return new Address();
     }
     
@@ -57,5 +47,50 @@ public class AddressFactory {
 		bean.setNumber(ent.getNumber());
 		bean.setId(ent.getId());
 		return bean;
+	}
+	
+	public List<Address> extractAddressList(List<AddressBean> src) {
+		List<Address> dest = new ArrayList<>();
+		
+		for(AddressBean bean: src) {
+			Address addr = createObject();
+			
+			Country country = (new CountryFactory()).createObject();
+			country.setName(bean.getCountry().getName());
+			
+			addr.setCountry(country);
+			addr.setState(bean.getState());
+			addr.setCity(bean.getCity());
+			addr.setPostalCode(bean.getPostalCode());
+			addr.setStreet(bean.getStreet());
+			addr.setNumber(bean.getNumber());
+			addr.setId(bean.getId());
+			
+			dest.add(addr);
+		}
+		
+		return dest;
+	}
+	
+	public List<AddressBean> extractAddressBeanList(List<Address> src) {
+		List<AddressBean> dest = new ArrayList<>();
+		
+		for(Address i: src) {
+			AddressBean bean = new AddressBean();			
+			CountryBean country = new CountryBean();
+			country.setName(i.getCountry().getName());		
+			bean.setCountry(country);
+			
+			bean.setState(i.getState());
+			bean.setCity(i.getCity());
+			bean.setPostalCode(i.getPostalCode());
+			bean.setStreet(i.getStreet());
+			bean.setNumber(i.getNumber());
+			bean.setId(i.getId());
+			
+			dest.add(bean);
+		}
+		
+		return dest;
 	}
 }

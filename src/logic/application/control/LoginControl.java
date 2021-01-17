@@ -11,7 +11,9 @@ import logic.domain.Account;
 import logic.domain.User;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.AccountBean;
-import logic.service.AccountFactory;
+import logic.service.AbstractFactory;
+import logic.service.Factory;
+import logic.service.Types;
 
 /**Singleton*/
 public class LoginControl {
@@ -31,8 +33,14 @@ public class LoginControl {
     }
 
     public void tryLogin(AccountBean bean) throws FailedLoginException, DatabaseFailureException{
-    	Account account = AccountFactory.getInstance().createAccount();
-    	User user = new User(bean.getUser().getEmail(), bean.getUser().getPassword());
+    	AbstractFactory factoryAcc = Factory.getInstance().getObject(Types.ACCOUNT);
+		Account account = (Account)factoryAcc.createObject();
+		
+		AbstractFactory factoryUs = Factory.getInstance().getObject(Types.USER);
+		User user = (User)factoryUs.createObject();
+		user.setEmail(bean.getUser().getEmail());
+		user.setPwd(bean.getUser().getPassword());
+
     	account.setUser(user);
     	
 		try {
@@ -43,7 +51,7 @@ public class LoginControl {
     		SessionFacade.getSession().setPremium(account.isPremium());
 		
 		} catch (SQLException se) {
-			Logger.getLogger(CheckCandidatesControl.class.getName()).log(Level.SEVERE, null, se);
+			Logger.getLogger(LoginControl.class.getName()).log(Level.SEVERE, null, se);
 			throw new DatabaseFailureException();
 		} catch (FailedLoginException fe) {
 			throw new FailedLoginException("Login failed. Please, check your credentials or Sign Up.");

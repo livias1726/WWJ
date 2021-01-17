@@ -1,21 +1,25 @@
 package logic.application.control;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import logic.application.SessionFacade;
-import logic.domain.Address;
 import logic.domain.Company;
 import logic.domain.Job;
+import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.IncompleteAccountException;
 import logic.presentation.bean.AddressBean;
 import logic.presentation.bean.JobBean;
 import logic.presentation.bean.OfferBean;
+import logic.service.AbstractFactory;
 import logic.service.AddressFactory;
+import logic.service.Factory;
 import logic.service.JobFactory;
 import logic.service.OfferFactory;
+import logic.service.Types;
 
 public class PublishOfferControl {
 	
@@ -34,49 +38,57 @@ public class PublishOfferControl {
     }
     
 	public List<AddressBean> retrieveCompanyInfo() throws DatabaseFailureException, IncompleteAccountException {
-    	Company comp = new Company();
-    	List<AddressBean> bean = new ArrayList<>();
-		
+		AbstractFactory factoryComp = Factory.getInstance().getObject(Types.COMPANY);
+    	Company comp = (Company)factoryComp.createObject();
+    	
+    	AbstractFactory factoryAddr = Factory.getInstance().getObject(Types.ADDRESS);		
 		try {
-			comp = comp.getCompanyInfo(SessionFacade.getSession().getID());
-			if(comp == null || comp.getBranches() == null) {
+			comp.getCompanyInfo(SessionFacade.getSession().getID());
+			if(comp.getBranches() == null) {
 				throw new IncompleteAccountException("Your Company info is still incomplete. Please, complete the section before publishing an offer");
 			}
 			
-			for(Address i: comp.getBranches()) {
-				bean.add(AddressFactory.getInstance().extractAddressBean(i));
-			}		
+			return ((AddressFactory)factoryAddr).extractAddressBeanList(comp.getBranches());	
 		} catch (SQLException e) {
+			Logger.getLogger(PublishOfferControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException();
 		}
-
-		return bean;
 	}
 	
 	public List<JobBean> retrieveJobs() throws DatabaseFailureException {
+		AbstractFactory factory = Factory.getInstance().getObject(Types.JOB);
+    	Job job = (Job)factory.createObject();
+    	
     	try {
-    		List<Job> list = JobFactory.getInstance().createJob().getAvailableJobs();
-    		return JobFactory.getInstance().extractToBean(list);
+    		List<Job> list =job.getAvailableJobs();
+    		return ((JobFactory)factory).extractToBean(list);
 		} catch (SQLException e) {
+			Logger.getLogger(PublishOfferControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException();
 		}
 	}
 	    
     public void saveNewJob(JobBean bean) throws DatabaseFailureException {
-		Job job = JobFactory.getInstance().createJob();
+    	AbstractFactory factory = Factory.getInstance().getObject(Types.JOB);
+    	Job job = (Job)factory.createObject();
+    	
 		job.setName(bean.getName());
 		job.setCategory(bean.getCategory());
 		try {
 			job.addJobToDB();
 		} catch (SQLException e) {
+			Logger.getLogger(PublishOfferControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException();
 		}
 	}
 
 	public void publishNewOffer(OfferBean bean) throws DatabaseFailureException{
+		AbstractFactory factory = Factory.getInstance().getObject(Types.OFFER);
+		Offer offer = ((OfferFactory)factory).extractOffer(bean);
 		try {
-			OfferFactory.getInstance().extractOffer(bean).publish(SessionFacade.getSession().getID());
+			offer.publish(SessionFacade.getSession().getID());
 		} catch (SQLException e) {
+			Logger.getLogger(PublishOfferControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException();
 		}
 	}

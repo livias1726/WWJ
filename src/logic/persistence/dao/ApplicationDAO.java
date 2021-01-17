@@ -12,6 +12,9 @@ import logic.domain.Job;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
+import logic.service.AbstractFactory;
+import logic.service.Factory;
+import logic.service.Types;
 
 public class ApplicationDAO {
 	
@@ -29,9 +32,10 @@ public class ApplicationDAO {
         	stmt = conn.prepareCall(RoutinesIdentifier.GET_APPLICATIONS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			res = RoutinesManager.bindParametersAndExec(stmt, (int)id);
 			
-            if (res.first()){           	
+            if (res.first()){ 
+            	AbstractFactory factory = Factory.getInstance().getObject(Types.APPLICATION);
             	do {
-            		Application item = new Application();
+            		Application item = (Application)factory.createObject();
                 	item.setId(res.getInt("id"));
                 	
                 	Job position = new Job();

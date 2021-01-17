@@ -12,8 +12,9 @@ import logic.domain.Country;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.bean.BusinessInCountryBean;
-import logic.service.BusinessFactory;
-import logic.service.CountryFactory;
+import logic.service.AbstractFactory;
+import logic.service.Factory;
+import logic.service.Types;
 
 public class CalculateFeasibilityControl {
 	
@@ -32,8 +33,14 @@ public class CalculateFeasibilityControl {
     }
 
 	public Float retrieveBusinessFeasibility(BusinessInCountryBean business, String budget) throws DatabaseFailureException{
-		BusinessInCountry bus = BusinessFactory.getInstance().createBusiness(business.getId());
-		Country country = CountryFactory.getInstance().createCountry();
+		AbstractFactory factoryBus = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
+		BusinessInCountry bus = (BusinessInCountry)factoryBus.createObject();
+		
+		bus.setId(business.getId());
+		
+		AbstractFactory factoryCou = Factory.getInstance().getObject(Types.COUNTRY);
+		Country country = (Country)factoryCou.createObject();
+		
 		country.setName(business.getCountry().getName());
 		bus.setCountry(country);
 

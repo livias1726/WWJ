@@ -1,7 +1,6 @@
 package logic.application.control;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,11 +12,14 @@ import logic.domain.Address;
 import logic.domain.Company;
 import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
-import logic.presentation.bean.AddressBean;
 import logic.presentation.bean.CompanyBean;
 import logic.presentation.bean.OfferBean;
+import logic.service.AbstractFactory;
 import logic.service.AddressFactory;
+import logic.service.CompanyFactory;
+import logic.service.Factory;
 import logic.service.OfferFactory;
+import logic.service.Types;
 
 public class RecruiterAccountControl {
 	
@@ -36,36 +38,27 @@ public class RecruiterAccountControl {
     }
 
 	public CompanyBean retrieveCompanyInfo() throws DatabaseFailureException {
-		Company company = null;
-		
+		AbstractFactory factory = Factory.getInstance().getObject(Types.COMPANY);
+    	Company comp = (Company)factory.createObject();
+    	
 		try {
-			company = new Company().getCompanyInfo(SessionFacade.getSession().getID());
+			comp.getCompanyInfo(SessionFacade.getSession().getID());
+			return ((CompanyFactory)factory).extractCompanyBean(comp);
 		} catch (SQLException e) {
+			Logger.getLogger(RecruiterAccountControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException();
 		}
-    	
-		if(company != null) {
-			CompanyBean bean = new CompanyBean();
-			bean.setName(company.getName());
-			bean.setDescription(company.getDescription());
-			
-			List<AddressBean> branches = new ArrayList<>();
-			for(Address i: company.getBranches()) {
-				branches.add(AddressFactory.getInstance().extractAddressBean(i));
-			}
-			bean.setBranches(branches);
-			
-			return bean;
-		}
-		
-		return null;
 	}
 
 	public ObservableList<OfferBean> retrievePublishedOffers() throws DatabaseFailureException {
+		AbstractFactory factory = Factory.getInstance().getObject(Types.OFFER);
+    	Offer offer = (Offer)factory.createObject();
+    	
 		try {
-			List<Offer> list = OfferFactory.getInstance().createOffer().getOffersByRecruiter(SessionFacade.getSession().getID());
+			List<Offer> list = offer.getOffersByRecruiter(SessionFacade.getSession().getID());
+			
 			ObservableList<OfferBean> dest = FXCollections.observableArrayList();
-			for(OfferBean i: OfferFactory.getInstance().extractPublishOfferBeanList(list)) {
+			for(OfferBean i: ((OfferFactory)factory).extractPublishOfferBeanList(list)) {
 				dest.add(i);
 			}
 			return dest;
@@ -76,18 +69,19 @@ public class RecruiterAccountControl {
 	}
 
 	public void changeCompanyInfo(CompanyBean bean) throws DatabaseFailureException {
-		Company company = new Company(bean.getName());
+		AbstractFactory factoryComp = Factory.getInstance().getObject(Types.COMPANY);
+    	Company company = (Company)factoryComp.createObject();
+		company.setName(bean.getName());
     	company.setDescription(bean.getDescription());
     
-    	List<Address> branches = new ArrayList<>();
-    	for(AddressBean i: bean.getBranches()) {
-			branches.add(AddressFactory.getInstance().extractAddress(i));
-    	} 	
+    	AbstractFactory factoryAddr = Factory.getInstance().getObject(Types.ADDRESS);
+    	List<Address> branches = ((AddressFactory)factoryAddr).extractAddressList(bean.getBranches());	
     	company.setBranches(branches);
     	
 		try {
 			company.saveCompanyInfoOnDB(SessionFacade.getSession().getID());
 		} catch (SQLException e) {
+			Logger.getLogger(RecruiterAccountControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException();
 		}
 	}

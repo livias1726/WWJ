@@ -15,7 +15,9 @@ import logic.exceptions.NoResultFoundException;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
-import logic.service.OfferFactory;
+import logic.service.AbstractFactory;
+import logic.service.Factory;
+import logic.service.Types;
 
 public class OfferDAO {
 
@@ -99,12 +101,14 @@ public class OfferDAO {
         	stmt = conn.prepareCall(RoutinesIdentifier.GET_RECRUITERS_OFFERS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			res = RoutinesManager.bindParametersAndExec(stmt, id.intValue());
 			
-            if (res.first()){           	
+            if (res.first()){     
+            	AbstractFactory factoryOff = Factory.getInstance().getObject(Types.OFFER);
+            	AbstractFactory factoryJob = Factory.getInstance().getObject(Types.JOB);
             	do {
-                	Offer item = OfferFactory.getInstance().createOffer();
+            		Offer item = (Offer)factoryOff.createObject();
                 	item.setId(res.getInt("id"));
-                	
-                	Job position = new Job();
+   
+                	Job position = (Job)factoryJob.createObject();
                 	position.setName(res.getString("name"));
                 	item.setPosition(position);
                 	
@@ -131,24 +135,32 @@ public class OfferDAO {
 	public static Offer selectOffer(int id) throws SQLException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
-		Offer offer = OfferFactory.getInstance().createOffer();
-
+	
+		AbstractFactory factoryOffer = Factory.getInstance().getObject(Types.OFFER);
+		Offer offer = (Offer)factoryOffer.createObject();
 		try {
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.GET_OFFER, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			res = RoutinesManager.bindParametersAndExec(stmt, id);
 			
-            if (res.first()){           	
+            if (res.first()){  
             	offer.setCompanyName(res.getString("company"));
             	
-            	Job job = new Job();
+            	AbstractFactory factoryJob = Factory.getInstance().getObject(Types.JOB);
+            	Job job = (Job)factoryJob.createObject();
             	job.setName(res.getString("position"));
-            	offer.setPosition(job);
             	
+            	offer.setPosition(job);           	
             	offer.setTaskDescription(res.getString("description"));
             	
-            	Address branch = new Address();
-            	branch.setCountry(new Country(res.getString("country")));
+            	AbstractFactory factoryAdd = Factory.getInstance().getObject(Types.ADDRESS);
+            	Address branch = (Address)factoryAdd.createObject();
+            	
+            	AbstractFactory factoryCou = Factory.getInstance().getObject(Types.COUNTRY);
+        		Country country = (Country)factoryCou.createObject();
+        		country.setName(res.getString("country"));
+        		
+            	branch.setCountry(country);
             	branch.setState(res.getString("state"));
             	branch.setCity(res.getString("city"));
             	branch.setPostalCode(res.getString("postal_code"));
@@ -213,18 +225,25 @@ public class OfferDAO {
         
         res.first();
         
+        AbstractFactory factoryOff = Factory.getInstance().getObject(Types.OFFER);
+        AbstractFactory factoryJob = Factory.getInstance().getObject(Types.JOB);
+        AbstractFactory factoryCou = Factory.getInstance().getObject(Types.COUNTRY);
+        AbstractFactory factoryAdd = Factory.getInstance().getObject(Types.ADDRESS);
+    	
         do {
-        	Offer offer = OfferFactory.getInstance().createOffer();
+        	Offer offer = (Offer)factoryOff.createObject();
         	offer.setId(res.getInt("offer"));
         	offer.setCompanyName(res.getString("company"));
         	
-        	Job position = new Job();
+        	Job position = (Job)factoryJob.createObject();
         	position.setName(res.getString("name"));
         	position.setCategory(res.getString("category"));
         	offer.setPosition(position);
         	
-        	Country country = new Country(res.getString("country"));
-        	Address branch = new Address();
+        	Country country = (Country)factoryCou.createObject();
+        	country.setName(res.getString("country"));
+        	
+        	Address branch = (Address)factoryAdd.createObject();
         	branch.setCountry(country);
         	branch.setState(res.getString("state"));
         	branch.setCity(res.getString("city"));

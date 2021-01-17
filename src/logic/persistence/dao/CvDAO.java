@@ -17,6 +17,9 @@ import logic.exceptions.NoResultFoundException;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
+import logic.service.AbstractFactory;
+import logic.service.Factory;
+import logic.service.Types;
 
 public class CvDAO {
 	
@@ -27,8 +30,9 @@ public class CvDAO {
 	public static CV selectCVInfo(long accountID) throws SQLException, IOException, NoResultFoundException {
 		CallableStatement stmt = null;
 		ResultSet res = null;
-		CV cv = new CV();
-
+		
+		AbstractFactory factory = Factory.getInstance().getObject(Types.CV);
+		CV cv = (CV)factory.createObject();
 		try {
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.GET_CV);

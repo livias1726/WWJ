@@ -10,7 +10,9 @@ import logic.domain.User;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.DuplicatedUserException;
 import logic.presentation.bean.AccountBean;
-import logic.service.AccountFactory;
+import logic.service.AbstractFactory;
+import logic.service.Factory;
+import logic.service.Types;
 
 public class SignUpControl {
 	
@@ -29,8 +31,16 @@ public class SignUpControl {
     }
     
     public void trySignUp(AccountBean bean) throws DatabaseFailureException, DuplicatedUserException {  
-    	Account account = AccountFactory.getInstance().createAccount();
-    	User user = new User(bean.getUser().getEmail(), bean.getUser().getPassword(), bean.getUser().getFirstName(), bean.getUser().getLastName());   	
+    	AbstractFactory factoryAcc = Factory.getInstance().getObject(Types.ACCOUNT);
+		Account account = (Account)factoryAcc.createObject();
+		
+		AbstractFactory factoryUs = Factory.getInstance().getObject(Types.USER);
+		User user = (User)factoryUs.createObject();
+		user.setEmail(bean.getUser().getEmail());
+		user.setPwd(bean.getUser().getPassword());
+		user.setFirstName(bean.getUser().getFirstName());
+		user.setLastName(bean.getUser().getLastName());
+		
     	account.setUser(user);
     	account.setType(Users.stringToUsers(bean.getType()));
     	try {

@@ -11,6 +11,9 @@ import logic.domain.Job;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
+import logic.service.AbstractFactory;
+import logic.service.Factory;
+import logic.service.Types;
 
 public class JobDAO {
 	
@@ -29,9 +32,13 @@ public class JobDAO {
 			res = RoutinesManager.executeStmt(stmt);
 			
 			if(res.first()) {
+				AbstractFactory factory = Factory.getInstance().getObject(Types.JOB);
+		    	
 				list = new ArrayList<>();
 				do {
-					Job job = new Job(res.getString("name"), res.getString("category"));
+					Job job = (Job)factory.createObject();
+					job.setName(res.getString("name"));
+					job.setCategory(res.getString("category"));
 					job.setId(res.getInt("id"));
 					list.add(job);
 				}while(res.next());

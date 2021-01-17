@@ -30,10 +30,6 @@ public class Offer implements Serializable{
 		/**/
 	}
 	
-	public Offer(int id) {
-		this.id = id;
-	}
-
 	public String getCompanyName() {
 		return companyName;
 	}

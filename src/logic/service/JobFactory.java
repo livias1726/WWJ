@@ -6,23 +6,10 @@ import java.util.List;
 import logic.domain.Job;
 import logic.presentation.bean.JobBean;
 
-public class JobFactory {
+public class JobFactory implements AbstractFactory{
 
-	private static JobFactory instance = null;
-
-    private JobFactory() {
-    	/*Default constructor*/
-    }
-
-    public static JobFactory getInstance() {
-        if(instance == null) {
-        	instance = new JobFactory();
-        }
-
-        return instance;
-    }
-    
-    public Job createJob() {
+	@Override
+    public Job createObject() {
     	return new Job();
     }
     

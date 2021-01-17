@@ -2,23 +2,10 @@ package logic.service;
 
 import logic.domain.Country;
 
-public class CountryFactory {
+public class CountryFactory implements AbstractFactory{
 
-	private static CountryFactory instance = null;
-
-    private CountryFactory() {
-    	/*Default constructor*/
-    }
-
-    public static CountryFactory getInstance() {
-        if(instance == null) {
-        	instance = new CountryFactory();
-        }
-
-        return instance;
-    }
-    
-    public Country createCountry() {
+	@Override
+    public Country createObject() {
     	return new Country();
     }
 }

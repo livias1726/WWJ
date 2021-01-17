@@ -15,7 +15,7 @@ DO
         open cur;
 		list_loop: loop
         
-			fetch cur into offer_id, seek_id;
+			fetch cur into offer_id;
 			if done then
 				leave list_loop;
 			end if;

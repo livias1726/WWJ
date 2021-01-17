@@ -13,6 +13,9 @@ import logic.domain.Country;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
+import logic.service.AbstractFactory;
+import logic.service.Factory;
+import logic.service.Types;
 
 public class CompanyDAO {
 	
@@ -20,26 +23,26 @@ public class CompanyDAO {
 		/**/
 	}
 
-	public static Company selectCompany(Long id) throws SQLException {
-	
+	public static Company selectCompany(Company company, Long id) throws SQLException {	
 		CallableStatement stmt = null;
 		ResultSet res = null;
-		Company company = null;
 
 		try {
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.GET_COMPANY, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			res = RoutinesManager.bindParametersAndExec(stmt, id.intValue());
 			
-            if (res.first()){           	
-            	company = new Company(res.getString("name"));
+            if (res.first()){         
+            	company.setName(res.getString("name"));
             	company.setDescription(res.getString("description"));
 
+            	AbstractFactory factoryAdd = Factory.getInstance().getObject(Types.ADDRESS);
+        		AbstractFactory factoryCou = Factory.getInstance().getObject(Types.COUNTRY);
             	List<Address> branches = new ArrayList<>();
             	do {
-            		Address branch = new Address();
+            		Address branch = (Address)factoryAdd.createObject();
             		
-            		Country cBranch = new Country();
+            		Country cBranch = (Country)factoryCou.createObject();
             		cBranch.setName(res.getString("country"));
                 	branch.setCountry(cBranch);
                 	

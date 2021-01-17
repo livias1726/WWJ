@@ -11,6 +11,9 @@ import logic.domain.Candidate;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
+import logic.service.AbstractFactory;
+import logic.service.Factory;
+import logic.service.Types;
 
 public class CandidateDAO {
 	
@@ -25,14 +28,17 @@ public class CandidateDAO {
 		
 		try{
 			Connection conn = ConnectionManager.getConnection();
-        	stmt = conn.prepareCall(RoutinesIdentifier.GET_CANDIDATES, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        	
+        	stmt = conn.prepareCall(RoutinesIdentifier.GET_CANDIDATES, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);       	
 			res = RoutinesManager.bindParametersAndExec(stmt, id.intValue());
 			
             if (res.first()){
+            	AbstractFactory factory = Factory.getInstance().getObject(Types.CANDIDATE);
+        		
             	do {
-            		
-            		Candidate cand = new Candidate(Long.valueOf(res.getInt("candidate")), res.getInt("offer"), res.getString("first_name") + " " + res.getString("last_name"));
+            		Candidate cand = (Candidate)factory.createObject();
+            		cand.setSeeker(Long.valueOf(res.getInt("candidate")));
+            		cand.setOffer(res.getInt("offer"));
+            		cand.setName(res.getString("first_name") + " " + res.getString("last_name"));
                 	list.add(cand);
             	}while(res.next());           	
             }

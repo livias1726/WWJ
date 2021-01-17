@@ -11,6 +11,10 @@ import logic.application.SessionFacade;
 import logic.domain.Candidate;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.CandidateBean;
+import logic.service.AbstractFactory;
+import logic.service.CandidateFactory;
+import logic.service.Factory;
+import logic.service.Types;
 
 public class CheckCandidatesControl {
 	
@@ -29,32 +33,27 @@ public class CheckCandidatesControl {
     }
 
 	public ObservableList<CandidateBean> retrieveCandidates() throws DatabaseFailureException {
-		Candidate cand = new Candidate();
-		List<Candidate> list;
+		AbstractFactory factory = Factory.getInstance().getObject(Types.CANDIDATE);
+		Candidate cand = (Candidate)factory.createObject();
+		
 		try {
-			list = cand.getCandidatesFromDB(SessionFacade.getSession().getID());
+			List<Candidate> list = cand.getCandidatesFromDB(SessionFacade.getSession().getID());
+			ObservableList<CandidateBean> dest = FXCollections.observableArrayList();
+	    	for(CandidateBean i: ((CandidateFactory)factory).extractCandidateBeanList(list)) {
+	    		dest.add(i);
+	    	}   
+	    	
+	    	return dest;
 		} catch (SQLException e) {
 			Logger.getLogger(CheckCandidatesControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException(); 
-		}
-		
-		ObservableList<CandidateBean> dest = FXCollections.observableArrayList();
-		
-		for(Candidate i: list) {
-			CandidateBean bean = new CandidateBean();
-			
-			bean.setOffer(i.getOffer());
-			bean.setSeeker(i.getSeeker());
-			bean.setName(i.getName());
-			
-			dest.add(bean);
-		}
-		
-		return dest;
+		}		
 	}
 
 	public void removeCandidates(List<Long> candidates, List<Integer> offers) throws DatabaseFailureException {
-		Candidate cand = new Candidate();
+		AbstractFactory factory = Factory.getInstance().getObject(Types.CANDIDATE);
+		Candidate cand = (Candidate)factory.createObject();
+		
 		try {
 			cand.removeCandidatesFromDB(candidates, offers);
 		} catch (SQLException e) {

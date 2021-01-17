@@ -82,7 +82,7 @@ public class User implements Serializable{
 	}
 	
 	public User getPersonalInfoFromDB(long id) throws SQLException {
-		return UserDAO.selectPersonalInfo(id);
+		return UserDAO.selectPersonalInfo(this, id);
 	}
 
 	public void savePersonalInfoOnDB(Long id) throws SQLException {

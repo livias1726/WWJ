@@ -12,7 +12,11 @@ import logic.exceptions.NoResultFoundException;
 import logic.presentation.bean.BusinessBean;
 import logic.presentation.bean.BusinessInCountryBean;
 import logic.presentation.bean.CountryBean;
+import logic.service.AbstractFactory;
 import logic.service.BusinessFactory;
+import logic.service.BusinessInCountryFactory;
+import logic.service.Factory;
+import logic.service.Types;
 
 public class ViewBusinessControl extends ViewResultsControl{
 	
@@ -31,9 +35,12 @@ public class ViewBusinessControl extends ViewResultsControl{
     }
     
     public List<BusinessBean> retrieveBusinesses() throws DatabaseFailureException{
-    	try {
-    		List<Business> list = BusinessFactory.getInstance().createBusiness().getAvailableBusinesses();
-    		return BusinessFactory.getInstance().extractBusinessBeanList(list);
+    	AbstractFactory factory = Factory.getInstance().getObject(Types.BUSINESS);
+		Business bus = (Business)factory.createObject();
+    	
+		try {
+    		List<Business> list = bus.getAvailableBusinesses();
+    		return ((BusinessFactory)factory).extractBusinessBeanList(list);
 		} catch (SQLException e) {
 			Logger.getLogger(ViewBusinessControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException();
@@ -41,9 +48,12 @@ public class ViewBusinessControl extends ViewResultsControl{
     }
     
     public List<BusinessInCountryBean> retrieveBusinessesByCategory(BusinessInCountryBean bean) throws NoResultFoundException, DatabaseFailureException {
-		try {
-			List<BusinessInCountry> list = BusinessFactory.getInstance().createBusiness().getBusinessesByCategory(bean.getCategory());
-			return BusinessFactory.getInstance().extractBusinessInCountryBeanList(list);
+    	AbstractFactory factory = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
+    	BusinessInCountry bus = (BusinessInCountry)factory.createObject();
+    	
+    	try {
+			List<BusinessInCountry> list = bus.getBusinessesByCategory(bean.getCategory());
+			return ((BusinessInCountryFactory)factory).extractBusinessInCountryBeanList(list);
 		} catch (NoResultFoundException e) {
 			throw new NoResultFoundException();
 		} catch (SQLException se) {
@@ -53,9 +63,12 @@ public class ViewBusinessControl extends ViewResultsControl{
     }
     
     public List<BusinessInCountryBean> retrieveBusinessesByCountry(CountryBean bean) throws NoResultFoundException, DatabaseFailureException {
-		try {
-			List<BusinessInCountry> list = BusinessFactory.getInstance().createBusiness().getBusinessesByPlace(bean.getName());
-			return BusinessFactory.getInstance().extractBusinessInCountryBeanList(list);
+    	AbstractFactory factory = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
+    	BusinessInCountry bus = (BusinessInCountry)factory.createObject();
+    	
+    	try {
+			List<BusinessInCountry> list = bus.getBusinessesByPlace(bean.getName());
+			return ((BusinessInCountryFactory)factory).extractBusinessInCountryBeanList(list);
 		} catch (NoResultFoundException e) {
 			throw new NoResultFoundException();
 		} catch (SQLException se) {
@@ -65,9 +78,12 @@ public class ViewBusinessControl extends ViewResultsControl{
     }
     
     public List<BusinessInCountryBean> retrieveBusinesses(CountryBean country, BusinessInCountryBean bus) throws NoResultFoundException, DatabaseFailureException{
-		try {
-			List<BusinessInCountry> list = BusinessFactory.getInstance().createBusiness().getBusinessesInCountry(country.getName(), bus.getCategory());
-			return BusinessFactory.getInstance().extractBusinessInCountryBeanList(list);
+    	AbstractFactory factory = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
+    	BusinessInCountry business = (BusinessInCountry)factory.createObject();
+    	
+    	try {
+			List<BusinessInCountry> list = business.getBusinessesInCountry(country.getName(), bus.getCategory());
+			return ((BusinessInCountryFactory)factory).extractBusinessInCountryBeanList(list);
 		} catch (NoResultFoundException e) {
 			throw new NoResultFoundException();
 		} catch (SQLException se) {

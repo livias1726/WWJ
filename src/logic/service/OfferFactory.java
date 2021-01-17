@@ -11,28 +11,11 @@ import logic.presentation.bean.CountryBean;
 import logic.presentation.bean.JobBean;
 import logic.presentation.bean.OfferBean;
 
-public class OfferFactory {
-	
-	private static OfferFactory instance = null;
-
-    private OfferFactory() {
-    	/*Default constructor*/
-    }
-
-    public static OfferFactory getInstance() {
-        if(instance == null) {
-        	instance = new OfferFactory();
-        }
-
-        return instance;
-    }
+public class OfferFactory implements AbstractFactory{
     
-    public Offer createOffer() {
+	@Override
+    public Offer createObject() {
     	return new Offer();
-    }
-    
-    public Offer createOffer(int id) {
-    	return new Offer(id);
     }
     
     public List<OfferBean> extractOfferBeanList(List<Offer> src){
@@ -96,7 +79,9 @@ public class OfferFactory {
     	bean.setPosition(job);
     	
     	bean.setTaskDescription(offer.getTaskDescription());
-    	bean.setBranch(AddressFactory.getInstance().extractAddressBean(offer.getBranch()));	
+    	
+    	bean.setBranch((new AddressFactory()).extractAddressBean(offer.getBranch()));	
+    	
     	bean.setStart(offer.getStart());
     	bean.setFinish(offer.getFinish());
     	bean.setBaseSalary(offer.getBaseSalary());

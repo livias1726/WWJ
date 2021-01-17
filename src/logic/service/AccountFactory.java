@@ -5,23 +5,10 @@ import logic.domain.Account;
 import logic.presentation.bean.AccountBean;
 import logic.presentation.bean.UserBean;
 
-public class AccountFactory {
-	
-	private static AccountFactory instance = null;
-
-    private AccountFactory() {
-    	/*Default constructor*/
-    }
-
-    public static AccountFactory getInstance() {
-        if(instance == null) {
-        	instance = new AccountFactory();
-        }
-
-        return instance;
-    }
+public class AccountFactory implements AbstractFactory{
     
-    public Account createAccount() {
+	@Override
+    public Account createObject() {
     	return new Account();
     }
     

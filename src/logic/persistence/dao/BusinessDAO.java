@@ -14,7 +14,9 @@ import logic.exceptions.NoResultFoundException;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
-import logic.service.BusinessFactory;
+import logic.service.AbstractFactory;
+import logic.service.Factory;
+import logic.service.Types;
 
 public class BusinessDAO {
 	
@@ -33,9 +35,11 @@ public class BusinessDAO {
 			res = RoutinesManager.executeStmt(stmt);
 			
 			if(res.first()) {
+				AbstractFactory factory = Factory.getInstance().getObject(Types.BUSINESS);
 				list = new ArrayList<>();
 				do {
-					Business bus = new Business(res.getInt("id"));
+					Business bus = (Business)factory.createObject();
+					bus.setId(res.getInt("id"));
 					bus.setName(res.getString("name"));
 					bus.setCategory(res.getString("category"));
 					list.add(bus);
@@ -125,7 +129,7 @@ public class BusinessDAO {
 		CallableStatement stmt = null;
 		ResultSet res = null;
 		List<BusinessInCountry> list = new ArrayList<>();
-
+		
 		try {
 			Connection conn = ConnectionManager.getConnection();
         	stmt = conn.prepareCall(RoutinesIdentifier.GET_FAVOURITE_BUSINESSES, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -152,14 +156,18 @@ public class BusinessDAO {
 		}
 
 		res.first();
+		AbstractFactory factoryBus = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
+		AbstractFactory factoryCou = Factory.getInstance().getObject(Types.COUNTRY);
+
 		do {
-			BusinessInCountry business = BusinessFactory.getInstance().createBusiness();
+
+			BusinessInCountry business = (BusinessInCountry)factoryBus.createObject();
 			business.setId(res.getInt("id"));
 			business.setName(res.getString("name"));
 			business.setCategory(res.getString("category"));
 			business.setDescription(res.getString("description"));
-			
-			Country country = new Country();
+		
+			Country country = (Country)factoryCou.createObject();
 			country.setName(res.getString("country"));
 			country.setCurrency(res.getString("currency"));
 			business.setCountry(country);

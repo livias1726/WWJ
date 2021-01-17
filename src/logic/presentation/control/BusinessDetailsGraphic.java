@@ -65,14 +65,16 @@ public class BusinessDetailsGraphic implements Initializable {
 		ObservableList<String> currency = FXCollections.observableArrayList("$", "£", "€");
 		currBox.setItems(currency);
 		currBox.setValue(currency.get(0));
-		
+
 		try {
-			for(BusinessInCountryBean i: ManageFavouriteBusinessesControl.getInstance().retrieveFavourites()) {
-				if(i.getId() == business.getId()) {
-					favBtn.getStyleClass().add("star_button_set");
-					fav = true;
+			if(SessionFacade.getSession().getID() != null) {
+				for(BusinessInCountryBean i: ManageFavouriteBusinessesControl.getInstance().retrieveFavourites()) {
+					if(i.getId() == business.getId()) {
+						favBtn.getStyleClass().add("star_button_set");
+						fav = true;
+					}
 				}
-			}
+			}					
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			goBack();

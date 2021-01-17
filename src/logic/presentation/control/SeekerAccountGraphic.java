@@ -17,6 +17,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 import logic.application.SessionFacade;
+import logic.application.control.SeekerAccountControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
 import logic.presentation.GraphicHandler;
@@ -31,9 +32,6 @@ public class SeekerAccountGraphic extends AccountGraphic{
 	
 	@FXML
     private HBox privateHBox;
-	
-	@FXML
-    private Button homeBtn;
 
 	@FXML
     private Button changePicBtn;
@@ -74,9 +72,9 @@ public class SeekerAccountGraphic extends AccountGraphic{
 	
 	@FXML
 	public void openCVPrivate(){
-		CVBean cv = null;
+		CVBean cv = new CVBean();
 		try {
-			cv = new CVBean().getCVFile(accountID);	    	
+			SeekerAccountControl.getInstance().retrieveCV(cv, accountID);  	
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			return;
@@ -94,7 +92,7 @@ public class SeekerAccountGraphic extends AccountGraphic{
 		if(res.isPresent()) {
 			if(res.get().getText().equals("Upload")) {
 				uploadCV();
-			}else if(res.get().getText().equals("Show") && cv != null) {
+			}else if(res.get().getText().equals("Show")) {
 				showCV(cv);
 			}
 		}	
@@ -102,8 +100,9 @@ public class SeekerAccountGraphic extends AccountGraphic{
 	
 	@FXML
 	public void openCVPublic(){
+		CVBean cv = new CVBean();
 		try {
-			CVBean cv = new CVBean().getCVFile(accountID);	  
+			SeekerAccountControl.getInstance().retrieveCV(cv, accountID); 
 			showCV(cv);
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
@@ -120,9 +119,8 @@ public class SeekerAccountGraphic extends AccountGraphic{
 		File newCV = fileChooser.showOpenDialog(stage);
 		
 		if (newCV != null) {
-		    CVBean bean = new CVBean();
 		    try {
-				bean.uploadNewCV(newCV);
+		    	SeekerAccountControl.getInstance().updateCV(newCV); 
 			} catch (DatabaseFailureException e) {
 				GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			}

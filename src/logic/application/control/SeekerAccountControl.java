@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +16,10 @@ import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
 import logic.presentation.bean.ApplicationBean;
 import logic.presentation.bean.CVBean;
-import logic.presentation.bean.JobBean;
+import logic.service.AbstractFactory;
+import logic.service.ApplicationFactory;
+import logic.service.Factory;
+import logic.service.Types;
 
 public class SeekerAccountControl {
 
@@ -33,58 +38,57 @@ public class SeekerAccountControl {
     }
 
 	public ObservableList<ApplicationBean> retrieveApplications() throws DatabaseFailureException {
-		Application app = new Application();
-    	List<Application> list;
+		AbstractFactory factory = Factory.getInstance().getObject(Types.APPLICATION);
+		Application app = (Application)factory.createObject();
+
 		try {
-			list = app.getApplications(SessionFacade.getSession().getID());
+			List<Application> list = app.getApplications(SessionFacade.getSession().getID());
+			ObservableList<ApplicationBean> dest = FXCollections.observableArrayList();
+			for(ApplicationBean i: ((ApplicationFactory)factory).extractApplicationBeanList(list)) {
+				dest.add(i);
+			}
+			return dest;
 		} catch (SQLException se) {
+			Logger.getLogger(SeekerAccountControl.class.getName()).log(Level.SEVERE, null, se);
 			throw new DatabaseFailureException();
 		}
-    	
-		ObservableList<ApplicationBean> dest = FXCollections.observableArrayList();
-		for(Application i: list) {
-			ApplicationBean bean = new ApplicationBean();
-			bean.setId(i.getId());
-			
-			JobBean job = new JobBean();
-			job.setName(i.getPosition().getName());
-			bean.setPosition(job);
-			
-			bean.setApplication(i.getApplication());
-			bean.setExpiration(i.getExpiration());
-			
-			dest.add(bean);
-		}
-		return dest;
 	}
 
 	public void removeApplications(List<Integer> selected) throws DatabaseFailureException {
-		Application app = new Application();
+		AbstractFactory factory = Factory.getInstance().getObject(Types.APPLICATION);
+		Application app = (Application)factory.createObject();
+		
 		try {
 			app.removeApplicatinosFromDB(SessionFacade.getSession().getID(), selected);
 		} catch (SQLException e) {
+			Logger.getLogger(SeekerAccountControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException(); 
 		}
 	}
 
-	public CVBean retrieveCV(Long accountID) throws DatabaseFailureException, NoResultFoundException {
-		CVBean bean = new CVBean();
+	public CVBean retrieveCV(CVBean cvBean, Long accountID) throws DatabaseFailureException, NoResultFoundException {
+		AbstractFactory factory = Factory.getInstance().getObject(Types.CV);
+		CV cv = (CV)factory.createObject();
 		try {
-			CV cv = new CV().getCVFromDB(accountID);
-			bean.setCv(cv.getCvDoc());
+			cv.getCVFromDB(accountID);
+			cvBean.setCv(cv.getCvDoc());
 		} catch (SQLException | IOException e) {
+			Logger.getLogger(SeekerAccountControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException(); 
 		} catch (NoResultFoundException e) {
 			throw new NoResultFoundException("No CV document was found. Do you want to upload it?");
 		}
 
-		return bean;
+		return cvBean;
 	}
 
 	public void updateCV(File curr) throws DatabaseFailureException {
+		AbstractFactory factory = Factory.getInstance().getObject(Types.CV);
+		CV cv = (CV)factory.createObject();
 		try {
-			new CV().saveCV(curr, SessionFacade.getSession().getID());
+			cv.saveCV(curr, SessionFacade.getSession().getID());
 		} catch (SQLException | IOException e) {
+			Logger.getLogger(SeekerAccountControl.class.getName()).log(Level.SEVERE, null, e);
 			throw new DatabaseFailureException(); 
 		}
 	}
