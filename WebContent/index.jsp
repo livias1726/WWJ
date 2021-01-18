@@ -12,15 +12,22 @@
 	</head>
 	<body class="main">
 		<div class="dropdown" style="float:right;">
-	    	<button class="user_btn"></button>
-		  <div class="dropdown-content" style="right:0;">
-		    <a href="http://localhost:8080/WorldWideJob/login.jsp">Login</a>
-		  </div>
+		  	<button class="menu_btn"></button>
+		    <div class="dropdown-content" style="right:0;">
+		    	<a href="src/logic/presentation/resources/html/pricing.html">Buy premium version</a>
+		        <a href="src/logic/presentation/resources/html/support.html">Support</a>	     		
+		     </div>
+		</div>
+		<div class="dropdown" style="float:right;">
+			<button class="user_btn"></button>
+			<div class="dropdown-content" style="right:0;">
+		    	<a href="http://localhost:8080/WorldWideJob/login.jsp">Login</a>
+		  	</div>
 		</div>
 		<div style="margin-left: 300px">
 		    <button class="main_btns" type="button" onClick="javascript:window.location='seekerResearch.jsp';">Job seeker</button>
 		    <button class="main_btns" type="button" onClick="javascript:window.location='login.jsp';">Recruiter</button>
-		    <button class="main_btns" type="button" onClick="javascript:window.location='entrepreneurResearch.jsp';">Entrepreneur</button>
+		    <button class="main_btns" type="button" onClick="javascript:window.location='entrepreneur_search.jsp';">Entrepreneur</button>
 		</div>
 	</body>
 </html>
