@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="logic.application.control.RecruiterAccountControl" 
+	import="logic.presentation.bean.OfferBean"
+	import="java.util.List"
+	import="javafx.collections.ObservableList"
+%>    
+
+<jsp:useBean id="offerBean" class="logic.presentation.bean.OfferBean" scope="session"/>
+<jsp:setProperty name="offerBean" property="*"/>
+    
 <!DOCTYPE html>
 
 <html lang="en">
@@ -12,6 +21,7 @@
 		
 		<title>WorldWideJob - offersRecruiter</title>
 	</head>
+	
 	<body>
 		<div>
 			<form action="offersRecruiter.jsp" name="offersRecruiter" method="POST">
@@ -21,7 +31,7 @@
 		     			<a href="http://localhost:8080/WorldWideJob/publish.jsp">Publish Job Offer</a>
 		     			<a href="">Buy Premium Version</a>
 		     			<a class="dropdown" href="">Support</a>
-		     			<a href="">Quit</a>
+		     			<a href="http://localhost:8080/WorldWideJob/index.jsp">Quit</a>
 		     		</div>
 		     	</div>
 		     	<div style="float:right;">
@@ -29,8 +39,8 @@
 		        <div class="dropdown" style="float:right;">
 	    			<button class="user_btn" style="background-color:lightblue;margin-right:10px;width:40px;height:40px;margin-top:10px"></button>
 		     		<div class="dropdown-content" style="right:0;">
-		     			<a href="">Account</a>
-		     			<a href="">Logout</a>
+		     			<a href="http://localhost:8080/WorldWideJob/recruiterProfile.jsp">Account</a>
+		     			<a href="http://localhost:8080/WorldWideJob/login.jsp">Logout</a>
 		     		</div>
 		     	</div>
 		     	</div>
@@ -38,9 +48,9 @@
 	    			<img alt="" class="image" src="icons/main_icon.png" width=70px height=70px>
 	    		</div>
 	    		<div style="float:left">
-	    			<button class="home_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px;"></button>
+	    			<button class="home_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px;" onClick="javascript:window.location='recruiterProfile.jsp';"></button>
 	    		<div style="float:right;">
-	    			<button class="arrow_btn" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px"></button>
+	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='recruiterProfile.jsp';"></button>
 	    		</div>
 	    		</div>
 	    		<div>
@@ -51,17 +61,42 @@
 	    		<input type="radio" name="number">Active
 	    		<input type="radio" name="number">Expired
 	    		</fieldset>
-	    		<input class="candidate_row_title" type="text" name="offers_row_title" value="" disabled style="background-color:#56A6F0; border:0;">
-	    		<input class="candidate_row_title" type="text" name="number_row_title" value="NUMBER" disabled style="background-color:#56A6F0; width:10%; left:250px;border:0;">
-	    		<input class="candidate_row_title" type="text" name="position_row_title" value="POSITION" disabled style="background-color:#56A6F0; width:10%; left:450px;border:0;">
-	    		<input class="candidate_row_title" type="text" name="uploaddate_row_title" value="UPLOAD DATE" disabled style="background-color:#56A6F0; width:10%; left:700px;border:0;">
-	    		<input class="candidate_row_title" type="text" name="expirationdate_row_title" value="EXPIRATION DATE" disabled style="background-color:#56A6F0; width:10%; left:950px;border:0;">
-	    		<input class="candidate_row" type="text" name="offers_row" value="" disabled style="background-color:white;border:0;">
-	    		<input class="candidate_row" type="text" name="number_row" value="" disabled style="background-color:white; width:30%; left:250px;border:0;">
-	    		<input class="candidate_row" type="text" name="position_row" value="" disabled style="background-color:white;width:30%; left:450px; border:0;">
-	    		<input class="candidate_row" type="text" name="uploaddate_row" value="" disabled style="background-color:white;width:30%; left:700px; border:0;">
-	    		<input class="candidate_row" type="text" name="expirationdate_row" value="" disabled style="background-color:white;width:18%; left:950px; border:0;">
-	    		<input class="candidate_row" type="checkbox" name="candidate_checkbox" style="left:-500px"><br>
+	    	
+	    		<table border="0" id='offerTable' style="table-layout:fixed; width:900px;position:absolute;left:230px;top:250px;background-color:white">
+	    			<thead>
+      						<tr>
+         						<th style="height:30px; color:black; background-color:dodgerblue">NUMBER</th>
+         						<th style="height:30px; color:black; background-color:dodgerblue">POSITION</th>
+         						<th style="height:30px; color:black; background-color:dodgerblue">UPLOAD DATE</th>
+         						<th style="height:30px; color:black; background-color:dodgerblue">EXPIRATION DATE</th>
+         						<th style="height:30px; color:black; background-color:dodgerblue">CANDIDATES</th>
+      						</tr>
+      						<tr>
+      							<td style="height:20px"></td>
+         						<td></td>
+         						<td></td>
+         						<td></td>
+         						<td></td>
+   							</tr>
+   							<tr>
+      							<td style="height:20px"></td>
+         						<td></td>
+         						<td></td>
+         						<td></td>
+         						<td></td>
+   							</tr>
+   							<tr>
+      							<td style="height:20px"></td>
+         						<td></td>
+         						<td></td>
+         						<td></td>
+         						<td></td>
+   							</tr>
+      					</thead>
+      					<tbody>
+      					</tbody>
+      			</table>
+      			
 	    		<button class="delete_btn" style="width:100px; height:50px; top:500px; left:400px; background-color:dodgerblue">Delete</button>
 	    		</div>
 	    	</form>

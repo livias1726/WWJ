@@ -12,10 +12,6 @@
 <jsp:useBean id="accountBean" class="logic.presentation.bean.AccountBean" scope="session"/>
 <jsp:setProperty name="accountBean" property="*"/>
 
-<%
-	Class.forName("com.mysql.jdbc.Driver");
-%>
-
 <html lang="en">
 	<head>
 		<meta charset="ISO-8859-1">
