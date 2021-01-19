@@ -4,6 +4,8 @@
 		import="logic.application.control.ViewBusinessControl"
 		import="logic.application.control.ViewResultsControl"
 		import="logic.application.SessionFacade"%>
+<%@page errorPage="WEB-INF/error.jsp"%>
+
 <!DOCTYPE html>
 
 <jsp:useBean id="businessBean" class="logic.presentation.bean.BusinessBean" scope="session"/>
@@ -32,8 +34,16 @@
 	    	<div class="search_entr">
     			<h1 style="text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">Become your own boss.<br>Start a new business in the Country of your dreams.<br></h1>
 	    		<% if (request.getParameter("search") != null){
-	    				if(!request.getParameter("place").equals("") || !request.getParameter("business").equals("")) {
+	    				if(request.getParameter("place") != null && !request.getParameter("place").equals("")){
 	    					countryBean.setName(request.getParameter("place"));
+	    					
+	    					if(request.getParameter("business") != null && !request.getParameter("business").equals("")) {	    					
+		    					businessBean.setCategory(request.getParameter("business"));
+	    					}
+	    					
+	    					String redirectURL = "http://localhost:8080/WorldWideJob/business_results.jsp";
+	            			response.sendRedirect(redirectURL);
+	    				}else if(request.getParameter("business") != null && !request.getParameter("business").equals("")) {	    					
 	    					businessBean.setCategory(request.getParameter("business"));
 	    					String redirectURL = "http://localhost:8080/WorldWideJob/business_results.jsp";
 	            			response.sendRedirect(redirectURL);

@@ -46,27 +46,6 @@
 	-fx-background-size:16px;
 }
 
-.add_btn{
-	-fx-background-image: url('../icons/plus.png');
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: center;
-	-fx-background-size:16px;
-}
-
-.view_btn{
-	-fx-background-image: url('../icons/view.png');
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: center;
-	-fx-background-size:16px;
-}
-
-.maps_btn{
-	-fx-background-image: url('../icons/map.png');
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: center;
-	-fx-background-size:32px;
-}
-
 .main{
 	-fx-background-color: white;
 	-fx-background-image: url('../icons/main_icon.png');

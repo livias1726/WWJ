@@ -1,7 +1,9 @@
 .toolbar{
+	width:100%;
 	height: 50px;
 	border-color:blue;
 	border:5px;
+	overflow:hidden;
 }
 
 .main_icon{
@@ -141,6 +143,12 @@
 	margin-top:30px;
 }
 
+.research_title{
+	text-align:center; 
+	text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
+	font-size:24px;
+}
+
 .login_btns{
 	height: 31px; 
 	width: 66px; 
@@ -220,15 +228,64 @@
 	width:250px;
     height:30px;
     left: 20px;
-	top: 130px;
+	top: 100px;
     font-size:20px;
+    font-weight:bold;
     text-overflow: ellipsis;
     text-align:center;
+    color:white;
+    border-color:black;
+    background-color:dodgerblue;
+}
+
+.result{
+	position: absolute;
+	width:83%;
+    height:80px;
+    padding:10px 10px 10px 10px;
+    font-size:20px;
     color:black;
     border-color:black;
-    background-color:white;
 }
-        
+
+.order_by{
+	position: absolute;
+	width: 250px;
+	height: 40px;
+	left: 20px;
+	top: 150px;
+	color:black;
+}
+
+.order_select{
+	position: absolute;
+	width: 160px;
+	height: 30px;
+	left: 110px;
+	top: 158px;
+	color:black;	
+}
+
+.filter_box{
+	border-color:lightgrey;
+	border-style:strong;
+	position: absolute;
+	width:230px;
+	height:140px;
+	left:20px;
+	top:200px;
+}
+
+.result_box{
+	position: absolute;
+	width:600px;
+	height:100%;
+    left: 400px;
+	top: 100px;
+    border-color:lightgrey;	
+	border-style:strong;
+}
+      
 .joboffers{
 	width:250px;
     height:60px;
@@ -251,35 +308,6 @@
 	top: 220px;
 	color:black;
 	border: 1px;
-}
-
-.result{
-	position: absolute;
-	width:400px;
-    height:80px;
-    left: 570px;
-	top: 240px;
-    font-size:20px;
-    color:black;
-    border-color:black;
-}
-
-.order_by{
-	position: absolute;
-	width: 250px;
-	height: 40px;
-	left: 20px;
-	top: 250px;
-	color:black;
-}
-
-.order_select{
-	position: absolute;
-	width: 160px;
-	height: 30px;
-	left: 110px;
-	top: 258px;
-	color:black;	
 }
 
 .busdetails{
