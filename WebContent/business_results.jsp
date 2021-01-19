@@ -58,16 +58,21 @@
 					    		<legend class="research_title">BUSINESSES</legend>
 					    			<ul id="res" style="list-style-type:none;">
 					    			<%for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinessesByCountry(countryBean)){%>
-					    				<li><button class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%> </button></li>
+					    				<li>
+					    				<button id="res_btn" class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
+					    				<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
+					    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
+					    				<button id="cat" style="display:none;" value="<%=i.getCategory()%>"></button>
+					    				</li>
 					    			<%}%>    
 					    			</ul>
 				    		</fieldset>	
 			    		</div>		    			    					
-		    			<fieldset class="filter_box">
-				    		<legend style="font-weight:bold">Category:</legend>
+		    			<fieldset class="filter_box" id="filters">
+				    		<legend style="font-weight:bold">Categories</legend>
 				    			<%for(BusinessBean i: ViewBusinessControl.getInstance().retrieveBusinesses()){%>
-				    				<input type="checkbox" id="cat1" name="cat1" value="<%=i.getCategory()%>" onclick="filterResults()">
-  									<label for="cat1"><%=i.getCategory()%></label><br>
+				    				<input type="checkbox" id="cat1" name="category" value="<%=i.getCategory()%>" onclick="filterResults()"><%=i.getCategory()%>
+				    				<p></p>
 				    			<%}%>
 			    		</fieldset>
 			    		
@@ -85,16 +90,21 @@
 					    			<ul id="res" style="list-style-type:none;">
 					    			<%businessInCountryBean.setCategory(businessBean.getCategory());
 					    			  for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinessesByCategory(businessInCountryBean)){%>
-					    				<li><button class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%> </button></li>
+					    				<li>
+					    				<button class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
+					    				<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
+					    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
+					    				<button id="cat" style="display:none;" value="<%=i.getCountry().getName()%>"></button>
+					    				</li>
 					    			<%}%>    
 					    			</ul>
 				    		</fieldset>	
 			    		</div>		    			    					
-		    			<fieldset class="filter_box">
+		    			<fieldset class="filter_box" id="filters">
 				    		<legend style="font-weight:bold">Countries:</legend>
 					    		<%for(String i: ViewResultsControl.getInstance().retrieveCountries()){%>
-				    				<input type="checkbox" id="cat1" name="cat1" value="<%=i%>" onclick="filterResults()">
-  									<label for="cat1"><%=i%></label><br>
+				    				<input type="checkbox" id="cat1" name="cat1" value="<%=i%>" onclick="filterResults()"><%=i%>
+				    				<p></p>
 				    			<%}%>
 			    		</fieldset>
 		    	
@@ -112,7 +122,11 @@
 					    			<ul id="res" style="list-style-type:none;">
 					    			<%businessInCountryBean.setCategory(businessBean.getCategory());
 					    			  for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinesses(countryBean, businessInCountryBean)){%>
-					    				<li><button class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%> </button></li>
+					    				<li>
+					    				<button class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
+					    				<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
+					    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
+					    				</li>
 					    			<%}%>    
 					    			</ul>
 				    		</fieldset>	
