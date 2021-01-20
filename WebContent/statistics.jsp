@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="logic.presentation.bean.BusinessBean" %> 
+    
+<%@ page import="logic.presentation.bean.BusinessInCountryBean"
+		 import="logic.application.control.CalculateFeasibilityControl"%> 
+		 
 <%@page errorPage="WEB-INF/error.jsp"%>
    
 <!DOCTYPE html>
 
-<jsp:useBean id="businessBean" scope="session" class="logic.presentation.bean.BusinessBean"/>
-<jsp:setProperty name="businessBean" property="*"/>
+<jsp:useBean id="businessResult" scope="session" class="logic.presentation.bean.BusinessInCountryBean"/>
+<jsp:setProperty name="businessResult" property="*"/>
 
 <%Class.forName("com.mysql.cj.jdbc.Driver");%>
 
@@ -21,48 +24,64 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
    	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+   	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<title>WorldWideJob</title>
 </head>
 <body>	
 	<jsp:include page="WEB-INF/toolbar.jsp"/>
 	<div style="background-color:#C6D6D3">
 		<form action="statistics.jsp" name="statisticsform" method="POST">
-		
-	    		<div class="scheletro_signUp" style="top:70px; left:5px;">Statistics<br>
-	    			<div style="margin-top: 20px; margin-left:-30px">
-	    				<input type="text" id="businessName" name="businessName" disabled value="<%=businessBean.getName()%>" style="width:300px; height:40px;margin-top:10px;margin-left:30px">
-	    			</div>
-	    			<div style="margin-top: 40px;margin-left:-30px">
-				    	<label for="popularity" style="color:black;font-size:20px;margin-left:45px;top:20px">Popularity over the years</label>
-	    			</div>
-	    			<div class="orizzontale" style="margin-left:50px;"></div>
-	    			<hr width="1" size="300" style="background-color:black;margin-left:50px;margin-top:-300px">
-	    			<div style="margin-top: 40px;margin-left:250px">
-				    	<label for="costs" style="color:black;font-size:20px;margin-left:45px">Average earnings and costs</label>
-	    			</div>
-	    			<div class="orizzontale"></div>
-	    			<hr width="1" size="300" style="background-color:black;margin-left:300px;margin-top:-300px">
-	    			<div style="margin-top: -1000px; margin-left:700px">
-				    	<label for="budget" style="color:black;font-size:20px;margin-left:40px">Insert budget</label>
-				    	<input class="budget" type="text" id="budget" name="budget" value="" style="background-color:#E4F5F2; margin-left:20px; top:0px;height:30px;width:140px">
-				    </div><br>
-				    <div style="margin-top:-160px">
-				    <button class="calculatefeasibility_btn" name="calcFeas" style="width:150px; height:50px; background-color: dodgerblue;border-color:blac;margin-left:1020px;margin-top:-200px">Calculate feasibility</button>
-	    			<% if (request.getParameter("calcFeas") != null && !request.getParameter("budget").equals("")) {
-					String redirectURL = "http://localhost:8080/WorldWideJob/feasibility.jsp";
-        			response.sendRedirect(redirectURL);
-    				}
-	    			if(request.getParameter("calcFeas") != null && request.getParameter("budget").equals("")) { %>
-						<script>window.alert("Warning! Enter your budget.")</script>
-					<%}%>
-	    			</div>
-	    			<div style="margin-top: 40px;margin-left:-30px">
-				    	<label for="competitors" style="color:black;font-size:20px;margin-left:700px">Competitors</label>
-	    			</div>
-	    			<div class="orizzontale" style="margin-left:700px"></div>
-	    			<hr width="1" size="300" style="background-color:black;margin-left:700px;margin-top:-300px">
-	    		</div>
+			<label class="research_title" style="margin-left:40%;font-size:30px"><%=businessResult.getName()%> - Statistics</label>
+			
+			<!-- FEASIBILITY -->
+    		<div style="margin-left:800px;">
+    			<label for="budget">Insert budget:</label>
+	    		<input class="budget" type="text" name="budget" id="budget">
+	    		<select name="curr" id="curr" style="height:40px;width:40px;">
+				    <option value="$">$</option>
+				    <option value="&pound">&pound;</option>
+				    <option value="&euro">&euro;</option>
+				</select>
+	    		<button class="details_buttons" name="calcFeas">Calculate feasibility</button>
+	    		<%if(request.getParameter("calcFeas") != null){
+	    			if (!request.getParameter("budget").equals("")) {
+    		  			CalculateFeasibilityControl.getInstance().retrieveBusinessFeasibility(businessResult, request.getParameter("budget"));
+	    				String redirectURL = "http://localhost:8080/WorldWideJob/feasibility.jsp";
+	        			response.sendRedirect(redirectURL);
+    				}else{ %>
+    					<script>window.alert("Warning! Enter your budget.")</script>
+    			  <%}
+	    		 }%>
+    		</div>
+    		
+    		<!-- CHARTS -->
+    		<h2 style="text-align:center">Popularity over the years</h2>
+   			<div class="charts" id="chart_pop"></div>
+   			
+   			<h2 style="text-align:center">Average earnings and costs</h2>
+   			<div class="charts" id="chart_avg"></div>
+   
+   			<h2 style="text-align:center">Competitors</h2>
+   			<div class="charts" id="chart_comp"></div>
+   			
+   			<button id="pop_list" style="display:none;" value="<%=
+   				businessResult.getPopularity().get(0) + "$$" +
+   	   			businessResult.getPopularity().get(1) + "$$" +
+   	   			businessResult.getPopularity().get(2) + "$$" +
+   	   			businessResult.getPopularity().get(3) + "$$" +
+   	   			businessResult.getPopularity().get(4)%>"></button>
+ 			<button id="avg_list" style="display:none;" value="<%=
+ 				businessResult.getAverageEarnings() + "$$" + 
+ 				businessResult.getAverageCost() + "$$" + 
+ 				businessResult.getCountry().getCurrency()%>"></button>
+ 			<button id="comp_list" style="display:none;" value="<%=
+ 				businessResult.getCompetitors().get(0) + "$$" +
+ 				businessResult.getCompetitors().get(1) + "$$" +
+ 				businessResult.getCompetitors().get(2) + "$$" +
+ 				businessResult.getCompetitors().get(3) + "$$" +
+ 				businessResult.getCompetitors().get(4)%>"></button>
 	    </form>
 	</div>
 </body>
+<script src="js/statistics.js"></script>
 </html>

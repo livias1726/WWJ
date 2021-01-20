@@ -260,6 +260,13 @@
 	width:40px;
 }
 
+.charts{
+	height:300px;
+	width:600px;
+	margin-left:30%;
+	margin-top:20px;
+}
+
 .login_btns{
 	height: 31px; 
 	width: 66px; 

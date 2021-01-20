@@ -29,6 +29,9 @@
 	businessResult.setName(tok.nextToken());
 	businessResult.setDescription(tok.nextToken());
 	
+	countryBean.setName(tok.nextToken());
+	businessResult.setCountry(countryBean);
+	
 	String redirectURL = "http://localhost:8080/WorldWideJob/business_details.jsp";
 	response.sendRedirect(redirectURL); 
 }%>
@@ -66,7 +69,7 @@
 					    			<ul id="res" style="list-style-type:none;">
 					    			<%for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinessesByCountry(countryBean)){%>
 					    				<li>
-					    				<button id="res_btn" class="result" type="submit" name="business" value="<%=i.getId() + "$$" + i.getName() + "$$" + i.getDescription()%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
+					    				<button id="res_btn" class="result" type="submit" name="business" value="<%=i.getId() + "$$" + i.getName() + "$$" + i.getDescription() + "$$" + i.getCountry().getName()%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
 										<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
 					    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
 					    				<button id="cat" style="display:none;" value="<%=i.getCategory()%>"></button>

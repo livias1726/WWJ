@@ -7,7 +7,7 @@
  		  import="logic.application.control.ViewStatisticsControl"
  		  import="logic.application.control.CalculateFeasibilityControl"
  		  import="logic.application.SessionFacade"%>
-<%@page errorPage="WEB-INF/error.jsp"%>
+
 		
 <!DOCTYPE html>
 
@@ -95,7 +95,7 @@
 		    		<p>Know which services can help you reach your goals</p>
 		    		<p>Know how many connections you need to get faster targeted clientele</p>
 		    		<p>Know your statistics!</p>
-		    		<button class="details_buttons" type="button" name="statBtn">View statistics</button>
+		    		<button class="details_buttons" type="submit" name="statBtn">View statistics</button>
 					<%if(request.getParameter("statBtn") != null){
 		    			if(SessionFacade.getSession().getID() == null){%>
 							<script>window.alert("You need to be logged to view the statistics.")</script>
