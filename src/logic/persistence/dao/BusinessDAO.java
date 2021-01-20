@@ -188,7 +188,7 @@ public class BusinessDAO {
         	RoutinesManager.bindParametersAndExec(stmt, idFav, (int)idEnt);
 			
         } catch (SQLException e) {
-        	throw new SQLException("An error occured while trying to insert a business to the favourite ones."); 
+        	throw new SQLException("An error occured while trying to insert a business to the favourite ones.");
 		} finally {
 			if(stmt != null) {
 				stmt.close();

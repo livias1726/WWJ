@@ -91,4 +91,5 @@ public class ViewBusinessControl extends ViewResultsControl{
 			throw new DatabaseFailureException();
 		}
     }
+   
 }

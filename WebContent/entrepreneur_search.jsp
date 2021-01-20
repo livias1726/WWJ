@@ -18,14 +18,14 @@
 
 <html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>WorldWideJob</title>
-</head>
 	<meta charset="ISO-8859-1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<link rel="icon" href="icons/main_icon.png">
 	<link href="css/style.css" rel="stylesheet">
+<title>WorldWideJob</title>
+</head>
+	
 <body>
 	<jsp:include page="WEB-INF/toolbar.jsp"/>
 	<div>

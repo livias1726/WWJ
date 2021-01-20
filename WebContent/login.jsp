@@ -16,6 +16,7 @@
 	userBean.setEmail(request.getParameter("email"));
 	userBean.setPassword(request.getParameter("password"));
 	accountBean.setUser(userBean);
+	
 	LoginControl.getInstance().tryLogin(accountBean); 
 	
 	if("SEEKER".equals(ManageAccountControl.getInstance().retrieveAccount().getType())) {
@@ -29,7 +30,7 @@
     	return;
     }
     if("ENTREPRENEUR".equals(ManageAccountControl.getInstance().retrieveAccount().getType())) {
-      	String redirectURL = "http://localhost:8080/WorldWideJob/entrepreneurProfile.jsp";
+      	String redirectURL = "http://localhost:8080/WorldWideJob/entrepreneur_profile.jsp";
     	response.sendRedirect(redirectURL);
     	return;
     }

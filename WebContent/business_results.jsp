@@ -1,5 +1,6 @@
  <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@page import="java.util.StringTokenizer"%>	  
  <%@ page import="logic.presentation.bean.BusinessBean"
 		  import="logic.presentation.bean.CountryBean"
 		  import="logic.presentation.bean.BusinessInCountryBean"
@@ -15,17 +16,23 @@
 <jsp:useBean id="businessBean" scope="session" class="logic.presentation.bean.BusinessBean"/>
 <jsp:setProperty name="businessBean" property="*"/>
 
-<jsp:useBean id="businessInCountryBean" scope="session" class="logic.presentation.bean.BusinessInCountryBean"/>
-<jsp:setProperty name="businessInCountryBean" property="*"/>
+<jsp:useBean id="businessResult" scope="session" class="logic.presentation.bean.BusinessInCountryBean"/>
+<jsp:setProperty name="businessResult" property="*"/>
 
 <%Class.forName("com.mysql.cj.jdbc.Driver");%>
-
-<%if (request.getParameter("business") != null){
-	businessBean.setName(request.getParameter("business"));
-	String redirectURL = "http://localhost:8080/WorldWideJob/businessDetails.jsp";
+	
+<%if(request.getParameter("business") != null){
+	String res = request.getParameter("business");
+	StringTokenizer tok = new StringTokenizer(res, "$$");
+	
+	businessResult.setId(Integer.parseInt(tok.nextToken()));
+	businessResult.setName(tok.nextToken());
+	businessResult.setDescription(tok.nextToken());
+	
+	String redirectURL = "http://localhost:8080/WorldWideJob/business_details.jsp";
 	response.sendRedirect(redirectURL); 
 }%>
-    			 
+  			 
 <html lang="en">
 	<head>
 		<meta charset="ISO-8859-1">
@@ -45,7 +52,7 @@
 			<form action="business_results.jsp" name="businessresultform" method="POST">
 	    		<div style="background-color:#AED6F1; overflow:hidden">
 	    		
-	    			<!-- BUSINESS RESEARCH -->
+	    			<!-- COUNTRY RESEARCH -->
 		    		<%if(businessBean.getCategory() == null) {%>
 		    			<p><input class="result_label" name="resultLbl" value="<%=countryBean.getName()%>"></p>
 		    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled style="background-color:lightgrey">
@@ -59,11 +66,11 @@
 					    			<ul id="res" style="list-style-type:none;">
 					    			<%for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinessesByCountry(countryBean)){%>
 					    				<li>
-					    				<button id="res_btn" class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
-					    				<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
+					    				<button id="res_btn" class="result" type="submit" name="business" value="<%=i.getId() + "$$" + i.getName() + "$$" + i.getDescription()%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
+										<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
 					    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
 					    				<button id="cat" style="display:none;" value="<%=i.getCategory()%>"></button>
-					    				</li>
+										</li>
 					    			<%}%>    
 					    			</ul>
 				    		</fieldset>	
@@ -76,7 +83,7 @@
 				    			<%}%>
 			    		</fieldset>
 			    		
-			    	<!-- COUNTRY RESEARCH -->
+			    	<!-- BUSINESS RESEARCH -->
 		    		<%}else if(countryBean.getName() == null) {%>
 		    			<p><input class="result_label" name="resultLbl" value="<%=businessBean.getCategory()%>"></p>
 		    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled style="background-color:lightgrey">
@@ -88,10 +95,10 @@
 			    			<fieldset class="result_box">
 					    		<legend class="research_title">BUSINESSES</legend>
 					    			<ul id="res" style="list-style-type:none;">
-					    			<%businessInCountryBean.setCategory(businessBean.getCategory());
-					    			  for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinessesByCategory(businessInCountryBean)){%>
+					    			<%businessResult.setCategory(businessBean.getCategory());
+					    			  for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinessesByCategory(businessResult)){%>
 					    				<li>
-					    				<button class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
+					    				<button id="res_btn" class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
 					    				<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
 					    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
 					    				<button id="cat" style="display:none;" value="<%=i.getCountry().getName()%>"></button>
@@ -120,10 +127,10 @@
 			    			<fieldset class="result_box">
 					    		<legend class="research_title">BUSINESSES</legend>
 					    			<ul id="res" style="list-style-type:none;">
-					    			<%businessInCountryBean.setCategory(businessBean.getCategory());
-					    			  for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinesses(countryBean, businessInCountryBean)){%>
+					    			<%businessResult.setCategory(businessBean.getCategory());
+					    			  for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinesses(countryBean, businessResult)){%>
 					    				<li>
-					    				<button class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
+					    				<button id="res_btn" class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
 					    				<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
 					    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
 					    				</li>

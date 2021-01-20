@@ -46,27 +46,6 @@
 	-fx-background-size:16px;
 }
 
-.add_btn{
-	-fx-background-image: url('../icons/plus.png');
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: center;
-	-fx-background-size:16px;
-}
-
-.view_btn{
-	-fx-background-image: url('../icons/view.png');
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: center;
-	-fx-background-size:16px;
-}
-
-.maps_btn{
-	-fx-background-image: url('../icons/map.png');
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: center;
-	-fx-background-size:32px;
-}
-
 .main{
 	-fx-background-color: white;
 	-fx-background-image: url('../icons/main_icon.png');
@@ -192,13 +171,6 @@
 	-fx-background-size:150px;
 }
 
-.motiv{
-	-fx-background-image: url('../icons/motivation.png');
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: center;
-	-fx-background-size:150px;
-}
-
 .filter_box{
 	-fx-background-color: #a2a7ab;
 	-fx-border-color: black;
@@ -218,12 +190,6 @@
 	-fx-background-color: #C6CFD5;
 }
 
-.dollar{
-	-fx-background-image: url('../icons/dollar.png');
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: center;
-}
-
 .star_button_nset{
 	-fx-shape: "M 0 0.054 z M 15.422 18.129 l -5.264 -2.768 l -5.265 2.768 l 1.006 -5.863 L 1.64 8.114 l 5.887 -0.855 l 2.632 -5.334 l 2.633 5.334 l 5.885 0.855 l -4.258 4.152 L 15.422 18.129 z";
 	-fx-border-color: black;
@@ -233,12 +199,6 @@
 	-fx-shape: "M 0 0.054 z M 15.422 18.129 l -5.264 -2.768 l -5.265 2.768 l 1.006 -5.863 L 1.64 8.114 l 5.887 -0.855 l 2.632 -5.334 l 2.633 5.334 l 5.885 0.855 l -4.258 4.152 L 15.422 18.129 z";
 	-fx-border-color: white;
 	-fx-background-color: black;
-}
-
-.euro{
-	-fx-background-image: url('../icons/euro.png');
-	-fx-background-repeat: no-repeat;
-	-fx-background-position: center;
 }
 
 .list{

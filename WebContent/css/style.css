@@ -149,6 +149,117 @@
 	font-size:24px;
 }
 
+.result_label{
+	position: absolute;
+	width:250px;
+    height:30px;
+    left: 20px;
+	top: 100px;
+    font-size:20px;
+    font-weight:bold;
+    text-overflow: ellipsis;
+    text-align:center;
+    color:white;
+    border-color:black;
+    background-color:dodgerblue;
+}
+
+.result{
+	position: absolute;
+	width:83%;
+    height:80px;
+    padding:10px 10px 10px 10px;
+    font-size:20px;
+    color:black;
+    border-color:black;
+}
+
+.order_by{
+	position: absolute;
+	width: 250px;
+	height: 40px;
+	left: 20px;
+	top: 150px;
+	color:black;
+}
+
+.order_select{
+	position: absolute;
+	width: 160px;
+	height: 30px;
+	left: 110px;
+	top: 158px;
+	color:black;	
+}
+
+.filter_box{
+	border-color:lightgrey;
+	border-style:strong;
+	position: absolute;
+	width:230px;
+	height:140px;
+	left:20px;
+	top:200px;
+}
+
+.result_box{
+	position: absolute;
+	width:600px;
+	height:100%;
+    left: 400px;
+	top: 100px;
+    border-color:lightgrey;	
+	border-style:strong;
+}
+
+.bus_desc{
+	position: absolute;
+	width: 500px;
+	height: 200px;
+	color:black;
+	background-color:white;
+	overflow: auto;
+}
+
+.budget{
+	position:relative;
+    height:40px;
+    font-size:15px;
+}
+
+.currbox{
+	margin-left:100px;
+	height:20px;
+	width:20px;
+}
+
+.details_buttons{
+	color: white;
+    font-style: bold;
+    font-size: 15px;
+    text-align:center;
+    position:relative;
+    width:150px; 
+    height:50px;
+    background-color: dodgerblue;
+    border-color: black;
+}
+
+.star_button_nset{
+	clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+	border-color: black;
+	height:40px;
+	width:40px;
+}
+
+.star_button_set{
+	clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+	border-color: white;
+	background-color: black;
+	height:40px;
+	width:40px;
+}
+
 .login_btns{
 	height: 31px; 
 	width: 66px; 
@@ -222,69 +333,6 @@
     height:100%; 
     background-image: url('../icons/search_usr.png');
 }
-
-.result_label{
-	position: absolute;
-	width:250px;
-    height:30px;
-    left: 20px;
-	top: 100px;
-    font-size:20px;
-    font-weight:bold;
-    text-overflow: ellipsis;
-    text-align:center;
-    color:white;
-    border-color:black;
-    background-color:dodgerblue;
-}
-
-.result{
-	position: absolute;
-	width:83%;
-    height:80px;
-    padding:10px 10px 10px 10px;
-    font-size:20px;
-    color:black;
-    border-color:black;
-}
-
-.order_by{
-	position: absolute;
-	width: 250px;
-	height: 40px;
-	left: 20px;
-	top: 150px;
-	color:black;
-}
-
-.order_select{
-	position: absolute;
-	width: 160px;
-	height: 30px;
-	left: 110px;
-	top: 158px;
-	color:black;	
-}
-
-.filter_box{
-	border-color:lightgrey;
-	border-style:strong;
-	position: absolute;
-	width:230px;
-	height:140px;
-	left:20px;
-	top:200px;
-}
-
-.result_box{
-	position: absolute;
-	width:600px;
-	height:100%;
-    left: 400px;
-	top: 100px;
-    border-color:lightgrey;	
-	border-style:strong;
-}
       
 .joboffers{
 	width:250px;
@@ -308,51 +356,6 @@
 	top: 220px;
 	color:black;
 	border: 1px;
-}
-
-.busdetails{
-	position: absolute;
-	width: 96%;
-	height: 95%;
-	left: 20px;
-	top: 180px;
-	color:black;
-}
-
-.businessname{
-	color: white;
-    position:relative;
-    width:250px; 
-    height:45px; 
-    top:200px;
-    left:-140px;
-}
-
-.thebusiness{
-    position:relative;
-    width:250px; 
-    height:40px; 
-    top:290px;
-    left:-400px;
-    border:0;
-    font-size: 15px;
-}
-
-.busdescription{
-	position: absolute;
-	width: 90%;
-	height: 30%;
-	left: 40px;
-	top: 350px;
-	color:black;
-}
-
-.statistics_btn{
-	color: white;
-    font-style: bold;
-    font-size: 15px;
-    text-align:center;
-    position:relative
 }
 
 .recruiter_acc{
@@ -484,15 +487,6 @@ margin-left:700px;
 	
 }
 
-.star_btn{
-	position:relative; 
-    background-size:30px;
-    background-repeat:no-repeat;
-    background-position:center;
-    background-image: url('../icons/star.png');
-	
-}
-
 .map-offer_btn{
 	position:relative; 
     background-size:50px;
@@ -603,33 +597,6 @@ margin-left:700px;
 	top: 150px;
 	color:black;
 	border: 1px solid #56A6F0;
-}
-
-.calculatefeasibility_btn{
-	color: white;
-    font-style: bold;
-    font-size: 15px;
-    text-align:center;
-    position:relative
-}
-
-.insert_budget{
-	position:relative;
-    width:250px; 
-    height:40px; 
-    top:600px;
-    left:-650px;
-    border:0;
-    font-size:15px;
-}
-
-.budget{
-	color: black;
-    position:relative;
-    width:250px; 
-    height:45px; 
-    top:600px;
-    left:-30px;
 }
 
 .change_btn{
