@@ -11,6 +11,8 @@
 <jsp:useBean id="accountBean" class="logic.presentation.bean.AccountBean" scope="session"/>
 <jsp:setProperty name="accountBean" property="*"/>
 
+<%Class.forName("com.mysql.cj.jdbc.Driver");%>
+
 <%
 	if (request.getParameter("login") != null) {
 	userBean.setEmail(request.getParameter("email"));

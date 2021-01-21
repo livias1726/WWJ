@@ -267,6 +267,61 @@
 	margin-top:20px;
 }
 
+.feasibility_field{
+	background-color:#fff;
+	height:20px;
+	width:200px;
+	margin-left:50px;
+	font-size: 15px;
+    color:black;
+}
+
+.text_title{
+	position: absolute;
+	width: 380px;
+	height: 40px;
+
+	font-size: 22px;
+	line-height: 32px;
+	
+	top:162px;
+	left:20px;
+	border:0;
+}
+
+.text_subtitle{
+	position: absolute;
+	width: 280px;
+	height: 40px;
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 32px;	
+	top:195px;
+	left:40px;
+	border:0;
+}
+
+.text_subsubtitle{
+	position: absolute;
+	width: 550px;
+	height: 40px;
+
+	font-size: 15px;
+	line-height: 32px;
+	
+	top:230px;
+	left:60px;
+	border:0;
+}
+
+.text_input{
+	position:relative;
+    width:200px; 
+    height:20px; 
+    font-size: 15px;
+    color:black;
+}
+
 .login_btns{
 	height: 31px; 
 	width: 66px; 
@@ -662,54 +717,6 @@ margin-left:700px;
 	height: 200%;
 	left: 20px;
 	top: 100px;	
-}
-
-.text_title{
-	position: absolute;
-	width: 380px;
-	height: 40px;
-
-	font-size: 22px;
-	line-height: 32px;
-	
-	top:162px;
-	left:20px;
-	border:0;
-}
-
-.text_subtitle{
-	position: absolute;
-	width: 280px;
-	height: 40px;
-
-	font-weight: bold;
-	font-size: 20px;
-	line-height: 32px;
-	
-	top:195px;
-	left:40px;
-	border:0;
-}
-
-.text_subsubtitle{
-	position: absolute;
-	width: 550px;
-	height: 40px;
-
-	font-size: 15px;
-	line-height: 32px;
-	
-	top:230px;
-	left:60px;
-	border:0;
-}
-
-.text_input{
-	position:relative;
-    width:200px; 
-    height:20px; 
-    font-size: 15px;
-    color:black;
 }
 
 .orizzontale {

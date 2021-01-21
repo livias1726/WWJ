@@ -98,7 +98,7 @@ public class AccountDAO {
             res.close();
            
         } catch (SQLException e) {
-        	throw new SQLException("An error occured while trying to login."); 
+        	throw new SQLException("An error occured while trying to login.");
 		} finally {
 			if(stmt != null) {
 				stmt.close();

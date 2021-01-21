@@ -23,14 +23,19 @@
 	
 <%if(request.getParameter("business") != null){
 	String res = request.getParameter("business");
-	StringTokenizer tok = new StringTokenizer(res, "$$");
+	StringTokenizer tok = new StringTokenizer(res, "&");
 	
 	businessResult.setId(Integer.parseInt(tok.nextToken()));
 	businessResult.setName(tok.nextToken());
+	businessResult.setCategory(tok.nextToken());
 	businessResult.setDescription(tok.nextToken());
 	
 	countryBean.setName(tok.nextToken());
+	countryBean.setCurrency(tok.nextToken());
 	businessResult.setCountry(countryBean);
+	
+	businessResult.setAverageEarnings(Float.parseFloat(tok.nextToken()));
+	businessResult.setAverageCost(Float.parseFloat(tok.nextToken()));
 	
 	String redirectURL = "http://localhost:8080/WorldWideJob/business_details.jsp";
 	response.sendRedirect(redirectURL); 
@@ -51,98 +56,101 @@
 	</head>	
 	<body>
 		<jsp:include page="WEB-INF/toolbar.jsp"/>
-		<div>
+		<div style="background-color:#AED6F1;">
 			<form action="business_results.jsp" name="businessresultform" method="POST">
-	    		<div style="background-color:#AED6F1; overflow:hidden">
 	    		
-	    			<!-- COUNTRY RESEARCH -->
-		    		<%if(businessBean.getCategory() == null) {%>
-		    			<p><input class="result_label" name="resultLbl" value="<%=countryBean.getName()%>"></p>
-		    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled style="background-color:lightgrey">
-			    		<select class="order_select" id="order" name="orderselect" style="background-color:lightgrey">
-			    			<option>Earnings</option>
-			    			<option>Costs</option>
-			    		</select></p>
-			    		<div>
-			    			<fieldset class="result_box">
-					    		<legend class="research_title">BUSINESSES</legend>
-					    			<ul id="res" style="list-style-type:none;">
-					    			<%for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinessesByCountry(countryBean)){%>
-					    				<li>
-					    				<button id="res_btn" class="result" type="submit" name="business" value="<%=i.getId() + "$$" + i.getName() + "$$" + i.getDescription() + "$$" + i.getCountry().getName()%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
-										<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
-					    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
-					    				<button id="cat" style="display:none;" value="<%=i.getCategory()%>"></button>
-										</li>
-					    			<%}%>    
-					    			</ul>
-				    		</fieldset>	
-			    		</div>		    			    					
-		    			<fieldset class="filter_box" id="filters">
-				    		<legend style="font-weight:bold">Categories</legend>
-				    			<%for(BusinessBean i: ViewBusinessControl.getInstance().retrieveBusinesses()){%>
-				    				<input type="checkbox" id="cat1" name="category" value="<%=i.getCategory()%>" onclick="filterResults()"><%=i.getCategory()%>
-				    				<p></p>
-				    			<%}%>
-			    		</fieldset>
-			    		
-			    	<!-- BUSINESS RESEARCH -->
-		    		<%}else if(countryBean.getName() == null) {%>
-		    			<p><input class="result_label" name="resultLbl" value="<%=businessBean.getCategory()%>"></p>
-		    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled style="background-color:lightgrey">
-			    		<select class="order_select" id="order" name="orderselect" style="background-color:lightgrey">
-			    			<option>Earnings</option>
-			    			<option>Costs</option>
-			    		</select></p>
-			    		<div>
-			    			<fieldset class="result_box">
-					    		<legend class="research_title">BUSINESSES</legend>
-					    			<ul id="res" style="list-style-type:none;">
-					    			<%businessResult.setCategory(businessBean.getCategory());
-					    			  for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinessesByCategory(businessResult)){%>
-					    				<li>
-					    				<button id="res_btn" class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
-					    				<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
-					    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
-					    				<button id="cat" style="display:none;" value="<%=i.getCountry().getName()%>"></button>
-					    				</li>
-					    			<%}%>    
-					    			</ul>
-				    		</fieldset>	
-			    		</div>		    			    					
-		    			<fieldset class="filter_box" id="filters">
-				    		<legend style="font-weight:bold">Countries:</legend>
-					    		<%for(String i: ViewResultsControl.getInstance().retrieveCountries()){%>
-				    				<input type="checkbox" id="cat1" name="cat1" value="<%=i%>" onclick="filterResults()"><%=i%>
-				    				<p></p>
-				    			<%}%>
-			    		</fieldset>
-		    	
-			    	<!-- BUSINESS AND COUNTRY RESEARCH -->
-		    		<%}else{%>
-		    			<p><input class="result_label" name="resultLbl" value="<%=businessBean.getCategory() + " in " +countryBean.getName()%>"></p>
-		    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled style="background-color:lightgrey">
-			    		<select class="order_select" id="order" name="orderselect" style="background-color:lightgrey">
-			    			<option>Earnings</option>
-			    			<option>Costs</option>
-			    		</select></p>
-			    		<div>
-			    			<fieldset class="result_box">
-					    		<legend class="research_title">BUSINESSES</legend>
-					    			<ul id="res" style="list-style-type:none;">
-					    			<%businessResult.setCategory(businessBean.getCategory());
-					    			  for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinesses(countryBean, businessResult)){%>
-					    				<li>
-					    				<button id="res_btn" class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
-					    				<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
-					    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
-					    				</li>
-					    			<%}%>    
-					    			</ul>
-				    		</fieldset>	
-			    		</div> 
-			    	<%}%>     		
-	    		</div>
+    			<!-- COUNTRY RESEARCH -->
+	    		<%if(businessBean.getCategory() == null) {%>
+	    			<p><input class="result_label" name="resultLbl" value="<%=countryBean.getName()%>"></p>
+	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled style="background-color:lightgrey">
+		    		<select class="order_select" id="order" name="orderselect" style="background-color:lightgrey">
+		    			<option>Earnings</option>
+		    			<option>Costs</option>
+		    		</select></p>
+		    		<div>
+		    			<fieldset class="result_box">
+				    		<legend class="research_title">BUSINESSES</legend>
+				    			<ul id="res" style="list-style-type:none;">
+				    			<%for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinessesByCountry(countryBean)){%>
+				    				<li>
+				    				<button id="res_btn" class="result" type="submit" name="business" value="<%=
+					    				i.getId() + "&" + i.getName() + "&" + i.getCategory() + "&" +
+					    				i.getDescription() + "&" + i.getCountry().getName() + "&" + 
+					    				i.getCountry().getCurrency() + "&" + i.getAverageEarnings() + "&" +
+					    				i.getAverageCost()%>"> <%=i.getName()+ " - " +i.getCountry().getName()%>
+					    			</button>
+									<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
+				    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
+				    				<button id="cat" style="display:none;" value="<%=i.getCategory()%>"></button>
+									</li>
+				    			<%}%>    
+				    			</ul>
+			    		</fieldset>	
+		    		</div>		    			    					
+	    			<fieldset class="filter_box" id="filters">
+			    		<legend style="font-weight:bold">Categories</legend>
+			    			<%for(BusinessBean i: ViewBusinessControl.getInstance().retrieveBusinesses()){%>
+			    				<input type="checkbox" id="cat1" name="category" value="<%=i.getCategory()%>" onclick="filterResults()"><%=i.getCategory()%>
+			    				<p></p>
+			    			<%}%>
+		    		</fieldset>
+		    		
+		    	<!-- BUSINESS RESEARCH -->
+	    		<%}else if(countryBean.getName() == null) {%>
+	    			<p><input class="result_label" name="resultLbl" value="<%=businessBean.getCategory()%>"></p>
+	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled style="background-color:lightgrey">
+		    		<select class="order_select" id="order" name="orderselect" style="background-color:lightgrey">
+		    			<option>Earnings</option>
+		    			<option>Costs</option>
+		    		</select></p>
+		    		<div>
+		    			<fieldset class="result_box">
+				    		<legend class="research_title">BUSINESSES</legend>
+				    			<ul id="res" style="list-style-type:none;">
+				    			<%businessResult.setCategory(businessBean.getCategory());
+				    			  for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinessesByCategory(businessResult)){%>
+				    				<li>
+				    				<button id="res_btn" class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
+				    				<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
+				    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
+				    				<button id="cat" style="display:none;" value="<%=i.getCountry().getName()%>"></button>
+				    				</li>
+				    			<%}%>    
+				    			</ul>
+			    		</fieldset>	
+		    		</div>		    			    					
+	    			<fieldset class="filter_box" id="filters">
+			    		<legend style="font-weight:bold">Countries:</legend>
+				    		<%for(String i: ViewResultsControl.getInstance().retrieveCountries()){%>
+			    				<input type="checkbox" id="cat1" name="cat1" value="<%=i%>" onclick="filterResults()"><%=i%>
+			    				<p></p>
+			    			<%}%>
+		    		</fieldset>
+	    	
+		    	<!-- BUSINESS AND COUNTRY RESEARCH -->
+	    		<%}else{%>
+	    			<p><input class="result_label" name="resultLbl" value="<%=businessBean.getCategory() + " in " +countryBean.getName()%>"></p>
+	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled style="background-color:lightgrey">
+		    		<select class="order_select" id="order" name="orderselect" style="background-color:lightgrey">
+		    			<option>Earnings</option>
+		    			<option>Costs</option>
+		    		</select></p>
+		    		<div>
+		    			<fieldset class="result_box">
+				    		<legend class="research_title">BUSINESSES</legend>
+				    			<ul id="res" style="list-style-type:none;">
+				    			<%businessResult.setCategory(businessBean.getCategory());
+				    			  for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinesses(countryBean, businessResult)){%>
+				    				<li>
+				    				<button id="res_btn" class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
+				    				<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
+				    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
+				    				</li>
+				    			<%}%>    
+				    			</ul>
+			    		</fieldset>	
+		    		</div> 
+		    	<%}%>
 	    	</form>	
 	    </div>
 	</body>

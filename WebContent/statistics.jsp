@@ -34,21 +34,23 @@
 			<label class="research_title" style="margin-left:40%;font-size:30px"><%=businessResult.getName()%> - Statistics</label>
 			
 			<!-- FEASIBILITY -->
-    		<div style="margin-left:800px;">
+    		<div style="position:absolute;right:50px;">
     			<label for="budget">Insert budget:</label>
 	    		<input class="budget" type="text" name="budget" id="budget">
 	    		<select name="curr" id="curr" style="height:40px;width:40px;">
-				    <option value="$">$</option>
-				    <option value="&pound">&pound;</option>
-				    <option value="&euro">&euro;</option>
+				    <option value="USD">$</option>
+				    <option value="GBP">&pound;</option>
+				    <option value="EUR">&euro;</option>
 				</select>
 	    		<button class="details_buttons" name="calcFeas">Calculate feasibility</button>
 	    		<%if(request.getParameter("calcFeas") != null){
 	    			if (!request.getParameter("budget").equals("")) {
-    		  			CalculateFeasibilityControl.getInstance().retrieveBusinessFeasibility(businessResult, request.getParameter("budget"));
-	    				String redirectURL = "http://localhost:8080/WorldWideJob/feasibility.jsp";
+    		  			session.setAttribute("budget", request.getParameter("budget"));
+    		  			session.setAttribute("inserted_curr", request.getParameter("curr"));
+    		  			session.setAttribute("feas", CalculateFeasibilityControl.getInstance().retrieveBusinessFeasibility(businessResult, request.getParameter("budget")));
+    		  			String redirectURL = "http://localhost:8080/WorldWideJob/feasibility.jsp";
 	        			response.sendRedirect(redirectURL);
-    				}else{ %>
+    				}else{%>
     					<script>window.alert("Warning! Enter your budget.")</script>
     			  <%}
 	    		 }%>

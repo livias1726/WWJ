@@ -60,19 +60,23 @@ public class CalculateFeasibilityControl {
 		}
 	}
 	
-	public Float convertValue(Float val, String newCurr, String oldCurr) throws InvalidFieldException {
+	public Float convertValue(Float val, String newCurr, String oldCurr) throws InvalidFieldException{
+		
 		switch(newCurr) {
-		case "€":
-			EuroAdapter euroAdapter = new EuroAdapter(oldCurr);
-			return euroAdapter.value(val);
-		case "£":
-			PoundAdapter poundAdapter = new PoundAdapter(oldCurr);
-			return poundAdapter.value(val);
-		case "$":
-			USDAdapter usdAdapter = new USDAdapter(oldCurr);
-			return usdAdapter.value(val);
-		default:
-			throw new InvalidFieldException("Currency not recognized.");
+			case "€":
+			case "EUR":
+				EuroAdapter euroAdapter = new EuroAdapter(oldCurr);
+				return euroAdapter.value(val);
+			case "£":
+			case "GBP":
+				PoundAdapter poundAdapter = new PoundAdapter(oldCurr);
+				return poundAdapter.value(val);
+			case "$":
+			case "USD":
+				USDAdapter usdAdapter = new USDAdapter(oldCurr);
+				return usdAdapter.value(val);
+			default:
+				throw new InvalidFieldException("Currency not recognized.");
 		}
 	}
 	
