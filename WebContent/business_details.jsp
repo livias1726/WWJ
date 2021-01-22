@@ -35,9 +35,9 @@
 	</head>
 	<body>
 		<jsp:include page="WEB-INF/toolbar.jsp"/>
-		<div style="background-color:#C6D6D3">
+		<div style="height:680px;background-color:#C6D6D3">
 			<form action="business_details.jsp" name="businessdetailsform" method="POST">
-	    		<label class="research_title" style="margin-left:45%;font-size:36px"><%=businessResult.getName()%></label>
+	    		<label class="research_title" style="margin-left:35%;font-size:36px"><%=businessResult.getName()%></label>
 	    		
 	    		<div style="margin-left:50px">
 	    			<h2>Description</h2>
@@ -136,4 +136,5 @@
 	    	</form>
 		</div>
 	</body>
+	<script src="js/toolbar.js"></script>
 </html>

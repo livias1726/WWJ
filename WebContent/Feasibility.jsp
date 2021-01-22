@@ -4,6 +4,7 @@
 <%@ page import="logic.presentation.bean.BusinessInCountryBean"
 		 import="logic.application.control.CalculateFeasibilityControl"%> 
 
+<%@page errorPage="WEB-INF/error.jsp"%>
 
 <!DOCTYPE html>
 
@@ -57,7 +58,7 @@
 	    		<!-- LIVING EXP -->
 	    		<div style="margin-left:25px;">
 	    			<h2>Basic living expense</h2>
-	    			<h3 style="margin-left:25px">Total Living Expenses in <%businessResult.getCountry().getExampleCity();%> - 1 person, for year (without rent)</h3>
+	    			<h3 style="margin-left:25px">Total Living Expenses in <%=businessResult.getCountry().getExampleCity()%> - 1 person, for year (without rent)</h3>
 			     	<div class="feasibility_field">
 			     		<%=(String)session.getAttribute("inserted_curr") + " " + 
 			     		CalculateFeasibilityControl.getInstance().convertValue(businessResult.getCountry().getLivingExpense(), (String)session.getAttribute("inserted_curr"), businessResult.getCountry().getCurrency())%>
@@ -144,4 +145,5 @@
 		     </form>
 		</div>	
 	</body>
+	<script src="js/toolbar.js"></script>
 </html>

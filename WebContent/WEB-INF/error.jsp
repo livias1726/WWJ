@@ -10,7 +10,7 @@
 		<title>Error</title>
 	</head>
 	<body>
-		<h3>Sorry an error occured!</h3>  
-			<%=exception.getMessage()%>  
+		<h2>Sorry an error occured!</h2>
+		<em><%=exception.getMessage()%></em>		
 	</body>
 </html>

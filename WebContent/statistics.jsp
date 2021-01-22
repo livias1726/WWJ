@@ -86,4 +86,5 @@
 	</div>
 </body>
 <script src="js/statistics.js"></script>
+<script src="js/toolbar.js"></script>
 </html>

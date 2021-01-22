@@ -5,7 +5,8 @@
 		  import="logic.presentation.bean.CountryBean"
 		  import="logic.presentation.bean.BusinessInCountryBean"
 		  import="logic.application.control.ViewResultsControl"
-		  import="logic.application.control.ViewBusinessControl"%>
+		  import="logic.application.control.ViewBusinessControl"
+		  import="logic.exceptions.NoResultFoundException"%>
 <%@page errorPage="WEB-INF/error.jsp"%>
 
 <!DOCTYPE html>
@@ -71,18 +72,22 @@
 		    			<fieldset class="result_box">
 				    		<legend class="research_title">BUSINESSES</legend>
 				    			<ul id="res" style="list-style-type:none;">
-				    			<%for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinessesByCountry(countryBean)){%>
-				    				<li>
-				    				<button id="res_btn" class="result" type="submit" name="business" value="<%=
-					    				i.getId() + "&" + i.getName() + "&" + i.getCategory() + "&" +
-					    				i.getDescription() + "&" + i.getCountry().getName() + "&" + 
-					    				i.getCountry().getCurrency() + "&" + i.getAverageEarnings() + "&" +
-					    				i.getAverageCost()%>"> <%=i.getName()+ " - " +i.getCountry().getName()%>
-					    			</button>
-									<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
-				    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
-				    				<button id="cat" style="display:none;" value="<%=i.getCategory()%>"></button>
-									</li>
+				    			<%try{
+					    			for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinessesByCountry(countryBean)){%>
+					    				<li>
+					    				<button id="res_btn" class="result" type="submit" name="business" value="<%=
+						    				i.getId() + "&" + i.getName() + "&" + i.getCategory() + "&" +
+						    				i.getDescription() + "&" + i.getCountry().getName() + "&" + 
+						    				i.getCountry().getCurrency() + "&" + i.getAverageEarnings() + "&" +
+						    				i.getAverageCost()%>"> <%=i.getName()+ " - " +i.getCountry().getName()%>
+						    			</button>
+										<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
+					    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
+					    				<button id="cat" style="display:none;" value="<%=i.getCategory()%>"></button>
+										</li>
+									<%} 
+				    			  }catch(NoResultFoundException e){%>
+				    				<script>window.alert("No result found.")</script>				    			
 				    			<%}%>    
 				    			</ul>
 			    		</fieldset>	
@@ -108,19 +113,28 @@
 				    		<legend class="research_title">BUSINESSES</legend>
 				    			<ul id="res" style="list-style-type:none;">
 				    			<%businessResult.setCategory(businessBean.getCategory());
-				    			  for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinessesByCategory(businessResult)){%>
-				    				<li>
-				    				<button id="res_btn" class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
-				    				<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
-				    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
-				    				<button id="cat" style="display:none;" value="<%=i.getCountry().getName()%>"></button>
-				    				</li>
-				    			<%}%>    
+				    			  try{
+					    			for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinessesByCategory(businessResult)){%>
+					    				<li>
+					    				<button id="res_btn" class="result" type="submit" name="business" value="<%=
+						    				i.getId() + "&" + i.getName() + "&" + i.getCategory() + "&" +
+						    				i.getDescription() + "&" + i.getCountry().getName() + "&" + 
+						    				i.getCountry().getCurrency() + "&" + i.getAverageEarnings() + "&" +
+						    				i.getAverageCost()%>"> <%=i.getName()+ " - " +i.getCountry().getName()%>
+						    			</button>
+					    				<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
+					    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
+					    				<button id="cat" style="display:none;" value="<%=i.getCountry().getName()%>"></button>
+					    				</li>
+				    			  <%}
+					    		  }catch(NoResultFoundException e){%>
+					    				<script>window.alert("No result found.")</script>				    			
+					    		<%}%>     
 				    			</ul>
 			    		</fieldset>	
 		    		</div>		    			    					
 	    			<fieldset class="filter_box" id="filters">
-			    		<legend style="font-weight:bold">Countries:</legend>
+			    		<legend style="font-weight:bold">Countries</legend>
 				    		<%for(String i: ViewResultsControl.getInstance().retrieveCountries()){%>
 			    				<input type="checkbox" id="cat1" name="cat1" value="<%=i%>" onclick="filterResults()"><%=i%>
 			    				<p></p>
@@ -140,13 +154,22 @@
 				    		<legend class="research_title">BUSINESSES</legend>
 				    			<ul id="res" style="list-style-type:none;">
 				    			<%businessResult.setCategory(businessBean.getCategory());
-				    			  for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinesses(countryBean, businessResult)){%>
-				    				<li>
-				    				<button id="res_btn" class="result" type="submit" name="business" value="<%=i%>"> <%=i.getName()+ " - " +i.getCountry().getName()%></button>
-				    				<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
-				    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
-				    				</li>
-				    			<%}%>    
+				    			  try{
+					    			for(BusinessInCountryBean i: ViewBusinessControl.getInstance().retrieveBusinesses(countryBean, businessResult)){%>
+					    				<li>
+					    				<button id="res_btn" class="result" type="submit" name="business" value="<%=
+						    				i.getId() + "&" + i.getName() + "&" + i.getCategory() + "&" +
+						    				i.getDescription() + "&" + i.getCountry().getName() + "&" + 
+						    				i.getCountry().getCurrency() + "&" + i.getAverageEarnings() + "&" +
+						    				i.getAverageCost()%>"> <%=i.getName()+ " - " +i.getCountry().getName()%>
+						    			</button>
+					    				<button id="cost" style="display:none;" value="<%=i.getAverageCost()%>"></button>
+					    				<button id="earn" style="display:none;" value="<%=i.getAverageEarnings()%>"></button>
+					    				</li>
+				    			  <%}
+					    		  }catch(NoResultFoundException e){%>
+					    				<script>window.alert("No result found.")</script>				    			
+					    		<%}%>     
 				    			</ul>
 			    		</fieldset>	
 		    		</div> 
@@ -154,5 +177,6 @@
 	    	</form>	
 	    </div>
 	</body>
-	<script src="js/business_results.js"></script>
+	<script src="js/results.js"></script>
+	<script src="js/toolbar.js"></script>
 </html>

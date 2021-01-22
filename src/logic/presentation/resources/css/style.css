@@ -205,3 +205,9 @@
 	-fx-border-color: blue;
 }
 
+.maps_btn{
+	-fx-background-image: url('../icons/map.png');
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size:30px;
+}

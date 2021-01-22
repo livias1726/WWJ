@@ -2,7 +2,11 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="logic.presentation.bean.UserBean"
 		 import="logic.presentation.bean.AccountBean"
-		 import="logic.application.control.ManageAccountControl"%>   
+		 import="logic.application.control.ManageAccountControl"
+		 import="java.io.File"
+		 import="javafx.stage.FileChooser"%>   
+
+<%@page errorPage="WEB-INF/error.jsp"%>
 		
 <!DOCTYPE html>
 
@@ -15,7 +19,7 @@
 <%Class.forName("com.mysql.cj.jdbc.Driver");%>
 
 <%
-	accountBean = ManageAccountControl.getInstance().retrieveAccount();
+accountBean = ManageAccountControl.getInstance().retrieveAccount();
 %>
 
 <html lang="en">
@@ -23,47 +27,56 @@
 		<meta charset="ISO-8859-1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<link href="css/style.css" rel="stylesheet">
+		<meta charset="ISO-8859-1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<link rel="icon" href="icons/main_icon.png">
+	    <link href="css/style.css" rel="stylesheet">
+	
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
 		
 		<title>WorldWideJob - Profile</title>
 	</head>
 	<body>
 		<jsp:include page="WEB-INF/toolbar.jsp"/>
-		<div>
-			<form action="entrepreneurProfile.jsp" name="entrepreneurProfileform" method="POST">
-	    		<div class="recruiter_acc">
-	    		<div class="profile_pic">
-	    		<div>
-	    			<input type="text" id="Lnamefname" name="LnameFname" disabled value="<%=accountBean.getUser().getFirstName() + " " + accountBean.getUser().getLastName()%>" style="margin-left:290px;margin-top:20px;text-align:center;text-style:bold"><br>
-	    			<label for="email" style="margin-top:5px;margin-left:325px">Entrepreneur</label>
-	    		</div>
-	    		<input class="change_pic" disabled value="Change profile picture:" style="text-align:center;background-color:white; border:0;width:250px;height:20px;margin-top:180px;margin-left:-5px"><br>
-				<input type='file' id='getval' style="margin-top:10px; margin-left:-5px" name="background-image"/><br/><br/>
-				<div id='clock' style="margin-top:-340px; margin-left:-5px"></div>
+		<div style="height:680px;background-color:#8ecae6;border:1px solid blue">
+			<form action="entrepreneur_profile.jsp" name="entrepreneurProfileform" method="POST">
+			
+				<div class="profile_pic" id="profile"></div>
+				<input class="change_pic" type="file" id="file_selector" accept=".jpg">
+				
 				<script>
-				document.getElementById('getval').addEventListener('change', readURL, true);
-				function readURL(){
-				      var file = document.getElementById("getval").files[0];
-				      var reader = new FileReader();
-				      reader.onloadend = function(){
-				         document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";        
+				document.getElementById("file_selector").addEventListener("change", function changePic(){
+				      var input = document.getElementById("file_selector");
+				      var img = document.getElementById("profile");
+				          
+				      if (input.files && input.files[0]) {
+				      	var reader = new FileReader();
+
+					      reader.onload = function (e) {
+					          img.style.backgroundImage = "url(" + e.target.result + ")";
+					      };
+					      
+					      reader.readAsDataURL(input.files[0]);
 				      }
-				      if(file){
-				         reader.readAsDataURL(file);
-				       }else{
-				       }
-				}
+				}, true);
 				</script>
-				</div>
-	    		<div id="container">
-				<ul id="griglia">
-				<li><button class="profits_btn" type="button" style="width:200px;height:160px;background-color:lightblue" onClick="javascript:window.location='favouriteBusiness.jsp';">Business Plans</button></li>
-				<li><button class="id_btn" type="button" style="width:200px;height:160px;background-color:lightblue" onClick="javascript:window.location='personalInfo.jsp';"><br>Personal Info</button></li>
-				</ul>
+				
+				<div class="name">
+	    			<h2><%=accountBean.getUser().getFirstName() + " " + accountBean.getUser().getLastName()%></h2>
+	    			<h3>Entrepreneur</h3>
 	    		</div>
-	    		</div>
+	    		
+		    	<div id="container">
+					<ul id="griglia">
+						<li><button class="fav_business" type="button" onClick="javascript:window.location='favourite_businesses.jsp';">Business Plans</button></li>
+						<li><button class="id_btn" type="button" onClick="javascript:window.location='personalInfo.jsp';">Personal Info</button></li>
+					</ul>
+	    		</div>				
 	    	</form>
 	    </div>
-
-</body>
+	</body>
+	<script src="js/toolbar.js"></script>
 </html>
