@@ -16,6 +16,7 @@ public class OfferBean {
 	
 	private String taskDescription;
 	private List<String> requirements;
+	private String requirements2;
 	private AddressBean branch;
 	private LocalTime start;
 	private LocalTime finish;
@@ -49,6 +50,15 @@ public class OfferBean {
 
 	public void setRequirements(List<String> requirements) {
 		this.requirements = requirements;
+	}
+	
+	
+	public String getRequirements2() {
+		return requirements2;
+	}
+	
+	public void setRequirements2(String requirements2) {
+		this.requirements2 = requirements2;
 	}
 
 	public AddressBean getBranch() {
