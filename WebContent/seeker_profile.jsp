@@ -1,11 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="logic.presentation.bean.UserBean"
 		 import="logic.presentation.bean.AccountBean"
-		 import="logic.application.control.ManageAccountControl"%>   
-
-<%@page errorPage="WEB-INF/error.jsp"%>
-		
+		 import="logic.application.control.ManageAccountControl"%>
 <!DOCTYPE html>
 
 <jsp:useBean id="userBean" class="logic.presentation.bean.UserBean" scope="session"/>
@@ -31,15 +27,14 @@ accountBean = ManageAccountControl.getInstance().retrieveAccount();
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
-		
-		<title>WorldWideJob - Profile</title>
+		<title>WorldWideJob - Profile</title>	
 	</head>
 	<body>
 		<jsp:include page="WEB-INF/toolbar.jsp"/>
 		<div style="height:680px;background-color:#8ecae6;border:1px solid blue">
-			<form action="entrepreneur_profile.jsp" name="entrepreneurProfileform" method="POST">
-			
-				<div class="profile_pic" id="profile"></div>
+			<form action="seeker_profile.jsp" name="seekerProfileform" method="POST">
+				
+	    		<div class="profile_pic" id="profile"></div>
 				<input class="change_pic" type="file" id="file_selector" accept=".jpg">
 				
 				<script>
@@ -61,15 +56,17 @@ accountBean = ManageAccountControl.getInstance().retrieveAccount();
 				
 				<div class="name">
 	    			<h2><%=accountBean.getUser().getFirstName() + " " + accountBean.getUser().getLastName()%></h2>
-	    			<h3>Entrepreneur</h3>
+	    			<h3>Job Seeker</h3>
 	    		</div>
 	    		
-		    	<div id="container">
+	    		<div id="container">
 					<ul id="griglia">
-						<li><button class="fav_business" type="button" onClick="javascript:window.location='favourite_businesses.jsp';">Business Plans</button></li>
-						<li><button class="id_btn" type="button" onClick="javascript:window.location='personalInfo.jsp';">Personal Info</button></li>
+						<li><button class="cv_btn" type="button" onClick="javascript:window.location='cv.jsp';">Curriculum Vitae</button></li>
+						<li><button class="id_btn" type="button" onClick="javascript:window.location='personalInfo.jsp';"><br>Personal Info</button></li>
+						<li><button class="offers_btn" type="button" onClick="javascript:window.location='applicationsJobSeeker.jsp';">Applications</button></li>
+						<li><button class="fav_offers" type="button" onClick="javascript:window.location='favourite_offers.jsp';">Favourites</button></li>
 					</ul>
-	    		</div>				
+				</div>
 	    	</form>
 	    </div>
 	</body>

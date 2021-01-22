@@ -63,8 +63,8 @@
     			<!-- COUNTRY RESEARCH -->
 	    		<%if(businessBean.getCategory() == null) {%>
 	    			<p><input class="result_label" name="resultLbl" value="<%=countryBean.getName()%>"></p>
-	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled style="background-color:lightgrey">
-		    		<select class="order_select" id="order" name="orderselect" style="background-color:lightgrey">
+	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled>
+		    		<select class="order_select" id="order" name="orderselect">
 		    			<option>Earnings</option>
 		    			<option>Costs</option>
 		    		</select></p>
@@ -103,8 +103,8 @@
 		    	<!-- BUSINESS RESEARCH -->
 	    		<%}else if(countryBean.getName() == null) {%>
 	    			<p><input class="result_label" name="resultLbl" value="<%=businessBean.getCategory()%>"></p>
-	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled style="background-color:lightgrey">
-		    		<select class="order_select" id="order" name="orderselect" style="background-color:lightgrey">
+	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled>
+		    		<select class="order_select" id="order" name="orderselect">
 		    			<option>Earnings</option>
 		    			<option>Costs</option>
 		    		</select></p>
@@ -144,8 +144,8 @@
 		    	<!-- BUSINESS AND COUNTRY RESEARCH -->
 	    		<%}else{%>
 	    			<p><input class="result_label" name="resultLbl" value="<%=businessBean.getCategory() + " in " +countryBean.getName()%>"></p>
-	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled style="background-color:lightgrey">
-		    		<select class="order_select" id="order" name="orderselect" style="background-color:lightgrey">
+	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled>
+		    		<select class="order_select" id="order" name="orderselect">
 		    			<option>Earnings</option>
 		    			<option>Costs</option>
 		    		</select></p>

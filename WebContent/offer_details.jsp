@@ -1,8 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+    
+<%@ page import="java.awt.Desktop"
+		 import="java.io.IOException"
+		 import="java.net.URISyntaxException"
+		 import="java.net.URL"%>
+		 
 <%@ page import="logic.presentation.bean.JobBean"
 		 import="logic.presentation.bean.CountryBean"
 		 import="logic.presentation.bean.OfferBean"
+		 import="logic.presentation.bean.ApplicationBean"
+		 import="logic.application.control.ApplyToOfferControl"
+		 import="logic.application.control.SeekerAccountControl"
 		 import="logic.application.control.ManageFavouriteOffersControl"
  		 import="logic.application.SessionFacade"%>
     
@@ -16,6 +24,9 @@
 
 <jsp:useBean id="offerBean" class="logic.presentation.bean.OfferBean" scope="session"/>
 <jsp:setProperty name="offerBean" property="*"/>
+
+<jsp:useBean id="applicationBean" class="logic.presentation.bean.ApplicationBean" scope="session"/>
+<jsp:setProperty name="applicationBean" property="*"/>
 
 <%Class.forName("com.mysql.cj.jdbc.Driver");%>
 
@@ -40,65 +51,71 @@
 				<label class="research_title" style="margin-left:35%;font-size:36px">Offer details</label>
 				
 				<div style="margin-left:25px">
-	    			<h2><%=offerBean.getCompanyName()%></h2>
+	    			<h1><%=offerBean.getCompanyName()%></h1>
 	    		</div>
 	    		
 	    		<!-- FAVOURITE -->
-				<button class="star_button_nset" id="star" name="star"></button>
-				<%if(SessionFacade.getSession().getID() != null) {
-					for(OfferBean i: ManageFavouriteOffersControl.getInstance().retrieveFavourites()) {
-						if(i.getId() == offerBean.getId()) {%>
-							<script>
-							$("#star").removeClass("star_button_nset");
-							$("#star").addClass("star_button_set");
-							</script>
-						<%}
-					}
-				}%>
-				
-				<%if(request.getParameter("star") != null){
-				  	if(SessionFacade.getSession().getID() == null){%>
-						<script>window.alert("You need to be logged to manage your favourites.")</script>
-				  <%}else{
-					  	boolean flag = false;
-					    for(OfferBean i: ManageFavouriteOffersControl.getInstance().retrieveFavourites()) {
-							if(i.getId() == offerBean.getId()) {
-							  	ManageFavouriteOffersControl.getInstance().removeFavourites(offerBean.getId());%>
-							  	<script>
-								$("#star").removeClass("star_button_set");
-								$("#star").addClass("star_button_nset");
-								</script>	
-								<%
-								flag = true;
-								break;
-							}
-				  		}
-					    
-					    if(!flag){
-					    	ManageFavouriteOffersControl.getInstance().addNewFavourite(offerBean.getId());%>
-							<script>
-							$("#star").removeClass("star_button_nset");
-							$("#star").addClass("star_button_set");
-							</script>
-					    <%}
-					}		
-				}%>
+	    		<div style="position:absolute;right:25px;top:80px;height:40px;width:40px;">
+	    			<button class="star_button_nset" id="star" name="star"></button>
+					<%if(SessionFacade.getSession().getID() != null) {
+						for(OfferBean i: ManageFavouriteOffersControl.getInstance().retrieveFavourites()) {
+							if(i.getId() == offerBean.getId()) {%>
+								<script>
+								$("#star").removeClass("star_button_nset");
+								$("#star").addClass("star_button_set");
+								</script>
+							<%}
+						}
+					}%>
 					
+					<%if(request.getParameter("star") != null){
+					  	if(SessionFacade.getSession().getID() == null){%>
+							<script>window.alert("You need to be logged to manage your favourites.")</script>
+					  <%}else{
+						  	boolean flag = false;
+						    for(OfferBean i: ManageFavouriteOffersControl.getInstance().retrieveFavourites()) {
+								if(i.getId() == offerBean.getId()) {
+								  	ManageFavouriteOffersControl.getInstance().removeFavourites(offerBean.getId());%>
+								  	<script>
+									$("#star").removeClass("star_button_set");
+									$("#star").addClass("star_button_nset");
+									</script>	
+									<%
+									flag = true;
+									break;
+								}
+					  		}
+						    
+						    if(!flag){
+						    	ManageFavouriteOffersControl.getInstance().addNewFavourite(offerBean.getId());%>
+								<script>
+								$("#star").removeClass("star_button_nset");
+								$("#star").addClass("star_button_set");
+								</script>
+						    <%}
+						}		
+					}%>
+	    		</div>
+									
 				<!-- JOB -->
 				<div style="margin-left:25px;">
 	    			<h2>The Job</h2>
 	    			<label for="position" style="margin-left:50px">Position</label>
 		     		<div class="offer_field" id="position">
-			     		<%=offerBean.getPosition()%>
+			     		<%=offerBean.getPosition().getName()%>
 			     	</div>
-			     	
+			     	<p></p>
 	    			<label for="req" style="margin-left:50px">Requirements</label>
-		     		<div class="offer_field" id="req">
-			     		<%for(String i: offerBean.getRequirements()){%>
-			     			<div><%=i%></div>
-			     	    <%}%>
+		     		<div id="req">
+			     		<%if(offerBean.getRequirements() == null || offerBean.getRequirements().isEmpty()) {%>
+			     			Not Provided
+			    		<%}else {
+			    			for(String i: offerBean.getRequirements()){%>
+			     				<div class="offer_field"><%=i%></div>
+			     		  <%}
+			     	      }%>
 			     	</div>
-			     	
+			     	<p></p>
 			     	<label for="desc" style="margin-left:50px">Activities description</label>
 		     		<div class="act_desc" id="desc">
 			     		<%=offerBean.getTaskDescription()%>
@@ -106,19 +123,29 @@
 	    		</div>
 				
 				<!-- ADDITIONAL INFO -->
-				<div style="margin-left:525px;">
+				<div style="position:absolute;right:200px;top:170px;">
 	    			<h2>Additional Information</h2>
 	    			<label for="company" style="margin-left:50px">Company branch</label>
-		     		<div class="offer_field" id="company">
-			     		<%=offerBean.getBranch()%>
-			     	</div>
-			     	<button class="map-offer_btn"></button>
-			     	
+		     		<div class="comp_field" id="company">
+		     			<%=offerBean.getBranch()%>
+		     			<button class="map_btn" name="maps"></button>
+			     		<%if(request.getParameter("maps") != null){
+			     			String map = offerBean.getBranch().buildMapAddress();
+			     	    	URL url;
+			     			try {
+			     				url = new URL("https://www.google.com/maps/place/" + map + "/");
+			     				Desktop.getDesktop().browse(url.toURI());
+			     			} catch (URISyntaxException | IOException e) {%>
+			     				<script>window.alert("Sorry, the address cannot be opened in Maps. Try searching it manually.")</script>
+			     		  <%}
+			     		  }%>
+			     	</div>			     	
+			     	<p></p>
 	    			<label for="time" style="margin-left:50px">Time slot</label>
 		     		<div class="offer_field" id="time">
-			     		<%=offerBean.getStart()%><%=offerBean.getFinish()%>
+			     		<%=offerBean.getStart() + " - " + offerBean.getFinish()%>
 			     	</div>
-			     	
+			     	<p></p>
 			     	<label for="sal" style="margin-left:50px">Base salary</label>
 		     		<div class="offer_field" id="sal">
 			     		<%=offerBean.getBaseSalary()%>
@@ -126,16 +153,30 @@
 	    		</div>
 	    		
 				<!-- OTHERS -->
-	    		<div style="margin-left:525px;">
+	    		<div style="position:absolute;right:400px;top:425px;">
 	    			<h2>Others</h2>
 	    			<label for="exp" style="margin-left:50px">Expiration date</label>
 		     		<div class="offer_field" id="exp">
 			     		<%=offerBean.getExpiration()%>
 			     	</div>
+			     	<p></p>
+			     	<button class="apply_btn" name="apply" id="apply">Apply</button>
+			     	<%for(ApplicationBean i: SeekerAccountControl.getInstance().retrieveApplications()) {
+						if(i.getId() == offerBean.getId()) {%>
+							<script>document.getElementById("apply").disabled = true;</script>
+					  <%}
+					  }%>
+					  
+					<%if(request.getParameter("apply") != null){
+						 applicationBean.setId(offerBean.getId());
+						 ApplyToOfferControl.getInstance().apply(applicationBean);
+						 
+						 String redirectURL = "http://localhost:8080/WorldWideJob/offer_results.jsp";
+						 response.sendRedirect(redirectURL); 
+					 }%>
 	    		</div>
-	    			
-				<button class="apply_btn">Apply</button>	  
 	    	</form>
 	    </div>
 	</body>
+	<script src="js/toolbar.js"></script>
 </html>

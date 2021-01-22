@@ -8,7 +8,6 @@
 		 import="logic.application.control.ViewResultsControl"
 		 import="logic.application.control.ViewOfferControl"
 		 import="logic.exceptions.NoResultFoundException"%>
-
 <%@page errorPage="WEB-INF/error.jsp"%>
 		
 <!DOCTYPE html>
@@ -25,27 +24,20 @@
 <%Class.forName("com.mysql.cj.jdbc.Driver");%>
 
 <%if(request.getParameter("offer") != null){ 
-	String res = request.getParameter("business");
-	StringTokenizer tok = new StringTokenizer(res, "&");
+	String res = request.getParameter("offer");
 	
-	offerBean.setId(Integer.parseInt(tok.nextToken()));
-	offerBean.setCompanyName(tok.nextToken());
-
-	JobBean job = new JobBean();
-	job.setName(tok.nextToken());
-	job.setCategory(tok.nextToken());  		
-	offerBean.setPosition(job);
+	OfferBean offer = ViewOfferControl.getInstance().retrieveOfferById(Integer.parseInt(res));
 	
-	AddressBean branch = new AddressBean();
-	CountryBean country = new CountryBean();
-	country.setName(tok.nextToken());
-	branch.setCountry(country);
-	branch.setState(tok.nextToken());
-	branch.setCity(tok.nextToken());
-	offerBean.setBranch(branch);
-	
-	offerBean.setUpload(LocalDate.parse(tok.nextToken()));
-	offerBean.setExpiration(LocalDate.parse(tok.nextToken()));
+	offerBean.setId(Integer.parseInt(res));	
+	offerBean.setCompanyName(offer.getCompanyName()); 
+	offerBean.setTaskDescription(offer.getTaskDescription());
+	offerBean.setPosition(offer.getPosition());
+	offerBean.setBranch(offer.getBranch());
+	offerBean.setExpiration(offer.getExpiration());
+	offerBean.setRequirements(offer.getRequirements());
+	offerBean.setStart(offer.getStart());
+	offerBean.setFinish(offer.getFinish());
+	offerBean.setBaseSalary(offer.getBaseSalary());
 	
 	String redirectURL = "http://localhost:8080/WorldWideJob/offer_details.jsp";
 	response.sendRedirect(redirectURL); 
@@ -72,8 +64,8 @@
 	    		<!-- COUNTRY RESEARCH -->
 	    		<%if(jobBean.getCategory() == null) {%>
 	    			<p><input class="result_label" name="resultLbl" value="<%=countryBean.getName()%>"></p>
-	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled style="background-color:lightgrey">
-		    		<select class="order_select" id="order" name="orderselect" style="background-color:lightgrey">
+	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled>
+		    		<select class="order_select" id="order" name="orderselect">
 		    			<option>Upload</option>
 		    			<option>Expiration</option>
 		    		</select></p>
@@ -84,11 +76,7 @@
 				    			<%try{
 					    			for(OfferBean i: ViewOfferControl.getInstance().retrieveOffersByCountry(countryBean)){%>
 					    				<li>
-					    				<button id="res_btn" class="result" type="submit" name="offer" value="<%=
-						    				i.getId() + "&" + i.getCompanyName() + "&" + i.getPosition().getName() + "&" + 
-					    					i.getPosition().getCategory() + "&" + i.getBranch().getCountry().getName() + "&" +
-					    					i.getBranch().getState() + "&" + i.getBranch().getCountryName() + "&" + 
-					    					i.getBranch().getCity() + "&" + i.getUpload() + "&" + i.getExpiration()%>"> 
+					    				<button id="res_btn" class="result" type="submit" name="offer" value="<%=i.getId()%>"> 
 						    				<%if(i.getBranch().getState() == null) {%>
 						    					<%="'" + i.getCompanyName() + "'" + " - " + i.getBranch().getCountryName() + ", " + i.getBranch().getCity() + " (Exp: " + i.getExpiration() + ")" + "\n" + i.getPosition().getName()%>
 						    				<%}else {%>
@@ -114,11 +102,11 @@
 			    			<%}%>
 		    		</fieldset>
 		    		
-		    	<!-- BUSINESS RESEARCH -->
+		    	<!-- JOB RESEARCH -->
 	    		<%}else if(countryBean.getName() == null) {%>
 	    			<p><input class="result_label" name="resultLbl" value="<%=jobBean.getCategory()%>"></p>
-	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled style="background-color:lightgrey">
-		    		<select class="order_select" id="order" name="orderselect" style="background-color:lightgrey">
+	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled>
+		    		<select class="order_select" id="order" name="orderselect">
 		    			<option>Upload</option>
 		    			<option>Expiration</option>
 		    		</select></p>
@@ -129,11 +117,7 @@
 				    			<%try{
 					    			for(OfferBean i: ViewOfferControl.getInstance().retrieveOffersByJob(jobBean)){%>
 					    				<li>
-					    				<button class="result" id="res_btn" type="submit" name="offer" value="<%=
-						    				i.getId() + "&" + i.getCompanyName() + "&" + i.getPosition().getName() + "&" + 
-					    					i.getPosition().getCategory() + "&" + i.getBranch().getCountry().getName() + "&" +
-					    					i.getBranch().getState() + "&" + i.getBranch().getCountryName() + "&" + 
-					    					i.getBranch().getCity() + "&" + i.getUpload() + "&" + i.getExpiration()%>"> 
+					    				<button class="result" id="res_btn" type="submit" name="offer" value="<%=i.getId()%>"> 
 						    				<%if(i.getBranch().getState() == null) {%>
 						    					<%="'" + i.getCompanyName() + "'" + " - " + i.getBranch().getCountryName() + ", " + i.getBranch().getCity() + " (Exp: " + i.getExpiration() + ")" + "\n" + i.getPosition().getName()%>
 						    				<%}else {%>
@@ -162,8 +146,8 @@
 		    	<!-- JOB AND COUNTRY RESEARCH -->
 	    		<%}else{%>
 	    			<p><input class="result_label" name="resultLbl" value="<%=jobBean.getCategory() + " in " +countryBean.getName()%>"></p>
-	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled style="background-color:lightgrey">
-		    		<select class="order_select" id="order" name="orderselect" style="background-color:lightgrey">
+	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled>
+		    		<select class="order_select" id="order" name="orderselect">
 		    			<option>Upload</option>
 		    			<option>Expiration</option>
 		    		</select></p>
@@ -174,11 +158,7 @@
 				    			<%try{
 					    			for(OfferBean i: ViewOfferControl.getInstance().retrieveOffers(countryBean, jobBean)){%>
 					    				<li>
-					    				<button class="result" id="res_btn" type="submit" name="offer" value="<%=
-						    				i.getId() + "&" + i.getCompanyName() + "&" + i.getPosition().getName() + "&" + 
-					    					i.getPosition().getCategory() + "&" + i.getBranch().getCountry().getName() + "&" +
-					    					i.getBranch().getState() + "&" + i.getBranch().getCountryName() + "&" + 
-					    					i.getBranch().getCity() + "&" + i.getUpload() + "&" + i.getExpiration()%>"> 
+					    				<button class="result" id="res_btn" type="submit" name="offer" value="<%=i.getId()%>"> 
 						    				<%if(i.getBranch().getState() == null) {%>
 						    					<%="'" + i.getCompanyName() + "'" + " - " + i.getBranch().getCountryName() + ", " + i.getBranch().getCity() + " (Exp: " + i.getExpiration() + ")" + "\n" + i.getPosition().getName()%>
 						    				<%}else {%>

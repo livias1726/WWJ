@@ -2,7 +2,9 @@
 <%@ page import="logic.presentation.bean.UserBean"
 		import="logic.presentation.bean.AccountBean"
 		import="logic.application.control.ManageAccountControl"
-		import="logic.application.control.LoginControl"%>
+		import="logic.application.control.LoginControl"
+		import="logic.application.SessionFacade"
+		import="logic.application.Users"%>
 <!DOCTYPE html>
 
 <jsp:useBean id="userBean" class="logic.presentation.bean.UserBean" scope="session"/>
@@ -13,31 +15,26 @@
 
 <%Class.forName("com.mysql.cj.jdbc.Driver");%>
 
-<%
-	if (request.getParameter("login") != null) {
+<%if (request.getParameter("login") != null) {
 	userBean.setEmail(request.getParameter("email"));
 	userBean.setPassword(request.getParameter("password"));
 	accountBean.setUser(userBean);
 	
 	LoginControl.getInstance().tryLogin(accountBean); 
 	
-	if("SEEKER".equals(ManageAccountControl.getInstance().retrieveAccount().getType())) {
-    	String redirectURL = "http://localhost:8080/WorldWideJob/seekerProfile.jsp";
+	if(SessionFacade.getSession().getCurrUserType() == Users.SEEKER) {
+		String redirectURL = "http://localhost:8080/WorldWideJob/seeker_profile.jsp";
+    	response.sendRedirect(redirectURL);
+	}else if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER) {
+		String redirectURL = "http://localhost:8080/WorldWideJob/recruiterProfile.jsp";
     	response.sendRedirect(redirectURL);
     	return;
-    }
-    if("RECRUITER".equals(ManageAccountControl.getInstance().retrieveAccount().getType())) {
-    	String redirectURL = "http://localhost:8080/WorldWideJob/recruiterProfile.jsp";
+	}else{
+	    String redirectURL = "http://localhost:8080/WorldWideJob/entrepreneur_profile.jsp";
     	response.sendRedirect(redirectURL);
     	return;
-    }
-    if("ENTREPRENEUR".equals(ManageAccountControl.getInstance().retrieveAccount().getType())) {
-      	String redirectURL = "http://localhost:8080/WorldWideJob/entrepreneur_profile.jsp";
-    	response.sendRedirect(redirectURL);
-    	return;
-    }
- }
-%>
+	}
+}%>
 
 <html lang="en">
 	<head>

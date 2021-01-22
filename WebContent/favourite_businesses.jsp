@@ -56,8 +56,8 @@
 		<jsp:include page="WEB-INF/toolbar.jsp"/>
 		<div style="height:680px;background-color:#8ecae6;border:1px solid blue">
 			<form action="favourite_businesses.jsp" name="favouriteBusiness" method="POST">	
-    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled style="background-color:lightgrey">
-	    		<select class="order_select" id="order" name="orderselect" style="background-color:lightgrey">
+    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled>
+	    		<select class="order_select" id="order" name="orderselect">
 	    			<option>Earnings</option>
 	    			<option>Costs</option>
 	    		</select></p>
