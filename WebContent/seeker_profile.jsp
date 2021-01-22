@@ -63,7 +63,7 @@ accountBean = ManageAccountControl.getInstance().retrieveAccount();
 					<ul id="griglia">
 						<li><button class="cv_btn" type="button" onClick="javascript:window.location='cv.jsp';">Curriculum Vitae</button></li>
 						<li><button class="id_btn" type="button" onClick="javascript:window.location='personalInfo.jsp';"><br>Personal Info</button></li>
-						<li><button class="offers_btn" type="button" onClick="javascript:window.location='applicationsJobSeeker.jsp';">Applications</button></li>
+						<li><button class="offers_btn" type="button" onClick="javascript:window.location='applications.jsp';">Applications</button></li>
 						<li><button class="fav_offers" type="button" onClick="javascript:window.location='favourite_offers.jsp';">Favourites</button></li>
 					</ul>
 				</div>

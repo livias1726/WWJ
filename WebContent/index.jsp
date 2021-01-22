@@ -4,6 +4,23 @@
 		import="logic.application.Users"%>
 		
 <!DOCTYPE html>
+
+<%/*if(!request.getSession().isNew()){
+	if(SessionFacade.getSession().getCurrUserType() == Users.SEEKER) {
+		String redirectURL = "http://localhost:8080/WorldWideJob/seeker_search.jsp";
+    	response.sendRedirect(redirectURL);
+    	return;
+	}else if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER) {
+		String redirectURL = "http://localhost:8080/WorldWideJob/recruiterProfile.jsp";
+    	response.sendRedirect(redirectURL);
+    	return;
+	}else if(SessionFacade.getSession().getCurrUserType() == Users.ENTREPRENEUR){
+	    String redirectURL = "http://localhost:8080/WorldWideJob/entrepreneur_search.jsp";
+    	response.sendRedirect(redirectURL);
+    	return;
+	}
+}*/%>
+
 <html lang="en">
 	<head>
 		<meta charset="ISO-8859-1">

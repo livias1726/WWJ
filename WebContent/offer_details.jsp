@@ -163,7 +163,11 @@
 			     	<button class="apply_btn" name="apply" id="apply">Apply</button>
 			     	<%for(ApplicationBean i: SeekerAccountControl.getInstance().retrieveApplications()) {
 						if(i.getId() == offerBean.getId()) {%>
-							<script>document.getElementById("apply").disabled = true;</script>
+							<script>
+							var x = document.getElementById("apply");
+							x.disabled = true;
+							x.style.opacity=0.5;
+							</script>
 					  <%}
 					  }%>
 					  
