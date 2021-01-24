@@ -112,7 +112,9 @@
 		     		<div class="offer_field" id="position">
 			     		<%=offerBean.getPosition().getName()%>
 			     	</div>
-			     	<p></p>
+			     	
+			     	<br><br>
+			     	
 	    			<label for="req" style="margin-left:50px">Requirements</label>
 		     		<div id="req">
 			     		<%if(offerBean.getRequirements() == null || offerBean.getRequirements().isEmpty()) {%>
@@ -123,7 +125,9 @@
 			     		  <%}
 			     	      }%>
 			     	</div>
-			     	<p></p>
+			     	
+					<br><br>
+					
 			     	<label for="desc" style="margin-left:50px">Activities description</label>
 		     		<div class="act_desc" id="desc">
 			     		<%=offerBean.getTaskDescription()%>
@@ -147,13 +151,17 @@
 			     				<script>window.alert("Sorry, the address cannot be opened in Maps. Try searching it manually.")</script>
 			     		  <%}
 			     		  }%>
-			     	</div>			     	
-			     	<p></p>
+			     	</div>	
+	    				     	
+			     	<br><br>
+			     	
 	    			<label for="time" style="margin-left:50px">Time slot</label>
 		     		<div class="offer_field" id="time">
 			     		<%=offerBean.getStart() + " - " + offerBean.getFinish()%>
 			     	</div>
-			     	<p></p>
+			     	
+			     	<br><br>
+			     	
 			     	<label for="sal" style="margin-left:50px">Base salary</label>
 		     		<div class="offer_field" id="sal">
 		     			<%offerBean.convertCurrencyFormat();%>
@@ -168,7 +176,8 @@
 		     		<div class="offer_field" id="exp">
 			     		<%=offerBean.getExpiration()%>
 			     	</div>
-			     	<p></p>
+			     	
+			     	<br><br>
 			     	
 			     	<button class="apply_btn" name="apply" id="apply">Apply</button>
 			     	<%if(SessionFacade.getSession().getID() != null) {

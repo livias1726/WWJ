@@ -163,27 +163,32 @@ public class OfferBean {
 	
 	public void convertCurrencyFormat() {
 		String[] curr = this.getBaseSalary().split(" ");
+		String tmp = null;
 		switch(curr[0]) {
-		case "USD":
-			this.setBaseSalary("$" + " " + curr[1]);
-			break;
-		case "EUR":
-			this.setBaseSalary("€" + " " + curr[1]);
-			break;
-		case "GBP":
-			this.setBaseSalary("£" + " " + curr[1]);
-			break;
-		case "$":
-			this.setBaseSalary("USD" + " " + curr[1]);
-			break;
-		case "€":
-			this.setBaseSalary("EUR" + " " + curr[1]);
-			break;
-		case "£":
-			this.setBaseSalary("GBP" + " " + curr[1]);
-			break;
-		default:
-			break;
+			case "USD":
+				tmp = "$";
+				break;
+			case "EUR":
+				tmp = "€";
+				break;
+			case "GBP":
+				tmp = "£";
+				break;
+			case "$":
+				tmp = "USD";
+				break;
+			case "€":
+				tmp = "EUR";
+				break;
+			case "£":
+				tmp = "GBP";
+				break;
+			default:
+				break;
+		}
+		
+		if(tmp != null) {
+			setBaseSalary(tmp + " " + curr[1]);
 		}
 	}
 }

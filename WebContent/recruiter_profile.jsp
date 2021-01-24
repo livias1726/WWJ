@@ -48,7 +48,7 @@
 	    		
 	    		<div id="container">
 					<ul id="griglia">
-						<li><button class="company_btn" type="button" onClick="javascript:window.location='Company.jsp';">Company</button></li>
+						<li><button class="company_btn" type="button" onClick="javascript:window.location='company.jsp';">Company</button></li>
 						<li><button class="id_btn" type="button" onClick="javascript:window.location='personalInfo.jsp';">Personal Info</button></li>
 						<li><button class="offers_btn" type="button" onClick="javascript:window.location='published_offers.jsp';">Job Offers</button></li>
 						<li><button class="candidate_btn" type="button" onClick="javascript:window.location='candidates.jsp';">Candidates</button></li>

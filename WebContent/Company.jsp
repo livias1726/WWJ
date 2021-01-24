@@ -1,245 +1,135 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
+<%@ page import="java.util.List"
+		 import="java.util.ArrayList"%>
+
 <%@ page import="logic.presentation.bean.CompanyBean"
-		import="logic.presentation.bean.AddressBean"
-		import="java.util.List"
-		import="java.util.ArrayList"
-		import="java.util.Arrays"
-		import="logic.presentation.bean.AccountBean"
-		import="logic.application.control.RecruiterAccountControl"
-		import="logic.application.control.ManageAccountControl"
-		import="logic.presentation.bean.CountryBean"%>
+		 import="logic.presentation.bean.AddressBean"
+		 import="logic.presentation.bean.CountryBean"
+		 import="logic.application.control.RecruiterAccountControl"
+		 import="logic.application.control.ManageAccountControl"%>
 
 <!DOCTYPE html>
 
 <jsp:useBean id="companyBean" class="logic.presentation.bean.CompanyBean" scope="session"/>
 <jsp:setProperty name="companyBean" property="*"/>
 
-<jsp:useBean id="addressBean" class="logic.presentation.bean.AddressBean" scope="session"/>
-<jsp:setProperty name="addressBean" property="*"/>
+<%Class.forName("com.mysql.cj.jdbc.Driver");%>
 
-<jsp:useBean id="accountBean" class="logic.presentation.bean.AccountBean" scope="session"/>
-<jsp:setProperty name="accountBean" property="*"/>
+<%if(request.getParameter("save") != null){
+	CompanyBean bean = new CompanyBean();
+	bean.setName(request.getParameter("name"));   	
+	bean.setDescription(request.getParameter("description"));
+	
+	String[] country = request.getParameterValues("r_country");
+	for(String i: country){
+		System.out.println(i);
+	}
+	String[] state = request.getParameterValues("r_state");
+	String[] city = request.getParameterValues("r_city");
+	String[] street = request.getParameterValues("r_street");
+	String[] number = request.getParameterValues("r_number");
+	String[] zip = request.getParameterValues("r_zip");
+	String[] id = request.getParameterValues("r_id");
+	
+	List<AddressBean> branches = new ArrayList<>();
+	for(int i=0; i<country.length; i++){
+		AddressBean newBranch = new AddressBean();
+		CountryBean cBean = new CountryBean();
+		
+		cBean.setName(country[i]);
+		newBranch.setCountry(cBean);
+		
+		newBranch.setState(state[i]);
+		newBranch.setCity(city[i]);
+		newBranch.setStreet(street[i]);
+		newBranch.setNumber(Integer.parseInt(number[i]));
+		newBranch.setPostalCode(zip[i]);
+		newBranch.setId(Integer.parseInt(id[i]));
+		
+		branches.add(newBranch);
+	}
+	
+	bean.setBranches(branches);
+	
+	RecruiterAccountControl.getInstance().changeCompanyInfo(bean);
+	
+	String redirectURL = "http://localhost:8080/WorldWideJob/company.jsp";
+	response.sendRedirect(redirectURL); 
+}%>
 
-<jsp:useBean id="countryBean" class="logic.presentation.bean.CountryBean" scope="session"/>
-<jsp:setProperty name="countryBean" property="*"/>
-
-<%
-	Class.forName("com.mysql.jdbc.Driver");
-%>
+<%companyBean = RecruiterAccountControl.getInstance().retrieveCompanyInfo();%>
 
 <html lang="en">
 	<head>
 		<meta charset="ISO-8859-1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<link rel="icon" href="icons/search_usr.png">
+		<link rel="icon" href="icons/main_icon.png">
 	    <link href="css/style.css" rel="stylesheet">
-	    
-		<title>WorldWideJob - company</title>
-	</head>
 	
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	    
+		<title>WorldWideJob</title>
+	</head>	
 	<body>
-		<div>
-				<div class="dropdown" style="float:right;">
-	    			<button class="menu_btn" style="background-color:lightblue;width:40px;height:40px;margin-top:10px"></button>
-		     		<div class="dropdown-content" style="right:0;">
-		     			<a href="http://localhost:8080/WorldWideJob/publish.jsp">Publish Job Offer</a>
-		     			<a href="">Buy Premium Version</a>
-		     			<a class="dropdown" href="">Support</a>
-		     			<a href="http://localhost:8080/WorldWideJob/login.jsp">Quit</a>
-		     		</div>
-		     	</div>
-		     	<div style="float:right;">
-	    			<button class="notify_btn" style="background-color:lightblue;margin-right:10px;width:40px;height:40px;margin-top:10px"></button>
-		        <div class="dropdown" style="float:right;">
-	    			<button class="user_btn" style="background-color:lightblue;margin-right:10px;width:40px;height:40px;margin-top:10px"></button>
-		     		<div class="dropdown-content" style="right:0;">
-		     			<a href="http://localhost:8080/WorldWideJob/recruiterProfile.jsp">Account</a>
-		     			<a href="http://localhost:8080/WorldWideJob/login.jsp">Logout</a>
-		     		</div>
-		     	</div>
-		     	</div>
-	    		<div style="float:left;width:70px;height:70px">
-	    			<img alt="" class="image" src="icons/main_icon.png" width=70px height=70px>
-	    		</div>
-	    		<div style="float:left">
-	    			<button class="home_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='index.jsp';"></button>
-	    		<div style="float:right;">
-	    			<button class="arrow_btn" type="button" style="background-color:lightblue;width:40px;height:40px;margin-left:10px;margin-top:10px" onClick="javascript:window.location='recruiterProfile.jsp';"></button>
-	    		</div>
-	    		</div>
-	    		<div>
-	    		<input class="favourite_container" type="text" name="company_container" value="" disabled style="background-color:#C6D6D3">	
-	    		<input class="companyTitle" type="text" name="companyname" value="Name" disabled style="top:140px; left:-160px;">	
-	    		
-	    		<input class="companyTitle" type="text" name="companybranches" value="Branches" disabled style="top:140px; left:-250px;">
-	    		<%
-	    			Object o;
-	    			    			Integer count = 1;
-	    			    			String str = "";
-	    				   				List <AddressBean> s = RecruiterAccountControl.getInstance().retrieveCompanyInfo().getBranches();
-	    				   				for(Integer i=0;i<s.size();i++){
-	    				   					if(i+1 == ManageAccountControl.getInstance().retrieveAccount().getId()){
-	    				   						o=s.get(i);
-	    				   						String nuova = o.toString().concat(",");
-	    				   						for(Integer j=0;j<nuova.length();j++){
-	    				   					if(nuova.charAt(j) != ','){
-	    				   						str += nuova.charAt(j);
-	    				   					}else if(count == 1){
-	    				   						request.setAttribute("country", str);
-	    				   						count++;
-	    				   						str = "";
-	    				   						continue;
-	    				   					}else if(count == 2){
-	    				   						request.setAttribute("state", str);
-	    				   						count++;
-	    				   						str="";
-	    				   						continue;
-	    				   					}else if(count==3){
-	    				   						request.setAttribute("city", str);
-	    				   						count++;
-	    				   						str="";
-	    				   						continue;
-	    				   					}else if(count==4){
-	    				   						request.setAttribute("postalCode", str);
-	    				   						count++;
-	    				   						str="";
-	    				   						continue;
-	    				   					}else if(count==5){
-	    				   						request.setAttribute("street", str);
-	    				   						count++;
-	    				   						str="";
-	    				   						continue;
-	    				   					}else{
-	    				   						request.setAttribute("number", str);
-	    				   					}
-	    				   						}
-	    			   				}
-	    				   				}
-	    		%>
-		   		
-	    		<table contenteditable= "true" border="1" id='my_table' style="table-layout:fixed; width:600px;position:absolute;left:550px;top:185px; background-color:white">
-	    			<thead>
-      						<tr>
-         						<th style="color:black">Country</th>
-         						<th style="color:black">State</th>
-         						<th style="color:black">City</th>
-         						<th style="color:black">Street</th>
-         						<th style="color:black">Number</th>
-         						<th style="color:black">Zip Code</th>
-      						</tr>
-      						<tr>
-      							<td style="height:20px"><%=request.getAttribute("country")%></td>
-         						<td><%=request.getAttribute("state")%></td>
-         						<td><%=request.getAttribute("city")%></td>
-         						<td><%=request.getAttribute("postalCode")%></td>
-         						<td><%=request.getAttribute("street")%></td>
-         						<td><%=request.getAttribute("number")%></td>
-      					</thead>
-      					<tbody>
-      					</tbody>
-      			</table>
-	    		<input class="companyTitle" type="text" name="companyndescription" value="Description" disabled style="top:200px; left:40px;">
-	    		
-	    		<script>function addRow(id){
-	    					var tbody = document.getElementById(id).getElementsByTagName("TBODY")[0];
-	    					var row = document.createElement("TR");
-	    					var td1 = document.createElement("TD");
-	    					td1.appendChild(document.createTextNode("colonna1"));
-	    					var td2 = document.createElement("TD");
-	    					td2.appendChild(document.createTextNode("colonna2"));
-	    					var td3 = document.createElement("TD");
-	    					td3.appendChild(document.createTextNode("colonna3"));
-	    					var td4 = document.createElement("TD");
-	    					td4.appendChild(document.createTextNode("colonna4"));
-	    					var td5 = document.createElement("TD");
-	    					td5.appendChild(document.createTextNode("colonna5"));
-	    					var td6 = document.createElement("TD");
-	    					td6.appendChild(document.createTextNode("colonna6"));
-	    					row.appendChild(td1);
-	    					row.appendChild(td2);
-	    					row.appendChild(td3);
-	    					row.appendChild(td4);
-	    					row.appendChild(td5);
-	    					row.appendChild(td6);
-	    					tbody.appendChild(row);
-	    		}
-	    		</script>
-	    		<a href="javascript:addRow('my_table')" style="width:60px; height:30px; margin-left:1150px;margin-top:-20px; background-color:dodgerblue">Add</a>
-	    		</div>
-	    		<form action="Company.jsp" name="Company" method="POST">
-	    		<input class="companyTxt" type="text" name="inputName" value="<%=RecruiterAccountControl.getInstance().retrieveCompanyInfo().getName()%>" style="top:180px;left:-416px;">
-	    		<input class="companyTxt" type="text" name="inputDescription" value="<%=RecruiterAccountControl.getInstance().retrieveCompanyInfo().getDescription()%>" style="top:300px;left:-215px;width:300px;height:150px;">
-	    		<script>function saveNewRow(id_table){
-		   var address = new Array();
-			var table = document.getElementById(id_table);
-			var celle = table.getElementsByTagName('td');
-			for(var j=6; j<celle.length; j++){
-				var aggiungi = address.push(celle[j].innerHTML);
-			}
-			document.getElementById("hiddenField").value = address;
-			<%if(request.getParameter("save_changes") != null){
-				String string = "";
-				String string1 = "";
-				Integer p = 1;
-				request.setAttribute("lista", request.getParameter("variabile"));
-				string = request.getAttribute("lista").toString();
-				String nuova1 = string.concat(",");
-				for(Integer i=0;i<nuova1.length();i++){
-					if(nuova1.charAt(i) != ','){
-						string1 += nuova1.charAt(i);
-					}else if(p == 1){
-						request.setAttribute("country_mod", string1);
-						p++;
-						string1 = "";
-						continue;
-					}else if(p == 2){
-						request.setAttribute("state_mod", string1);
-						p++;
-						string1 = "";
-						continue;
-					}else if(p == 3){
-						request.setAttribute("city_mod", string1);
-						p++;
-						string1 = "";
-						continue;
-					}else if(p == 4){
-						request.setAttribute("postalCode_mod", string1);
-						p++;
-						string1 = "";
-						continue;
-					}else if(p == 5){
-						request.setAttribute("street_mod", string1);
-						p++;
-						string1 = "";
-						continue;
-					}else{
-						request.setAttribute("number_mod", string1);
-					}
-				}
-				addressBean.setCity(request.getAttribute("city_mod").toString());
-				addressBean.setPostalCode(request.getAttribute("postalCode_mod").toString());
-				addressBean.setStreet(request.getAttribute("street_mod").toString());
-				addressBean.setNumber(Integer.parseInt(request.getAttribute("number_mod").toString()));
-				addressBean.setState(request.getAttribute("state_mod").toString());
-				countryBean.setName(request.getAttribute("country_mod").toString());
-				addressBean.setCountry(countryBean);
-				addressBean.setId(0);
-				List<AddressBean> branches = new ArrayList<> ();
-				branches.add(addressBean);
-				companyBean.setName(request.getParameter("inputName"));
-				companyBean.setDescription(request.getParameter("inputDescription"));
-				companyBean.setBranches(branches);
-				RecruiterAccountControl.getInstance().changeCompanyInfo(companyBean);
-				
-			}%>
-
-	    }</script>
-	  
-	    <input type="hidden" id="hiddenField" name="variabile"/>
-	    <button class="savechange_btn" type="submit" name="save_changes" value="save" style="width:100px; height:50px; top:550px; left:900px; background-color:dodgerblue" onClick="saveNewRow('my_table')">Save changes</button>
-	    </form>
-	</div>
+		<jsp:include page="WEB-INF/toolbar.jsp"/>
+		<div style="height:680px;background-color:#8ecae6;border:1px solid blue">
+			<form action="company.jsp" name="company" method="POST">
+				<button class="change_btn" id="change" type="button">Change</button>
+				<div style="margin-left:50px;margin-top:25px;width:500px">
+					<h2>Name</h2>
+					<input id="name" name="name" type="text" value="<%=companyBean.getName()%>" style="margin-left:25px;" readonly>
+					
+					<br>
+					<br>
+					
+					<h2>Description</h2>
+					<textarea class="act_desc" id="description" name="description" rows="" cols="" style="margin-left:25px;" readonly><%=companyBean.getDescription()%></textarea>
+				</div>
+		    		
+		    	<div style="position:absolute;right:50px;top:125px">
+		    		<h2>Branches</h2>
+		    		<table id="table" class="table_branch">
+						<tr>
+						    <th id="country_col">Country</th>
+						    <th id="state_col">State</th>
+						    <th id="city_col">City</th>
+						    <th id="street_col">Street</th>
+						    <th id="num_col">Number</th>
+						    <th id="zip_col">Zip Code</th>
+						    <th id="id_col" style="display:none"></th>
+					  	</tr>
+					  	<%for(AddressBean i: companyBean.getBranches()){ %>
+							<tr>
+							    <td><input type="hidden" name="r_country" value="<%=i.getCountryName()%>"><%=i.getCountryName()%></td>
+							    <%if(i.getState() != null){ %>
+							    	<td><input type="hidden" name="r_state" value="<%=i.getState()%>"><%=i.getState()%></td>
+							    <%}else{ %>
+							    	<td><input type="hidden" name="r_state" value=""></td>
+							    <%} %>
+							    <td><input type="hidden" name="r_city" value="<%=i.getCity()%>"><%=i.getCity()%></td>
+							    <td><input type="hidden" name="r_street" value="<%=i.getStreet()%>"><%=i.getStreet()%></td>
+							    <td><input type="hidden" name="r_number" value="<%=i.getNumber()%>"><%=i.getNumber()%></td>
+							    <td><input type="hidden" name="r_zip" value="<%=i.getPostalCode()%>"><%=i.getPostalCode()%></td>
+							    <td style="display:none"><input type="hidden" name="r_id" value="<%=i.getId()%>"></td>
+							</tr>
+						<%}%>
+					</table>
+					<div id="new_branch" style="display:none; width:200px">
+						<input id="country" type="text" name="country" placeholder="Country">
+						<input id="state" type="text" name="state" placeholder="State">
+						<input id="city" type="text" name="city" placeholder="City">
+						<input id="street" type="text" name="street" placeholder="Street">
+						<input id="number" type="text" name="number" placeholder="Number">
+						<input id="zip" type="text" name="zip" placeholder="Zip Code">
+				    	<button id="add_branch" type="button" name="add_branch" onClick="addBranch()">Add</button>
+					</div>
+		    	</div>
+		    	<button class="save_btn" id="save" name="save" style="display:none">Save changes</button>
+			</form>
+		</div>
 	</body>
+	<script src="js/toolbar.js"></script>
+	<script src="js/company.js"></script>
 </html>

@@ -165,6 +165,7 @@
 	position:absolute;
 	height:30px;
 	width:30px;
+	left:450px;
     background-size:30px;
     background-repeat:no-repeat;
     background-position:center;
@@ -303,6 +304,40 @@
     border-color: black;
     margin-top:50px;
     cursor:pointer;
+}
+
+.save_btn{
+	color: white;
+    font-size: 15px;
+    font-weight: bold;
+    text-align:center;
+    width:100px;
+    background-color: dodgerblue;
+    border-color: black;
+    position:absolute;
+    right:500px;
+    top:550px;
+    cursor:pointer;	
+}
+
+.change_btn{
+	color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align:center;
+    width:80px; 
+    height:30px;
+    background-color: dodgerblue;
+    border-color: black;
+    position:relative;
+    margin-left:25px;
+    margin-top:25px;
+    cursor:pointer;	
+}
+
+.table_branch{
+	border-collapse: collapse;
+	border:2px solid blue;
 }
 /**/
 
@@ -667,70 +702,7 @@ th{
 }
 /**/
 
-.joboffers{
-	width:250px;
-    height:60px;
-    position: absolute;
-	left: 250px;
-	top: 130px;
-    margin-left:400px;
-    font-size:20px;
-    text-overflow: ellipsis;
-    text-align:center;
-    color:white;
-    border-color:black;
-}
-
-.line{
-	position: absolute;
-	width: 500px;
-	height: 0px;
-	left: 520px;
-	top: 220px;
-	color:black;
-	border: 1px;
-}
-
-#clock{
-      background-image:url('');
-      background-size:cover;
-      background-position: center;
-      height: 250px; width: 250px;
-}
-
-.scheletro_offer_det{
-	color:grey;
-	font-style:bold;
-	font-size:20px;
-	padding-left:40px;
-	padding-top:50px;
-	background:#C6D6D3;
-	position: absolute;
-	width: 96%;
-	height: 95%;
-	top: 70px;
-	
-}
-
-.favouritejoboffer_container{
-	position: absolute;
-	width: 35%;
-	height: 20%;
-	left: 500px;
-	top: 150px;
-	color:black;
-	border: 1px solid #56A6F0;
-}
-
 .change_btn{
-	color: white;
-    font-size: 15px;
-    font-style: bold;
-    text-align:center;
-    position:relative
-}
-
-.savechange_btn{
 	color: white;
     font-size: 15px;
     font-style: bold;
@@ -758,62 +730,9 @@ th{
     background-color:white
 }
 
-.add_btn{
-	color: white;
-    font-size: 15px;
-    font-style: bold;
-    text-align:center;
-    position:relative
-}
-
-.scheletro_signUp{
-	color:dodgerblue;
-	font-style:bold;
-	font-size:70px;
-	padding-left:40px;
-	padding-top:15px;
-	background:#C6D6D3;
-	position: absolute;
-	width: 96%;
-	height: 200%;
-	left: 20px;
-	top: 100px;	
-}
-
-.orizzontale {
-  border-bottom: 1px solid #000;
-  padding-bottom: 20px;
-  margin-top: 300px;
-  margin-left: 300px;
-  width: 300px;
-}
-
-.saveresults_btn{
-	color: white;
-    font-size: 15px;
-    font-style: bold;
-    text-align:center;
-    position:relative	
-}
-
 .alert {
   padding: 20px;
   background-color: white;
   color: white;
-}
-
-.closebtn {
-  margin-left: 15px;
-  color: black;
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.closebtn:hover {
-  color: black;
 }
 
