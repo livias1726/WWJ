@@ -26,7 +26,7 @@
 		String redirectURL = "http://localhost:8080/WorldWideJob/seeker_profile.jsp";
     	response.sendRedirect(redirectURL);
 	}else if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER) {
-		String redirectURL = "http://localhost:8080/WorldWideJob/recruiterProfile.jsp";
+		String redirectURL = "http://localhost:8080/WorldWideJob/recruiter_profile.jsp";
     	response.sendRedirect(redirectURL);
     	return;
 	}else{

@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.StringTokenizer"%>	 
-<%@ page import="logic.presentation.bean.ApplicationBean"
+
+<%@ page import="java.util.StringTokenizer"%>
+
+<%@ page import="logic.application.control.RecruiterAccountControl"
 		 import="logic.presentation.bean.OfferBean"
 		 import="logic.application.control.ViewOfferControl"
-		 import="logic.application.control.SeekerAccountControl"
 		 import="java.util.ArrayList"
 		 import="java.util.List"%>
-		 
+ 
+ <%@page errorPage="WEB-INF/error.jsp"%>
+    
 <!DOCTYPE html>
 
 <jsp:useBean id="offerBean" scope="session" class="logic.presentation.bean.OfferBean"/>
@@ -37,53 +40,44 @@
 		<meta charset="ISO-8859-1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-	    <link rel="icon" href="icons/main_icon.png">
+		<link rel="icon" href="icons/main_icon.png">
 	    <link href="css/style.css" rel="stylesheet">
 	
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-		<title>WorldWideJob - Applications</title>
-	</head>	
+		<title>WorldWideJob - Offers</title>
+	</head>
+	
 	<body>
 		<jsp:include page="WEB-INF/toolbar.jsp"/>
 		<div style="height:680px;background-color:#8ecae6;border:1px solid blue">
-			<form action="applications.jsp" name="applicationsJobSeeker" method="POST">
-				<table class="table_applications">
+			<form action="published_offers.jsp" name="publishedOffers" method="POST">
+				<div style="margin-left:25%;margin-top:20px">
+		    		<input type="radio" id="all" name="radio" onclick="filterOffers(this)" checked>All
+		    		<input type="radio" id="act" name="radio" onclick="filterOffers(this)">Active
+		    		<input type="radio" id="exp" name="radio" onclick="filterOffers(this)">Expired
+	    		</div>
+	    	
+	    		<table class="table_offers" id="row">
 					<tr>
-					    <th id="check"><input type="checkbox" id="select" name="select" onclick="selectAll(this)"></th>
-					    <th id="offer_col">Offer</th>
+					    <th id="num_col">Number</th>
 					    <th id="pos_col">Position</th>
-					    <th id="app_col">Application date</th>
+					    <th id="up_col">Upload date</th>
 					    <th id="exp_col">Expiration date</th>
+					    <th id="cand_col">Candidates</th>
 				  	</tr>
-				  	<%for(ApplicationBean i: SeekerAccountControl.getInstance().retrieveApplications()){ %>
+				  	<%for(OfferBean i: RecruiterAccountControl.getInstance().retrievePublishedOffers()){ %>
 						<tr>
-						    <td><input type="checkbox" id="sel" name="sel" value="<%=i.getId()%>" onclick="selectElem(this)"></td>
 						    <td><button name="offer" value="<%=i.getId()%>"><%=i.getId()%></button></td>
-						    <td><%=i.getJobName()%></td>
-						    <td><%=i.getApplication()%></td>
+						    <td><%=i.getPosition().getName()%></td>
+						    <td><%=i.getUpload()%></td>
 						    <td><%=i.getExpiration()%></td>
+						    <td><%=i.getCandidates()%></td>
 						</tr>
 					<%}%>
-				</table>	
-    			<button class="delete_btn" id="delete" name="delete" value="">Delete</button>
-    			<%if(request.getParameter("delete") != null){
-    				List<Integer> list = new ArrayList<>();
-    				
-    				String res = request.getParameter("delete");
-    				StringTokenizer tok = new StringTokenizer(res, "&");
-    				while(tok.hasMoreTokens()){
-    					list.add(Integer.parseInt(tok.nextToken()));
-    				}
-    				
-    				if(list.size() > 0){
-    					SeekerAccountControl.getInstance().removeApplications(list);
-    					String redirectURL = "http://localhost:8080/WorldWideJob/applications.jsp";
-    					response.sendRedirect(redirectURL); 
-    				}
-    			}%>			    		    		
-			</form>
-		</div>
+				</table>
+	    	</form>
+	    </div>
 	</body>
 	<script src="js/toolbar.js"></script>
-	<script src="js/tables.js"></script>
+	<script src="js/published_offers.js"></script>
 </html>

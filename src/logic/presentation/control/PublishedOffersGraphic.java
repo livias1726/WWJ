@@ -118,7 +118,7 @@ public class PublishedOffersGraphic implements Initializable {
 	private void showActive(FilteredList<OfferBean> list) {
     	list.setPredicate(data -> {
 	      boolean showItem = true;
-	      showItem = showItem && (data.getExpiration().isAfter(LocalDate.now()));
+	      showItem = showItem && (LocalDate.parse(data.getExpiration()).isAfter(LocalDate.now()));
 	      return showItem;
     	});
     }
@@ -130,7 +130,7 @@ public class PublishedOffersGraphic implements Initializable {
     private void showExpired(FilteredList<OfferBean> list) {
     	list.setPredicate(data -> {
   	      boolean showItem = true;
-  	      showItem = showItem && (data.getExpiration().isBefore(LocalDate.now()));
+  	      showItem = showItem && (LocalDate.parse(data.getExpiration()).isBefore(LocalDate.now()));
   	      return showItem;
       	});
     }

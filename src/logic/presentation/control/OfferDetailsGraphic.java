@@ -91,20 +91,25 @@ public class OfferDetailsGraphic implements Initializable {
 		}
 			
 		descArea.setText(offer.getTaskDescription());
-		branch.setText(offer.getBranch().getStreet() + ", " + offer.getBranch().getNumber() + ", " + 
-					   offer.getBranch().getPostalCode() + ", " + offer.getBranch().getCity() + ", " + 
-					   offer.getBranch().getState() + ", " + offer.getBranch().getCountry());
+		String addr = offer.getBranch().getStreet() + ", " + offer.getBranch().getNumber() + ", " + offer.getBranch().getPostalCode() 
+					  + ", " + offer.getBranch().getCity();
+		if(offer.getBranch().getState() != null) {
+			branch.setText(addr + ", " + offer.getBranch().getState() + ", " + offer.getBranch().getCountryName());
+		}else {
+			branch.setText(addr + ", " + offer.getBranch().getCountryName());
+		}
+		
 		
 		if(offer.getStart() == null && offer.getFinish() == null) {
 			startTime.setText(empty);
 			endTime.setText(empty);
 		}else {
-			startTime.setText(offer.getStart().toString());
-			endTime.setText(offer.getFinish().toString());
+			startTime.setText(offer.getStart());
+			endTime.setText(offer.getFinish());
 		}
 		
 		salary.setText(String.valueOf(offer.getBaseSalary()));	
-		expDate.setText(offer.getExpiration().toString());
+		expDate.setText(offer.getExpiration());
 
 		if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER) {
 			applyBtn.setVisible(false);

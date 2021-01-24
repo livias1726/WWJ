@@ -147,7 +147,6 @@
 	height:30px;
 	width:400px;
 	margin-left:50px;
-	text-align:center;
 	font-size: 15px;
     color:black;
 }
@@ -176,7 +175,7 @@
 .apply_btn{
 	color: white;
     font-size: 20px;
-    font-style: bold;
+    font-weight: bold;
     text-align:center;
     width:100px; 
     height:50px;
@@ -189,7 +188,7 @@
 .cv_btn{
 	color:lightblue;
 	font-size:30px;
-	font-style:bold;
+	font-weight: bold;
 	position:relative;
 	text-align:center; 
 	text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
@@ -205,7 +204,7 @@
 .fav_offers{
 	color:lightblue;
 	font-size:30px;
-	font-style:bold;
+	font-weight: bold;
 	position:relative;
 	text-align:center; 
 	text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
@@ -218,96 +217,24 @@
 	cursor:pointer;
 }
 
-.applications{
+.table_applications{
 	margin-left:30%;
 	margin-top:50px;
 	border-collapse: collapse;
 	border:2px solid blue;
 }
-
-td{
-  border: 1px solid lightgrey;
-  text-align: center;
-  padding: 10px;
-  background-color:white;
-}
-
-th{
-  border: 1px solid lightgrey;
-  text-align: center;
-  font-weight:bold;
-  padding: 10px;
-  background-color:#f7f7e8;
-}
-
-.candidate_row_title{
-	position: absolute;
-	width: 86%;
-	height: 30px;
-	left: 100px;
-	top: 220px;
-	color:white;
-}
-
-.candidate_row{
-	position: absolute;
-	width: 90%;
-	height: 25px;
-	left: 50px;
-	top: 250px;
-	color:black;
-}
-
-.favourite_container{
-	position:absolute;
-	width: 100%;
-	height: 100%;
-	left:0px;
-	top: 90px;
-	color:black;
-	border: 1px solid #56A6F0;
-	box-sizing: border-box;
-}
-
-.favourite_title{
-	position: absolute;
-	width: 260px;
-	height: 40px;
-
-	font-family: Red Hat Text;
-	font-style: normal;
-	font-weight: bold;
-	font-size: 30px;
-	color: #56A6F0;
-	line-height: 32px;
-	
-	top:100px;
-	left:20px;
-	border:0;
-}
-
-.delete_btn{
-	color: white;
-    font-size: 20px;
-    font-style: bold;
-    text-align:center;
-    width:100px; 
-    height:50px;
-    background-color: dodgerblue;
-    border-color: black;
-    margin-top:50px;
-    margin-left:45%;
-    cursor:pointer;
-}
 /**/
 
 /*RECRUITER*/
 .candidate_btn{
-	color:white;
+	color:lightblue;
 	font-size:30px;
-	font-style:bold;
+	font-weight: bold;
 	position:relative;
-	text-align:center;
+	text-align:center; 
+	text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
+	width:250px;
+	height:150px;
 	background-repeat:no-repeat; 
 	background-size: 150px;
 	background-position:center;
@@ -316,11 +243,14 @@ th{
 }
 
 .company_btn{
-	color:white;
+	color:lightblue;
 	font-size:30px;
-	font-style:bold;
+	font-weight: bold;
 	position:relative;
-	text-align:center;
+	text-align:center; 
+	text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
+	width:250px;
+	height:150px;
 	background-repeat:no-repeat; 
 	background-size: 150px;
 	background-position:center;
@@ -328,11 +258,59 @@ th{
 	cursor:pointer;
 }
 
+.table_candidates{
+	margin-left:40%;
+	margin-top:50px;
+	border-collapse: collapse;
+	border:2px solid blue;
+}
+
+.table_offers{
+	margin-left:25%;
+	margin-top:50px;
+	border-collapse: collapse;
+	border:2px solid blue;
+}
+
+.requirements{
+	list-style-type:none;
+	background-color:white;
+	text-align:left;
+	width:150px;
+}
+
+.publish_btn{
+	color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align:center;
+    width:150px; 
+    height:70px;
+    background-color: dodgerblue;
+    border-color: black;
+    margin-top:50px;
+    cursor:pointer;
+}
+
+.cancel_btn{
+	color: black;
+    font-size: 20px;
+    font-weight: bold;
+    text-align:center;
+    width:150px; 
+    height:70px;
+    background-color: lightgrey;
+    border-color: black;
+    margin-top:50px;
+    cursor:pointer;
+}
+/**/
+
 /*ENTREPRENEUR*/
 .fav_business{
 	color:lightblue;
 	font-size:30px;
-	font-style:bold;
+	font-weight: bold;
 	position:relative;
 	text-align:center; 
 	text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
@@ -560,7 +538,7 @@ th{
 .id_btn{
 	color:lightblue;
 	font-size:30px;
-	font-style:bold;
+	font-weight: bold;
 	position:relative;
 	text-align:center; 
 	text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
@@ -573,11 +551,10 @@ th{
 	cursor:pointer;
 }
 
-
 .offers_btn{
 	color:lightblue;
 	font-size:30px;
-	font-style:bold;
+	font-weight: bold;
 	position:relative;
 	text-align:center; 
 	text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
@@ -615,78 +592,6 @@ th{
 	width:40px;
 	cursor:pointer;
 }
-/**/
-
-.text_title{
-	position: absolute;
-	width: 380px;
-	height: 40px;
-
-	font-size: 22px;
-	line-height: 32px;
-	
-	top:162px;
-	left:20px;
-	border:0;
-}
-
-.text_subtitle{
-	position: absolute;
-	width: 280px;
-	height: 40px;
-	font-weight: bold;
-	font-size: 20px;
-	line-height: 32px;	
-	top:195px;
-	left:40px;
-	border:0;
-}
-
-.text_subsubtitle{
-	position: absolute;
-	width: 550px;
-	height: 40px;
-
-	font-size: 15px;
-	line-height: 32px;
-	
-	top:230px;
-	left:60px;
-	border:0;
-}
-
-.text_input{
-	position:relative;
-    width:200px; 
-    height:20px; 
-    font-size: 15px;
-    color:black;
-}
-
-.login_btns{
-	height: 31px; 
-	width: 66px; 
-	border-color: #0080FF; 
-	font-size: 15px; 
-	font-family: System; 
-	cursor: pointer;
-}
-
-.job_btn{
-	width:250px;
-    height:30px;
-    margin-left:130px;
-    margin-right:-500px;
-    font-size:20px;
-    text-overflow: ellipsis;
-    text-align:right;
-    color:grey;
-    margin-top:200px;
-    background-image: url('../icons/candidate.png');
-	background-repeat: no-repeat;
-    background-position: left;
-	background-size:24px
-}
 
 .login_frame{
 	height: 350px; 
@@ -716,8 +621,52 @@ th{
 	cursor: pointer;
 }
 
+.login_btns{
+	height: 31px; 
+	width: 66px; 
+	border-color: #0080FF; 
+	font-size: 15px; 
+	font-family: System; 
+	cursor: pointer;
+}
 
-      
+.table{
+	margin-left:30%;
+	margin-top:50px;
+	border-collapse: collapse;
+	border:2px solid blue;
+}
+
+td{
+  border: 1px solid lightgrey;
+  text-align: center;
+  padding: 10px;
+  background-color:white;
+}
+
+th{
+  border: 1px solid lightgrey;
+  text-align: center;
+  font-weight:bold;
+  padding: 10px;
+  background-color:#f7f7e8;
+}
+
+.delete_btn{
+	color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align:center;
+    width:100px; 
+    height:50px;
+    background-color: dodgerblue;
+    border-color: black;
+    margin-top:50px;
+    margin-left:45%;
+    cursor:pointer;
+}
+/**/
+
 .joboffers{
 	width:250px;
     height:60px;
@@ -762,13 +711,6 @@ th{
 	top: 70px;
 	
 }
-
-
-
-
-
-
-
 
 .favouritejoboffer_container{
 	position: absolute;

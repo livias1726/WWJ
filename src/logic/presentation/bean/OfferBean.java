@@ -18,11 +18,11 @@ public class OfferBean {
 	private List<String> requirements;
 	private String requirements2;
 	private AddressBean branch;
-	private LocalTime start;
-	private LocalTime finish;
+	private String start;
+	private String finish;
 	private String baseSalary;
-	private LocalDate expiration;
-	private LocalDate upload;
+	private String expiration;
+	private String upload;
 	private int candidates;
 	
 	public JobBean getPosition() {
@@ -69,44 +69,12 @@ public class OfferBean {
 		this.branch = branch;
 	}
 
-	public LocalTime getStart() {
-		return start;
-	}
-
-	public void setStart(LocalTime start) {
-		this.start = start;
-	}
-
-	public LocalTime getFinish() {
-		return finish;
-	}
-
-	public void setFinish(LocalTime finish) {
-		this.finish = finish;
-	}
-
 	public String getCompanyName() {
 		return companyName;
 	}
 
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
-	}
-	
-	public LocalDate getExpiration() {
-		return expiration;
-	}
-
-	public void setUpload(LocalDate upload) {
-		this.upload = upload;
-	}
-	
-	public LocalDate getUpload() {
-		return upload;
-	}
-
-	public void setExpiration(LocalDate expiration) {
-		this.expiration = expiration;
 	}
 
 	public String getTaskDescription() {
@@ -140,24 +108,82 @@ public class OfferBean {
 	public void setCandidates(int candidates) {
 		this.candidates = candidates;
 	}
+
+	public String getStart() {
+		return start;
+	}
+
+	public void setStart(String start) {
+		this.start = start;
+	}
+
+	public String getFinish() {
+		return finish;
+	}
+
+	public void setFinish(String finish) {
+		this.finish = finish;
+	}
+
+	public String getExpiration() {
+		return expiration;
+	}
+
+	public void setExpiration(String expiration) {
+		this.expiration = expiration;
+	}
+
+	public String getUpload() {
+		return upload;
+	}
+
+	public void setUpload(String upload) {
+		this.upload = upload;
+	}
 	
-	public void verifyFieldsValidity(LocalTime start, LocalTime finish, LocalDate expiration) throws InvalidFieldException {
+	public void verifyFieldsValidity(String start, String finish, String expiration) throws InvalidFieldException {
 		if(start != null) {
 			if(finish == null) {
-				throw new InvalidFieldException("Please, provide a 'Finish' time or remove alse the 'Start' one");
+				throw new InvalidFieldException("Please, provide a 'Finish' time or remove also the 'Start' one");
 			}else {
-				if(start.isAfter(finish)) {
+				if(LocalTime.parse(start).isAfter(LocalTime.parse(finish))) {
 					throw new InvalidFieldException("The 'Finish' time must be after the 'Start' time");
 				}
 			}
 		}
 		
 		if(start == null && finish != null) {
-			throw new InvalidFieldException("Please, provide a 'Start' time or remove alse the 'Finish' one");
+			throw new InvalidFieldException("Please, provide a 'Start' time or remove also the 'Finish' one");
 		}
 	
-		if(expiration.isBefore(LocalDate.now())) {
-			throw new InvalidFieldException("The Expiration date must be after in the future");
+		if(LocalDate.parse(expiration).isBefore(LocalDate.now())) {
+			throw new InvalidFieldException("The Expiration date must be in the future");
+		}
+	}
+	
+	public void convertCurrencyFormat() {
+		String[] curr = this.getBaseSalary().split(" ");
+		switch(curr[0]) {
+		case "USD":
+			this.setBaseSalary("$" + " " + curr[1]);
+			break;
+		case "EUR":
+			this.setBaseSalary("€" + " " + curr[1]);
+			break;
+		case "GBP":
+			this.setBaseSalary("£" + " " + curr[1]);
+			break;
+		case "$":
+			this.setBaseSalary("USD" + " " + curr[1]);
+			break;
+		case "€":
+			this.setBaseSalary("EUR" + " " + curr[1]);
+			break;
+		case "£":
+			this.setBaseSalary("GBP" + " " + curr[1]);
+			break;
+		default:
+			break;
 		}
 	}
 }

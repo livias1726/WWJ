@@ -1,5 +1,8 @@
 package logic.service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +42,8 @@ public class OfferFactory implements AbstractFactory{
     		branch.setCity(i.getBranch().getCity());
     		offerBean.setBranch(branch);
     		
-    		offerBean.setUpload(i.getUpload());
-    		offerBean.setExpiration(i.getExpiration());
+    		offerBean.setUpload(i.getUpload().toString());
+    		offerBean.setExpiration(i.getExpiration().toString());
     		
     		dest.add(offerBean);
     	}
@@ -59,8 +62,8 @@ public class OfferFactory implements AbstractFactory{
 			jobBean.setName(i.getPosition().getName());
 			bean.setPosition(jobBean);
 			
-			bean.setUpload(i.getUpload());
-			bean.setExpiration(i.getExpiration());
+			bean.setUpload(i.getUpload().toString());
+			bean.setExpiration(i.getExpiration().toString());
 			bean.setCandidates(i.getCandidates());
 			
 			dest.add(bean);
@@ -82,10 +85,10 @@ public class OfferFactory implements AbstractFactory{
     	
     	bean.setBranch((new AddressFactory()).extractAddressBean(offer.getBranch()));	
     	
-    	bean.setStart(offer.getStart());
-    	bean.setFinish(offer.getFinish());
+    	bean.setStart(offer.getStart().toString());
+    	bean.setFinish(offer.getFinish().toString());
     	bean.setBaseSalary(offer.getBaseSalary());
-    	bean.setExpiration(offer.getExpiration());
+    	bean.setExpiration(offer.getExpiration().toString());
     	
     	List<String> requirements = new ArrayList<>();
     	for(String i: offer.getRequirements()) {
@@ -109,10 +112,10 @@ public class OfferFactory implements AbstractFactory{
     	branch.setId(bean.getBranch().getId());
     	offer.setBranch(branch);
     	
-    	offer.setStart(bean.getStart());
-    	offer.setFinish(bean.getFinish());
+    	offer.setStart(LocalTime.parse(bean.getStart(), DateTimeFormatter.ofPattern("H[:mm]")));
+    	offer.setFinish(LocalTime.parse(bean.getFinish(), DateTimeFormatter.ofPattern("H[:mm]")));
     	offer.setBaseSalary(bean.getBaseSalary());
-    	offer.setExpiration(bean.getExpiration());
+    	offer.setExpiration(LocalDate.parse(bean.getExpiration(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
     	
     	List<String> requirements = new ArrayList<>();
     	for(String i: bean.getRequirements()) {

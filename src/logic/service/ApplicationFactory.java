@@ -25,7 +25,7 @@ public class ApplicationFactory implements AbstractFactory {
 			bean.setPosition(job);
 			
 			bean.setApplication(i.getApplication());
-			bean.setExpiration(i.getExpiration());
+			bean.setExpiration(i.getExpiration().toString());
 			
 			dest.add(bean);
 		}

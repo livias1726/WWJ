@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@page import="java.util.StringTokenizer"
-		import="java.time.LocalDate"%>
+
+<%@page import="java.util.StringTokenizer"%>
+		
 <%@ page import="logic.presentation.bean.JobBean"
 		 import="logic.presentation.bean.CountryBean"
 		 import="logic.presentation.bean.OfferBean"
@@ -8,6 +9,7 @@
 		 import="logic.application.control.ViewResultsControl"
 		 import="logic.application.control.ViewOfferControl"
 		 import="logic.exceptions.NoResultFoundException"%>
+		 
 <%@page errorPage="WEB-INF/error.jsp"%>
 		
 <!DOCTYPE html>
@@ -35,8 +37,7 @@
 	offerBean.setBranch(offer.getBranch());
 	offerBean.setExpiration(offer.getExpiration());
 	offerBean.setRequirements(offer.getRequirements());
-	offerBean.setStart(offer.getStart());
-	offerBean.setFinish(offer.getFinish());
+	offerBean.setStart(offer.getStart());offerBean.setFinish(offer.getFinish());
 	offerBean.setBaseSalary(offer.getBaseSalary());
 	
 	String redirectURL = "http://localhost:8080/WorldWideJob/offer_details.jsp";
@@ -65,7 +66,7 @@
 	    		<%if(jobBean.getCategory() == null) {%>
 	    			<p><input class="result_label" name="resultLbl" value="<%=countryBean.getName()%>"></p>
 	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled>
-		    		<select class="order_select" id="order" name="orderselect">
+		    		<select class="order_select" id="order_off" name="orderselect">
 		    			<option>Upload</option>
 		    			<option>Expiration</option>
 		    		</select></p>
@@ -106,7 +107,7 @@
 	    		<%}else if(countryBean.getName() == null) {%>
 	    			<p><input class="result_label" name="resultLbl" value="<%=jobBean.getCategory()%>"></p>
 	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled>
-		    		<select class="order_select" id="order" name="orderselect">
+		    		<select class="order_select" id="order_off" name="orderselect">
 		    			<option>Upload</option>
 		    			<option>Expiration</option>
 		    		</select></p>
@@ -147,7 +148,7 @@
 	    		<%}else{%>
 	    			<p><input class="result_label" name="resultLbl" value="<%=jobBean.getCategory() + " in " +countryBean.getName()%>"></p>
 	    			<p><input class="order_by" type="text" name="orderby" value="Order by:" disabled>
-		    		<select class="order_select" id="order" name="orderselect">
+		    		<select class="order_select" id="order_off" name="orderselect">
 		    			<option>Upload</option>
 		    			<option>Expiration</option>
 		    		</select></p>

@@ -8,6 +8,7 @@
 <%@ page import="logic.presentation.bean.JobBean"
 		 import="logic.presentation.bean.CountryBean"
 		 import="logic.presentation.bean.OfferBean"
+		 import="logic.presentation.bean.AccountBean"
 		 import="logic.presentation.bean.ApplicationBean"
 		 import="logic.application.control.ApplyToOfferControl"
 		 import="logic.application.control.SeekerAccountControl"
@@ -15,6 +16,9 @@
  		 import="logic.application.SessionFacade"%>
     
 <!DOCTYPE html>
+
+<jsp:useBean id="accountBean" class="logic.presentation.bean.AccountBean" scope="session"/>
+<jsp:setProperty name="accountBean" property="*"/>
 
 <jsp:useBean id="countryBean" class="logic.presentation.bean.CountryBean" scope="session"/>
 <jsp:setProperty name="countryBean" property="*"/>
@@ -58,14 +62,18 @@
 	    		<div style="position:absolute;right:25px;top:80px;height:40px;width:40px;">
 	    			<button class="star_button_nset" id="star" name="star"></button>
 					<%if(SessionFacade.getSession().getID() != null) {
-						for(OfferBean i: ManageFavouriteOffersControl.getInstance().retrieveFavourites()) {
-							if(i.getId() == offerBean.getId()) {%>
-								<script>
-								$("#star").removeClass("star_button_nset");
-								$("#star").addClass("star_button_set");
-								</script>
-							<%}
-						}
+						if(SessionFacade.getSession().getID() != accountBean.getId()){%>
+		     				<script>document.getElementById("star").style.display = "none";</script>
+		     	  	  <%}else{
+							for(OfferBean i: ManageFavouriteOffersControl.getInstance().retrieveFavourites()) {
+								if(i.getId() == offerBean.getId()) {%>
+									<script>
+									$("#star").removeClass("star_button_nset");
+									$("#star").addClass("star_button_set");
+									</script>
+								<%}
+							}
+		     	  	    }
 					}%>
 					
 					<%if(request.getParameter("star") != null){
@@ -148,6 +156,7 @@
 			     	<p></p>
 			     	<label for="sal" style="margin-left:50px">Base salary</label>
 		     		<div class="offer_field" id="sal">
+		     			<%offerBean.convertCurrencyFormat();%>
 			     		<%=offerBean.getBaseSalary()%>
 			     	</div>
 	    		</div>
@@ -160,16 +169,23 @@
 			     		<%=offerBean.getExpiration()%>
 			     	</div>
 			     	<p></p>
+			     	
 			     	<button class="apply_btn" name="apply" id="apply">Apply</button>
-			     	<%for(ApplicationBean i: SeekerAccountControl.getInstance().retrieveApplications()) {
-						if(i.getId() == offerBean.getId()) {%>
-							<script>
-							var x = document.getElementById("apply");
-							x.disabled = true;
-							x.style.opacity=0.5;
-							</script>
-					  <%}
-					  }%>
+			     	<%if(SessionFacade.getSession().getID() != null) {
+			     		if(SessionFacade.getSession().getID() != accountBean.getId()){%>
+			     			<script>document.getElementById("apply").style.display = "none";</script>
+			     	  <%}else{
+					     	for(ApplicationBean i: SeekerAccountControl.getInstance().retrieveApplications()) {
+								if(i.getId() == offerBean.getId()) {%>
+									<script>
+									var x = document.getElementById("apply");
+									x.disabled = true;
+									x.style.opacity=0.5;
+									</script>
+							  <%}
+						  	}
+			     		}
+			     	  }%>
 					  
 					<%if(request.getParameter("apply") != null){
 						 applicationBean.setId(offerBean.getId());

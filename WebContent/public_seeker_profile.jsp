@@ -23,7 +23,7 @@
 
 <%Class.forName("com.mysql.cj.jdbc.Driver");%>
 
-<%accountBean = ManageAccountControl.getInstance().retrieveAccount();%>
+<%accountBean = ManageAccountControl.getInstance().retrieveAccount(accountBean.getId());%>
 
 <html lang="en">
 	<head>
@@ -36,7 +36,7 @@
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		<title>WorldWideJob - Profile</title>	
+		<title>WorldWideJob - <%=accountBean.getUser().getFirstName() + " " + accountBean.getUser().getLastName()%></title>
 	</head>
 	<body>
 		<jsp:include page="WEB-INF/toolbar.jsp"/>
@@ -54,18 +54,7 @@
 	    		    reader.readAsDataURL(<%=accountBean.getPic()%>);
 	    		    </script>
 	    		<%}%>
-	    		<input class="change_pic" type="file" id="file_selector" name="pic" accept="image/*">			
-				<button id="pic_hid" name="pic_hid" value="" style="display:none"></button>
-				
-				<%if(request.getParameter("pic_hid") != null){
-						byte[] array = request.getParameter("pic_hid").getBytes();
-						File file = new File("temp.tmp");
-					    try(FileOutputStream outs = new FileOutputStream(file)){
-					    	outs.write(array);
-						    accountBean.setPic(file);
-					    }
-					    ManageAccountControl.getInstance().updateAccountPic(accountBean);
-				  }%>
+	    		
 				<div class="name">
 	    			<h2><%=accountBean.getUser().getFirstName() + " " + accountBean.getUser().getLastName()%></h2>
 	    			<h3>Job Seeker</h3>
@@ -85,9 +74,7 @@
 							<script>resultDialog()</script>
 							<%return;
 						}%>
-						<li><button class="id_btn" type="button" onClick="javascript:window.location='personalInfo.jsp';">Personal Info</button><br></li>
-						<li><button class="offers_btn" type="button" onClick="javascript:window.location='applications.jsp';">Applications</button></li>
-						<li><button class="fav_offers" type="button" onClick="javascript:window.location='favourite_offers.jsp';">Favourites</button></li>
+						<li><button class="id_btn" type="button" onClick="javascript:window.location='personalInfo.jsp';"><br>Personal Info</button></li>
 					</ul>
 				</div>
 	    	</form>

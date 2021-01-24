@@ -12,12 +12,17 @@
 	<div class="dropdown" style="float:right;">
 		<button class="menu_btn"></button>
 	    <div class="dropdown-content" style="right:0;">
-	      	<%if(SessionFacade.getSession().isPremium()){%>
+	    	<%if(SessionFacade.getSession().getID() != null && SessionFacade.getSession().getCurrUserType() == Users.RECRUITER){%>
+	    		<a href="http://localhost:8080/WorldWideJob/publish_offer_form.jsp">Publish a new offer</a>
+	    	<%}
+	    	
+	      	  if(SessionFacade.getSession().isPremium()){%>
 	      		<a href="">Cancel premium subscription</a>
 	      	<%} else {%>
 	      		<a href="html/pricing.html">Buy premium version</a>
-	      		<a href="html/support.html">Support</a>
-	      	<%}%>		     		
+	      	<%}%>	
+	      	
+	      	<a href="html/support.html">Support</a>	     		
 	   	</div>
 	</div>
 	

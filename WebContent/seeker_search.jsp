@@ -64,7 +64,7 @@
 		    			<%} %>	    			
 		    		</select> 
 		    		&nbsp;&nbsp;
-		    		Job:
+		    		<label style="color:white">Job:</label>
 		    		<select class="search_select" name="job" style="margin-right:100px">
 		    			<option></option>
 		    			<%for(JobBean i: ViewOfferControl.getInstance().retrieveJobs()){%>

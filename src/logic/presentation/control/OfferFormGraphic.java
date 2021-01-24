@@ -1,8 +1,6 @@
 package logic.presentation.control;
 
 import java.net.URL;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -113,14 +111,14 @@ public class OfferFormGraphic extends ToolBarGraphic{
 		
 		reqList.setCellFactory(TextFieldListCell.forListView());
 	
-		pubBtn.disableProperty().bind((jobCombo.valueProperty().isNull())
-											 .or(reqList.itemsProperty().isNull())
-											 .or(descTxt.textProperty().isEmpty())
-											 .or(choiceBranch.valueProperty().isNull())
-											 .or(startTime.textProperty().isEmpty())
-											 .or(finishTime.textProperty().isEmpty())
-											 .or(salary.textProperty().isNull())
-											 .or(expDate.valueProperty().isNull()));
+		pubOff.disableProperty().bind((jobCombo.valueProperty().isNull())
+										.or(reqList.itemsProperty().isNull()
+										.or(descTxt.textProperty().isEmpty()
+										.or(choiceBranch.valueProperty().isNull()
+										.or(startTime.textProperty().isEmpty()
+										.or(finishTime.textProperty().isEmpty()
+										.or(salary.textProperty().isNull()
+										.or(expDate.valueProperty().isNull()))))))));
 	}
 	
 	@FXML
@@ -192,11 +190,11 @@ public class OfferFormGraphic extends ToolBarGraphic{
     	branch.setId(branchId.get(choiceBranch.getSelectionModel().getSelectedIndex()));
     	offer.setBranch(branch);
 
-    	offer.setStart(LocalTime.parse(startTime.getText(), DateTimeFormatter.ofPattern("H[:mm]")));
-    	offer.setFinish(LocalTime.parse(finishTime.getText(), DateTimeFormatter.ofPattern("H[:mm]")));
+    	offer.setStart(startTime.getText());
+    	offer.setFinish(finishTime.getText());
     	
     	offer.setBaseSalary(currBox.getValue() + " " + salary.getText());
-    	offer.setExpiration(expDate.getValue());
+    	offer.setExpiration(expDate.getValue().toString());
     	
     	try {
     		offer.verifyFieldsValidity(offer.getStart(), offer.getFinish(), offer.getExpiration());

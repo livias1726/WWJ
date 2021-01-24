@@ -34,11 +34,13 @@ function selectElem(source){
 	}else{
 		var temp="";
 		for(i = 0; i < check.length; i++){
-			arg = temp;
-			if(arg == ""){
-				temp = check[i].value;
-			}else{
-				temp = arg + "&" + check[i].value;
+			if(check[i].checked){
+				arg = temp;
+				if(arg == ""){
+					temp = check[i].value;
+				}else{
+					temp = arg + "&" + check[i].value;
+				}
 			}
 		}
 		$("#delete").val(temp);
