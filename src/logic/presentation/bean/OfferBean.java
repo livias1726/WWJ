@@ -161,7 +161,29 @@ public class OfferBean {
 		}
 	}
 	
-	public void convertCurrencyFormat() {
+	public void convertCurrencyToStr() {
+		String[] curr = this.getBaseSalary().split(" ");
+		String tmp = null;
+		switch(curr[0]) {
+			case "$":
+				tmp = "USD";
+				break;
+			case "€":
+				tmp = "EUR";
+				break;
+			case "£":
+				tmp = "GBP";
+				break;
+			default:
+				break;
+		}
+		
+		if(tmp != null) {
+			setBaseSalary(tmp + " " + curr[1]);
+		}
+	}
+	
+	public void convertCurrencyToSym() {
 		String[] curr = this.getBaseSalary().split(" ");
 		String tmp = null;
 		switch(curr[0]) {
@@ -173,15 +195,6 @@ public class OfferBean {
 				break;
 			case "GBP":
 				tmp = "£";
-				break;
-			case "$":
-				tmp = "USD";
-				break;
-			case "€":
-				tmp = "EUR";
-				break;
-			case "£":
-				tmp = "GBP";
 				break;
 			default:
 				break;

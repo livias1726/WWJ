@@ -164,7 +164,7 @@
 			     	
 			     	<label for="sal" style="margin-left:50px">Base salary</label>
 		     		<div class="offer_field" id="sal">
-		     			<%offerBean.convertCurrencyFormat();%>
+		     			<%offerBean.convertCurrencyToStr();%>
 			     		<%=offerBean.getBaseSalary()%>
 			     	</div>
 	    		</div>

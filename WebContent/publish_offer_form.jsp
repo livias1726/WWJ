@@ -93,7 +93,7 @@
 	
 	try {
 		offerBean.verifyFieldsValidity(offerBean.getStart(), offerBean.getFinish(), offerBean.getExpiration());
-		offerBean.convertCurrencyFormat();
+		offerBean.convertCurrencyToSym();
 		
 		PublishOfferControl.getInstance().publishNewOffer(offerBean);%>
 		
