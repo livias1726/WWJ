@@ -306,35 +306,6 @@
     cursor:pointer;
 }
 
-.save_btn{
-	color: white;
-    font-size: 15px;
-    font-weight: bold;
-    text-align:center;
-    width:100px;
-    background-color: dodgerblue;
-    border-color: black;
-    position:absolute;
-    right:500px;
-    top:550px;
-    cursor:pointer;	
-}
-
-.change_btn{
-	color: white;
-    font-size: 20px;
-    font-weight: bold;
-    text-align:center;
-    width:80px; 
-    height:30px;
-    background-color: dodgerblue;
-    border-color: black;
-    position:relative;
-    margin-left:25px;
-    margin-top:25px;
-    cursor:pointer;	
-}
-
 .table_branch{
 	border-collapse: collapse;
 	border:2px solid blue;
@@ -699,6 +670,35 @@ th{
     margin-top:50px;
     margin-left:45%;
     cursor:pointer;
+}
+
+.save_btn{
+	color: white;
+    font-size: 15px;
+    font-weight: bold;
+    text-align:center;
+    width:100px;
+    background-color: dodgerblue;
+    border-color: black;
+    position:absolute;
+    right:500px;
+    top:550px;
+    cursor:pointer;	
+}
+
+.change_btn{
+	color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align:center;
+    width:80px; 
+    height:30px;
+    background-color: dodgerblue;
+    border-color: black;
+    position:relative;
+    margin-left:25px;
+    margin-top:25px;
+    cursor:pointer;	
 }
 /**/
 

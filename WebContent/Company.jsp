@@ -9,6 +9,8 @@
 		 import="logic.application.control.RecruiterAccountControl"
 		 import="logic.application.control.ManageAccountControl"%>
 
+<%@page errorPage="WEB-INF/error.jsp"%>
+
 <!DOCTYPE html>
 
 <jsp:useBean id="companyBean" class="logic.presentation.bean.CompanyBean" scope="session"/>

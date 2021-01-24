@@ -2,7 +2,8 @@
 
 <%@ page import="logic.presentation.bean.UserBean"
 		 import="logic.presentation.bean.AccountBean"
-		 import="logic.application.control.ManageAccountControl"%>
+		 import="logic.application.control.ManageAccountControl"
+		 import="logic.application.SessionFacade"%>
 
 <%@page errorPage="WEB-INF/error.jsp"%>
 
@@ -49,7 +50,8 @@
 	    		<div id="container">
 					<ul id="griglia">
 						<li><button class="company_btn" type="button" onClick="javascript:window.location='company.jsp';">Company</button></li>
-						<li><button class="id_btn" type="button" onClick="javascript:window.location='personalInfo.jsp';">Personal Info</button></li>
+						<li><button class="id_btn" type="button" onClick="javascript:window.location='personal_info.jsp';">Personal Info</button></li>
+						
 						<li><button class="offers_btn" type="button" onClick="javascript:window.location='published_offers.jsp';">Job Offers</button></li>
 						<li><button class="candidate_btn" type="button" onClick="javascript:window.location='candidates.jsp';">Candidates</button></li>
 					</ul>

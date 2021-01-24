@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
+<%@ page import="java.io.InputStream"
+		 import="java.io.File"
+		 import="java.io.FileOutputStream"
+		 import="java.io.FileInputStream"
+		 import="java.net.URL"%>
+		 
 <%@ page import="logic.presentation.bean.UserBean"
 		 import="logic.presentation.bean.AccountBean"
 		 import="logic.application.control.SeekerAccountControl"
 		 import="logic.application.control.ManageAccountControl"
-		 import="java.io.InputStream"
-		 import="java.io.File"
-		 import="java.io.FileOutputStream"
-		 import="java.io.FileInputStream"
-		 import="java.net.URL"
-		 import="logic.exceptions.NoResultFoundException"%>
+		 import="logic.exceptions.NoResultFoundException"
+		 import="logic.application.SessionFacade"%>
 		 
 <!DOCTYPE html>
 
@@ -23,7 +26,10 @@
 
 <%Class.forName("com.mysql.cj.jdbc.Driver");%>
 
-<%accountBean = ManageAccountControl.getInstance().retrieveAccount();%>
+<%
+accountBean = ManageAccountControl.getInstance().retrieveAccount();
+userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacade.getSession().getID());
+%>
 
 <html lang="en">
 	<head>
@@ -85,7 +91,7 @@
 							<script>resultDialog()</script>
 							<%return;
 						}%>
-						<li><button class="id_btn" type="button" onClick="javascript:window.location='personalInfo.jsp';">Personal Info</button><br></li>
+						<li><button class="id_btn" type="button" onClick="javascript:window.location='personal_info.jsp';">Personal Info</button><br></li>
 						<li><button class="offers_btn" type="button" onClick="javascript:window.location='applications.jsp';">Applications</button></li>
 						<li><button class="fav_offers" type="button" onClick="javascript:window.location='favourite_offers.jsp';">Favourites</button></li>
 					</ul>

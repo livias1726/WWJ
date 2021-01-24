@@ -1,6 +1,8 @@
 package logic.presentation.control;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -84,7 +86,7 @@ public class PersonalInfoGraphic implements Initializable {
 	    	emailField.setText(user.getEmail());
 	    	pwdField.setText(user.getPassword());
 	    	city.setText(user.getCity());
-	    	birth.setValue(user.getBirth());
+	    	birth.setValue(LocalDate.parse(user.getBirth(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 			
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
@@ -152,7 +154,7 @@ public class PersonalInfoGraphic implements Initializable {
 		} 
 
     	bean.setCity(city.getText());
-    	bean.setBirth(birth.getValue());
+    	bean.setBirth(birth.getValue().toString());
     
     	try {
 			ManageAccountControl.getInstance().changePersonalInfo(bean);

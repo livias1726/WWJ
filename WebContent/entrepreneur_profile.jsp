@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
 <%@ page import="logic.presentation.bean.UserBean"
 		 import="logic.presentation.bean.AccountBean"
-		 import="logic.application.control.ManageAccountControl"%>   
+		 import="logic.application.control.ManageAccountControl"
+		 import="logic.application.SessionFacade"%>   
 
 <%@page errorPage="WEB-INF/error.jsp"%>
 		
@@ -18,6 +19,7 @@
 
 <%
 accountBean = ManageAccountControl.getInstance().retrieveAccount();
+userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacade.getSession().getID());
 %>
 
 <html lang="en">
@@ -67,7 +69,7 @@ accountBean = ManageAccountControl.getInstance().retrieveAccount();
 		    	<div id="container">
 					<ul id="griglia">
 						<li><button class="fav_business" type="button" onClick="javascript:window.location='favourite_businesses.jsp';">Business Plans</button></li>
-						<li><button class="id_btn" type="button" onClick="javascript:window.location='personalInfo.jsp';">Personal Info</button></li>
+						<li><button class="id_btn" type="button" onClick="javascript:window.location='personal_info.jsp';">Personal Info</button></li>
 					</ul>
 	    		</div>				
 	    	</form>

@@ -1,6 +1,5 @@
 package logic.presentation.bean;
 
-import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +12,7 @@ public class UserBean {
     private String firstName;
 	private String lastName;
 	private String city;
-	private LocalDate birth;
+	private String birth;
 	
 	public UserBean() {
 		/*Default constructor*/
@@ -59,11 +58,11 @@ public class UserBean {
 		this.city = city;
 	}
 
-	public LocalDate getBirth() {
+	public String getBirth() {
 		return birth;
 	}
 
-	public void setBirth(LocalDate birth) {
+	public void setBirth(String birth) {
 		this.birth = birth;
 	}
 	

@@ -98,14 +98,7 @@ public class ManageAccountControl {
 
 	public void changePersonalInfo(UserBean bean) throws DatabaseFailureException {
     	AbstractFactory factoryUs = Factory.getInstance().getObject(Types.USER);
-		User user = (User)factoryUs.createObject();
-		
-		user.setEmail(bean.getEmail());
-		user.setPwd(bean.getPassword());
-		user.setFirstName(bean.getFirstName());
-		user.setLastName(bean.getLastName());
-    	user.setCity(bean.getCity());
-    	user.setBirth(bean.getBirth());
+		User user = ((UserFactory)factoryUs).extractUser(bean);
 		try {
 			user.savePersonalInfoOnDB(SessionFacade.getSession().getID());
 		} catch (SQLException e) {
