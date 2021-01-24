@@ -164,23 +164,16 @@ public class OfferBean {
 	public void convertCurrencyToStr() {
 		String[] curr = this.getBaseSalary().split(" ");
 		String tmp = null;
-		switch(curr[0]) {
-			case "$":
-				tmp = "USD";
-				break;
-			case "€":
-				tmp = "EUR";
-				break;
-			case "£":
-				tmp = "GBP";
-				break;
-			default:
-				break;
+		
+		if(curr[0].equals("$")) {
+			tmp = "USD";
+		}else if(curr[0].equals("€")) {
+			tmp = "EUR";
+		}else {
+			tmp = "GBP";
 		}
 		
-		if(tmp != null) {
-			setBaseSalary(tmp + " " + curr[1]);
-		}
+		setBaseSalary(tmp + " " + curr[1]);
 	}
 	
 	public void convertCurrencyToSym() {
