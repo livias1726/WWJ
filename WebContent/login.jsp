@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
 <%@ page import="logic.presentation.bean.UserBean"
-		import="logic.presentation.bean.AccountBean"
-		import="logic.application.control.ManageAccountControl"
-		import="logic.application.control.LoginControl"
-		import="logic.application.SessionFacade"
-		import="logic.application.Users"%>
+		 import="logic.presentation.bean.AccountBean"
+		 import="logic.application.control.ManageAccountControl"
+		 import="logic.application.control.LoginControl"
+		 import="logic.application.SessionFacade"
+		 import="logic.application.Users"%>
+		 
+<%@ page errorPage="WEB-INF/error.jsp"%>
+
 <!DOCTYPE html>
 
 <jsp:useBean id="userBean" class="logic.presentation.bean.UserBean" scope="session"/>
@@ -44,43 +48,40 @@
 		<link rel="icon" href="icons/main_icon.png">
 	    <link href="css/style.css" rel="stylesheet">
 	    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
-	    <title>WorldWideJob - login</title>
+	    <script src="js/login.js"></script>
+	    <title>WorldWideJob - Login</title>
 	</head>
 	<body>
-		    <form action="login.jsp" name="logform" method="POST">
-		    	<div style="margin: 100px 0px 0px 750px">
-				  <button class="login_btns" type="button" onClick="javascript:window.location='signUp.jsp';">Sign Up</button>
-				</div>	
-		    	<fieldset class="login_frame">
-    				<legend style="color: #0080FF; font-size: 30px; font-family: System;">LOGIN</legend>
-				        <div>
-				            <div style="margin-top: 40px">
-				                <label for="email">Email:</label>
-				                <input type="text" id="email" name="email" style="margin-left: 52px">
-				            </div>
-				        </div>
-				        <div>
-				            <div style="margin-top: 30px">
-				                <label for="password">Password:</label>
-				                <input type="password" id="password" name="password" style="margin-left: 30px">
-				            </div>
-				        </div>
-				        <div>
-				            <input class="login_btns" type="submit" name="login" value="Sign In" style="margin: 30px 120px">
-				        </div>
-				        <div>
-				        	<button type="button" class="login_fb" id="loginFb"></button>
-				        </div>
-				        <div>
-				            <input class="login_gg" type="submit" name="loginGoogle" value="">
-				        </div>
-				        <div class="alert_msg" id="unavailable" style="display:none;color: red;font-weight: bold;">
-						    Sorry, this function is not available yet.
-					  	</div>
-				  </fieldset>
-		    </form>
+	    <form action="login.jsp" name="logform" method="POST">
+	    	<button class="login_btns" type="button" style="margin-left:750px" onClick="javascript:window.location='sign_up.jsp';">Sign Up</button>
+	    	<fieldset class="login_frame">
+   				<legend style="color: #0080FF; font-size: 30px;">LOGIN</legend>
+			        <div>
+			            <div style="margin-top: 40px">
+			                <label for="email">Email:</label>
+			                <input type="text" id="email" name="email" style="margin-left: 52px">
+			            </div>
+			        </div>
+			        <div>
+			            <div style="margin-top: 30px">
+			                <label for="password">Password:</label>
+			                <input type="password" id="password" name="password" style="margin-left: 30px">
+			            </div>
+			        </div>
+			        <div>
+			            <input class="login_btns" type="submit" name="login" value="Sign In" style="margin: 30px 120px">
+			        </div>
+			        <div>
+			        	<button type="button" class="login_fb" id="loginFb"></button>
+			        </div>
+			        <br>
+			        <div>
+			        	<button type="button" class="login_gg" id="loginGg"></button>
+			        </div>
+			        <div id="unavailable" style="display:none;color:red;font-weight:bold;margin-left:15px;margin-top:10px">
+					    Sorry, this service is not available yet.
+				  	</div>
+			  </fieldset>
+	    </form>
 	</body>
-	<script src="js/login.js"></script>
 </html>

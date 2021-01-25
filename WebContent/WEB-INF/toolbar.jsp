@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
 <%@ page import="logic.application.SessionFacade"
-		import="logic.application.Users"
-		import="logic.presentation.bean.AccountBean"
-		import="logic.application.control.ManageAccountControl"%>
+		 import="logic.application.Users"
+		 import="logic.presentation.bean.AccountBean"
+		 import="logic.application.control.ManageAccountControl"%>
 		
 <jsp:useBean id="accountBean" class="logic.presentation.bean.AccountBean" scope="session"/>
 <jsp:setProperty name="accountBean" property="*"/>
@@ -12,15 +13,27 @@
 	<div class="dropdown" style="float:right;">
 		<button class="menu_btn"></button>
 	    <div class="dropdown-content" style="right:0;">
-	    	<%if(SessionFacade.getSession().getID() != null && SessionFacade.getSession().getCurrUserType() == Users.RECRUITER){%>
-	    		<a href="http://localhost:8080/WorldWideJob/publish_offer_form.jsp">Publish a new offer</a>
-	    	<%}
+	    	<%if(SessionFacade.getSession().getID() != null){
+	    		  if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER){%>
+	    			<a href="http://localhost:8080/WorldWideJob/publish_offer_form.jsp">Publish a new offer</a>
+	    	    <%}
 	    	
-	      	  if(SessionFacade.getSession().isPremium()){%>
-	      		<a href="">Cancel premium subscription</a>
-	      	<%} else {%>
-	      		<a href="html/pricing.html">Buy premium version</a>
-	      	<%}%>	
+		      	  if(SessionFacade.getSession().isPremium()){%>
+		      		<a id="cancSub" href="#" onclick="cancelSub()">Cancel premium subscription</a>
+		      		<script>
+		      		function cancelSub() {
+		      			if (confirm("If you want to cancel the subscription to the premium account send us an email!")) {
+		      			    window.open("html/support.html");
+		      			}
+		      		}
+		      		</script>
+		      	<%} else {%>
+		      		<a href="html/pricing.html">Buy premium version</a>
+		      		
+		      	<%}
+	    	  }else{%>
+	    	  		
+	    	<%}%>
 	      	
 	      	<a href="html/support.html">Support</a>	     		
 	   	</div>
@@ -78,7 +91,7 @@
 	   <%}else if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER) {%>
 	   		<button class="home_btn" type="submit" name="home"></button>
 	   		<%if (request.getParameter("home") != null) {
-				String redirectURL = "http://localhost:8080/WorldWideJob/recruiterProfile.jsp";
+				String redirectURL = "http://localhost:8080/WorldWideJob/recruiter_profile.jsp";
 				response.sendRedirect(redirectURL);
 			}
 	     }else{%>

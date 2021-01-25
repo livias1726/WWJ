@@ -35,7 +35,6 @@
 			<div class="dropdown" style="float:right;">
 			  	<button class="menu_btn"></button>
 			    <div class="dropdown-content" style="right:0;">
-			    	<a href="html/pricing.html">Buy premium version</a>
 			        <a href="html/support.html">Support</a>	     		
 			     </div>
 			</div>
@@ -45,6 +44,10 @@
 			    	<a href="http://localhost:8080/WorldWideJob/login.jsp">Login</a>
 			  	</div>
 			</div>
+			<div style="margin-right:15px;margin-top:17px;float:right;">
+				<a  href="html/admarket.html">Buy AD space</a>
+			</div>
+			
 			<div style="margin-left: 300px">
 			    <button class="main_btns" name="seek">Job seeker</button>
 			 	<%if(request.getParameter("seek") != null) {

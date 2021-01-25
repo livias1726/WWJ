@@ -1,58 +1,26 @@
-function noResultDialog() {
-    $("#main").dialog({
-    	resizable: false,
-      	height: "auto",
-      	width: 400,
-      	modal: true,
-      	buttons: {
-      		"Upload": function() {
-      			$(this).dialog("close");
-        		//OPEN FILE SYSTEM TO UPLOAD CV
-        	}
-    	}
-    });
-    
-    $("#main").dialog("open");
+function uploadPic(source) {
+    if (source.files && source.files[0]) {
+        var reader = new FileReader();
+        reader.onloadend = function (e) {
+            $('#profile').attr('src', e.target.result);
+            var base64result = (e.target.result).split(',')[1];
+            document.getElementById("store_pic").value = base64result;
+            $("#submit").trigger("click");
+        }
+        reader.readAsDataURL(source.files[0]);
+    }
 }
-
-function resultDialog() {
-    $("#main").dialog({
-    	resizable: false,
-      	height: "auto",
-      	width: 400,
-      	modal: true,
-      	buttons: {
-      		"Change": function() {
-      			$(this).dialog("close");
-        		var reader = new FileReader();
-        	},
-        	
-        	"Show": function() {
-      			$(this).dialog("close");
-      			window.open("Here Download PDF url", '_blank');
-        	}
-    	}
-    });
-    
-    $("#main").dialog("open");
-}
-
-$("#file_selector").change(function(){
-	var input = document.getElementById("file_selector");
-	var img = document.getElementById("profile");
-	      
-	if (input.files && input.files[0]) {
-		var reader = new FileReader();
-		reader.onloadend = function (e) {
-			img.style.backgroundImage = "url(" + e.target.result + ")";
-      	};
+	
+function uploadCv(source) {
+    if (source.files && source.files[0]) {
+        var reader = new FileReader();
+	    reader.onloadend = function (e) {
+	    	var base64result = (e.target.result).split(',')[1];
+            document.getElementById("store_cv").value = base64result;
+	        $("#submit2").trigger("click");
+	    }
 	    reader.readAsDataURL(input.files[0]);
-	    
-	    var saver = new FileReader();
-		saver.onloadend = function (e) {
-			$("#pic_hid").val(e.target.result);
-			$("#pic_hid").trigger("click");
-      	};
-	    saver.readAsArrayBuffer(input.files[0]);
 	}
-})
+}
+
+

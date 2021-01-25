@@ -1,13 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
+<%@ page import="java.io.InputStream"
+		 import="java.io.File"
+		 import="java.io.FileOutputStream"
+		 import="java.io.FileInputStream"
+		 import="java.awt.Desktop"
+		 import="java.io.IOException"
+		 import="java.net.URISyntaxException"
+		 import="java.net.URL"%>
+		 
 <%@ page import="logic.presentation.bean.UserBean"
 		 import="logic.presentation.bean.AccountBean"
 		 import="logic.application.control.SeekerAccountControl"
 		 import="logic.application.control.ManageAccountControl"
-		 import="java.io.InputStream"
-		 import="java.io.File"
-		 import="java.io.FileOutputStream"
-		 import="java.io.FileInputStream"
-		 import="java.net.URL"
 		 import="logic.exceptions.NoResultFoundException"%>
 		 
 <!DOCTYPE html>
@@ -23,7 +28,10 @@
 
 <%Class.forName("com.mysql.cj.jdbc.Driver");%>
 
-<%accountBean = ManageAccountControl.getInstance().retrieveAccount(accountBean.getId());%>
+<%
+accountBean = ManageAccountControl.getInstance().retrieveAccount(accountBean.getId());
+userBean = ManageAccountControl.getInstance().retrievePersonalInfo(accountBean.getId());
+%>
 
 <html lang="en">
 	<head>
@@ -34,26 +42,26 @@
 	    <link href="css/style.css" rel="stylesheet">
 	
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+		
+  		<script src="js/toolbar.js"></script>
 		<title>WorldWideJob - <%=accountBean.getUser().getFirstName() + " " + accountBean.getUser().getLastName()%></title>
 	</head>
 	<body>
 		<jsp:include page="WEB-INF/toolbar.jsp"/>
 		<div id="main" style="height:680px;background-color:#8ecae6;border:1px solid blue">
 			<form action="seeker_profile.jsp" name="seekerProfileform" method="POST">
-				<button name="cv_file" id="cv_file" value="" style="display:none"></button>
-				
-	    		<div class="profile_pic" id="profile"></div>
-	    		<%if(accountBean.getPic() != null){%>
-	    			<script>
-	    			var reader = new FileReader();
-	    			reader.onloadend = function (e) {
-	    				document.getElementById("profile").style.backgroundImage = "url(" + e.target.result + ")";
-	    	      	};
-	    		    reader.readAsDataURL(<%=accountBean.getPic()%>);
-	    		    </script>
-	    		<%}%>
+				<div class="profile_pic">
+	    			<%if(accountBean.getPic() != null){	
+	    				String path = "file://" + accountBean.getPic().getAbsolutePath();
+	    				path = path.replace("\\", "/");%>
+	    				
+	    				<img src="<%=path%>" alt="profile" id="profile" width="246" height="197">
+					<%}else{%>
+						<img src="icons/profile_pic.png" alt="profile" id="profile" width="246" height="197">
+					<%}%>
+	    		</div>
 	    		
 				<div class="name">
 	    			<h2><%=accountBean.getUser().getFirstName() + " " + accountBean.getUser().getLastName()%></h2>
@@ -62,24 +70,28 @@
 	    		
 	    		<div id="container">
 					<ul id="griglia">
-						<li><button class="cv_btn" type="button" name="cv" value="">Curriculum Vitae</button></li>						
+						<li><button class="cv_btn" name="cv">Curriculum Vitae</button></li>						
 						<%if(request.getParameter("cv") != null){
 							try {
 								SeekerAccountControl.getInstance().retrieveCV(cvBean, accountBean.getId());
-							} catch (NoResultFoundException re) {%>
-								<script>noResultDialog()</script>
-								<%return;
-						 	}%>
-						
-							<script>resultDialog()</script>
-							<%return;
+								
+								String path = "file://" + cvBean.getCv().getAbsolutePath();
+							    path = path.replace("\\", "/");
+							    URL url;
+								try {
+									url = new URL(path);
+									Desktop.getDesktop().browse(url.toURI());
+								} catch (URISyntaxException | IOException e) {%>
+									<script>window.alert("Sorry, the document cannot be opened")</script>
+							  <%}
+						    } catch (NoResultFoundException re) {%>
+								<script>alert("No CV has been uploaded.");</script>
+						  <%}
 						}%>
-						<li><button class="id_btn" type="button" onClick="javascript:window.location='personalInfo.jsp';"><br>Personal Info</button></li>
+						<li><button class="id_btn" type="button" onClick="javascript:window.location='personal_info_public.jsp';">Personal Info</button></li>
 					</ul>
 				</div>
 	    	</form>
 	    </div>
 	</body>
-	<script src="js/toolbar.js"></script>
-	<script src="js/files.js"></script>
 </html>

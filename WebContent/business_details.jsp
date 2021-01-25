@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
- <%@ page import="logic.presentation.bean.BusinessBean"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
+<%@ page import="logic.presentation.bean.BusinessBean"
  		  import="logic.presentation.bean.CountryBean"
  		  import="logic.presentation.bean.BusinessInCountryBean"
  		  import="logic.application.control.ManageFavouriteBusinessesControl"
@@ -8,6 +8,7 @@
  		  import="logic.application.control.CalculateFeasibilityControl"
  		  import="logic.application.SessionFacade"%>
 
+<%@ page errorPage="WEB-INF/error.jsp"%>
 		
 <!DOCTYPE html>
 
@@ -28,9 +29,8 @@
 	    <link href="css/style.css" rel="stylesheet">
 	
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
 		
+		<script src="js/toolbar.js"></script>
 		<title>WorldWideJob</title>
 	</head>
 	<body>
@@ -136,5 +136,4 @@
 	    	</form>
 		</div>
 	</body>
-	<script src="js/toolbar.js"></script>
 </html>

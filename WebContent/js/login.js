@@ -1,3 +1,7 @@
 $('#loginFb').click(function() {
-	 $('#unavailable').show();
+	$('#unavailable').show();
+});
+
+$('#loginGg').click(function() {
+	$('#unavailable').show();
 });

@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.StringTokenizer"%>	 
+
+<%@ page import="java.util.StringTokenizer"
+		 import="java.util.ArrayList"
+		 import="java.util.List"%>	
+		  
 <%@ page import="logic.presentation.bean.ApplicationBean"
 		 import="logic.presentation.bean.OfferBean"
 		 import="logic.application.control.ViewOfferControl"
-		 import="logic.application.control.SeekerAccountControl"
-		 import="java.util.ArrayList"
-		 import="java.util.List"%>
+		 import="logic.application.control.SeekerAccountControl"%>
+
+<%@page errorPage="WEB-INF/error.jsp"%>
 		 
 <!DOCTYPE html>
 
@@ -41,6 +45,9 @@
 	    <link href="css/style.css" rel="stylesheet">
 	
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		
+		<script src="js/toolbar.js"></script>
+		<script src="js/tables.js"></script>
 		<title>WorldWideJob - Applications</title>
 	</head>	
 	<body>
@@ -84,6 +91,4 @@
 			</form>
 		</div>
 	</body>
-	<script src="js/toolbar.js"></script>
-	<script src="js/tables.js"></script>
 </html>

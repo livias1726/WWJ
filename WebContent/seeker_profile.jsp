@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
-<%@ page import="java.io.InputStream"
-		 import="java.io.File"
+<%@ page import="java.io.File"
+		 import="java.io.OutputStream"
 		 import="java.io.FileOutputStream"
-		 import="java.io.FileInputStream"
-		 import="java.net.URL"%>
+		 import="java.awt.Desktop"
+		 import="java.io.IOException"
+		 import="java.net.URISyntaxException"
+		 import="java.net.URL"
+		 import="java.util.Base64"
+		 import="java.nio.charset.StandardCharsets"%> 
 		 
 <%@ page import="logic.presentation.bean.UserBean"
 		 import="logic.presentation.bean.AccountBean"
@@ -30,7 +34,9 @@
 accountBean = ManageAccountControl.getInstance().retrieveAccount();
 userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacade.getSession().getID());
 %>
+  
 
+				  
 <html lang="en">
 	<head>
 		<meta charset="ISO-8859-1">
@@ -40,38 +46,41 @@ userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacad
 	    <link href="css/style.css" rel="stylesheet">
 	
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  		
+		<script src="js/toolbar.js"></script>
+		<script src="js/files.js"></script>
 		<title>WorldWideJob - Profile</title>	
 	</head>
 	<body>
 		<jsp:include page="WEB-INF/toolbar.jsp"/>
 		<div id="main" style="height:680px;background-color:#8ecae6;border:1px solid blue">
-			<form action="seeker_profile.jsp" name="seekerProfileform" method="POST">
-				<button name="cv_file" id="cv_file" value="" style="display:none"></button>
+			<form action="seeker_profile.jsp" name="seekerProfileform" method="POST" enctype='multipart/form-data'>				
+	    		<div class="profile_pic">
+	    			<%if(accountBean.getPic() != null){	
+	    				String path = "file://" + accountBean.getPic().getAbsolutePath();
+	    				path = path.replace("\\", "/");%>
+	    				
+	    				<img src="<%=path%>" alt="profile" id="profile" width="246" height="197">
+					<%}else{%>
+						<img src="icons/profile_pic.png" alt="profile" id="profile" width="246" height="197">
+					<%}%>
+	    		</div>
+	    		
+	    		<input class="change_pic" type="file" id="load_pic" name="load_pic" accept="image/*" onchange="uploadPic(this)">
+	    		<input type="hidden" id="store_pic" name="store_pic">
+	    		<button id="submit" name="submit" style="display:none"></button>
+	    		<%if(request.getParameter("submit") != null){
+					byte[] data = Base64.getDecoder().decode(request.getParameter("store_pic").getBytes(StandardCharsets.UTF_8));
 				
-	    		<div class="profile_pic" id="profile"></div>
-	    		<%if(accountBean.getPic() != null){%>
-	    			<script>
-	    			var reader = new FileReader();
-	    			reader.onloadend = function (e) {
-	    				document.getElementById("profile").style.backgroundImage = "url(" + e.target.result + ")";
-	    	      	};
-	    		    reader.readAsDataURL(<%=accountBean.getPic()%>);
-	    		    </script>
-	    		<%}%>
-	    		<input class="change_pic" type="file" id="file_selector" name="pic" accept="image/*">			
-				<button id="pic_hid" name="pic_hid" value="" style="display:none"></button>
+					File newPic = new File("tmp/target.jpg");
+					try (OutputStream stream = new FileOutputStream(newPic)) {
+					    stream.write(data);
+					}
+					
+					accountBean.setPic(newPic);
+					ManageAccountControl.getInstance().updateAccountPic(accountBean);
+				}%>
 				
-				<%if(request.getParameter("pic_hid") != null){
-						byte[] array = request.getParameter("pic_hid").getBytes();
-						File file = new File("temp.tmp");
-					    try(FileOutputStream outs = new FileOutputStream(file)){
-					    	outs.write(array);
-						    accountBean.setPic(file);
-					    }
-					    ManageAccountControl.getInstance().updateAccountPic(accountBean);
-				  }%>
 				<div class="name">
 	    			<h2><%=accountBean.getUser().getFirstName() + " " + accountBean.getUser().getLastName()%></h2>
 	    			<h3>Job Seeker</h3>
@@ -79,26 +88,53 @@ userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacad
 	    		
 	    		<div id="container">
 					<ul id="griglia">
-						<li><button class="cv_btn" type="button" name="cv" value="">Curriculum Vitae</button></li>						
-						<%if(request.getParameter("cv") != null){
-							try {
-								SeekerAccountControl.getInstance().retrieveCV(cvBean, accountBean.getId());
-							} catch (NoResultFoundException re) {%>
-								<script>noResultDialog()</script>
-								<%return;
-						 	}%>
+						<li><button class="cv_btn" name="cv">Curriculum Vitae</button></li>	
+						<li><button class="id_btn" type="button" onClick="javascript:window.location='personal_info.jsp';">Personal Info</button></li>
 						
-							<script>resultDialog()</script>
-							<%return;
-						}%>
-						<li><button class="id_btn" type="button" onClick="javascript:window.location='personal_info.jsp';">Personal Info</button><br></li>
 						<li><button class="offers_btn" type="button" onClick="javascript:window.location='applications.jsp';">Applications</button></li>
 						<li><button class="fav_offers" type="button" onClick="javascript:window.location='favourite_offers.jsp';">Favourites</button></li>
 					</ul>
 				</div>
+				
+				<input type="file" id="load_cv" name="load_cv" accept=".pdf" style="display:none" onchange="uploadCv(this)">
+				<input type="hidden" id="store_pic" name="store_pic">
+				<button id="submit2" name="submit2" style="display:none"></button>
+				<%if(request.getParameter("cv") != null){
+					try {
+						SeekerAccountControl.getInstance().retrieveCV(cvBean, accountBean.getId());
+						
+						String path = "file://" + cvBean.getCv().getAbsolutePath();
+					    path = path.replace("\\", "/");
+					    URL url;
+						try {
+							url = new URL(path);
+							Desktop.getDesktop().browse(url.toURI());
+						} catch (URISyntaxException | IOException e) {%>
+							<script>window.alert("Sorry, the document cannot be opened")</script>
+					  <%}
+				    } catch (NoResultFoundException re) {%>
+						<script>
+						if (confirm("No CV has been uploaded. Do you want to upload one?")) {
+						    $("#load_cv").trigger("click");
+						} else {
+						    /**/
+						}
+						</script>
+				 <%}
+				}%>
+				
+				<%if(request.getParameter("submit2") != null){
+					byte[] data = Base64.getDecoder().decode(request.getParameter("store_cv").getBytes(StandardCharsets.UTF_8));
+				
+					File newCV = new File("tmp/target.pdf");
+					try (OutputStream stream = new FileOutputStream(newCV)) {
+					    stream.write(data);
+					}
+					
+					cvBean.setCv(newCV);
+					SeekerAccountControl.getInstance().updateCV(newCV); 
+				}%>
 	    	</form>
 	    </div>
 	</body>
-	<script src="js/toolbar.js"></script>
-	<script src="js/files.js"></script>
 </html>
