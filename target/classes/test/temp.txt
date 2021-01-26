@@ -1,3 +1,0 @@
-•	Develop at least 3 test cases per person. In each test (class) file, please report (via Java comments) the name of the person in charge.
-•	1 Selenium test via GUI per member.
-•	1 Selenium test via API per member.

@@ -87,11 +87,10 @@ public class CalculateFeasibilityControl {
 		Float earn = business.getAverageEarnings();
 		
 		for(Float i: business.getTaxes()) {
-			business.setAverageEarnings(earn*(1-(i/100)));
-			earn = business.getAverageEarnings();
+			earn = earn*(1-(i/100));
 		}
 		
-		result = result + business.getAverageEarnings() - business.getAverageCost();
+		result = result + earn - business.getAverageCost();
 		
 		return result;
 	}
