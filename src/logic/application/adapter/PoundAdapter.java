@@ -16,10 +16,10 @@ public class PoundAdapter implements Currency {
 		Float res;
 		switch(ukCurr) {
 			case "C$":
-				res = (float) (val*0.58);
+				res = new CDToPoundAdaptee().getValue(val);
 				break;
 			case "kr":
-				res = (float) (val*0.0057);
+				res = new KrToPoundAdaptee().getValue(val);
 				break;
 			default:
 				res = val;

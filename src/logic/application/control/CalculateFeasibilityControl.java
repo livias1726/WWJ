@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import logic.application.adapter.Currency;
 import logic.application.adapter.EuroAdapter;
 import logic.application.adapter.PoundAdapter;
 import logic.application.adapter.USDAdapter;
@@ -65,15 +66,15 @@ public class CalculateFeasibilityControl {
 		switch(newCurr) {
 			case "€":
 			case "EUR":
-				EuroAdapter euroAdapter = new EuroAdapter(oldCurr);
+				Currency euroAdapter = new EuroAdapter(oldCurr);
 				return euroAdapter.value(val);
 			case "£":
 			case "GBP":
-				PoundAdapter poundAdapter = new PoundAdapter(oldCurr);
+				Currency poundAdapter = new PoundAdapter(oldCurr);
 				return poundAdapter.value(val);
 			case "$":
 			case "USD":
-				USDAdapter usdAdapter = new USDAdapter(oldCurr);
+				Currency usdAdapter = new USDAdapter(oldCurr);
 				return usdAdapter.value(val);
 			default:
 				throw new InvalidFieldException("Currency not recognized.");

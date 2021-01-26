@@ -17,10 +17,10 @@ public class USDAdapter implements Currency {
 
 		switch(usCurr) {
 			case "C$":
-				res = (float) (val*0.79);
+				res = new CDToUSDAdaptee().getValue(val);
 				break;
 			case "kr":
-				res = (float) (val*0.0078);
+				res = new KrToUSDAdaptee().getValue(val);
 				break;
 			default:
 				res = val;

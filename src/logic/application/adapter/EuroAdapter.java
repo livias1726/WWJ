@@ -16,10 +16,10 @@ public class EuroAdapter implements Currency{
 		Float res;
 		switch(euCurr) {
 			case "C$":
-				res = (float) (val*0.65);
+				res = new CDToEuroAdaptee().getValue(val);
 				break;
 			case "kr":
-				res = (float) (val*0.0064);
+				res = new KrToEuroAdaptee().getValue(val);
 				break;
 			default:
 				res = val;
