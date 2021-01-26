@@ -6,7 +6,7 @@ import java.util.List;
 import logic.domain.Business;
 import logic.presentation.bean.BusinessBean;
 
-public class BusinessFactory implements AbstractFactory {
+public class BusinessFactory implements Entity {
 
 	@Override
     public Business createObject() {

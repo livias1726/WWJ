@@ -12,7 +12,7 @@ import logic.domain.Job;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.Factory;
 import logic.service.Types;
 
@@ -33,7 +33,7 @@ public class ApplicationDAO {
 			res = RoutinesManager.bindParametersAndExec(stmt, (int)id);
 			
             if (res.first()){ 
-            	AbstractFactory factory = Factory.getInstance().getObject(Types.APPLICATION);
+            	Entity factory = Factory.getInstance().getObject(Types.APPLICATION);
             	do {
             		Application item = (Application)factory.createObject();
                 	item.setId(res.getInt("id"));

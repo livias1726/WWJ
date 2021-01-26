@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import logic.domain.User;
 import logic.presentation.bean.UserBean;
 
-public class UserFactory implements AbstractFactory {
+public class UserFactory implements Entity {
 
 	@Override
     public User createObject() {

@@ -14,7 +14,7 @@ import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.CompanyBean;
 import logic.presentation.bean.OfferBean;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.AddressFactory;
 import logic.service.CompanyFactory;
 import logic.service.Factory;
@@ -38,7 +38,7 @@ public class RecruiterAccountControl {
     }
 
 	public CompanyBean retrieveCompanyInfo() throws DatabaseFailureException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.COMPANY);
+		Entity factory = Factory.getInstance().getObject(Types.COMPANY);
     	Company comp = (Company)factory.createObject();
     	
 		try {
@@ -51,7 +51,7 @@ public class RecruiterAccountControl {
 	}
 
 	public ObservableList<OfferBean> retrievePublishedOffers() throws DatabaseFailureException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.OFFER);
+		Entity factory = Factory.getInstance().getObject(Types.OFFER);
     	Offer offer = (Offer)factory.createObject();
     	
 		try {
@@ -69,12 +69,12 @@ public class RecruiterAccountControl {
 	}
 
 	public void changeCompanyInfo(CompanyBean bean) throws DatabaseFailureException {
-		AbstractFactory factoryComp = Factory.getInstance().getObject(Types.COMPANY);
+		Entity factoryComp = Factory.getInstance().getObject(Types.COMPANY);
     	Company company = (Company)factoryComp.createObject();
 		company.setName(bean.getName());
     	company.setDescription(bean.getDescription());
     
-    	AbstractFactory factoryAddr = Factory.getInstance().getObject(Types.ADDRESS);
+    	Entity factoryAddr = Factory.getInstance().getObject(Types.ADDRESS);
     	List<Address> branches = ((AddressFactory)factoryAddr).extractAddressList(bean.getBranches());	
     	company.setBranches(branches);
     	

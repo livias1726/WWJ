@@ -1,6 +1,6 @@
 package logic.service;
 
-public interface AbstractFactory {
+public interface Entity {
 
 	public Object createObject();
 }

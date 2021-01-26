@@ -13,7 +13,7 @@ import logic.domain.Country;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.Factory;
 import logic.service.Types;
 
@@ -36,8 +36,8 @@ public class CompanyDAO {
             	company.setName(res.getString("name"));
             	company.setDescription(res.getString("description"));
 
-            	AbstractFactory factoryAdd = Factory.getInstance().getObject(Types.ADDRESS);
-        		AbstractFactory factoryCou = Factory.getInstance().getObject(Types.COUNTRY);
+            	Entity factoryAdd = Factory.getInstance().getObject(Types.ADDRESS);
+        		Entity factoryCou = Factory.getInstance().getObject(Types.COUNTRY);
             	List<Address> branches = new ArrayList<>();
             	do {
             		Address branch = (Address)factoryAdd.createObject();

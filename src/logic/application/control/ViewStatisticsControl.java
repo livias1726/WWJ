@@ -8,7 +8,7 @@ import logic.domain.BusinessInCountry;
 import logic.domain.Country;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.BusinessInCountryBean;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.Factory;
 import logic.service.Types;
 
@@ -29,12 +29,12 @@ public class ViewStatisticsControl {
     }
 
 	public void retrieveBusinessStatistics(BusinessInCountryBean business) throws DatabaseFailureException {
-		AbstractFactory factoryBus = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
+		Entity factoryBus = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
 		BusinessInCountry bus = (BusinessInCountry)factoryBus.createObject();
 		
 		bus.setId(business.getId());
 		
-		AbstractFactory factoryCou = Factory.getInstance().getObject(Types.COUNTRY);
+		Entity factoryCou = Factory.getInstance().getObject(Types.COUNTRY);
 		Country country = (Country)factoryCou.createObject();
 		
 		country.setName(business.getCountry().getName());

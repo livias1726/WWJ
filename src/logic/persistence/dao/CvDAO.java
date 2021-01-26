@@ -17,7 +17,7 @@ import logic.exceptions.NoResultFoundException;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.Factory;
 import logic.service.Types;
 
@@ -31,7 +31,7 @@ public class CvDAO {
 		CallableStatement stmt = null;
 		ResultSet res = null;
 		
-		AbstractFactory factory = Factory.getInstance().getObject(Types.CV);
+		Entity factory = Factory.getInstance().getObject(Types.CV);
 		CV cv = (CV)factory.createObject();
 		try {
 			Connection conn = ConnectionManager.getConnection();

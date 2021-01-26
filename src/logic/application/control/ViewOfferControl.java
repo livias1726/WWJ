@@ -14,7 +14,7 @@ import logic.exceptions.NoResultFoundException;
 import logic.presentation.bean.CountryBean;
 import logic.presentation.bean.JobBean;
 import logic.presentation.bean.OfferBean;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.Factory;
 import logic.service.JobFactory;
 import logic.service.OfferFactory;
@@ -37,7 +37,7 @@ public class ViewOfferControl extends ViewResultsControl{
     }
       
     public List<JobBean> retrieveJobs() throws DatabaseFailureException {
-    	AbstractFactory factory = Factory.getInstance().getObject(Types.JOB);
+    	Entity factory = Factory.getInstance().getObject(Types.JOB);
     	Job job = (Job)factory.createObject();
     	try {
     		List<Job> list = job.getAvailableJobs();
@@ -49,7 +49,7 @@ public class ViewOfferControl extends ViewResultsControl{
 	}
     
     public ObservableList<OfferBean> retrieveOffersByJob(JobBean bean) throws DatabaseFailureException, NoResultFoundException {
-    	AbstractFactory factory = Factory.getInstance().getObject(Types.OFFER);
+    	Entity factory = Factory.getInstance().getObject(Types.OFFER);
     	Offer offer = (Offer)factory.createObject();
 		try {
 			List<Offer> list = offer.getOffersByPosition(bean.getCategory());
@@ -63,7 +63,7 @@ public class ViewOfferControl extends ViewResultsControl{
     }
     
     public ObservableList<OfferBean> retrieveOffersByCountry(CountryBean bean) throws DatabaseFailureException, NoResultFoundException {
-    	AbstractFactory factory = Factory.getInstance().getObject(Types.OFFER);
+    	Entity factory = Factory.getInstance().getObject(Types.OFFER);
     	Offer offer = (Offer)factory.createObject();
 		try {
 			List<Offer> list = offer.getOffersByPlace(bean.getName());
@@ -77,7 +77,7 @@ public class ViewOfferControl extends ViewResultsControl{
     }
     
     public ObservableList<OfferBean> retrieveOffers(CountryBean country, JobBean job) throws DatabaseFailureException, NoResultFoundException{
-    	AbstractFactory factory = Factory.getInstance().getObject(Types.OFFER);
+    	Entity factory = Factory.getInstance().getObject(Types.OFFER);
     	Offer offer = (Offer)factory.createObject();
 		try {
 			List<Offer> list = offer.getOffers(country.getName(), job.getCategory());
@@ -91,7 +91,7 @@ public class ViewOfferControl extends ViewResultsControl{
     }
     
     private ObservableList<OfferBean> modelToBean(List<Offer> src) {
-    	AbstractFactory factory = Factory.getInstance().getObject(Types.OFFER);
+    	Entity factory = Factory.getInstance().getObject(Types.OFFER);
     	
     	ObservableList<OfferBean> dest = FXCollections.observableArrayList();
     	for(OfferBean i: ((OfferFactory)factory).extractOfferBeanList(src)) {
@@ -101,7 +101,7 @@ public class ViewOfferControl extends ViewResultsControl{
     }
 
 	public OfferBean retrieveOfferById(Integer id) throws DatabaseFailureException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.OFFER);
+		Entity factory = Factory.getInstance().getObject(Types.OFFER);
 
 		try {
 			Offer offer = ((Offer)factory.createObject()).getOffer(id);

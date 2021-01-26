@@ -21,7 +21,7 @@ import logic.domain.User;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.Factory;
 import logic.service.Types;
 
@@ -42,7 +42,7 @@ public class AccountDAO {
 			res = RoutinesManager.bindParametersAndExec(stmt, (int)account.getID());
 			
             if (res.first()){
-            	AbstractFactory factory = Factory.getInstance().getObject(Types.USER);
+            	Entity factory = Factory.getInstance().getObject(Types.USER);
         		User user = (User)factory.createObject();
                 user.setFirstName(res.getString("first_name"));
                 user.setLastName(res.getString("last_name"));

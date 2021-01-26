@@ -14,7 +14,7 @@ import logic.exceptions.NoResultFoundException;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.Factory;
 import logic.service.Types;
 
@@ -35,7 +35,7 @@ public class BusinessDAO {
 			res = RoutinesManager.executeStmt(stmt);
 			
 			if(res.first()) {
-				AbstractFactory factory = Factory.getInstance().getObject(Types.BUSINESS);
+				Entity factory = Factory.getInstance().getObject(Types.BUSINESS);
 				list = new ArrayList<>();
 				do {
 					Business bus = (Business)factory.createObject();
@@ -156,8 +156,8 @@ public class BusinessDAO {
 		}
 
 		res.first();
-		AbstractFactory factoryBus = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
-		AbstractFactory factoryCou = Factory.getInstance().getObject(Types.COUNTRY);
+		Entity factoryBus = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
+		Entity factoryCou = Factory.getInstance().getObject(Types.COUNTRY);
 
 		do {
 

@@ -14,7 +14,7 @@ import logic.presentation.bean.CountryBean;
 import logic.presentation.bean.JobBean;
 import logic.presentation.bean.OfferBean;
 
-public class OfferFactory implements AbstractFactory{
+public class OfferFactory implements Entity{
     
 	@Override
     public Offer createObject() {

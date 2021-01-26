@@ -6,7 +6,7 @@ import java.util.List;
 import logic.domain.Candidate;
 import logic.presentation.bean.CandidateBean;
 
-public class CandidateFactory implements AbstractFactory {
+public class CandidateFactory implements Entity {
 
 	@Override
     public Candidate createObject() {

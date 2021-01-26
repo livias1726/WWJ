@@ -11,7 +11,7 @@ import logic.application.SessionFacade;
 import logic.domain.Candidate;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.CandidateBean;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.CandidateFactory;
 import logic.service.Factory;
 import logic.service.Types;
@@ -33,7 +33,7 @@ public class CheckCandidatesControl {
     }
 
 	public ObservableList<CandidateBean> retrieveCandidates() throws DatabaseFailureException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.CANDIDATE);
+		Entity factory = Factory.getInstance().getObject(Types.CANDIDATE);
 		Candidate cand = (Candidate)factory.createObject();
 		
 		try {
@@ -51,7 +51,7 @@ public class CheckCandidatesControl {
 	}
 
 	public void removeCandidates(List<Long> candidates, List<Integer> offers) throws DatabaseFailureException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.CANDIDATE);
+		Entity factory = Factory.getInstance().getObject(Types.CANDIDATE);
 		Candidate cand = (Candidate)factory.createObject();
 		
 		try {

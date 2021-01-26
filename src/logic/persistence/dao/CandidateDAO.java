@@ -11,7 +11,7 @@ import logic.domain.Candidate;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.Factory;
 import logic.service.Types;
 
@@ -32,7 +32,7 @@ public class CandidateDAO {
 			res = RoutinesManager.bindParametersAndExec(stmt, id.intValue());
 			
             if (res.first()){
-            	AbstractFactory factory = Factory.getInstance().getObject(Types.CANDIDATE);
+            	Entity factory = Factory.getInstance().getObject(Types.CANDIDATE);
         		
             	do {
             		Candidate cand = (Candidate)factory.createObject();

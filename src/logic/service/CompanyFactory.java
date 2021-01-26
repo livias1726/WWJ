@@ -6,7 +6,7 @@ import logic.domain.Company;
 import logic.presentation.bean.AddressBean;
 import logic.presentation.bean.CompanyBean;
 
-public class CompanyFactory implements AbstractFactory {
+public class CompanyFactory implements Entity {
 
 	@Override
     public Company createObject() {

@@ -15,7 +15,7 @@ import logic.exceptions.NoResultFoundException;
 import logic.persistence.ConnectionManager;
 import logic.persistence.RoutinesIdentifier;
 import logic.persistence.RoutinesManager;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.Factory;
 import logic.service.Types;
 
@@ -102,8 +102,8 @@ public class OfferDAO {
 			res = RoutinesManager.bindParametersAndExec(stmt, id.intValue());
 			
             if (res.first()){     
-            	AbstractFactory factoryOff = Factory.getInstance().getObject(Types.OFFER);
-            	AbstractFactory factoryJob = Factory.getInstance().getObject(Types.JOB);
+            	Entity factoryOff = Factory.getInstance().getObject(Types.OFFER);
+            	Entity factoryJob = Factory.getInstance().getObject(Types.JOB);
             	do {
             		Offer item = (Offer)factoryOff.createObject();
                 	item.setId(res.getInt("id"));
@@ -136,7 +136,7 @@ public class OfferDAO {
 		CallableStatement stmt = null;
 		ResultSet res = null;
 	
-		AbstractFactory factoryOffer = Factory.getInstance().getObject(Types.OFFER);
+		Entity factoryOffer = Factory.getInstance().getObject(Types.OFFER);
 		Offer offer = (Offer)factoryOffer.createObject();
 		try {
 			Connection conn = ConnectionManager.getConnection();
@@ -146,17 +146,17 @@ public class OfferDAO {
             if (res.first()){  
             	offer.setCompanyName(res.getString("company"));
             	
-            	AbstractFactory factoryJob = Factory.getInstance().getObject(Types.JOB);
+            	Entity factoryJob = Factory.getInstance().getObject(Types.JOB);
             	Job job = (Job)factoryJob.createObject();
             	job.setName(res.getString("position"));
             	
             	offer.setPosition(job);           	
             	offer.setTaskDescription(res.getString("description"));
             	
-            	AbstractFactory factoryAdd = Factory.getInstance().getObject(Types.ADDRESS);
+            	Entity factoryAdd = Factory.getInstance().getObject(Types.ADDRESS);
             	Address branch = (Address)factoryAdd.createObject();
             	
-            	AbstractFactory factoryCou = Factory.getInstance().getObject(Types.COUNTRY);
+            	Entity factoryCou = Factory.getInstance().getObject(Types.COUNTRY);
         		Country country = (Country)factoryCou.createObject();
         		country.setName(res.getString("country"));
         		
@@ -225,10 +225,10 @@ public class OfferDAO {
         
         res.first();
         
-        AbstractFactory factoryOff = Factory.getInstance().getObject(Types.OFFER);
-        AbstractFactory factoryJob = Factory.getInstance().getObject(Types.JOB);
-        AbstractFactory factoryCou = Factory.getInstance().getObject(Types.COUNTRY);
-        AbstractFactory factoryAdd = Factory.getInstance().getObject(Types.ADDRESS);
+        Entity factoryOff = Factory.getInstance().getObject(Types.OFFER);
+        Entity factoryJob = Factory.getInstance().getObject(Types.JOB);
+        Entity factoryCou = Factory.getInstance().getObject(Types.COUNTRY);
+        Entity factoryAdd = Factory.getInstance().getObject(Types.ADDRESS);
     	
         do {
         	Offer offer = (Offer)factoryOff.createObject();

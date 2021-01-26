@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import logic.domain.Country;
 import logic.exceptions.DatabaseFailureException;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.Factory;
 import logic.service.Types;
 
@@ -28,7 +28,7 @@ public class ViewResultsControl {
     }
     
     public List<String> retrieveCountries() throws DatabaseFailureException{ 
-    	AbstractFactory factory = Factory.getInstance().getObject(Types.COUNTRY);
+    	Entity factory = Factory.getInstance().getObject(Types.COUNTRY);
 		Country country = (Country)factory.createObject();
     	try {
 			return country.getAvailableCountries();

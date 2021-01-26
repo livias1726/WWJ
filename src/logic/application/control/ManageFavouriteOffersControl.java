@@ -9,7 +9,7 @@ import logic.application.SessionFacade;
 import logic.domain.Offer;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.OfferBean;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.Factory;
 import logic.service.OfferFactory;
 import logic.service.Types;
@@ -31,7 +31,7 @@ public class ManageFavouriteOffersControl {
     }
 
 	public List<OfferBean> retrieveFavourites() throws DatabaseFailureException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.OFFER);
+		Entity factory = Factory.getInstance().getObject(Types.OFFER);
     	Offer offer = (Offer)factory.createObject();
 		try {
 			List<Offer> list = offer.getFavourites(SessionFacade.getSession().getID().intValue());
@@ -43,7 +43,7 @@ public class ManageFavouriteOffersControl {
 	}
 
 	public void addNewFavourite(int id) throws DatabaseFailureException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.OFFER);
+		Entity factory = Factory.getInstance().getObject(Types.OFFER);
     	Offer offer = (Offer)factory.createObject();
     	offer.setId(id);
 		try {
@@ -55,7 +55,7 @@ public class ManageFavouriteOffersControl {
 	}
 
 	public void removeFavourites(int id) throws DatabaseFailureException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.OFFER);
+		Entity factory = Factory.getInstance().getObject(Types.OFFER);
     	Offer offer = (Offer)factory.createObject();
     	offer.setId(id);
 		try {

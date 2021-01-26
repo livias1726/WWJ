@@ -12,7 +12,7 @@ import logic.exceptions.NoResultFoundException;
 import logic.presentation.bean.BusinessBean;
 import logic.presentation.bean.BusinessInCountryBean;
 import logic.presentation.bean.CountryBean;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.BusinessFactory;
 import logic.service.BusinessInCountryFactory;
 import logic.service.Factory;
@@ -35,7 +35,7 @@ public class ViewBusinessControl extends ViewResultsControl{
     }
     
     public List<BusinessBean> retrieveBusinesses() throws DatabaseFailureException{
-    	AbstractFactory factory = Factory.getInstance().getObject(Types.BUSINESS);
+    	Entity factory = Factory.getInstance().getObject(Types.BUSINESS);
 		Business bus = (Business)factory.createObject();
     	
 		try {
@@ -48,7 +48,7 @@ public class ViewBusinessControl extends ViewResultsControl{
     }
     
     public List<BusinessInCountryBean> retrieveBusinessesByCategory(BusinessInCountryBean bean) throws NoResultFoundException, DatabaseFailureException {
-    	AbstractFactory factory = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
+    	Entity factory = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
     	BusinessInCountry bus = (BusinessInCountry)factory.createObject();
     	
     	try {
@@ -63,7 +63,7 @@ public class ViewBusinessControl extends ViewResultsControl{
     }
     
     public List<BusinessInCountryBean> retrieveBusinessesByCountry(CountryBean bean) throws NoResultFoundException, DatabaseFailureException {
-    	AbstractFactory factory = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
+    	Entity factory = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
     	BusinessInCountry bus = (BusinessInCountry)factory.createObject();
     	
     	try {
@@ -78,7 +78,7 @@ public class ViewBusinessControl extends ViewResultsControl{
     }
     
     public List<BusinessInCountryBean> retrieveBusinesses(CountryBean country, BusinessInCountryBean bus) throws NoResultFoundException, DatabaseFailureException{
-    	AbstractFactory factory = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
+    	Entity factory = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
     	BusinessInCountry business = (BusinessInCountry)factory.createObject();
     	
     	try {

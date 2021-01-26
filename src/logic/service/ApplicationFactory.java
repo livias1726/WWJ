@@ -7,7 +7,7 @@ import logic.domain.Application;
 import logic.presentation.bean.ApplicationBean;
 import logic.presentation.bean.JobBean;
 
-public class ApplicationFactory implements AbstractFactory {
+public class ApplicationFactory implements Entity {
 
 	@Override
     public Application createObject() {

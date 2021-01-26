@@ -12,7 +12,7 @@ import logic.domain.User;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.AccountBean;
 import logic.presentation.bean.UserBean;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.AccountFactory;
 import logic.service.Factory;
 import logic.service.Types;
@@ -35,7 +35,7 @@ public class ManageAccountControl {
     }
 
     public AccountBean retrieveAccount() throws DatabaseFailureException{
-    	AbstractFactory factory = Factory.getInstance().getObject(Types.ACCOUNT);
+    	Entity factory = Factory.getInstance().getObject(Types.ACCOUNT);
 		Account account = (Account)factory.createObject();
 		account.setID(SessionFacade.getSession().getID().intValue());
     	try {
@@ -48,7 +48,7 @@ public class ManageAccountControl {
     }
     
     public AccountBean retrieveAccount(Long accountID) throws DatabaseFailureException {
-    	AbstractFactory factory = Factory.getInstance().getObject(Types.ACCOUNT);
+    	Entity factory = Factory.getInstance().getObject(Types.ACCOUNT);
 		Account account = (Account)factory.createObject();
 		account.setID(accountID.intValue());
     	try {
@@ -61,7 +61,7 @@ public class ManageAccountControl {
 	}	
     
     public UserBean retrievePersonalInfo(Long id) throws DatabaseFailureException {    	
-    	AbstractFactory factory = Factory.getInstance().getObject(Types.USER);
+    	Entity factory = Factory.getInstance().getObject(Types.USER);
 		User user = (User)factory.createObject();
 		
 		try {
@@ -75,7 +75,7 @@ public class ManageAccountControl {
 	}
     
     public void updateAccountPic(AccountBean account) throws DatabaseFailureException {
-    	AbstractFactory factory = Factory.getInstance().getObject(Types.ACCOUNT);
+    	Entity factory = Factory.getInstance().getObject(Types.ACCOUNT);
 		Account acc = (Account)factory.createObject();
     	try {
 			acc.savePic(account.getPic(), SessionFacade.getSession().getID());
@@ -86,7 +86,7 @@ public class ManageAccountControl {
     }
 
 	public List<String> retrieveNotifications() throws DatabaseFailureException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.ACCOUNT);
+		Entity factory = Factory.getInstance().getObject(Types.ACCOUNT);
 		Account account = (Account)factory.createObject();
 		try {
 			return account.getNotificationsFromDB(SessionFacade.getSession().getID());
@@ -97,7 +97,7 @@ public class ManageAccountControl {
 	}
 
 	public void changePersonalInfo(UserBean bean) throws DatabaseFailureException {
-    	AbstractFactory factoryUs = Factory.getInstance().getObject(Types.USER);
+    	Entity factoryUs = Factory.getInstance().getObject(Types.USER);
 		User user = ((UserFactory)factoryUs).extractUser(bean);
 		try {
 			user.savePersonalInfoOnDB(SessionFacade.getSession().getID());

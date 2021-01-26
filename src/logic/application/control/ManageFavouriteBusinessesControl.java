@@ -9,7 +9,7 @@ import logic.application.SessionFacade;
 import logic.domain.BusinessInCountry;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.BusinessInCountryBean;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.BusinessInCountryFactory;
 import logic.service.Factory;
 import logic.service.Types;
@@ -31,7 +31,7 @@ public class ManageFavouriteBusinessesControl {
     }
     
     public List<BusinessInCountryBean> retrieveFavourites() throws DatabaseFailureException {
-    	AbstractFactory factory = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
+    	Entity factory = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
     	BusinessInCountry bus = (BusinessInCountry)factory.createObject();
     	try {
 			List<BusinessInCountry> list = bus.getFavourites(SessionFacade.getSession().getID());
@@ -43,7 +43,7 @@ public class ManageFavouriteBusinessesControl {
 	}
 
 	public void addNewFavourite(int id) throws DatabaseFailureException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
+		Entity factory = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
     	BusinessInCountry bus = (BusinessInCountry)factory.createObject();
     	bus.setId(id);
 		try {
@@ -55,7 +55,7 @@ public class ManageFavouriteBusinessesControl {
 	}
 
 	public void removeFavourite(int id) throws DatabaseFailureException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
+		Entity factory = Factory.getInstance().getObject(Types.BUSINESSINCOUNTRY);
     	BusinessInCountry bus = (BusinessInCountry)factory.createObject();
     	bus.setId(id);
 		try {

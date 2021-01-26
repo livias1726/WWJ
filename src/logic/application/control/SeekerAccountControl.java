@@ -16,7 +16,7 @@ import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.NoResultFoundException;
 import logic.presentation.bean.ApplicationBean;
 import logic.presentation.bean.CVBean;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.ApplicationFactory;
 import logic.service.Factory;
 import logic.service.Types;
@@ -38,7 +38,7 @@ public class SeekerAccountControl {
     }
 
 	public ObservableList<ApplicationBean> retrieveApplications() throws DatabaseFailureException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.APPLICATION);
+		Entity factory = Factory.getInstance().getObject(Types.APPLICATION);
 		Application app = (Application)factory.createObject();
 
 		try {
@@ -55,7 +55,7 @@ public class SeekerAccountControl {
 	}
 
 	public void removeApplications(List<Integer> selected) throws DatabaseFailureException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.APPLICATION);
+		Entity factory = Factory.getInstance().getObject(Types.APPLICATION);
 		Application app = (Application)factory.createObject();
 		
 		try {
@@ -67,7 +67,7 @@ public class SeekerAccountControl {
 	}
 
 	public CVBean retrieveCV(CVBean cvBean, Long accountID) throws DatabaseFailureException, NoResultFoundException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.CV);
+		Entity factory = Factory.getInstance().getObject(Types.CV);
 		CV cv = (CV)factory.createObject();
 		try {
 			cv.getCVFromDB(accountID);
@@ -83,7 +83,7 @@ public class SeekerAccountControl {
 	}
 
 	public void updateCV(File curr) throws DatabaseFailureException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.CV);
+		Entity factory = Factory.getInstance().getObject(Types.CV);
 		CV cv = (CV)factory.createObject();
 		try {
 			cv.saveCV(curr, SessionFacade.getSession().getID());

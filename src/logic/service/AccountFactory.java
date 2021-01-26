@@ -5,7 +5,7 @@ import logic.domain.Account;
 import logic.presentation.bean.AccountBean;
 import logic.presentation.bean.UserBean;
 
-public class AccountFactory implements AbstractFactory{
+public class AccountFactory implements Entity{
     
 	@Override
     public Account createObject() {

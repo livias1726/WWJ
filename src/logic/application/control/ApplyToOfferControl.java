@@ -8,7 +8,7 @@ import logic.application.SessionFacade;
 import logic.domain.Application;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.ApplicationBean;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.Factory;
 import logic.service.Types;
 
@@ -29,7 +29,7 @@ public class ApplyToOfferControl {
     }
 
 	public void apply(ApplicationBean bean) throws DatabaseFailureException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.APPLICATION);
+		Entity factory = Factory.getInstance().getObject(Types.APPLICATION);
 		Application appl = (Application)factory.createObject();
 		appl.setId(bean.getId());
 		try {

@@ -14,7 +14,7 @@ import logic.exceptions.IncompleteAccountException;
 import logic.presentation.bean.AddressBean;
 import logic.presentation.bean.JobBean;
 import logic.presentation.bean.OfferBean;
-import logic.service.AbstractFactory;
+import logic.service.Entity;
 import logic.service.AddressFactory;
 import logic.service.Factory;
 import logic.service.JobFactory;
@@ -38,10 +38,10 @@ public class PublishOfferControl {
     }
     
 	public List<AddressBean> retrieveCompanyInfo() throws DatabaseFailureException, IncompleteAccountException {
-		AbstractFactory factoryComp = Factory.getInstance().getObject(Types.COMPANY);
+		Entity factoryComp = Factory.getInstance().getObject(Types.COMPANY);
     	Company comp = (Company)factoryComp.createObject();
     	
-    	AbstractFactory factoryAddr = Factory.getInstance().getObject(Types.ADDRESS);		
+    	Entity factoryAddr = Factory.getInstance().getObject(Types.ADDRESS);		
 		try {
 			comp.getCompanyInfo(SessionFacade.getSession().getID());
 			if(comp.getBranches() == null) {
@@ -56,7 +56,7 @@ public class PublishOfferControl {
 	}
 	
 	public List<JobBean> retrieveJobs() throws DatabaseFailureException {
-		AbstractFactory factory = Factory.getInstance().getObject(Types.JOB);
+		Entity factory = Factory.getInstance().getObject(Types.JOB);
     	Job job = (Job)factory.createObject();
     	
     	try {
@@ -69,7 +69,7 @@ public class PublishOfferControl {
 	}
 	    
     public void saveNewJob(JobBean bean) throws DatabaseFailureException {
-    	AbstractFactory factory = Factory.getInstance().getObject(Types.JOB);
+    	Entity factory = Factory.getInstance().getObject(Types.JOB);
     	Job job = (Job)factory.createObject();
     	
 		job.setName(bean.getName());
@@ -83,7 +83,7 @@ public class PublishOfferControl {
 	}
 
 	public void publishNewOffer(OfferBean bean) throws DatabaseFailureException{
-		AbstractFactory factory = Factory.getInstance().getObject(Types.OFFER);
+		Entity factory = Factory.getInstance().getObject(Types.OFFER);
 		Offer offer = ((OfferFactory)factory).extractOffer(bean);
 		try {
 			offer.publish(SessionFacade.getSession().getID());

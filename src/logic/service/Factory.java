@@ -16,7 +16,7 @@ public class Factory {
         return instance;
     }
 
-	public AbstractFactory getObject(Types type) {
+	public Entity getObject(Types type) {
 		switch(type) {
 		case OFFER:
 			return new OfferFactory();

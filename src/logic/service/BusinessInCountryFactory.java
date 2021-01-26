@@ -7,7 +7,7 @@ import logic.domain.BusinessInCountry;
 import logic.presentation.bean.BusinessInCountryBean;
 import logic.presentation.bean.CountryBean;
 
-public class BusinessInCountryFactory implements AbstractFactory{
+public class BusinessInCountryFactory implements Entity{
 
 	@Override
     public BusinessInCountry createObject() {

@@ -8,7 +8,7 @@ import logic.domain.Country;
 import logic.presentation.bean.AddressBean;
 import logic.presentation.bean.CountryBean;
 
-public class AddressFactory implements AbstractFactory{
+public class AddressFactory implements Entity{
     
 	@Override
     public Address createObject() {

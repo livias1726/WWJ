@@ -6,7 +6,7 @@ import java.util.List;
 import logic.domain.Job;
 import logic.presentation.bean.JobBean;
 
-public class JobFactory implements AbstractFactory{
+public class JobFactory implements Entity{
 
 	@Override
     public Job createObject() {
