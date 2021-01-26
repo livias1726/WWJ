@@ -86,8 +86,11 @@ public class PersonalInfoGraphic implements Initializable {
 	    	emailField.setText(user.getEmail());
 	    	pwdField.setText(user.getPassword());
 	    	city.setText(user.getCity());
-	    	birth.setValue(LocalDate.parse(user.getBirth(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-			
+	    	
+	    	if(user.getBirth() != null) {
+	    		birth.setValue(LocalDate.parse(user.getBirth(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+	    	}
+	    	
 		} catch (DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			closePersonalInfo();
