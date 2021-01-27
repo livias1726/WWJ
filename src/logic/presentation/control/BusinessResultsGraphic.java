@@ -14,17 +14,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import logic.application.control.ViewBusinessControl;
-import logic.exceptions.DatabaseFailureException;
-import logic.exceptions.NoResultFoundException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Sections;
 import logic.presentation.ToolBarGraphic;
 import logic.presentation.bean.BusinessInCountryBean;
-import logic.presentation.bean.CountryBean;
 
 
 public class BusinessResultsGraphic extends ToolBarGraphic{
@@ -44,79 +39,61 @@ public class BusinessResultsGraphic extends ToolBarGraphic{
 	@FXML
 	private VBox resultsBox;
 	
-	private CountryBean searchedCountry;
-	private BusinessInCountryBean searchedBusiness;
 	private List<BusinessInCountryBean> businesses;	
-	private List<String> cList;
-    private List<String> bList;
+	private List<String> filterList;
+	private int cas;
+	
     private ObservableList<String> items = FXCollections.observableArrayList("Earnings", "Management cost");
     private List<CheckBox> filters = new ArrayList<>();
 	
-	public BusinessResultsGraphic(CountryBean c, List<String> list) {
-		this.searchedCountry = c;
-		this.bList = list;
-	}
-	
-	public BusinessResultsGraphic(BusinessInCountryBean b, List<String> list) {
-		this.searchedBusiness = b;
-		this.cList = list;
+	public BusinessResultsGraphic(List<BusinessInCountryBean> businesses, List<String> list, int cas) {
+		this.businesses = businesses;
+		this.filterList = list;
+		this.cas = cas;
 	}
 
-	public BusinessResultsGraphic(CountryBean c, BusinessInCountryBean b) {
-		this.searchedCountry = c;
-		this.searchedBusiness = b;
-	}
-	
 	@Override
 	public void initialize(URL url, ResourceBundle resource) {
 		super.initialize(url, resource);
 
 		//Get results
 		List<CheckBox> group = new ArrayList<>();
-		try {
-			if(searchedBusiness == null) {
-				searchIDLbl.setText(searchedCountry.getName());
+		switch(cas) {
+			case 0:
+				searchIDLbl.setText(businesses.get(0).getCategory() + " in " + businesses.get(0).getCountry().getName());
+				searchIDLbl.setAlignment(Pos.CENTER);
+				
+				filterBox.setVisible(false);
+				break;
+			case 1:
+				searchIDLbl.setText(businesses.get(0).getCountry().getName());
 				searchIDLbl.setAlignment(Pos.CENTER);
 
-				businesses = ViewBusinessControl.getInstance().retrieveBusinessesByCountry(searchedCountry);
-
 				filterLab.setText("Categories");
-				for(String i: bList) {
+				for(String i: filterList) {
 					CheckBox item = new CheckBox(i);
 					filterBox.getChildren().add(item);
 					group.add(item);
 					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterBusiness(new ArrayList<>(), group));
 					filters.add(item);
 				}
-
-			} else if(searchedCountry == null) {
-				searchIDLbl.setText(searchedBusiness.getCategory());	
+				
+				break;
+			case 2:
+				searchIDLbl.setText(businesses.get(0).getCategory());	
 				searchIDLbl.setAlignment(Pos.CENTER);
 				
-				businesses = ViewBusinessControl.getInstance().retrieveBusinessesByCategory(searchedBusiness);
-				
 				filterLab.setText("Countries");	
-				for(String i: cList) {
+				for(String i: filterList) {
 					CheckBox item = new CheckBox(i);
 					filterBox.getChildren().add(item);
 					group.add(item);
 					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterCountry(new ArrayList<>(), group));
 					filters.add(item);
 				}
-				
-			} else {
-				businesses = ViewBusinessControl.getInstance().retrieveBusinesses(searchedCountry, searchedBusiness);
-				searchIDLbl.setText(searchedBusiness.getCategory() + " in " + searchedCountry.getName());
-				searchIDLbl.setAlignment(Pos.CENTER);
-				
-				filterBox.setVisible(false);
-			}
-		} catch (NoResultFoundException e) {
-			GraphicHandler.popUpMsg(AlertType.INFORMATION, e.getMessage());
-			goBack();
-		} catch (DatabaseFailureException de) {
-			GraphicHandler.popUpMsg(AlertType.ERROR, de.getMessage());
-			goBack();
+				break;
+			default:
+				break;
 		}
 		
 		//Add listener to filters choice box

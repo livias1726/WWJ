@@ -19,12 +19,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.application.control.ViewOfferControl;
 import logic.exceptions.DatabaseFailureException;
-import logic.exceptions.NoResultFoundException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Sections;
 import logic.presentation.ToolBarGraphic;
-import logic.presentation.bean.CountryBean;
-import logic.presentation.bean.JobBean;
 import logic.presentation.bean.OfferBean;
 
 public class OfferResultsGraphic extends ToolBarGraphic{
@@ -43,28 +40,18 @@ public class OfferResultsGraphic extends ToolBarGraphic{
 	
 	@FXML
     private Label filterLab;
-    
-    private CountryBean searchedCountry;
-	private JobBean searchedJob;
+	
 	private ObservableList<OfferBean> offers;	
-	private List<String> cList;
-    private List<String> jList;
+	private List<String> filterList;
+	private int cas;
+	
     private List<CheckBox> filters = new ArrayList<>();
 	private ObservableList<String> items = FXCollections.observableArrayList("Upload date", "Expiration date");
 	
-	public OfferResultsGraphic(CountryBean c, List<String> list) {
-		this.searchedCountry = c;
-		this.jList = list;
-	}
-	
-	public OfferResultsGraphic(JobBean j, List<String> list) {
-		this.searchedJob = j;
-		this.cList = list;
-	}
-
-	public OfferResultsGraphic(CountryBean c, JobBean j) {
-		this.searchedCountry = c;
-		this.searchedJob = j;
+	public OfferResultsGraphic(ObservableList<OfferBean> offers, List<String> list, int cas) {
+		this.offers = offers;
+		this.filterList = list;
+		this.cas = cas;
 	}
 	
 	@Override
@@ -73,53 +60,41 @@ public class OfferResultsGraphic extends ToolBarGraphic{
 		
 		List<CheckBox> group = new ArrayList<>();
 
-		try {
-			if(searchedJob == null) {
-				searchIDLbl.setText(searchedCountry.getName());
+		switch(cas) {
+			case 0:
+				searchIDLbl.setText(offers.get(0).getPosition().getCategory() + " in " + offers.get(0).getBranch().getCountryName());
 				searchIDLbl.setAlignment(Pos.CENTER);
 				
-				//Retrieve offers by Country			
-				offers = ViewOfferControl.getInstance().retrieveOffersByCountry(searchedCountry);
+				filterBox.setVisible(false);
+				break;
+			case 1:
+				searchIDLbl.setText(offers.get(0).getBranch().getCountryName());
+				searchIDLbl.setAlignment(Pos.CENTER);
 				
 				filterLab.setText("Categories");
-				for(String i: jList) {
+				for(String i: filterList) {
 					CheckBox item = new CheckBox(i);
 					filterBox.getChildren().add(item);
 					group.add(item);
 					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterJob(new ArrayList<>(), group));
 					filters.add(item);
 				}
-				
-			} else if(searchedCountry == null) {
-				searchIDLbl.setText(searchedJob.getCategory());	
+				break;
+			case 2:
+				searchIDLbl.setText(offers.get(0).getPosition().getCategory());	
 				searchIDLbl.setAlignment(Pos.CENTER);
 				
-				//Retrieve offers by Job
-				offers = ViewOfferControl.getInstance().retrieveOffersByJob(searchedJob);
-				
 				filterLab.setText("Countries");	
-				for(String i: cList) {
+				for(String i: filterList) {
 					CheckBox item = new CheckBox(i);
 					filterBox.getChildren().add(item);
 					group.add(item);
 					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterCountry(new ArrayList<>(), group));
 					filters.add(item);
 				}
-			} else {
-				//Retrieve offers by Country and Job
-				offers = ViewOfferControl.getInstance().retrieveOffers(searchedCountry, searchedJob);
-				
-				searchIDLbl.setText(searchedJob.getCategory() + " in " + searchedCountry.getName());
-				searchIDLbl.setAlignment(Pos.CENTER);
-				
-				filterBox.setVisible(false);
-			}
-		} catch (DatabaseFailureException e) {
-			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
-			goBack();
-		} catch (NoResultFoundException ne) {
-			GraphicHandler.popUpMsg(AlertType.INFORMATION, ne.getMessage());
-			goBack();
+				break;
+			default:
+				break;
 		}
 		
 		//Add listener to filters choice box

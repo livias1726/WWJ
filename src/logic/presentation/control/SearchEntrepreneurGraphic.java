@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import logic.application.control.ViewBusinessControl;
 import logic.application.control.ViewResultsControl;
 import logic.exceptions.DatabaseFailureException;
+import logic.exceptions.NoResultFoundException;
 import logic.presentation.GraphicHandler;
 import logic.presentation.Scenes;
 import logic.presentation.ToolBarGraphic;
@@ -64,26 +65,40 @@ public class SearchEntrepreneurGraphic extends ToolBarGraphic {
 		Stage stage = (Stage)pane.getScene().getWindow();
 		BusinessResultsGraphic controller;
 
-		if (placeSearch.getValue() != null && !placeSearch.getValue().equals("")) {
-			CountryBean country = new CountryBean();
-			country.setName(placeSearch.getValue());
+		try {
+			if (placeSearch.getValue() != null && !placeSearch.getValue().equals("")) {
+				CountryBean country = new CountryBean();
+				country.setName(placeSearch.getValue());
 
-			if (businessSearch.getValue() != null && !businessSearch.getValue().equals("")) {
+				if (businessSearch.getValue() != null && !businessSearch.getValue().equals("")) {
+					BusinessInCountryBean bus = new BusinessInCountryBean();
+					bus.setCategory(businessSearch.getValue());
+					
+					List<BusinessInCountryBean> businesses = ViewBusinessControl.getInstance().retrieveBusinesses(country, bus);
+					
+					controller = new BusinessResultsGraphic(businesses, null, 0);			
+				}else {
+					
+					List<BusinessInCountryBean> businesses = ViewBusinessControl.getInstance().retrieveBusinessesByCountry(country);
+					controller = new BusinessResultsGraphic(businesses, bList, 1);
+				}
+
+			}else {
 				BusinessInCountryBean bus = new BusinessInCountryBean();
 				bus.setCategory(businessSearch.getValue());
+
+				List<BusinessInCountryBean> businesses = ViewBusinessControl.getInstance().retrieveBusinessesByCategory(bus);
 				
-				controller = new BusinessResultsGraphic(country, bus);			
-			}else {
-				controller = new BusinessResultsGraphic(country, bList);
+				controller = new BusinessResultsGraphic(businesses, cList, 2);	
 			}
 
-		}else {
-			BusinessInCountryBean bus = new BusinessInCountryBean();
-			bus.setCategory(businessSearch.getValue());
-
-			controller = new BusinessResultsGraphic(bus, cList);	
+			stage.setScene(GraphicHandler.switchScreen(Scenes.BUSINESSES, controller));
+		}catch (NoResultFoundException e) {
+			GraphicHandler.popUpMsg(AlertType.INFORMATION, e.getMessage());
+		} catch (DatabaseFailureException de) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, de.getMessage());
+			goBack();
 		}
-
-		stage.setScene(GraphicHandler.switchScreen(Scenes.BUSINESSES, controller));
+		
 	}
 }
