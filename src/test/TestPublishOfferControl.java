@@ -12,7 +12,7 @@ import logic.exceptions.InvalidFieldException;
 import logic.presentation.bean.JobBean;
 import logic.presentation.bean.OfferBean;
 
-public class TestOfferFormGraphic {
+public class TestPublishOfferControl {
 
 	@Test
 	public void testAddJobInvalidField() {
