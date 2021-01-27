@@ -40,7 +40,7 @@ public class BusinessResultsGraphic extends ToolBarGraphic{
 	private VBox resultsBox;
 	
 	private List<BusinessInCountryBean> businesses;	
-	private List<String> filterList;
+	private List<String> filterBusList;
 	private int cas;
 	
     private ObservableList<String> items = FXCollections.observableArrayList("Earnings", "Management cost");
@@ -48,7 +48,7 @@ public class BusinessResultsGraphic extends ToolBarGraphic{
 	
 	public BusinessResultsGraphic(List<BusinessInCountryBean> businesses, List<String> list, int cas) {
 		this.businesses = businesses;
-		this.filterList = list;
+		this.filterBusList = list;
 		this.cas = cas;
 	}
 
@@ -70,12 +70,12 @@ public class BusinessResultsGraphic extends ToolBarGraphic{
 				searchIDLbl.setAlignment(Pos.CENTER);
 
 				filterLab.setText("Categories");
-				for(String i: filterList) {
-					CheckBox item = new CheckBox(i);
-					filterBox.getChildren().add(item);
-					group.add(item);
-					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterBusiness(new ArrayList<>(), group));
-					filters.add(item);
+				for(String i: filterBusList) {
+					CheckBox busCat = new CheckBox(i);
+					filterBox.getChildren().add(busCat);
+					group.add(busCat);
+					busCat.selectedProperty().addListener((obv, oldValue, newValue) -> filterBusiness(new ArrayList<>(), group));
+					filters.add(busCat);
 				}
 				
 				break;
@@ -84,7 +84,7 @@ public class BusinessResultsGraphic extends ToolBarGraphic{
 				searchIDLbl.setAlignment(Pos.CENTER);
 				
 				filterLab.setText("Countries");	
-				for(String i: filterList) {
+				for(String i: filterBusList) {
 					CheckBox item = new CheckBox(i);
 					filterBox.getChildren().add(item);
 					group.add(item);

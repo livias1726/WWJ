@@ -42,7 +42,7 @@ public class OfferResultsGraphic extends ToolBarGraphic{
     private Label filterLab;
 	
 	private ObservableList<OfferBean> offers;	
-	private List<String> filterList;
+	private List<String> filterOfferList;
 	private int cas;
 	
     private List<CheckBox> filters = new ArrayList<>();
@@ -50,7 +50,7 @@ public class OfferResultsGraphic extends ToolBarGraphic{
 	
 	public OfferResultsGraphic(ObservableList<OfferBean> offers, List<String> list, int cas) {
 		this.offers = offers;
-		this.filterList = list;
+		this.filterOfferList = list;
 		this.cas = cas;
 	}
 	
@@ -72,12 +72,12 @@ public class OfferResultsGraphic extends ToolBarGraphic{
 				searchIDLbl.setAlignment(Pos.CENTER);
 				
 				filterLab.setText("Categories");
-				for(String i: filterList) {
-					CheckBox item = new CheckBox(i);
-					filterBox.getChildren().add(item);
-					group.add(item);
-					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterJob(new ArrayList<>(), group));
-					filters.add(item);
+				for(String i: filterOfferList) {
+					CheckBox jobCat = new CheckBox(i);
+					filterBox.getChildren().add(jobCat);
+					group.add(jobCat);
+					jobCat.selectedProperty().addListener((obv, oldValue, newValue) -> filterJob(new ArrayList<>(), group));
+					filters.add(jobCat);
 				}
 				break;
 			case 2:
@@ -85,12 +85,12 @@ public class OfferResultsGraphic extends ToolBarGraphic{
 				searchIDLbl.setAlignment(Pos.CENTER);
 				
 				filterLab.setText("Countries");	
-				for(String i: filterList) {
-					CheckBox item = new CheckBox(i);
-					filterBox.getChildren().add(item);
-					group.add(item);
-					item.selectedProperty().addListener((obv, oldValue, newValue) -> filterCountry(new ArrayList<>(), group));
-					filters.add(item);
+				for(String i: filterOfferList) {
+					CheckBox country = new CheckBox(i);
+					filterBox.getChildren().add(country);
+					group.add(country);
+					country.selectedProperty().addListener((obv, oldValue, newValue) -> filterCountry(new ArrayList<>(), group));
+					filters.add(country);
 				}
 				break;
 			default:
