@@ -8,6 +8,10 @@ import logic.exceptions.BadAddressException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.bean.UserBean;
 
+/**
+ * @author livia simoncini 
+ */
+
 public class TestUserBean {
 
 	@Test

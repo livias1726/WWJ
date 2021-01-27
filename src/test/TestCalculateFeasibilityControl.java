@@ -10,6 +10,10 @@ import logic.exceptions.InvalidFieldException;
 import logic.presentation.bean.BusinessInCountryBean;
 import logic.presentation.bean.CountryBean;
 
+/**
+ * @author livia simoncini
+ */
+
 public class TestCalculateFeasibilityControl {
 
 	@Test

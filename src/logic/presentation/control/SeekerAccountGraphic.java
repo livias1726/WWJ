@@ -84,8 +84,9 @@ public class SeekerAccountGraphic extends AccountGraphic{
 			Optional<ButtonType> res = GraphicHandler.popUpMsg(AlertType.CONFIRMATION, null);
 			if(res.isPresent() && res.get().getText().equals("Upload")) {
 				uploadCV();
-				return;
-			}	
+			}
+			
+			return;
 		}
 	
 		Optional<ButtonType> res = GraphicHandler.popUpMsg(AlertType.CONFIRMATION, "");

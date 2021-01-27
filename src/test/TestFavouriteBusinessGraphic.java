@@ -14,6 +14,10 @@ import javafx.scene.control.ChoiceBox;
 import logic.presentation.bean.BusinessInCountryBean;
 import logic.presentation.control.FavouriteBusinessGraphic;
 
+/**
+ * @author livia simoncini
+ */
+
 public class TestFavouriteBusinessGraphic {
 
 	JFXPanel fxPanel = new JFXPanel();

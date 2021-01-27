@@ -72,6 +72,7 @@ public class SignUpGraphic implements Initializable {
 		signUpBtn.disableProperty().bind(seekRadio.selectedProperty()
 				.or(recRadio.selectedProperty())
 				.or(entreRadio.selectedProperty()).not());
+		
 		seekRadio.selectedProperty().addListener((obs, oldV, newV) -> checked = 1);
 		recRadio.selectedProperty().addListener((obs, oldV, newV) -> checked = 2);
 		entreRadio.selectedProperty().addListener((obs, oldV, newV) -> checked = 3);

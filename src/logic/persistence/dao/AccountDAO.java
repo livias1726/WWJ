@@ -120,7 +120,10 @@ public class AccountDAO {
 				ret = true;
 	            
 	        } catch (SQLException e) {
-	        	throw new SQLException("An error occured while trying to create the account."); 
+	        	if(e.getSQLState() != null) {
+	        		throw e;
+	        	}
+	        	throw new SQLException("An error occured while trying to create the account.");
 			} finally {
 				if(stmt != null) {
 					stmt.close();
