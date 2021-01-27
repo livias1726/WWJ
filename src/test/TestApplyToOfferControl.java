@@ -1,7 +1,6 @@
 package test;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 import javafx.collections.ObservableList;
@@ -10,6 +9,10 @@ import logic.application.control.ApplyToOfferControl;
 import logic.application.control.SeekerAccountControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.ApplicationBean;
+
+/**
+ * @author alison petrilli
+ */
 
 public class TestApplyToOfferControl {
 

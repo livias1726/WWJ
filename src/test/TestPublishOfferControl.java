@@ -12,6 +12,10 @@ import logic.exceptions.InvalidFieldException;
 import logic.presentation.bean.JobBean;
 import logic.presentation.bean.OfferBean;
 
+/**
+ * @author dominique toce
+ */
+
 public class TestPublishOfferControl {
 
 	@Test

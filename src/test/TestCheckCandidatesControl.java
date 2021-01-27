@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,10 @@ import logic.application.SessionFacade;
 import logic.application.control.CheckCandidatesControl;
 import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.CandidateBean;
+
+/**
+ * @author dominique toce
+ */
 
 public class TestCheckCandidatesControl {
 

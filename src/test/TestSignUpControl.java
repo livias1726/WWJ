@@ -9,6 +9,10 @@ import logic.exceptions.DuplicatedUserException;
 import logic.presentation.bean.AccountBean;
 import logic.presentation.bean.UserBean;
 
+/**
+ * @author alison petrilli
+ */
+
 public class TestSignUpControl {
 
 	@Test

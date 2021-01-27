@@ -13,6 +13,10 @@ import logic.presentation.bean.JobBean;
 import logic.presentation.bean.OfferBean;
 import logic.service.OfferFactory;
 
+/**
+ * @author alison petrilli
+ */
+
 public class TestOfferFactory {
 
 	@Test

@@ -10,6 +10,10 @@ import logic.exceptions.NoResultFoundException;
 import logic.presentation.bean.CountryBean;
 import logic.presentation.bean.JobBean;
 
+/**
+ * @author dominique toce
+ */
+
 public class TestViewOfferControl {
 
 	@Test
