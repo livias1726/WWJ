@@ -1,5 +1,9 @@
 package logic.exceptions;
 
+/**
+ * @author livia simoncini
+ */
+
 public class DuplicatedUserException extends Exception {
 
 	private static final long serialVersionUID = -6317725911834964264L;
