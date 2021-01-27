@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.application.SessionFacade;
 import logic.application.control.ManageAccountControl;
+import logic.exceptions.BadAddressException;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.InvalidFieldException;
 import logic.presentation.GraphicHandler;
@@ -153,6 +154,9 @@ public class PersonalInfoGraphic implements Initializable {
 			bean.verifySyntax();
 		} catch (InvalidFieldException e) {
 			GraphicHandler.popUpMsg(AlertType.WARNING, e.getMessage());
+			return;
+		} catch (BadAddressException e) {
+			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 			return;
 		} 
 

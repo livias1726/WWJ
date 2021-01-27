@@ -3,6 +3,7 @@ package logic.presentation.bean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import logic.exceptions.BadAddressException;
 import logic.exceptions.InvalidFieldException;
 
 public class UserBean {
@@ -78,11 +79,11 @@ public class UserBean {
 		}     
     }
     
-    public void verifySyntax() throws InvalidFieldException {
+    public void verifySyntax() throws BadAddressException {
     	Pattern pattern = Pattern.compile("^.+@.+\\..+$");
     	Matcher matcher = pattern.matcher(email);
     	if(!matcher.matches()) {
-			throw new InvalidFieldException("The email address is not valid");	
+			throw new BadAddressException("The email address is not valid");	
 		}
 	}
     
@@ -96,7 +97,7 @@ public class UserBean {
     	}
     }
     
-    public void verifySignUpSyntax(String email, String pwd) throws InvalidFieldException {
+    public void verifySignUpSyntax(String email, String pwd) throws InvalidFieldException, BadAddressException {
     	verifyFields();
 		verifyEqualFields(email, pwd);
 		verifySyntax();

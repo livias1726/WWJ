@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import logic.application.SessionFacade;
 import logic.application.control.LoginControl;
 import logic.application.control.SignUpControl;
+import logic.exceptions.BadAddressException;
 import logic.exceptions.DatabaseFailureException;
 import logic.exceptions.DuplicatedUserException;
 import logic.exceptions.InvalidFieldException;
@@ -123,7 +124,7 @@ public class SignUpGraphic implements Initializable {
 			
 		} catch (DuplicatedUserException | InvalidFieldException e) {
 			GraphicHandler.popUpMsg(AlertType.WARNING, e.getMessage());
-		} catch (FailedLoginException | DatabaseFailureException e) {
+		} catch (BadAddressException | FailedLoginException | DatabaseFailureException e) {
 			GraphicHandler.popUpMsg(AlertType.ERROR, e.getMessage());
 		}
 	}
