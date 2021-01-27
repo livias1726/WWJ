@@ -29,10 +29,14 @@
 		      		</script>
 		      	<%} else {%>
 		      		<a href="html/pricing.html">Buy premium version</a>
-		      		
+		      		<!-- REMOVED FOR TESTING PURPOSES
+		      		<script>window.setTimeout(adPopUp(), 30000);</script> 
+		      		-->
 		      	<%}
 	    	  }else{%>
-	    	  		
+	    	  	<!-- REMOVED FOR TESTING PURPOSES
+	    	  	<script>window.setTimeout(adPopUp(), 30000);</script> 
+	    	  	-->
 	    	<%}%>
 	      	
 	      	<a href="html/support.html">Support</a>	     		

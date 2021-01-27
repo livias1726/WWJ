@@ -14,12 +14,12 @@ $('#order_bus').change(function() {
 	    	shouldSwitch = false;
 	    	
 			if($("#order_bus option:selected").text() == "Earnings"){
-		      	if (button1[2].getAttribute("value") > button2[2].getAttribute("value")) {
+		      	if (button1[2].getAttribute("value") < button2[2].getAttribute("value")) {
 		        	shouldSwitch = true;
 		        	break;
 		      	}
 	    	}else{
-	    		if (button1[1].getAttribute("value") > button2[1].getAttribute("value")) {
+	    		if (button1[1].getAttribute("value") < button2[1].getAttribute("value")) {
 		        	shouldSwitch = true;
 		        	break;
 		      	}
