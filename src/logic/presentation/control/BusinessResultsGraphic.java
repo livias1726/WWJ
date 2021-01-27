@@ -173,9 +173,9 @@ public class BusinessResultsGraphic extends ToolBarGraphic{
 	public void orderResults(List <BusinessInCountryBean> list, Number filter) {
 		list.sort((BusinessInCountryBean b1, BusinessInCountryBean b2) -> {
 			if(filter.intValue() == 0) {
-        		return b1.getAverageEarnings().compareTo(b2.getAverageEarnings());
+        		return b2.getAverageEarnings().compareTo(b1.getAverageEarnings());
         	}else {
-        		return b1.getAverageCost().compareTo(b2.getAverageCost());
+        		return b2.getAverageCost().compareTo(b1.getAverageCost());
         	}    
 	    });
 	}
