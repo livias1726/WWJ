@@ -25,7 +25,7 @@ public class TestFavouriteBusinessGraphic {
 		int size = 4;
 		for(int i=0; i<size; i++) {
 			BusinessInCountryBean bean = new BusinessInCountryBean();
-			bean.setAverageEarnings((float) i); //0, 1, 2, 3
+			bean.setAverageEarnings((float) i);  //0, 1, 2, 3
 			bean.setAverageCost((float) (size-i)); //4, 3, 2, 1
 			
 			businesses.add(bean);
@@ -36,52 +36,52 @@ public class TestFavouriteBusinessGraphic {
 	
 	@Test
 	public void testOrderResultEarnings() {
-		ChoiceBox<String> order = new ChoiceBox<>();
-		ObservableList<String> items = FXCollections.observableArrayList("Earnings", "Management cost");
-		order.setItems(items);
-		order.setValue(items.get(0));
+		ChoiceBox<String> filterBox = new ChoiceBox<>();
+		ObservableList<String> filters = FXCollections.observableArrayList("Earnings", "Management cost");
+		filterBox.setItems(filters);
+		filterBox.setValue(filters.get(0));
 		
-		List<BusinessInCountryBean> businesses = new ArrayList<>();
+		List<BusinessInCountryBean> items = new ArrayList<>();
 		
 		int size = 4;
 		for(int i=0; i<size; i++) {
-			BusinessInCountryBean bean = new BusinessInCountryBean();
-			bean.setAverageEarnings((float) i); //0, 1, 2, 3
-			bean.setAverageCost((float) (size-i)); //4, 3, 2, 1
+			BusinessInCountryBean j = new BusinessInCountryBean();
+			j.setAverageEarnings((float) i); 
+			j.setAverageCost((float) (size-i)); 
 			
-			businesses.add(bean);
+			items.add(j);
 		}	
 		
 		FavouriteBusinessGraphic graph = new FavouriteBusinessGraphic();
 		
-		graph.orderResults(businesses, 0);
+		graph.orderResults(items, 0);
 		
-		assertTrue(businesses.get(0).getAverageEarnings() == 3 && businesses.get(size-1).getAverageEarnings() == 0);
+		assertTrue(items.get(0).getAverageEarnings() == 3 && items.get(size-1).getAverageEarnings() == 0);
 	}
 	
 	@Test
 	public void testOrderResultCost() {
-		ChoiceBox<String> order = new ChoiceBox<>();
+		ChoiceBox<String> orderBox = new ChoiceBox<>();
 		ObservableList<String> items = FXCollections.observableArrayList("Earnings", "Management cost");
-		order.setItems(items);
-		order.setValue(items.get(0));
+		orderBox.setItems(items);
+		orderBox.setValue(items.get(0));
 		
-		List<BusinessInCountryBean> businesses = new ArrayList<>();
+		List<BusinessInCountryBean> list = new ArrayList<>();
 		
 		int size = 4;
 		for(int i=0; i<size; i++) {
-			BusinessInCountryBean bean = new BusinessInCountryBean();
-			bean.setAverageEarnings((float) i); //0, 1, 2, 3
-			bean.setAverageCost((float) (size-i)); //4, 3, 2, 1
+			BusinessInCountryBean b = new BusinessInCountryBean();
+			b.setAverageEarnings((float) i); 
+			b.setAverageCost((float) (size-i));
 			
-			businesses.add(bean);
+			list.add(b);
 		}	
 		
 		FavouriteBusinessGraphic graph = new FavouriteBusinessGraphic();
 		
-		graph.orderResults(businesses, 1);
+		graph.orderResults(list, 1);
 		
-		assertTrue(businesses.get(0).getAverageCost() == 4 && businesses.get(size-1).getAverageCost() == 1);
+		assertTrue(list.get(0).getAverageCost() == 4 && list.get(size-1).getAverageCost() == 1);
 	}
 
 }
