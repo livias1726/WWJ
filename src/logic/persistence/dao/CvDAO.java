@@ -35,7 +35,7 @@ public class CvDAO {
 		CV cv = (CV)factory.createObject();
 		try {
 			Connection conn = ConnectionManager.getConnection();
-        	stmt = conn.prepareCall(RoutinesIdentifier.GET_CV);
+        	stmt = conn.prepareCall(RoutinesIdentifier.GET_CV, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			res = RoutinesManager.bindParametersAndExec(stmt, (int)accountID);
 			
 			if(!res.first()) {
@@ -54,7 +54,7 @@ public class CvDAO {
             res.close(); 
             
         } catch (SQLException e) {
-        	throw new SQLException("An error occured while trying to retrieve the cv."); 
+        	throw new SQLException("An error occured while trying to retrieve the cv.");
 		} finally {
 			if(stmt != null) {
 				stmt.close();

@@ -4,6 +4,7 @@
 		 
 <%
 SessionFacade.getSession().setID(null);
+SessionFacade.getSession().setCurrUserType(null);
 session.invalidate();
 response.sendRedirect("http://localhost:8080/WorldWideJob/index.jsp");
 %>

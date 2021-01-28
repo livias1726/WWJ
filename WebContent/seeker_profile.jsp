@@ -34,9 +34,7 @@
 accountBean = ManageAccountControl.getInstance().retrieveAccount();
 userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacade.getSession().getID());
 %>
-  
-
-				  
+  				  
 <html lang="en">
 	<head>
 		<meta charset="ISO-8859-1">
@@ -54,7 +52,7 @@ userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacad
 	<body>
 		<jsp:include page="WEB-INF/toolbar.jsp"/>
 		<div id="main" style="height:680px;background-color:#8ecae6;border:1px solid blue">
-			<form action="seeker_profile.jsp" name="seekerProfileform" method="POST" enctype='multipart/form-data'>				
+			<form action="seeker_profile.jsp" name="seekerProfileform" method="POST">				
 	    		<div class="profile_pic">
 	    			<%if(accountBean.getPic() != null){	
 	    				String path = "file://" + accountBean.getPic().getAbsolutePath();
@@ -88,9 +86,8 @@ userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacad
 	    		
 	    		<div id="container">
 					<ul id="griglia">
-						<li><button class="cv_btn" name="cv">Curriculum Vitae</button></li>	
-						<li><button class="id_btn" type="button" onClick="javascript:window.location='personal_info.jsp';">Personal Info</button></li>
-						
+						<li><button class="cv_btn" id="cv" name="cv">Curriculum Vitae</button></li>
+						<li><button class="id_btn" type="button" onClick="javascript:window.location='personal_info.jsp';">Personal Info</button></li>						
 						<li><button class="offers_btn" type="button" onClick="javascript:window.location='applications.jsp';">Applications</button></li>
 						<li><button class="fav_offers" type="button" onClick="javascript:window.location='favourite_offers.jsp';">Favourites</button></li>
 					</ul>
@@ -114,8 +111,8 @@ userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacad
 					  <%}
 				    } catch (NoResultFoundException re) {%>
 						<script>
-						if (confirm("No CV has been uploaded. Do you want to upload one?")) {
-						    $("#load_cv").trigger("click");
+						if (window.confirm("No CV has been uploaded. Do you want to upload one?")) {
+						    $("#load_cv").click();
 						} else {
 						    /**/
 						}

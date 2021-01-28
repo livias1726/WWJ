@@ -93,12 +93,9 @@
 			<button class="home_btn" type="button" onClick="javascript:window.location='seeker_search.jsp';"></button>
 			
 	   <%}else if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER) {%>
-	   		<button class="home_btn" type="submit" name="home"></button>
-	   		<%if (request.getParameter("home") != null) {
-				String redirectURL = "http://localhost:8080/WorldWideJob/recruiter_profile.jsp";
-				response.sendRedirect(redirectURL);
-			}
-	     }else{%>
+	   		<button class="home_btn" type="button" onClick="javascript:window.location='recruiter_profile.jsp';"></button>
+	   		
+	   <%}else{%>
 		    <button class="home_btn" type="button" onClick="javascript:window.location='entrepreneur_search.jsp';"></button>
 	   <%}%>
 	</div>

@@ -4,10 +4,12 @@
 		 import="logic.presentation.bean.AccountBean"
 		 import="logic.application.control.LoginControl"
 		 import="logic.application.control.SignUpControl"
+		 import="logic.application.SessionFacade"
+		 import="logic.application.Users"
 		 import="logic.exceptions.DuplicatedUserException"
 		 import="logic.exceptions.InvalidFieldException"%>
 
-<%@ page errorPage="WEB-INF/error.jsp"%>
+<%@page errorPage="WEB-INF/error.jsp"%>
 		 
 <!DOCTYPE html>
 
@@ -28,7 +30,12 @@
 	try{
 		userBean.verifySignUpSyntax(request.getParameter("confEmail"), request.getParameter("confPwd"));
 		accountBean.setUser(userBean);
-		switch(request.getParameter("category")){
+		
+		if(request.getParameter("category") == null){%>
+			<script>alert("Select a role.");</script>
+			<%return;
+	    }else{
+		  switch(request.getParameter("category")){
 			case "seek":
 				accountBean.setType("SEEKER");
 				break;
@@ -40,7 +47,9 @@
 				break;
 			default:%>
 				<script>alert("Invalid role.");</script>
-	  <%}
+				<%return;
+	  	  }
+		}
 		
 		SignUpControl.getInstance().trySignUp(accountBean);
 		LoginControl.getInstance().tryLogin(accountBean);
@@ -90,6 +99,9 @@
 		    			<input type="radio" name="category" id="seek" value="seek">Job Seeker
 		    			&emsp;&emsp;
 		    			<input type="radio" name="category" id="rec" value="rec">Recruiter
+		    			<%if(SessionFacade.getSession().getCurrUserType() == Users.RECRUITER){%>
+		    				<script>document.getElementById("rec").checked = true</script>
+		    			<%}%>
 		    			&emsp;&emsp;
 		    			<input type="radio" name="category" id="entr" value="entr">Entrepreneur
 					</div>
