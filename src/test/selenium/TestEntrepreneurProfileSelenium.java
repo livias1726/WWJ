@@ -8,7 +8,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TestEntrepreneurProfileSelenium {
+/**
+ * @author alison petrilli
+ */
+
+public class TestEntrepreneurProfileSelenium {	
 
 	@Test
 	public void testToolbarSetupLogged() {
