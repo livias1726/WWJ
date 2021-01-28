@@ -57,7 +57,7 @@
 			   <%}else{%>
 				    <a href="http://localhost:8080/WorldWideJob/entrepreneur_profile.jsp">Profile</a>
 			   <%}%>	      		
-	      		<a href="http://localhost:8080/WorldWideJob/index.jsp">Logout</a>
+	      		<a href="http://localhost:8080/WorldWideJob/logout.jsp">Logout</a>
 	      	<%}%>		     		
 	   	</div>
 	</div>
