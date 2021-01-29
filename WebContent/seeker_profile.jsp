@@ -70,7 +70,7 @@ userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacad
 	    		<%if(request.getParameter("submit") != null){
 					byte[] data = Base64.getDecoder().decode(request.getParameter("store_pic").getBytes(StandardCharsets.UTF_8));
 				
-					File newPic = new File("tmp/target.jpg");
+					File newPic = new File("target.jpg");
 					try (OutputStream stream = new FileOutputStream(newPic)) {
 					    stream.write(data);
 					}
@@ -124,7 +124,7 @@ userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacad
 				<%if(request.getParameter("submit2") != null){
 					byte[] data = Base64.getDecoder().decode(request.getParameter("store_cv").getBytes(StandardCharsets.UTF_8));
 				
-					File newCV = new File("tmp/target.pdf");
+					File newCV = new File("target.pdf");
 					try (OutputStream stream = new FileOutputStream(newCV)) {
 					    stream.write(data);
 					}

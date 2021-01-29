@@ -14,6 +14,8 @@
 		 import="logic.application.control.SeekerAccountControl"
 		 import="logic.application.control.ManageAccountControl"
 		 import="logic.exceptions.NoResultFoundException"%>
+
+<%@page errorPage="WEB-INF/error.jsp"%>
 		 
 <!DOCTYPE html>
 

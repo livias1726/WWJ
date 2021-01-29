@@ -21,7 +21,6 @@
 	    <link href="css/style.css" rel="stylesheet">
 	
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    	<script src="js/toolbar.js"></script>
 		<title>WorldWideJob</title>
 	</head>
 	<body>
@@ -143,4 +142,5 @@
 		     </form>
 		</div>	
 	</body>
+	<script src="js/toolbar.js"></script>
 </html>

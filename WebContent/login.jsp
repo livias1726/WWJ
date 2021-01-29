@@ -48,7 +48,6 @@
 		<link rel="icon" href="icons/main_icon.png">
 	    <link href="css/style.css" rel="stylesheet">
 	    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	    <script src="js/login.js"></script>
 	    <title>WorldWideJob - Login</title>
 	</head>
 	<body>
@@ -84,4 +83,5 @@
 			  </fieldset>
 	    </form>
 	</body>
+	<script src="js/login.js"></script>
 </html>

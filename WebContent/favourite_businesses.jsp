@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
     
 <%@page import="java.util.StringTokenizer"%>	
   
@@ -8,6 +7,7 @@
 		 import="logic.application.control.ManageFavouriteBusinessesControl"%>
 
 <%@page errorPage="WEB-INF/error.jsp"%>
+
 <!DOCTYPE html>
 
 <jsp:useBean id="countryBean" scope="session" class="logic.presentation.bean.CountryBean"/>

@@ -70,8 +70,7 @@
 		<link rel="icon" href="icons/main_icon.png">
 	    <link href="css/style.css" rel="stylesheet">
 	
-		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-		
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>		
 		<title>WorldWideJob</title>
 	</head>	
 	<body>

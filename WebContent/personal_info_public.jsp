@@ -29,7 +29,6 @@ userBean = ManageAccountControl.getInstance().retrievePersonalInfo(accountBean.g
 	<link href="css/style.css" rel="stylesheet">
 	
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="js/toolbar.js"></script>
 	<title>WorldWideWeb</title>
 </head>
 	<body>
@@ -65,4 +64,5 @@ userBean = ManageAccountControl.getInstance().retrievePersonalInfo(accountBean.g
 	    	</form>
 	    </div>
 	</body>
+	<script src="js/toolbar.js"></script>
 </html>

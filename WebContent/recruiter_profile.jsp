@@ -37,12 +37,7 @@ userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacad
 	    <link href="css/style.css" rel="stylesheet">
 	
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
-		<script src="js/toolbar.js"></script>
-		<script src="js/files.js"></script>
-		<title>WorldWideJob - Profile</title>
-		
+		<title>WorldWideJob - Profile</title>		
 	</head>
 	<body>
 		<jsp:include page="WEB-INF/toolbar.jsp"/>
@@ -66,7 +61,7 @@ userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacad
 	    		<%if(request.getParameter("submit") != null){
 					byte[] data = Base64.getDecoder().decode(request.getParameter("store_pic").getBytes(StandardCharsets.UTF_8));
 				
-					File newPic = new File("tmp/target.jpg");
+					File newPic = new File("target.jpg");
 					try (OutputStream stream = new FileOutputStream(newPic)) {
 					    stream.write(data);
 					}
@@ -92,4 +87,6 @@ userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacad
 	    	</form>
 	    </div>
 	</body>
+	<script src="js/toolbar.js"></script>
+	<script src="js/files.js"></script>
 </html>

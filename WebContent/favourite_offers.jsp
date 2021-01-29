@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
 <%@ page import="logic.presentation.bean.OfferBean"
 		 import="logic.presentation.bean.CountryBean"
 		 import="logic.application.control.ManageFavouriteOffersControl"
 		 import="logic.application.control.ViewOfferControl"%>
-<%@page errorPage="WEB-INF/error.jsp"%>    
+		 
+<%@page errorPage="WEB-INF/error.jsp"%>   
+ 
 <!DOCTYPE html>
 
 <jsp:useBean id="countryBean" scope="session" class="logic.presentation.bean.CountryBean"/>
