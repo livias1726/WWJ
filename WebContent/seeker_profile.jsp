@@ -8,7 +8,10 @@
 		 import="java.net.URISyntaxException"
 		 import="java.net.URL"
 		 import="java.util.Base64"
-		 import="java.nio.charset.StandardCharsets"%> 
+		 import="java.nio.charset.StandardCharsets"
+		 import="java.nio.file.Files"
+		 import="java.sql.Blob"
+		 import="javax.sql.rowset.serial.SerialBlob"%> 
 		 
 <%@ page import="logic.presentation.bean.UserBean"
 		 import="logic.presentation.bean.AccountBean"
@@ -44,9 +47,6 @@ userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacad
 	    <link href="css/style.css" rel="stylesheet">
 	
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  		
-		<script src="js/toolbar.js"></script>
-		<script src="js/files.js"></script>
 		<title>WorldWideJob - Profile</title>	
 	</head>
 	<body>
@@ -54,9 +54,9 @@ userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacad
 		<div id="main" style="height:680px;background-color:#8ecae6;border:1px solid blue">
 			<form action="seeker_profile.jsp" name="seekerProfileform" method="POST">				
 	    		<div class="profile_pic">
-	    			<%if(accountBean.getPic() != null){	
-	    				String path = "file://" + accountBean.getPic().getAbsolutePath();
-	    				path = path.replace("\\", "/");%>
+	    			<%if(accountBean.getPic() != null){
+        				String path = "file://" + accountBean.getPic().getAbsolutePath();
+					    path = path.replace("\\", "/");%>
 	    				
 	    				<img src="<%=path%>" alt="profile" id="profile" width="246" height="197">
 					<%}else{%>
@@ -93,8 +93,8 @@ userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacad
 					</ul>
 				</div>
 				
-				<input type="file" id="load_cv" name="load_cv" accept=".pdf" style="display:none" onchange="uploadCv(this)">
-				<input type="hidden" id="store_pic" name="store_pic">
+				<input type="file" id="load_cv" name="load_cv" accept=".pdf" style="position:absolute;top:-100px" onchange="uploadCv(this)">
+				<input type="hidden" id="store_cv" name="store_cv">
 				<button id="submit2" name="submit2" style="display:none"></button>
 				<%if(request.getParameter("cv") != null){
 					try {
@@ -112,7 +112,8 @@ userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacad
 				    } catch (NoResultFoundException re) {%>
 						<script>
 						if (window.confirm("No CV has been uploaded. Do you want to upload one?")) {
-						    $("#load_cv").click();
+							var input = document.getElementById("load_cv");
+						    input.click();
 						} else {
 						    /**/
 						}
@@ -134,4 +135,6 @@ userBean =  ManageAccountControl.getInstance().retrievePersonalInfo(SessionFacad
 	    	</form>
 	    </div>
 	</body>
+	<script src="js/toolbar.js"></script>
+	<script src="js/files.js"></script>
 </html>

@@ -41,17 +41,13 @@ userBean = ManageAccountControl.getInstance().retrievePersonalInfo(accountBean.g
 		<link rel="icon" href="icons/main_icon.png">
 	    <link href="css/style.css" rel="stylesheet">
 	
-		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
-		
-  		<script src="js/toolbar.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>		
 		<title>WorldWideJob - <%=accountBean.getUser().getFirstName() + " " + accountBean.getUser().getLastName()%></title>
 	</head>
 	<body>
 		<jsp:include page="WEB-INF/toolbar.jsp"/>
 		<div id="main" style="height:680px;background-color:#8ecae6;border:1px solid blue">
-			<form action="seeker_profile.jsp" name="seekerProfileform" method="POST">
+			<form action="public_seeker_profile.jsp" name="publicSeekerProfileform" method="POST">
 				<div class="profile_pic">
 	    			<%if(accountBean.getPic() != null){	
 	    				String path = "file://" + accountBean.getPic().getAbsolutePath();
@@ -70,28 +66,29 @@ userBean = ManageAccountControl.getInstance().retrievePersonalInfo(accountBean.g
 	    		
 	    		<div id="container">
 					<ul id="griglia">
-						<li><button class="cv_btn" name="cv">Curriculum Vitae</button></li>						
-						<%if(request.getParameter("cv") != null){
-							try {
-								SeekerAccountControl.getInstance().retrieveCV(cvBean, accountBean.getId());
-								
-								String path = "file://" + cvBean.getCv().getAbsolutePath();
-							    path = path.replace("\\", "/");
-							    URL url;
-								try {
-									url = new URL(path);
-									Desktop.getDesktop().browse(url.toURI());
-								} catch (URISyntaxException | IOException e) {%>
-									<script>window.alert("Sorry, the document cannot be opened")</script>
-							  <%}
-						    } catch (NoResultFoundException re) {%>
-								<script>alert("No CV has been uploaded.");</script>
-						  <%}
-						}%>
+						<li><button class="cv_btn" name="cv">Curriculum Vitae</button></li>					
 						<li><button class="id_btn" type="button" onClick="javascript:window.location='personal_info_public.jsp';">Personal Info</button></li>
 					</ul>
 				</div>
+				<%if(request.getParameter("cv") != null){
+					try {
+						SeekerAccountControl.getInstance().retrieveCV(cvBean, accountBean.getId());
+						
+						String path = "file://" + cvBean.getCv().getAbsolutePath();
+					    path = path.replace("\\", "/");
+					    URL url;
+						try {
+							url = new URL(path);
+							Desktop.getDesktop().browse(url.toURI());
+						} catch (URISyntaxException | IOException e) {%>
+							<script>window.alert("Sorry, the document cannot be opened")</script>
+					  <%}
+				    } catch (NoResultFoundException re) {%>
+						<script>window.alert("No CV has been uploaded.");</script>
+				  <%}
+				}%>
 	    	</form>
 	    </div>
 	</body>
+	<script src="js/toolbar.js"></script>
 </html>

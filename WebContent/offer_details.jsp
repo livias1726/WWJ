@@ -15,7 +15,7 @@
 		 import="logic.application.control.ManageFavouriteOffersControl"
  		 import="logic.application.SessionFacade"%>
   
-<%@ page errorPage="WEB-INF/error.jsp"%>
+
   
 <!DOCTYPE html>
 
@@ -63,7 +63,7 @@
 	    		<div style="position:absolute;right:25px;top:80px;height:40px;width:40px;">
 	    			<button class="star_button_nset" id="star" name="star"></button>
 					<%if(SessionFacade.getSession().getID() != null) {
-						if(SessionFacade.getSession().getID() != accountBean.getId()){%>
+						if(accountBean.getId() != 0 && SessionFacade.getSession().getID() != accountBean.getId()){%>
 		     				<script>document.getElementById("star").style.display = "none";</script>
 		     	  	  <%}else{
 							for(OfferBean i: ManageFavouriteOffersControl.getInstance().retrieveFavourites()) {
@@ -182,7 +182,7 @@
 			     	
 			     	<button class="apply_btn" name="apply" id="apply">Apply</button>
 			     	<%if(SessionFacade.getSession().getID() != null) {
-			     		if(SessionFacade.getSession().getID() != accountBean.getId()){%>
+			     		if(accountBean.getId() != 0 && SessionFacade.getSession().getID() != accountBean.getId()){%>
 			     			<script>document.getElementById("apply").style.display = "none";</script>
 			     	  <%}else{
 					     	for(ApplicationBean i: SeekerAccountControl.getInstance().retrieveApplications()) {
@@ -198,11 +198,15 @@
 			     	  }%>
 					  
 					<%if(request.getParameter("apply") != null){
-						 applicationBean.setId(offerBean.getId());
-						 ApplyToOfferControl.getInstance().apply(applicationBean);
-						 
-						 String redirectURL = "http://localhost:8080/WorldWideJob/offer_results.jsp";
-						 response.sendRedirect(redirectURL); 
+						if(SessionFacade.getSession().getID() != null){
+							 applicationBean.setId(offerBean.getId());
+							 ApplyToOfferControl.getInstance().apply(applicationBean);
+							 
+							 String redirectURL = "http://localhost:8080/WorldWideJob/offer_results.jsp";
+							 response.sendRedirect(redirectURL); 
+						}else{%>
+							<script>window.alert("You need to be logged to perform this operation. Please, log in or create an account!")</script>
+					  <%} 
 					 }%>
 	    		</div>
 	    	</form>

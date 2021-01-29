@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
     
 <%@ page import="logic.presentation.bean.BusinessInCountryBean"
 		 import="logic.application.control.CalculateFeasibilityControl"%> 
@@ -22,9 +21,7 @@
     <link href="css/style.css" rel="stylesheet">
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-   	<script src="js/statistics.js"></script>
-	<script src="js/toolbar.js"></script>
-   	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<title>WorldWideJob</title>
 </head>
 <body>	
@@ -34,7 +31,7 @@
 			<label class="research_title" style="margin-left:40%;font-size:30px"><%=businessResult.getName()%> - Statistics</label>
 			
 			<!-- FEASIBILITY -->
-    		<div style="position:absolute;right:50px;">
+    		<div style="position:absolute;right:50px;margin-top:10px;margin-bottom:10px;">
     			<label for="budget">Insert budget:</label>
 	    		<input class="budget" type="text" name="budget" id="budget">
 	    		<select name="curr" id="curr" style="height:40px;width:40px;">
@@ -57,7 +54,8 @@
     		</div>
     		
     		<!-- CHARTS -->
-    		<h2 style="text-align:center">Popularity over the years</h2>
+    		<br><br><br><br>
+    		<h2 style="text-align:center; margin-top:20px;">Popularity over the years</h2>
    			<div class="charts" id="chart_pop"></div>
    			
    			<h2 style="text-align:center">Average earnings and costs</h2>
@@ -85,4 +83,6 @@
 	    </form>
 	</div>
 </body>
+<script src="js/statistics.js"></script>
+<script src="js/toolbar.js"></script>
 </html>
