@@ -48,7 +48,7 @@
 				<a  href="html/admarket.html">Buy AD space</a>
 			</div>
 			
-			<div style="margin-left: 300px">
+			<div style="margin-left: 250px">
 			    <button class="main_btns" name="seek">Job seeker</button>
 			 	<%if(request.getParameter("seek") != null) {
 			    	SessionFacade.getSession().setCurrUserType(Users.SEEKER);

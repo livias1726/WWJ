@@ -21,8 +21,8 @@ public class TestEntrepreneurProfileSelenium {
 		WebDriver driver = new ChromeDriver();
 		driver.get("http://localhost:8080/WorldWideJob/login.jsp");
 				
-		driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("tom@gmail.com");
-		driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("serpe");
+		driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("livia@gmail.com");
+		driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("rossa");
 		driver.findElement(By.xpath("/html/body/form/fieldset/div[3]/input")).click();	
 		
 		

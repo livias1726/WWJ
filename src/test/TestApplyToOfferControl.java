@@ -11,7 +11,7 @@ import logic.exceptions.DatabaseFailureException;
 import logic.presentation.bean.ApplicationBean;
 
 /**
- * @author alison petrilli
+ * @author livia simoncini
  */
 
 public class TestApplyToOfferControl {

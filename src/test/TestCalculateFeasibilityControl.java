@@ -11,7 +11,7 @@ import logic.presentation.bean.BusinessInCountryBean;
 import logic.presentation.bean.CountryBean;
 
 /**
- * @author livia simoncini
+ * @author alison petrilli
  */
 
 public class TestCalculateFeasibilityControl {

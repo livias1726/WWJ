@@ -20,7 +20,7 @@ public class TestSignUpControl {
 		AccountBean acc = new AccountBean();
 		UserBean us = new UserBean();
 		
-		us.setEmail("tom@gmail.com"); //Primary key for users: the only field that's duplicated
+		us.setEmail("livia@gmail.com"); //Primary key for users: the only field that's duplicated
 		us.setPassword("nonPassword");
 		us.setFirstName("OtherName");
 		us.setLastName("OtherLastName");

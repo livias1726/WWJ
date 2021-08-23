@@ -23,8 +23,8 @@ public class TestToolbarSelenium {
 		WebDriver driver = new ChromeDriver();
 		driver.get("http://localhost:8080/WorldWideJob/login.jsp");
 				
-		driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("ralph@gmail.com");
-		driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("gatto");
+		driver.findElement(By.xpath("//*[@id=\"email\"]")).sendKeys("alison@gmail.com");
+		driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys("mela");
 		driver.findElement(By.xpath("/html/body/form/fieldset/div[3]/input")).click();	
 		
 		List<WebElement> anchors = driver.findElements(By.cssSelector(".dropdown-content a"));
@@ -32,7 +32,7 @@ public class TestToolbarSelenium {
 		
 		driver.close();
 		
-		assertEquals(4, count); //Not logged should be 2
+		assertEquals(4, count); 
 	}
 
 }
