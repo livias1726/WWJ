@@ -1,7 +1,9 @@
-.setting
+.git
+
+.setting/
 
 .classpath
 
 .project
 
-target
+target/
